@@ -484,8 +484,8 @@ footer p{color:var(--muted);font-size:0.82rem;}
 .wai-stat{text-align:center;display:flex;flex-direction:column;gap:0.25rem;}
 .wai-num{font-size:2.2rem;font-weight:800;font-family:'Syne',sans-serif;background:linear-gradient(135deg,var(--violet-light),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .wai-label{font-size:0.78rem;color:var(--muted);max-width:130px;line-height:1.4;}
-.wai-globe-wrap{display:flex;justify-content:center;align-items:center;margin:0 auto;}
-.wai-globe-canvas{width:500px;height:500px;cursor:grab;touch-action:none;}
+.wai-globe-wrap{display:flex;justify-content:center;align-items:center;margin-top:1rem;}
+.wai-globe-canvas{width:480px;height:480px;cursor:grab;touch-action:none;}
 .wai-globe-canvas:active{cursor:grabbing;}
 @keyframes waiDash{0%{stroke-dashoffset:1000;}100%{stroke-dashoffset:0;}}
 @media(max-width:768px){
@@ -911,17 +911,20 @@ footer p{color:var(--muted);font-size:0.82rem;}
 
 <!-- WORLD AI -->
 <div class="world-ai-section fade-in" id="world-ai">
-  <div class="section-wrap">
-    <div class="section-tag">— Il Mondo si sta Adeguando</div>
-    <h2 class="section-title">L'AI avanza ogni giorno.<br><span class="gradient-text">Chi si ferma, resta indietro.</span></h2>
-    <p class="section-sub">Dalle PMI alle multinazionali, migliaia di aziende nel mondo stanno già integrando l'intelligenza artificiale. Non è più innovazione — è la nuova normalità competitiva. La domanda non è se adeguarsi, ma quando.</p>
+  <canvas id="neuroCanvas" class="neuro-canvas"></canvas>
+  <div class="world-ai-content">
+    <div class="section-wrap">
+      <div class="section-tag">— Il Mondo si sta Adeguando</div>
+      <h2 class="section-title">L'AI avanza ogni giorno.<br><span class="gradient-text">Chi si ferma, resta indietro.</span></h2>
+      <p class="section-sub">Dalle PMI alle multinazionali, migliaia di aziende nel mondo stanno già integrando l'intelligenza artificiale. Non è più innovazione — è la nuova normalità competitiva. La domanda non è se adeguarsi, ma quando.</p>
+    </div>
+    <div class="wai-stats">
+      <div class="wai-stat"><span class="wai-num">77%</span><span class="wai-label">delle Fortune 500 usa già l'AI</span></div>
+      <div class="wai-stat"><span class="wai-num">4×</span><span class="wai-label">più rapido il time-to-market con AI</span></div>
+      <div class="wai-stat"><span class="wai-num">$15T</span><span class="wai-label">impatto economico stimato al 2030</span></div>
+    </div>
+    <div class="wai-globe-wrap"><canvas id="waiGlobe" class="wai-globe-canvas"></canvas></div>
   </div>
-  <div class="wai-stats">
-    <div class="wai-stat"><span class="wai-num">77%</span><span class="wai-label">delle Fortune 500 usa già l'AI</span></div>
-    <div class="wai-stat"><span class="wai-num">4×</span><span class="wai-label">più rapido il time-to-market con AI</span></div>
-    <div class="wai-stat"><span class="wai-num">$15T</span><span class="wai-label">impatto economico stimato al 2030</span></div>
-  </div>
-  <div class="wai-globe-wrap"><canvas id="waiGlobe" class="wai-globe-canvas"></canvas></div>
 </div>
 
 <!-- CONTATTI -->
