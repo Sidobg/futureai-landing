@@ -478,6 +478,15 @@ footer p{color:var(--muted);font-size:0.82rem;}
 }
 .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;}
 .fade-in.visible{opacity:1;transform:translateY(0);}
+/* === WORLD AI SECTION === */
+.world-ai-section{padding:5rem 1.25rem 3rem;position:relative;overflow:hidden;}
+.wai-stats{display:flex;justify-content:center;gap:2.5rem;margin:2rem 0 2.5rem;flex-wrap:wrap;}
+.wai-stat{text-align:center;display:flex;flex-direction:column;gap:0.25rem;}
+.wai-num{font-size:2.2rem;font-weight:800;font-family:'Syne',sans-serif;background:linear-gradient(135deg,var(--violet-light),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.wai-label{font-size:0.78rem;color:var(--muted);max-width:130px;line-height:1.4;}
+.wai-map-wrap{position:relative;max-width:860px;margin:0 auto;aspect-ratio:2/1;}
+.wai-canvas,.wai-svg{position:absolute;top:0;left:0;width:100%;height:100%;}
+@keyframes waiDash{0%{stroke-dashoffset:1000;}100%{stroke-dashoffset:0;}}
 @media(max-width:768px){
   .fade-in{opacity:1 !important;transform:none !important;}
 }
@@ -894,7 +903,135 @@ footer p{color:var(--muted);font-size:0.82rem;}
   // Fallback: hide after 8s regardless
   setTimeout(()=>{loader.style.opacity='0';},8000);
 })();
+
+// === WORLD AI MAP ===
+(function(){
+  const canvas=document.getElementById('waiDots');
+  const svg=document.getElementById('waiSvg');
+  if(!canvas||!svg)return;
+  const W=800,H=400;
+  canvas.width=W;canvas.height=H;
+  const ctx=canvas.getContext('2d');
+
+  function isLand(lat,lng){
+    if(lat>60&&lat<84&&lng>-55&&lng<-15)return true; // Groenlandia
+    if(lat>25&&lat<72&&lng>-140&&lng<-52){
+      if(lat>55)return true;
+      if(lat>30&&lng>-120&&lng<-65)return true;
+    } // Nord America
+    if(lat>-56&&lat<13&&lng>-82&&lng<-34)return true; // Sud America
+    if(lat>35&&lat<72&&lng>-10&&lng<40)return true; // Europa
+    if(lat>-36&&lat<38&&lng>-18&&lng<52)return true; // Africa
+    if(lat>12&&lat<42&&lng>34&&lng<62)return true; // Medio Oriente
+    if(lat>50&&lat<75&&lng>30&&lng<180)return true; // Russia/Nord Asia
+    if(lat>8&&lat<55&&lng>60&&lng<140)return true; // Asia Centrale/Sud
+    if(lat>-8&&lat<22&&lng>95&&lng<122)return true; // Sud-Est Asia
+    if(lat>30&&lat<46&&lng>127&&lng<146)return true; // Giappone/Corea
+    if(lat>-44&&lat<-10&&lng>113&&lng<154)return true; // Australia
+    if(lat<-65)return true; // Antartide
+    return false;
+  }
+
+  function project(lat,lng){
+    return{x:(lng+180)*(W/360),y:(90-lat)*(H/180)};
+  }
+
+  // Dots
+  ctx.fillStyle='rgba(123,92,245,0.4)';
+  for(let x=0;x<W;x+=7){
+    for(let y=0;y<H;y+=7){
+      const lng=(x/W)*360-180,lat=90-(y/H)*180;
+      if(isLand(lat,lng)){ctx.beginPath();ctx.arc(x,y,1.4,0,Math.PI*2);ctx.fill();}
+    }
+  }
+
+  // Fade edges
+  ['top','bottom'].forEach(side=>{
+    const g=ctx.createLinearGradient(0,side==='top'?0:H*0.85,0,side==='top'?H*0.15:H);
+    g.addColorStop(0,'rgba(8,11,20,1)');g.addColorStop(1,'rgba(8,11,20,0)');
+    ctx.fillStyle=g;ctx.fillRect(0,side==='top'?0:H*0.85,W,H*0.15);
+  });
+  ['left','right'].forEach(side=>{
+    const g=ctx.createLinearGradient(side==='left'?0:W*0.92,0,side==='left'?W*0.08:W,0);
+    g.addColorStop(0,'rgba(8,11,20,1)');g.addColorStop(1,'rgba(8,11,20,0)');
+    ctx.fillStyle=g;ctx.fillRect(side==='left'?0:W*0.92,0,W*0.08,H);
+  });
+
+  // SVG defs
+  const ns='http://www.w3.org/2000/svg';
+  svg.innerHTML=`<defs>
+    <linearGradient id="wlg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="white" stop-opacity="0"/>
+      <stop offset="10%" stop-color="#7b5cf5" stop-opacity="1"/>
+      <stop offset="90%" stop-color="#00d4ff" stop-opacity="1"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="wglow"><feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>`;
+
+  const connections=[
+    {from:[45.46,9.19],to:[51.51,-0.13]},   // Milano → Londra
+    {from:[48.86,2.35],to:[40.71,-74.01]},   // Parigi → New York
+    {from:[35.68,139.65],to:[22.32,114.17]}, // Tokyo → Hong Kong
+    {from:[19.08,72.88],to:[1.35,103.82]},   // Mumbai → Singapore
+    {from:[-33.87,151.21],to:[35.68,139.65]},// Sydney → Tokyo
+    {from:[55.75,37.62],to:[28.61,77.21]},   // Mosca → Delhi
+  ];
+
+  connections.forEach((c,i)=>{
+    const s=project(c.from[0],c.from[1]),e=project(c.to[0],c.to[1]);
+    const mx=(s.x+e.x)/2,my=Math.min(s.y,e.y)-45;
+    const d=`M ${s.x} ${s.y} Q ${mx} ${my} ${e.x} ${e.y}`;
+    const delay=i*0.7;
+
+    const path=document.createElementNS(ns,'path');
+    path.setAttribute('d',d);
+    path.setAttribute('fill','none');
+    path.setAttribute('stroke','url(#wlg)');
+    path.setAttribute('stroke-width','1.2');
+    path.style.cssText=`stroke-dasharray:1000;stroke-dashoffset:1000;animation:waiDash 2.5s ${delay}s ease-in-out infinite alternate;`;
+    svg.appendChild(path);
+
+    [s,e].forEach((pt,j)=>{
+      const col=j===0?'#7b5cf5':'#00d4ff';
+      const dot=document.createElementNS(ns,'circle');
+      dot.setAttribute('cx',pt.x);dot.setAttribute('cy',pt.y);
+      dot.setAttribute('r','3');dot.setAttribute('fill',col);
+      dot.setAttribute('filter','url(#wglow)');
+      svg.appendChild(dot);
+
+      const pulse=document.createElementNS(ns,'circle');
+      pulse.setAttribute('cx',pt.x);pulse.setAttribute('cy',pt.y);
+      pulse.setAttribute('r','3');pulse.setAttribute('fill','none');
+      pulse.setAttribute('stroke',col);pulse.setAttribute('stroke-width','1');
+      pulse.innerHTML=`
+        <animate attributeName="r" from="3" to="14" dur="2s" begin="${j*0.6}s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" from="0.7" to="0" dur="2s" begin="${j*0.6}s" repeatCount="indefinite"/>`;
+      svg.appendChild(pulse);
+    });
+  });
+})();
 </script>
+
+<!-- WORLD AI -->
+<div class="world-ai-section fade-in" id="world-ai">
+  <div class="section-wrap">
+    <div class="section-tag">— Il Mondo si sta Adeguando</div>
+    <h2 class="section-title">L'AI avanza ogni giorno.<br><span class="gradient-text">Chi si ferma, resta indietro.</span></h2>
+    <p class="section-sub">Dalle PMI alle multinazionali, migliaia di aziende nel mondo stanno già integrando l'intelligenza artificiale. Non è più innovazione — è la nuova normalità competitiva. La domanda non è se adeguarsi, ma quando.</p>
+  </div>
+  <div class="wai-stats">
+    <div class="wai-stat"><span class="wai-num">77%</span><span class="wai-label">delle Fortune 500 usa già l'AI</span></div>
+    <div class="wai-stat"><span class="wai-num">4×</span><span class="wai-label">più rapido il time-to-market con AI</span></div>
+    <div class="wai-stat"><span class="wai-num">$15T</span><span class="wai-label">impatto economico stimato al 2030</span></div>
+  </div>
+  <div class="wai-map-wrap">
+    <canvas id="waiDots" class="wai-canvas"></canvas>
+    <svg id="waiSvg" class="wai-svg" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet"></svg>
+  </div>
+</div>
 
 <!-- CONTATTI -->
 <div class="contact-section" id="contatti">
