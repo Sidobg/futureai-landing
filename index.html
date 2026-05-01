@@ -49,6 +49,50 @@ body{
   background-size:50px 50px;
 }
 
+.web-section{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--bg);padding:4rem 1.25rem;}
+.web-card{position:relative;background:linear-gradient(145deg,#162C6D 0%,#0A101D 100%);border-radius:40px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 40px 100px -20px rgba(0,0,0,0.9),0 20px 40px -20px rgba(0,0,0,0.8),inset 0 1px 2px rgba(255,255,255,0.2),inset 0 -2px 4px rgba(0,0,0,0.8);width:92vw;max-width:1200px;min-height:85vh;display:flex;align-items:center;justify-content:center;overflow:hidden;transform:translateY(80px);opacity:0;transition:transform 1s cubic-bezier(0.16,1,0.3,1),opacity 0.8s ease;}
+.web-card.visible{transform:translateY(0);opacity:1;}
+.web-card-sheen{position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;background:radial-gradient(800px circle at var(--mouse-x,50%) var(--mouse-y,50%),rgba(255,255,255,0.06) 0%,transparent 40%);mix-blend-mode:screen;}
+.web-card-inner{position:relative;z-index:2;width:100%;height:100%;padding:3rem 2rem;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;gap:2rem;}
+.web-brand{font-size:clamp(3rem,7vw,7rem);font-weight:900;text-transform:uppercase;letter-spacing:-0.04em;background:linear-gradient(180deg,#fff 0%,#71717a 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 12px 24px rgba(0,0,0,0.8));transform:translateX(50px);opacity:0;transition:transform 1s 0.4s cubic-bezier(0.16,1,0.3,1),opacity 0.8s 0.4s ease;text-align:right;}
+.web-card.visible .web-brand{transform:translateX(0);opacity:1;}
+.web-left{transform:translateX(-50px);opacity:0;transition:transform 1s 0.3s cubic-bezier(0.16,1,0.3,1),opacity 0.8s 0.3s ease;}
+.web-card.visible .web-left{transform:translateX(0);opacity:1;}
+.web-left h3{color:#fff;font-size:clamp(1.3rem,2.5vw,2rem);font-weight:700;line-height:1.2;margin-bottom:1rem;}
+.web-left p{color:rgba(147,197,253,0.7);font-size:0.95rem;line-height:1.7;margin-bottom:2rem;}
+.web-cta{display:inline-flex;align-items:center;gap:0.5rem;background:linear-gradient(180deg,#fff 0%,#f1f5f9 100%);color:#0f172a;padding:0.75rem 1.5rem;border-radius:1rem;font-weight:700;font-size:0.9rem;text-decoration:none;transition:transform 0.3s ease,box-shadow 0.3s ease;box-shadow:0 2px 4px rgba(0,0,0,0.1),0 12px 24px -4px rgba(0,0,0,0.3);}
+.web-cta:hover{transform:translateY(-3px);box-shadow:0 6px 12px rgba(0,0,0,0.15),0 20px 32px -6px rgba(0,0,0,0.4);}
+.web-phone-wrap{display:flex;align-items:center;justify-content:center;transform:translateY(40px) rotateX(10deg);opacity:0;transition:transform 1.2s 0.2s cubic-bezier(0.16,1,0.3,1),opacity 0.8s 0.2s ease;perspective:1000px;}
+.web-card.visible .web-phone-wrap{transform:translateY(0) rotateX(0);opacity:1;}
+.web-phone{width:200px;height:420px;background:#111;border-radius:2.5rem;box-shadow:inset 0 0 0 2px #52525b,inset 0 0 0 7px #000,0 40px 80px -15px rgba(0,0,0,0.9);position:relative;}
+.web-screen{position:absolute;inset:7px;background:#050914;border-radius:2rem;overflow:hidden;}
+.web-screen-inner{width:100%;height:100%;display:flex;flex-direction:column;}
+.web-notch{position:absolute;top:5px;left:50%;transform:translateX(-50%);width:80px;height:22px;background:#000;border-radius:999px;z-index:10;}
+.web-site-nav{background:rgba(8,11,20,0.95);padding:0.5rem 0.75rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05);margin-top:30px;}
+.web-site-logo{width:40px;height:8px;background:linear-gradient(90deg,#7b5cf5,#00d4ff);border-radius:4px;}
+.web-site-nav-links{display:flex;gap:4px;}
+.web-site-nav-links span{width:18px;height:4px;background:rgba(255,255,255,0.2);border-radius:2px;}
+.web-site-hero{padding:0.75rem;flex:1;}
+.web-site-tag{width:60%;height:5px;background:rgba(123,92,245,0.4);border-radius:3px;margin-bottom:0.4rem;}
+.web-site-h1{width:90%;height:10px;background:linear-gradient(90deg,#fff,rgba(255,255,255,0.7));border-radius:5px;margin-bottom:0.3rem;}
+.web-site-h1b{width:70%;height:10px;background:linear-gradient(90deg,#7b5cf5,#00d4ff);border-radius:5px;margin-bottom:0.6rem;}
+.web-site-p{width:85%;height:4px;background:rgba(255,255,255,0.15);border-radius:2px;margin-bottom:0.25rem;}
+.web-site-btn{width:50%;height:18px;background:linear-gradient(90deg,#7b5cf5,#00d4ff);border-radius:6px;margin-top:0.5rem;}
+.web-site-cards{display:flex;gap:4px;padding:0.5rem 0.75rem;}
+.web-site-card{flex:1;height:50px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;}
+.web-home-indicator{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:80px;height:3px;background:rgba(255,255,255,0.2);border-radius:2px;}
+.web-badge{position:absolute;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.9rem;border-radius:1rem;background:linear-gradient(135deg,rgba(255,255,255,0.08) 0%,rgba(255,255,255,0.01) 100%);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 25px 50px -12px rgba(0,0,0,0.8);opacity:0;transition:opacity 0.5s ease,transform 0.5s ease;}
+.web-card.visible .web-badge{opacity:1;}
+.web-badge-1{top:15%;left:-5%;transform:translateX(-20px);transition-delay:0.7s;}
+.web-card.visible .web-badge-1{transform:translateX(0);}
+.web-badge-2{bottom:20%;right:-3%;transform:translateX(20px);transition-delay:0.9s;}
+.web-card.visible .web-badge-2{transform:translateX(0);}
+.web-badge-icon{font-size:1.2rem;}
+.web-badge-text{display:flex;flex-direction:column;}
+.web-badge-title{color:#fff;font-size:0.75rem;font-weight:700;}
+.web-badge-sub{color:rgba(147,197,253,0.5);font-size:0.65rem;}
+@media(max-width:768px){.web-card-inner{grid-template-columns:1fr;grid-template-rows:auto auto auto;padding:2rem 1.25rem;gap:1.5rem;min-height:auto;} .web-brand{text-align:center;font-size:3rem;} .web-left{text-align:center;} .web-phone{width:160px;height:340px;} .web-badge-1{top:auto;bottom:calc(340px + 20px);left:0;} .web-badge-2{right:0;bottom:60px;}}
+
 /* CURSOR (desktop only) */
 .cursor,.cursor-ring{display:none;}
 @media(hover:hover){
@@ -916,6 +960,44 @@ footer p{color:var(--muted);font-size:0.82rem;}
   <div class="wai-globe-wrap"><canvas id="waiGlobe" class="wai-globe-canvas"></canvas></div>
 </div>
 
+<!-- WEB SECTION -->
+<div class="web-section fade-in" id="siti-web">
+  <div class="web-card" id="webCard">
+    <div class="web-card-sheen" id="webSheen"></div>
+    <div class="web-card-inner">
+      <div class="web-left">
+        <div class="section-tag">— Siti Web con AI</div>
+        <h3>Il tuo sito web,<br>riprogettato.</h3>
+        <p>Veloce, moderno e ottimizzato AI. Ogni sito che costruiamo è pensato per convertire visitatori in clienti — su ogni dispositivo.</p>
+        <a href="#contatti" class="web-cta">Richiedi il tuo sito →</a>
+      </div>
+      <div class="web-phone-wrap">
+        <div class="web-phone">
+          <div class="web-notch"></div>
+          <div class="web-screen">
+            <div class="web-screen-inner">
+              <div class="web-site-nav"><div class="web-site-logo"></div><div class="web-site-nav-links"><span></span><span></span><span></span></div></div>
+              <div class="web-site-hero">
+                <div class="web-site-tag"></div>
+                <div class="web-site-h1"></div>
+                <div class="web-site-h1b"></div>
+                <div class="web-site-p"></div>
+                <div class="web-site-p" style="width:70%"></div>
+                <div class="web-site-btn"></div>
+              </div>
+              <div class="web-site-cards"><div class="web-site-card"></div><div class="web-site-card"></div><div class="web-site-card"></div></div>
+            </div>
+            <div class="web-home-indicator"></div>
+          </div>
+        </div>
+        <div class="web-badge web-badge-1"><span class="web-badge-icon">🚀</span><div class="web-badge-text"><span class="web-badge-title">Deploy in 3 giorni</span><span class="web-badge-sub">Pronto alla consegna</span></div></div>
+        <div class="web-badge web-badge-2"><span class="web-badge-icon">⚡</span><div class="web-badge-text"><span class="web-badge-title">Performance 99/100</span><span class="web-badge-sub">Google PageSpeed</span></div></div>
+      </div>
+      <div class="web-brand">FutureAI</div>
+    </div>
+  </div>
+</div>
+
 <!-- CONTATTI -->
 <div class="contact-section" id="contatti">
   <div class="contact-inner">
@@ -1078,6 +1160,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
   });
 });
+
+// === WEB CARD ===
+(function(){const card=document.getElementById('webCard');if(!card)return;const observer=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){card.classList.add('visible');}});},{threshold:0.2});observer.observe(card);card.addEventListener('mousemove',function(e){const rect=card.getBoundingClientRect();card.style.setProperty('--mouse-x',(e.clientX-rect.left)+'px');card.style.setProperty('--mouse-y',(e.clientY-rect.top)+'px');});})();
 
 // === HERO NEURO CANVAS ===
 (function(){const c=document.getElementById('heroNeuro');if(!c)return;const gl=c.getContext('webgl')||c.getContext('experimental-webgl');if(!gl)return;const vs='precision mediump float;attribute vec2 a_position;varying vec2 vUv;void main(){vUv=.5*(a_position+1.);gl_Position=vec4(a_position,0.0,1.0);}';const fs='precision mediump float;varying vec2 vUv;uniform float u_time;uniform float u_ratio;uniform vec2 u_pointer_position;uniform float u_scroll_progress;vec2 rotate(vec2 uv,float th){return mat2(cos(th),sin(th),-sin(th),cos(th))*uv;}float neuro_shape(vec2 uv,float t,float p){vec2 sine_acc=vec2(0.);vec2 res=vec2(0.);float scale=8.;for(int j=0;j<15;j++){uv=rotate(uv,1.);sine_acc=rotate(sine_acc,1.);vec2 layer=uv*scale+float(j)+sine_acc-t;sine_acc+=sin(layer)+2.4*p;res+=(.5+.5*cos(layer))/scale;scale*=(1.2);}return res.x+res.y;}void main(){vec2 uv=.5*vUv;uv.x*=u_ratio;vec2 pointer=vUv-u_pointer_position;pointer.x*=u_ratio;float p=clamp(length(pointer),0.,1.);p=.5*pow(1.-p,2.);float t=.001*u_time;float noise=neuro_shape(uv,t,p);noise=1.2*pow(noise,3.);noise+=pow(noise,10.);noise=max(.0,noise-.5);noise*=(1.-length(vUv-.5));vec3 color=vec3(0.5,0.15,0.65);color=mix(color,vec3(0.02,0.7,0.9),0.32+0.16*sin(2.0*u_scroll_progress+1.2));color+=vec3(0.15,0.0,0.6)*sin(2.0*u_scroll_progress+1.5);color=color*noise;gl_FragColor=vec4(color,noise);}';function mk(src,type){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;}const prog=gl.createProgram();gl.attachShader(prog,mk(vs,gl.VERTEX_SHADER));gl.attachShader(prog,mk(fs,gl.FRAGMENT_SHADER));gl.linkProgram(prog);gl.useProgram(prog);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE);const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);const loc=gl.getAttribLocation(prog,'a_position');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);const uT=gl.getUniformLocation(prog,'u_time'),uR=gl.getUniformLocation(prog,'u_ratio'),uP=gl.getUniformLocation(prog,'u_pointer_position'),uS=gl.getUniformLocation(prog,'u_scroll_progress');const ptr={x:.5,y:.5,tX:.5,tY:.5};function resize(){const dpr=Math.min(window.devicePixelRatio,2),rect=c.parentElement.getBoundingClientRect();c.width=rect.width*dpr;c.height=rect.height*dpr;gl.viewport(0,0,c.width,c.height);gl.uniform1f(uR,c.width/c.height);}resize();window.addEventListener('resize',resize);function render(){ptr.x+=(ptr.tX-ptr.x)*0.2;ptr.y+=(ptr.tY-ptr.y)*0.2;gl.uniform1f(uT,performance.now());gl.uniform2f(uP,ptr.x,1-ptr.y);gl.uniform1f(uS,window.pageYOffset/(2*window.innerHeight));gl.drawArrays(gl.TRIANGLE_STRIP,0,4);requestAnimationFrame(render);}render();window.addEventListener('pointermove',function(e){const r=c.parentElement.getBoundingClientRect();ptr.tX=(e.clientX-r.left)/r.width;ptr.tY=(e.clientY-r.top)/r.height;});})();
