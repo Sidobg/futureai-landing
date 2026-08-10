@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="description" content="FutureAI – Automazioni AI per Aziende Italiane. Agenti AI, prenotazioni, webapp su misura e automazioni.">
 <title>FutureAI – Automazioni AI per Aziende</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --violet: #7B5CF5;
@@ -448,20 +448,138 @@ nav{
   border:1px solid var(--border);
   border-radius:18px;padding:2rem;
   transition:transform 0.3s,border-color 0.3s,box-shadow 0.3s;
-  position:relative;overflow:hidden;
-}
-.service-card::after{
-  content:'';position:absolute;
-  top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--violet),transparent);
-  opacity:0;transition:opacity 0.3s;
+  position:relative;isolation:isolate;
 }
 .service-card:hover{
   transform:translateY(-4px);
   border-color:var(--border2);
   box-shadow:0 16px 50px rgba(123,92,245,0.1);
 }
-.service-card:hover::after{opacity:1;}
+
+/* ===== BEAM: due comete che orbitano sul bordo della card =====
+   Porting in CSS/JS puro del Border Beam Panel di Motiq (MIT).
+   L'anello e' un conic-gradient ritagliato con la doppia maschera
+   mask-composite:exclude — le maschere SVG in luminanza non funzionano
+   su Chromium. Ruota una sola custom property per frame, quindi il
+   contenuto della card non viene mai ridisegnato. */
+/* inherits:true e' obbligatorio: il JS scrive la variabile sulla card,
+   ma a leggerla sono i due figli .beam-ring e .beam-glow. */
+@property --beam-a{syntax:'<angle>';inherits:true;initial-value:0deg;}
+
+.beam-ring,.beam-glow{
+  position:absolute;inset:-1px;
+  border-radius:19px;
+  pointer-events:none;
+  background:conic-gradient(from var(--beam-a,0deg),
+    transparent 0deg,
+    rgba(123,92,245,0.04) 18deg,
+    rgba(123,92,245,0.55) 46deg,
+    #00D4FF 56deg,
+    #C7F6FF 60deg,
+    transparent 63deg,
+    transparent 198deg,
+    rgba(255,110,199,0.04) 216deg,
+    rgba(255,110,199,0.50) 244deg,
+    #ff6ec7 254deg,
+    #FFD9F0 258deg,
+    transparent 261deg,
+    transparent 360deg);
+}
+.beam-ring{
+  padding:2px;
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  mask-composite:exclude;
+}
+.beam-glow{filter:blur(14px);opacity:0.35;z-index:-1;}
+
+/* su mobile il glow sfocato e' la parte cara: sei blur a schermo non li regge */
+@media(max-width:768px){
+  .beam-glow{display:none;}
+}
+@media(forced-colors:active){
+  .beam-ring,.beam-glow{display:none;}
+}
+
+/* ===== SERVIZI: indice editoriale =====
+   Prima erano sei card identiche in griglia regolare, con emoji al posto
+   delle icone e titoli a 1.05rem contro un corpo di 0.9: un contrasto di
+   scala di 1.17x, cioe' nessuna gerarchia. Diventano un indice numerato
+   su griglia asimmetrica: i numeri in monospace fanno da icona, i titoli
+   sono dimensionati per reggere la larghezza della card. */
+#servizi .section-tag{
+  font-family:'Space Mono',monospace;
+  font-weight:400;letter-spacing:0.2em;font-size:0.72rem;
+}
+#servizi .section-title{
+  font-size:clamp(2rem,3.6vw,2.9rem);
+  letter-spacing:-0.025em;
+}
+#servizi .section-sub{max-width:44ch;margin-bottom:3rem;}
+
+#servizi .services-grid{
+  grid-template-columns:repeat(12,1fr);
+  gap:1rem;
+}
+#servizi .service-card{grid-column:span 12;}
+#servizi .sp-7{grid-column:span 7;padding:2.4rem;}
+#servizi .sp-5{grid-column:span 5;padding:2rem;}
+#servizi .service-card.featured{grid-column:span 12;padding:2.6rem;}
+
+/* 01 ————————  la riga che sfuma e' l'indice, non una decorazione */
+#servizi .service-index{
+  display:flex;align-items:center;gap:0.9rem;
+  margin-bottom:1.5rem;
+}
+#servizi .service-index::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,var(--border2),transparent);
+}
+#servizi .service-num{
+  font-family:'Space Mono',monospace;
+  font-size:0.85rem;letter-spacing:0.1em;
+  color:var(--violet-light);
+}
+
+#servizi .service-card h3{
+  font-size:clamp(1.3rem,1.9vw,1.65rem);
+  line-height:1.06;letter-spacing:-0.02em;
+  margin-bottom:0.7rem;
+}
+#servizi .service-card p{font-size:0.92rem;}
+
+/* la pill diventa una nota a pie' di card, non un chip colorato */
+#servizi .service-pill{
+  display:block;
+  background:none;border:0;border-top:1px solid var(--border);
+  border-radius:0;
+  margin-top:1.6rem;padding:0.75rem 0 0;
+  font-family:'Space Mono',monospace;
+  font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* l'ultima card chiude a tutta larghezza, con titolo e testo affiancati:
+   spezza il ritmo invece di ripetere la sesta scatola uguale */
+#servizi .service-card.wide{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
+  column-gap:3rem;align-content:start;
+  padding:2.6rem;
+}
+#servizi .wide .service-index{grid-column:1/-1;}
+#servizi .wide h3{grid-column:1;grid-row:2;}
+#servizi .wide .service-pill{grid-column:1;grid-row:3;align-self:start;}
+#servizi .wide p{grid-column:2;grid-row:2/4;}
+
+@media(max-width:900px){
+  #servizi .services-grid{grid-template-columns:1fr;}
+  #servizi .service-card,
+  #servizi .sp-7,#servizi .sp-5,
+  #servizi .service-card.featured{grid-column:auto;padding:1.75rem;}
+  #servizi .service-card.wide{display:block;padding:1.75rem;}
+}
 
 /* Featured card */
 .service-card.featured{
@@ -844,12 +962,14 @@ footer p{color:var(--muted);font-size:0.82rem;}
   <div class="services-grid">
 
     <div class="service-card featured fade-in">
+      <span class="beam-glow" aria-hidden="true"></span>
+      <span class="beam-ring" aria-hidden="true"></span>
       <div class="featured-inner">
         <div class="featured-text">
-          <div class="service-icon ic-v">🧠</div>
+          <div class="service-index"><span class="service-num">01</span></div>
           <h3>Consulente AI Aziendale</h3>
           <p>Un agente AI addestrato sul tuo settore e sui tuoi documenti. Risponde a domande su produzione, procedure e processi — disponibile 24/7 per tutto il team.</p>
-          <span class="service-pill">⭐ Servizio Flagship</span>
+          <span class="service-pill">Servizio flagship</span>
         </div>
         <div class="featured-demo">
           <div class="chat-label">💬 Esempio live</div>
@@ -859,36 +979,46 @@ footer p{color:var(--muted);font-size:0.82rem;}
       </div>
     </div>
 
-    <div class="service-card fade-in">
-      <div class="service-icon ic-c">📅</div>
+    <div class="service-card sp-7 fade-in">
+      <span class="beam-glow" aria-hidden="true"></span>
+      <span class="beam-ring" aria-hidden="true"></span>
+      <div class="service-index"><span class="service-num">02</span></div>
       <h3>Prenotazioni Online</h3>
       <p>Webapp su misura per gestire appuntamenti e disponibilità. Il cliente prenota da solo, tu ricevi la conferma. Zero commissioni esterne.</p>
       <span class="service-pill">Zero commissioni</span>
     </div>
 
-    <div class="service-card fade-in">
-      <div class="service-icon ic-m">🖥️</div>
+    <div class="service-card sp-5 fade-in">
+      <span class="beam-glow" aria-hidden="true"></span>
+      <span class="beam-ring" aria-hidden="true"></span>
+      <div class="service-index"><span class="service-num">03</span></div>
       <h3>WebApp su Misura</h3>
       <p>Gestionale, CRM, portale clienti — qualsiasi strumento digitale costruito per il tuo business. Tuo, per sempre.</p>
       <span class="service-pill">Su misura</span>
     </div>
 
-    <div class="service-card fade-in">
-      <div class="service-icon ic-v">⚙️</div>
+    <div class="service-card sp-5 fade-in">
+      <span class="beam-glow" aria-hidden="true"></span>
+      <span class="beam-ring" aria-hidden="true"></span>
+      <div class="service-index"><span class="service-num">04</span></div>
       <h3>Automazioni Aziendali</h3>
       <p>Colleghiamo i tuoi strumenti (Gmail, Calendar, CRM, Excel) e automatizziamo i processi ripetitivi. Email, report, notifiche — tutto in automatico.</p>
       <span class="service-pill">n8n + AI</span>
     </div>
 
-    <div class="service-card fade-in">
-      <div class="service-icon ic-c">📞</div>
+    <div class="service-card sp-7 fade-in">
+      <span class="beam-glow" aria-hidden="true"></span>
+      <span class="beam-ring" aria-hidden="true"></span>
+      <div class="service-index"><span class="service-num">05</span></div>
       <h3>Chiamate Automatiche AI</h3>
       <p>Un assistente vocale AI risponde alle chiamate, gestisce prenotazioni e fornisce informazioni — 24/7, senza personale dedicato.</p>
       <span class="service-pill">Voce AI</span>
     </div>
 
-    <div class="service-card fade-in">
-      <div class="service-icon ic-m">🌐</div>
+    <div class="service-card wide fade-in">
+      <span class="beam-glow" aria-hidden="true"></span>
+      <span class="beam-ring" aria-hidden="true"></span>
+      <div class="service-index"><span class="service-num">06</span></div>
       <h3>Siti Web Moderni</h3>
       <p>Landing page e siti professionali, veloci e ottimizzati per convertire visitatori in clienti. Collegati alle tue automazioni.</p>
       <span class="service-pill">Alta conversione</span>
@@ -1533,5 +1663,112 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 })();
 </script>
+
+<!-- ===== BEAM DELLE CARD SERVIZI =====
+     Porting in JS puro del Border Beam Panel di Motiq (MIT).
+     La velocita' angolare e' sprungata (k=30, d=11): su hover punta a
+     240 gradi/s e al rilascio torna a 42, cosi' le comete accelerano e
+     planano invece di scattare. Un solo requestAnimationFrame guida
+     tutte e sei le card: sei loop indipendenti su mobile sarebbero solo
+     lavoro sprecato. -->
+<script>
+(function(){
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.service-card'));
+  if(!cards.length) return;
+
+  var IDLE = 42, HOVER = 240, K = 30, D = 11, PARCHEGGIO = 40;
+  var mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  // Angolo di partenza deterministico: l'angolo aureo sfasa le card fra loro,
+  // altrimenti le sei comete partono allineate e si vede la meccanica.
+  var stato = cards.map(function(el, i){
+    return { el: el, angolo: ((i+1) * 137.508) % 360, velocita: IDLE, v: 0, target: IDLE, inVista: true };
+  });
+
+  function dipingi(s){
+    s.el.style.setProperty('--beam-a', (((s.angolo % 360) + 360) % 360).toFixed(2) + 'deg');
+  }
+
+  var raf = 0, ultimo = 0;
+
+  function attive(){
+    if(document.hidden || mqReduce.matches) return false;
+    for(var i=0;i<stato.length;i++){ if(stato[i].inVista) return true; }
+    return false;
+  }
+
+  function frame(ora){
+    if(!ultimo) ultimo = ora;
+    var dt = Math.min(0.05, Math.max(0, (ora - ultimo) / 1000));
+    ultimo = ora;
+    for(var i=0;i<stato.length;i++){
+      var s = stato[i];
+      if(!s.inVista) continue;
+      var a = K * (s.target - s.velocita) - D * s.v;
+      s.v += a * dt;
+      s.velocita += s.v * dt;
+      s.angolo += s.velocita * dt;
+      dipingi(s);
+    }
+    raf = requestAnimationFrame(frame);
+  }
+
+  function avvia(){
+    if(raf || !attive()) return;
+    ultimo = 0;
+    raf = requestAnimationFrame(frame);
+  }
+  function ferma(){
+    if(!raf) return;
+    cancelAnimationFrame(raf); raf = 0;
+  }
+
+  // Anello fermo ma acceso: chi ha chiesto meno animazioni vede comunque il bordo.
+  function parcheggia(){
+    ferma();
+    stato.forEach(function(s){
+      s.angolo = PARCHEGGIO; s.velocita = IDLE; s.v = 0; s.target = IDLE;
+      dipingi(s);
+    });
+  }
+
+  stato.forEach(function(s){
+    dipingi(s);
+    s.el.addEventListener('pointerenter', function(){ s.target = HOVER; avvia(); });
+    s.el.addEventListener('pointerleave', function(){ s.target = IDLE; });
+    s.el.addEventListener('focusin',  function(){ s.target = HOVER; avvia(); });
+    s.el.addEventListener('focusout', function(){ s.target = IDLE; });
+  });
+
+  if(typeof IntersectionObserver !== 'undefined'){
+    var io = new IntersectionObserver(function(voci){
+      voci.forEach(function(voce){
+        for(var i=0;i<stato.length;i++){
+          if(stato[i].el === voce.target){ stato[i].inVista = voce.isIntersecting; break; }
+        }
+      });
+      if(attive()) avvia(); else ferma();
+    }, { threshold: 0.05 });
+    stato.forEach(function(s){ io.observe(s.el); });
+  }
+
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden) ferma(); else avvia();
+  });
+
+  function applicaPreferenza(){
+    if(mqReduce.matches) parcheggia(); else avvia();
+  }
+  if(mqReduce.addEventListener) mqReduce.addEventListener('change', applicaPreferenza);
+  else if(mqReduce.addListener) mqReduce.addListener(applicaPreferenza);
+  applicaPreferenza();
+})();
+</script>
+
+<!-- Vercel Web Analytics — versione per siti statici.
+     Il pacchetto npm @vercel/analytics vale solo per progetti React/Next
+     con build step; qui lo script arriva dall'endpoint di Vercel e
+     funziona solo sul dominio deployato (in locale da' 404, e' atteso). -->
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
