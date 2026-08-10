@@ -857,6 +857,110 @@ footer p{color:var(--muted);font-size:0.82rem;}
   .caso-body { padding: 1.1rem; }
 }
 
+/* ============================================================
+   TEMA CHIARO — la pagina passa al crema, i riquadri restano scuri.
+
+   Non e' un'inversione: le due bande dove vive la luce (hero e globo)
+   restano scure, perche' canvas, glow, beam e video sono effetti
+   luce-su-buio e su fondo chiaro sparirebbero. Il ritmo diventa
+   scuro > chiaro > scuro > chiaro, che e' anche il motivo per cui la
+   pagina non sembra un tema invertito.
+
+   Il crema non e' bianco puro: bianco contro card quasi nere e'
+   durissimo, e il caldo contro il viola-ciano freddo del brand da' alla
+   palette una tensione che nessun template ha.
+   ============================================================ */
+:root{
+  --paper:#F7F5F1;
+  --paper-2:#EFEBE3;
+  --ink:#14131B;
+  --ink-muted:#5E5B68;
+  --line:rgba(20,19,27,0.12);
+  --violet-ink:#5B3FD6;      /* il viola del brand, portato a contrasto leggibile sul crema */
+  --ombra:0 1px 2px rgba(20,19,27,0.06),0 18px 40px -14px rgba(20,19,27,0.22);
+}
+
+body{background:var(--paper);color:var(--ink);}
+
+/* blob sfocati e griglia viola vivevano sul buio: sul crema sono macchie */
+.orb{display:none;}
+.grid-bg{
+  background-image:
+    linear-gradient(rgba(20,19,27,0.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(20,19,27,0.05) 1px,transparent 1px);
+}
+
+/* --- le due bande scure --- */
+.hero,.world-ai-section{background:var(--dark);color:var(--text);}
+.world-ai-section{margin-top:0;padding-top:4rem;}
+.hero .section-title,.world-ai-section .section-title{color:var(--text);}
+.world-ai-section .section-sub,.world-ai-section .wai-label{color:var(--muted);}
+.world-ai-section .section-tag{color:var(--cyan);}
+
+/* --- testo sulla carta --- */
+.section-title,.contact-left h2{color:var(--ink);}
+/* .process-step p resta fuori da questa lista: e' dentro una card scura */
+.section-sub,.contact-left>p,.stat-label,footer p,.citem{color:var(--ink-muted);}
+.section-tag{color:var(--violet-ink);}
+.citem strong,.footer-trasparenza strong,.footer-logo span{color:var(--ink);}
+.footer-trasparenza{color:var(--ink-muted);}
+
+/* i numeri delle stat erano gradiente viola-ciano: il ciano sul crema
+   non si legge, quindi restano pieni sul viola leggibile */
+.stat-number{
+  background:none;-webkit-text-fill-color:currentColor;
+  color:var(--violet-ink);
+}
+
+/* separatori: filetti d'inchiostro, non di viola */
+.stats-wrap,footer,.contact-section{border-color:var(--line);}
+.contact-section{background:var(--paper-2);}
+
+/* --- i riquadri restano quelli di prima ---
+   L'alone viola diventa un'ombra vera a due strati: su fondo chiaro un
+   glow colorato sembra un errore di stampa. */
+.service-card,.process-step,.contact-form,.caso-card,.featured-demo{
+  color:var(--text);
+  border-color:rgba(20,19,27,0.10);
+  box-shadow:var(--ombra);
+}
+.service-card,.process-step,.contact-form{background:var(--card);}
+/* questi due erano veli traslucidi: senza il buio sotto diventavano chiari */
+.caso-card{background:var(--card);}
+.service-card.featured{background:linear-gradient(135deg,#171B33 0%,#111827 65%);}
+.featured-demo{background:var(--dark2);}
+.service-card:hover{box-shadow:0 2px 4px rgba(20,19,27,0.08),0 26px 55px -14px rgba(91,63,214,0.30);}
+.caso-card:hover{border-color:rgba(91,63,214,0.45);}
+/* il viola dell'etichetta era a 4.19 sulla card: sotto la soglia leggibile */
+.caso-tag{color:#A78BFA;}
+
+/* l'icona di contatto sul crema */
+.cicon{background:rgba(91,63,214,0.10);border-color:rgba(91,63,214,0.22);}
+
+/* casi studio: aveva uno sfondo scuro esplicito, residuo del vecchio tema.
+   Passa al crema come le altre sezioni — le sue card sono gia' scure. */
+#casi-studio{background:transparent;}
+.caso-dettaglio{color:#94A3B8;}   /* era #64748B: 4.31 sulla card, sotto soglia */
+
+/* la card Spline e' un riquadro scuro a tutti gli effetti */
+.spline-card{
+  color:var(--text);
+  border-color:rgba(20,19,27,0.10);
+  box-shadow:var(--ombra);
+}
+.spline-card .section-title{color:var(--text);}
+.spline-card .section-sub,.spline-card .spline-stat-l{color:var(--muted);}
+.spline-card .section-tag{color:var(--cyan);}
+
+/* barra e menu restano scuri: galleggiano sulla carta */
+nav,.mobile-menu,.music-toggle,.web-card{color:var(--text);}
+/* la barra si fa piu' densa: sopra il crema l'85% la schiariva e i link
+   scendevano a 4.05 di contrasto */
+nav{background:rgba(8,11,20,0.94);}
+.nav-links a{color:#C7CEDB;}
+/* questo tag vive dentro la card scura, non sulla carta */
+.web-card .section-tag{color:var(--cyan);}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
