@@ -880,13 +880,13 @@ footer p{color:var(--muted);font-size:0.82rem;}
    hero, cambiando solo la luminosita' — una scala sola, quattro gradini:
    #080B14 hero, #0F1626 testo, #E9EDF5 pagina, #F6F8FC card. */
 :root{
-  --paper:#E9EDF5;
-  --paper-2:#E1E7F1;
-  --ink:#0F1626;
-  --ink-muted:#5A6478;
-  --line:rgba(15,22,38,0.13);
-  --violet-ink:#5B3FD6;      /* il viola del brand, portato a contrasto leggibile sul chiaro */
-  --ombra:0 1px 2px rgba(15,22,38,0.07),0 18px 40px -14px rgba(15,22,38,0.22);
+  --paper:#0A0E1A;           /* la pagina torna nella famiglia della hero */
+  --paper-2:#0E1424;         /* banda alternata, per dividere le sezioni */
+  --ink:#EDF1FA;
+  --ink-muted:#8C97AD;
+  --line:rgba(255,255,255,0.10);
+  --violet-ink:#9B7FF8;      /* il viola del brand, alla luminosita' che serve sullo scuro */
+  --ombra:0 1px 2px rgba(0,0,0,0.35),0 22px 48px -16px rgba(0,0,0,0.6);
 }
 
 body{background:var(--paper);color:var(--ink);}
@@ -949,14 +949,14 @@ body{background:var(--paper);color:var(--ink);}
    tono e non per urto. Non basta cambiare il fondo — testo, bordi, bolle
    della chat, campi del form e box dei casi vanno tutti ribaltati. */
 :root{
-  /* la card e' ora piu' CHIARA della pagina, non piu' scura: su fondo
-     chiaro un riquadro che sale verso il bianco si stacca per elevazione
-     invece che per urto, ed e' il salto piu' morbido possibile */
-  --card-chiara:#F6F8FC;      /* la card, quasi bianca ma sempre blu */
-  --card-chiara-2:#E9EDF5;    /* pannelli dentro la card: chat, immagini */
-  --card-chiara-3:#FFFFFF;    /* campi e bolle in rilievo */
-  --linea-card:rgba(15,22,38,0.11);
-  --viola-su-chiaro:#4A32B4;  /* viola leggibile sopra una velatura viola */
+  /* stesso principio di prima, invertito per il fondo scuro: la card e'
+     un gradino piu' CHIARA della pagina, cosi' si stacca per elevazione
+     e non per urto. Su scuro il gradino e' piccolo, non bianco. */
+  --card-chiara:#141A2B;      /* la card */
+  --card-chiara-2:#0E1424;    /* pannelli dentro la card: chat, immagini */
+  --card-chiara-3:#0B1120;    /* campi e bolle, incassati */
+  --linea-card:rgba(255,255,255,0.09);
+  --viola-su-chiaro:#C4B5FD;  /* viola leggibile sopra una velatura viola */
 }
 .service-card,.process-step,.contact-form,.caso-card{
   background:var(--card-chiara);
@@ -1024,9 +1024,15 @@ body{background:var(--paper);color:var(--ink);}
 #servizi .services-grid{perspective:1400px;}
 #servizi .service-card{
   transform-style:preserve-3d;
-  transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+  transform:translateY(var(--sy,0px)) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
   transition:transform 0.5s cubic-bezier(0.22,1,0.36,1),box-shadow 0.3s,border-color 0.3s;
 }
+/* quanto ogni card sfila rispetto alle altre durante lo scorrimento:
+   le strette corrono di piu', le larghe restano quasi ferme. E' la
+   differenza fra loro a creare il movimento, non il movimento in se. */
+#servizi .sp-5{--amp:26;}
+#servizi .sp-7{--amp:14;}
+#servizi .featured,#servizi .wide{--amp:6;}
 #servizi .service-card[data-inclina="1"]{transition:box-shadow 0.3s,border-color 0.3s;}
 #servizi .service-card:hover{
   box-shadow:0 4px 10px rgba(20,19,27,0.10),0 36px 70px -18px rgba(91,63,214,0.32);
@@ -1094,12 +1100,18 @@ body{background:var(--paper);color:var(--ink);}
 .casi-grid,.process-grid{perspective:1400px;}
 .caso-card,.process-step{
   transform-style:preserve-3d;
-  transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+  transform:translateY(var(--sy,0px)) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
   transition:transform 0.5s cubic-bezier(0.22,1,0.36,1),box-shadow 0.3s,border-color 0.3s;
 }
+/* nei casi studio sfalso le colonne: pari e dispari corrono diverso */
+.casi-grid>.caso-card:nth-child(odd){--amp:22;}
+.casi-grid>.caso-card:nth-child(even){--amp:8;}
+.caso-full{--amp:4;}
+.process-step:nth-child(odd){--amp:18;}
+.process-step:nth-child(even){--amp:7;}
 .caso-card[data-inclina="1"],.process-step[data-inclina="1"]{transition:box-shadow 0.3s,border-color 0.3s;}
 /* il vecchio sollevamento al passaggio andava in conflitto con la rotazione */
-.caso-card:hover{transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));}
+.caso-card:hover{transform:translateY(var(--sy,0px)) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));}
 .caso-card:hover,.process-step:hover{
   box-shadow:0 4px 10px rgba(15,22,38,0.10),0 36px 70px -18px rgba(91,63,214,0.28);
 }
@@ -1119,12 +1131,52 @@ body{background:var(--paper);color:var(--ink);}
   .caso-card,.process-step{transform:none !important;transition:none;}
 }
 
+/* ===== RITORNO ALLO SCURO: valori che erano cablati per il chiaro ===== */
+.grid-bg{
+  background-image:
+    linear-gradient(rgba(123,92,245,0.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(123,92,245,0.05) 1px,transparent 1px);
+}
+.beam-glow{opacity:0.35;}          /* sullo scuro l'alone torna a essere luce */
+.caso-dettaglio{color:#94A0B5;}
+.fg input::placeholder,.fg textarea::placeholder{color:#6E7A90;}
+.success-msg{background:rgba(0,212,255,0.08);border-color:rgba(0,212,255,0.30);color:var(--cyan);}
+#errorMsg{color:#FF8A80 !important;}
+.bubble.user{background:rgba(123,92,245,0.18);border-color:rgba(123,92,245,0.35);}
+.caso-risultato{background:rgba(123,92,245,0.14);}
+.cicon{background:rgba(123,92,245,0.14);border-color:rgba(123,92,245,0.30);}
+#servizi .svc-cta{background:rgba(123,92,245,0.14);border-color:rgba(123,92,245,0.32);}
+#servizi .service-card:hover .svc-cta{background:rgba(123,92,245,0.24);}
+#servizi .svc-freccia{background:rgba(255,255,255,0.07);}
+#servizi .service-card:hover .svc-freccia{background:rgba(255,255,255,0.15);}
+#servizi .svc-cover{
+  background:
+    radial-gradient(120% 90% at 100% 0%,rgba(123,92,245,0.16) 0%,transparent 55%),
+    radial-gradient(90% 80% at 0% 100%,rgba(0,212,255,0.10) 0%,transparent 60%);
+}
+
+/* ===== DIVISIONE FRA LE SEZIONI =====
+   Due strumenti insieme, perche' da soli non bastano: le sezioni si
+   alternano fra due toni vicini — si sente il cambio senza vedere una
+   riga netta — e ognuna porta un filetto sottile in cima. Il respiro
+   verticale sale a 7rem: e' lo spazio, piu' del colore, a dire dove
+   finisce un discorso e ne comincia un altro. */
+.section-wrap{padding:7rem 4rem;}
+#servizi,#come-funziona,.world-ai-section{background:var(--paper);}
+#casi-studio,.spline-section,#siti-web{background:var(--paper-2);}
+.contact-section{background:var(--paper);}
+#casi-studio,#come-funziona,.spline-section,.world-ai-section,
+#siti-web,.contact-section,.stats-wrap{border-top:1px solid var(--line);}
+.world-ai-section{padding:7rem 1.5rem;}
+
+@media(max-width:900px){
+  .section-wrap{padding:4rem 1.25rem;}
+  .world-ai-section{padding:4rem 1.25rem;}
+}
+
 /* l'icona di contatto sul crema */
 .cicon{background:rgba(91,63,214,0.10);border-color:rgba(91,63,214,0.22);}
 
-/* casi studio: aveva uno sfondo scuro esplicito, residuo del vecchio tema.
-   Passa al crema come le altre sezioni — le sue card sono gia' scure. */
-#casi-studio{background:transparent;}
 
 /* la card Spline e' un riquadro scuro a tutti gli effetti */
 .spline-card{
