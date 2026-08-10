@@ -1006,6 +1006,82 @@ body{background:var(--paper);color:var(--ink);}
 /* sulla card chiara l'alone del beam diventa una velatura sporca */
 .beam-glow{opacity:0.22;}
 
+/* ===== CARD SERVIZI: inclinazione 3D, freccia e chiamata all'azione =====
+   Porting del componente tilt: la card ruota seguendo il mouse e i suoi
+   elementi stanno su piani diversi, cosi' il movimento ha profondita'
+   invece di essere una figurina che oscilla. Il molleggio dell'originale
+   e' reso con una transizione corta all'uscita e nessuna durante il
+   movimento: la stessa sensazione senza un ciclo di animazione acceso
+   su sei card. */
+#servizi .services-grid{perspective:1400px;}
+#servizi .service-card{
+  transform-style:preserve-3d;
+  transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+  transition:transform 0.5s cubic-bezier(0.22,1,0.36,1),box-shadow 0.3s,border-color 0.3s;
+}
+#servizi .service-card[data-inclina="1"]{transition:box-shadow 0.3s,border-color 0.3s;}
+#servizi .service-card:hover{
+  box-shadow:0 4px 10px rgba(20,19,27,0.10),0 36px 70px -18px rgba(91,63,214,0.32);
+}
+/* i piani: piu' avanti il titolo, piu' indietro il corpo */
+#servizi .service-index,#servizi .service-card h3{transform:translateZ(45px);}
+#servizi .service-card p{transform:translateZ(26px);}
+#servizi .service-pill,#servizi .svc-cta{transform:translateZ(34px);}
+#servizi .svc-freccia{transform:translateZ(60px);}
+
+/* velatura d'angolo: e' lo slot che ospitera' il video, e intanto da'
+   alla card una direzione di luce invece di un fondo piatto */
+#servizi .svc-cover{
+  position:absolute;inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  background:
+    radial-gradient(120% 90% at 100% 0%,rgba(91,63,214,0.13) 0%,transparent 55%),
+    radial-gradient(90% 80% at 0% 100%,rgba(0,168,204,0.10) 0%,transparent 60%);
+}
+
+#servizi .svc-freccia{
+  position:absolute;top:1.4rem;right:1.4rem;
+  width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--violet-ink);
+  background:rgba(255,255,255,0.55);
+  border:1px solid var(--linea-card);
+  backdrop-filter:blur(6px);
+  transition:transform 0.25s cubic-bezier(0.22,1,0.36,1),background 0.25s;
+}
+#servizi .service-card:hover .svc-freccia{transform:translateZ(60px) scale(1.08) rotate(3deg);background:rgba(255,255,255,0.85);}
+
+#servizi .svc-cta{
+  display:inline-flex;align-items:center;gap:0.45rem;
+  margin-top:1.1rem;
+  padding:0.6rem 1.1rem;border-radius:100px;
+  background:rgba(91,63,214,0.09);
+  border:1px solid rgba(91,63,214,0.22);
+  color:var(--violet-ink);
+  font-size:0.82rem;font-weight:500;text-decoration:none;
+  transition:background 0.25s,gap 0.25s;
+}
+#servizi .service-card:hover .svc-cta{background:rgba(91,63,214,0.16);gap:0.7rem;}
+#servizi .svc-cta svg{transition:transform 0.25s;}
+#servizi .service-card:hover .svc-cta svg{transform:translateX(2px);}
+
+/* la freccia non deve finire sotto il numero d'indice */
+#servizi .service-index{padding-right:3.2rem;}
+#servizi .wide .service-index{padding-right:3.2rem;}
+
+@media(max-width:900px){
+  #servizi .services-grid{perspective:none;}
+  #servizi .service-card{transform:none;}
+  #servizi .service-index,#servizi .service-card h3,
+  #servizi .service-card p,#servizi .service-pill,
+  #servizi .svc-cta,#servizi .svc-freccia{transform:none;}
+  #servizi .svc-freccia{top:1.1rem;right:1.1rem;}
+}
+@media(prefers-reduced-motion:reduce){
+  #servizi .service-card{transform:none !important;transition:none;}
+}
+
 /* l'icona di contatto sul crema */
 .cicon{background:rgba(91,63,214,0.10);border-color:rgba(91,63,214,0.22);}
 
@@ -1217,12 +1293,15 @@ nav{background:rgba(8,11,20,0.94);}
     <div class="service-card featured fade-in">
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
+      <div class="svc-cover" aria-hidden="true"></div>
       <div class="featured-inner">
         <div class="featured-text">
           <div class="service-index"><span class="service-num">01</span></div>
           <h3>Consulente AI Aziendale</h3>
           <p>Un agente AI addestrato sul tuo settore e sui tuoi documenti. Risponde a domande su produzione, procedure e processi — disponibile 24/7 per tutto il team.</p>
           <span class="service-pill">Servizio flagship</span>
+      <a class="svc-cta" href="#contatti">Parlane con noi<svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="svc-freccia" href="#contatti" aria-label="Richiedi: Consulente AI Aziendale"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
         <div class="featured-demo">
           <div class="chat-label">💬 Esempio live</div>
@@ -1235,46 +1314,61 @@ nav{background:rgba(8,11,20,0.94);}
     <div class="service-card sp-7 fade-in">
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
+      <div class="svc-cover" aria-hidden="true"></div>
       <div class="service-index"><span class="service-num">02</span></div>
       <h3>Prenotazioni Online</h3>
       <p>Webapp su misura per gestire appuntamenti e disponibilità. Il cliente prenota da solo, tu ricevi la conferma. Zero commissioni esterne.</p>
       <span class="service-pill">Zero commissioni</span>
+      <a class="svc-cta" href="#contatti">Parlane con noi<svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="svc-freccia" href="#contatti" aria-label="Richiedi: Prenotazioni Online"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
 
     <div class="service-card sp-5 fade-in">
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
+      <div class="svc-cover" aria-hidden="true"></div>
       <div class="service-index"><span class="service-num">03</span></div>
       <h3>WebApp su Misura</h3>
       <p>Gestionale, CRM, portale clienti — qualsiasi strumento digitale costruito per il tuo business. Tuo, per sempre.</p>
       <span class="service-pill">Su misura</span>
+      <a class="svc-cta" href="#contatti">Parlane con noi<svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="svc-freccia" href="#contatti" aria-label="Richiedi: WebApp su Misura"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
 
     <div class="service-card sp-5 fade-in">
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
+      <div class="svc-cover" aria-hidden="true"></div>
       <div class="service-index"><span class="service-num">04</span></div>
       <h3>Automazioni Aziendali</h3>
       <p>Colleghiamo i tuoi strumenti (Gmail, Calendar, CRM, Excel) e automatizziamo i processi ripetitivi. Email, report, notifiche — tutto in automatico.</p>
       <span class="service-pill">n8n + AI</span>
+      <a class="svc-cta" href="#contatti">Parlane con noi<svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="svc-freccia" href="#contatti" aria-label="Richiedi: Automazioni Aziendali"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
 
     <div class="service-card sp-7 fade-in">
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
+      <div class="svc-cover" aria-hidden="true"></div>
       <div class="service-index"><span class="service-num">05</span></div>
       <h3>Chiamate Automatiche AI</h3>
       <p>Un assistente vocale AI risponde alle chiamate, gestisce prenotazioni e fornisce informazioni — 24/7, senza personale dedicato.</p>
       <span class="service-pill">Voce AI</span>
+      <a class="svc-cta" href="#contatti">Parlane con noi<svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="svc-freccia" href="#contatti" aria-label="Richiedi: Chiamate Automatiche AI"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
 
     <div class="service-card wide fade-in">
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
+      <div class="svc-cover" aria-hidden="true"></div>
       <div class="service-index"><span class="service-num">06</span></div>
       <h3>Siti Web Moderni</h3>
       <p>Landing page e siti professionali, veloci e ottimizzati per convertire visitatori in clienti. Collegati alle tue automazioni.</p>
       <span class="service-pill">Alta conversione</span>
+      <a class="svc-cta" href="#contatti">Parlane con noi<svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="svc-freccia" href="#contatti" aria-label="Richiedi: Siti Web Moderni"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
 
   </div>
@@ -2021,6 +2115,42 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   if(mqReduce.addEventListener) mqReduce.addEventListener('change', applicaPreferenza);
   else if(mqReduce.addListener) mqReduce.addListener(applicaPreferenza);
   applicaPreferenza();
+})();
+</script>
+
+<!-- Inclinazione 3D delle card servizi.
+     Stessi angoli del componente originale (10.5 gradi per asse). Nessun
+     ciclo di animazione: si scrivono due variabili CSS al movimento del
+     puntatore e la transizione lavora solo al rilascio, quando la card
+     torna in piano. -->
+<script>
+(function(){
+  var carte = Array.prototype.slice.call(document.querySelectorAll('#servizi .service-card'));
+  if(!carte.length) return;
+
+  var mqGrande = window.matchMedia('(min-width:901px)');
+  var mqMoto   = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var GRADI = 10.5;
+
+  carte.forEach(function(c){
+    c.addEventListener('pointermove', function(e){
+      // il tilt e' un gesto da mouse: al tocco darebbe solo scatti
+      if(e.pointerType === 'touch' || !mqGrande.matches || mqMoto.matches) return;
+      var r = c.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width  - 0.5;
+      var py = (e.clientY - r.top)  / r.height - 0.5;
+      c.setAttribute('data-inclina','1');
+      c.style.setProperty('--ry', ( px * GRADI * 2).toFixed(2) + 'deg');
+      c.style.setProperty('--rx', (-py * GRADI * 2).toFixed(2) + 'deg');
+    });
+    var raddrizza = function(){
+      c.removeAttribute('data-inclina');
+      c.style.setProperty('--rx','0deg');
+      c.style.setProperty('--ry','0deg');
+    };
+    c.addEventListener('pointerleave', raddrizza);
+    c.addEventListener('pointercancel', raddrizza);
+  });
 })();
 </script>
 
