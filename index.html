@@ -992,35 +992,58 @@ body{background:var(--paper);color:var(--ink);}
 /* col video attivo il canvas neurale si spegne */
 .hero.con-video #heroNeuro{display:none;}
 
-/* ===== SFONDO VIDEO DELLA SEZIONE "IL MONDO SI STA ADEGUANDO" =====
-   Sta sotto a tutto: testo, statistiche e globo restano in primo piano.
-   Il velo sopra il video non e' decorazione, e' quello che tiene il testo
-   leggibile mentre sotto scorrono immagini di luminosita' variabile. */
-.wai-bg{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  object-fit:cover;
-  opacity:0.55;
-  z-index:0;pointer-events:none;
+/* ===== IL MONDO SI STA ADEGUANDO — due colonne =====
+   Era una pila centrata: tag, titolo, tre percentuali in fila e globo
+   sotto. Tutto sullo stesso asse, tutto della stessa misura, nessuna
+   tensione. Ora il discorso e i numeri stanno a sinistra su un asse
+   solo, e il globo prende la destra come oggetto con cui si interagisce
+   davvero — si trascina, e ora lo dice. */
+#world-ai{padding:5rem 1.5rem;}
+#world-ai .wai-grid{
+  max-width:1180px;margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:clamp(2.5rem,5vw,5rem);
+  align-items:center;
 }
-/* Velo chiaro, non uniforme: denso in alto dove stanno titolo, testo e
-   statistiche — il video e' uno schermo di codice, quindi scuro, e senza
-   copertura il testo nero ci finirebbe sopra — e rado in basso, attorno al
-   globo, dove il video deve vedersi davvero. */
-.wai-bg-velo{
-  position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:linear-gradient(180deg,
-    var(--paper) 0%,
-    rgba(247,245,241,0.90) 12%,
-    rgba(247,245,241,0.86) 34%,
-    rgba(247,245,241,0.42) 62%,
-    rgba(247,245,241,0.58) 88%,
-    var(--paper) 100%);
+#world-ai .wai-testo{min-width:0;}
+#world-ai .section-sub{margin-bottom:0;max-width:42ch;}
+
+/* le percentuali diventano una scheda dati incolonnata, non tre isole
+   centrate: cosi' si leggono in sequenza e i numeri si allineano */
+#world-ai .wai-stats{display:block;margin:2.5rem 0 0;}
+#world-ai .wai-stat{
+  display:flex;flex-direction:row;align-items:baseline;gap:1.2rem;
+  text-align:left;
+  padding:1rem 0;
+  border-top:1px solid var(--line);
 }
-/* tutto il contenuto sale sopra il video */
-.world-ai-section>.section-wrap,
-.world-ai-section>.wai-stats,
-.world-ai-section>.wai-globe-wrap{position:relative;z-index:1;}
+#world-ai .wai-stat:last-child{border-bottom:1px solid var(--line);}
+#world-ai .wai-num{
+  font-size:2.4rem;line-height:1;
+  min-width:4.4rem;
+  font-variant-numeric:tabular-nums;   /* sennò le cifre ballano fra una riga e l'altra */
+}
+#world-ai .wai-label{max-width:36ch;font-size:0.9rem;}
+
+#world-ai .wai-globe-wrap{
+  flex-direction:column;gap:0.9rem;
+  justify-self:end;margin:0;
+}
+#world-ai .wai-globe-canvas{width:min(44vw,470px);height:min(44vw,470px);}
+#world-ai .wai-hint{
+  font-family:'Space Mono',monospace;
+  font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--ink-muted);
+}
+
+@media(max-width:900px){
+  #world-ai .wai-grid{grid-template-columns:1fr;gap:2.5rem;}
+  #world-ai .wai-globe-wrap{justify-self:center;}
+  #world-ai .wai-stat{padding:0.85rem 0;gap:1rem;}
+  #world-ai .wai-num{font-size:2rem;min-width:3.6rem;}
+  #world-ai .wai-globe-canvas{width:min(78vw,340px);height:min(78vw,340px);}
+}
 
 /* barra e menu restano scuri: galleggiano sulla carta */
 nav,.mobile-menu,.music-toggle,.web-card{color:var(--text);}
@@ -1522,19 +1545,22 @@ nav{background:rgba(8,11,20,0.94);}
 
 <!-- WORLD AI -->
 <div class="world-ai-section fade-in" id="world-ai">
-  <video class="wai-bg" data-src="mondo-bg.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
-  <div class="wai-bg-velo" aria-hidden="true"></div>
-  <div class="section-wrap">
+  <div class="wai-grid">
+  <div class="wai-testo">
     <div class="section-tag">— Il Mondo si sta Adeguando</div>
     <h2 class="section-title">L'AI avanza ogni giorno.<br><span class="gradient-text">Chi si ferma, resta indietro.</span></h2>
     <p class="section-sub">Dalle PMI alle multinazionali, migliaia di aziende nel mondo stanno già integrando l'intelligenza artificiale. Non è più innovazione — è la nuova normalità competitiva. La domanda non è se adeguarsi, ma quando.</p>
-  </div>
-  <div class="wai-stats">
+    <div class="wai-stats">
     <div class="wai-stat"><span class="wai-num">78%</span><span class="wai-label">delle aziende usa l'AI in almeno una funzione</span></div>
     <div class="wai-stat"><span class="wai-num">89%</span><span class="wai-label">delle piccole imprese usa strumenti AI ogni giorno</span></div>
     <div class="wai-stat"><span class="wai-num">71%</span><span class="wai-label">usa già l'AI generativa nelle operazioni</span></div>
   </div>
-  <div class="wai-globe-wrap"><canvas id="waiGlobe" class="wai-globe-canvas"></canvas></div>
+  </div>
+  <div class="wai-globe-wrap">
+    <canvas id="waiGlobe" class="wai-globe-canvas"></canvas>
+    <span class="wai-hint">trascina per ruotare</span>
+  </div>
+  </div>
 </div>
 
 <!-- WEB SECTION -->
