@@ -952,6 +952,28 @@ body{background:var(--paper);color:var(--ink);}
 .spline-card .section-sub,.spline-card .spline-stat-l{color:var(--muted);}
 .spline-card .section-tag{color:var(--cyan);}
 
+/* ===== SFONDO VIDEO DELLA SEZIONE "IL MONDO SI STA ADEGUANDO" =====
+   Sta sotto a tutto: testo, statistiche e globo restano in primo piano.
+   Il velo sopra il video non e' decorazione, e' quello che tiene il testo
+   leggibile mentre sotto scorrono immagini di luminosita' variabile. */
+.wai-bg{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  opacity:0.20;
+  z-index:0;pointer-events:none;
+}
+.wai-bg-velo{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 50% 45%,rgba(8,11,20,0.55) 0%,rgba(8,11,20,0.88) 70%),
+    linear-gradient(180deg,var(--dark) 0%,rgba(8,11,20,0.75) 18%,rgba(8,11,20,0.75) 82%,var(--dark) 100%);
+}
+/* tutto il contenuto sale sopra il video */
+.world-ai-section>.section-wrap,
+.world-ai-section>.wai-stats,
+.world-ai-section>.wai-globe-wrap{position:relative;z-index:1;}
+
 /* barra e menu restano scuri: galleggiano sulla carta */
 nav,.mobile-menu,.music-toggle,.web-card{color:var(--text);}
 /* la barra si fa piu' densa: sopra il crema l'85% la schiariva e i link
@@ -1450,6 +1472,8 @@ nav{background:rgba(8,11,20,0.94);}
 
 <!-- WORLD AI -->
 <div class="world-ai-section fade-in" id="world-ai">
+  <video class="wai-bg" data-src="mondo-bg.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
+  <div class="wai-bg-velo" aria-hidden="true"></div>
   <div class="section-wrap">
     <div class="section-tag">— Il Mondo si sta Adeguando</div>
     <h2 class="section-title">L'AI avanza ogni giorno.<br><span class="gradient-text">Chi si ferma, resta indietro.</span></h2>
@@ -1575,9 +1599,10 @@ nav{background:rgba(8,11,20,0.94);}
   <p>© 2026 FutureAI – Automazioni AI per Aziende</p>
   <p>futureai@libero.it</p>
   <p class="footer-trasparenza">
-    <strong>Trasparenza IA</strong> — Il video e la musica di questo sito sono generati con
-    intelligenza artificiale. FUTURE AI progetta e fornisce sistemi di intelligenza artificiale
-    nel rispetto del Regolamento UE 2024/1689 (AI Act).
+    <strong>Trasparenza IA</strong> — Il video nella sezione iniziale e la musica di sottofondo
+    sono generati con intelligenza artificiale. Le altre riprese sono materiale d'archivio.
+    FUTURE AI progetta e fornisce sistemi di intelligenza artificiale nel rispetto del
+    Regolamento UE 2024/1689 (AI Act).
   </p>
 </footer>
 
@@ -1866,6 +1891,43 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   if(mqReduce.addEventListener) mqReduce.addEventListener('change', applicaPreferenza);
   else if(mqReduce.addListener) mqReduce.addListener(applicaPreferenza);
   applicaPreferenza();
+})();
+</script>
+
+<!-- Sfondo video della sezione "Il Mondo si sta Adeguando".
+     Il src non e' nel markup ma in data-src: cosi' su telefono il file non
+     parte proprio, e 2,4 MB di decoro non pesano sulla connessione che
+     conta di piu'. In pausa fuori schermo e a scheda nascosta. -->
+<script>
+(function(){
+  var v = document.querySelector('.wai-bg');
+  if(!v) return;
+
+  var mqGrande = window.matchMedia('(min-width:901px)');
+  var mqMoto   = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var parti = function(){ var p = v.play(); if(p && p.catch) p.catch(function(){}); };
+
+  // niente remove(): l'elemento resta e il video si aggancia solo quando serve,
+  // cosi' chi ruota il tablet in orizzontale lo ottiene lo stesso.
+  // Finche' il src non viene messo, non parte nessuna richiesta di rete.
+  function valuta(){
+    if(mqMoto.matches || !mqGrande.matches){ v.pause(); v.style.display='none'; return; }
+    v.style.display='';
+    if(!v.getAttribute('src')){ v.setAttribute('src', v.getAttribute('data-src')); }
+    parti();
+  }
+  valuta();
+  (mqGrande.addEventListener ? mqGrande.addEventListener('change',valuta) : mqGrande.addListener(valuta));
+  (mqMoto.addEventListener   ? mqMoto.addEventListener('change',valuta)   : mqMoto.addListener(valuta));
+
+  if(typeof IntersectionObserver !== 'undefined'){
+    new IntersectionObserver(function(voci){
+      voci.forEach(function(x){ x.isIntersecting ? parti() : v.pause(); });
+    },{threshold:0.05}).observe(v);
+  }
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden) v.pause(); else parti();
+  });
 })();
 </script>
 
