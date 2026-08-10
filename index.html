@@ -304,7 +304,9 @@ nav{
   font-size:0.7rem;
   line-height:1.4;
   letter-spacing:0.04em;
-  color:var(--muted);
+  /* piu' chiara del muted: col video di sfondo scendeva a 4.35 sulle
+     tracce ambra, e un'informazione dovuta per legge non sta sul limite */
+  color:#A9B2C2;
   text-align:right;
   max-width:none;
 }
@@ -965,6 +967,26 @@ body{background:var(--paper);color:var(--ink);}
 .spline-card .section-sub,.spline-card .spline-stat-l{color:var(--muted);}
 .spline-card .section-tag{color:var(--cyan);}
 
+/* ===== SFONDO VIDEO DELLA HERO =====
+   Sostituisce il canvas neurale dove il video gira: due sfondi animati
+   sovrapposti sono rumore, non ricchezza. Sotto i 901px il video non
+   parte e il canvas resta al suo posto. */
+.hero-bg{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  opacity:0.45;
+  z-index:0;pointer-events:none;
+}
+.hero-bg-velo{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(8,11,20,0.88) 0%,rgba(8,11,20,0.72) 45%,rgba(8,11,20,0.55) 100%),
+    linear-gradient(180deg,var(--dark) 0%,rgba(8,11,20,0.35) 30%,rgba(8,11,20,0.45) 75%,var(--dark) 100%);
+}
+/* col video attivo il canvas neurale si spegne */
+.hero.con-video #heroNeuro{display:none;}
+
 /* ===== SFONDO VIDEO DELLA SEZIONE "IL MONDO SI STA ADEGUANDO" =====
    Sta sotto a tutto: testo, statistiche e globo restano in primo piano.
    Il velo sopra il video non e' decorazione, e' quello che tiene il testo
@@ -1042,6 +1064,8 @@ nav{background:rgba(8,11,20,0.94);}
 
 <!-- HERO -->
 <div class="hero">
+  <video class="hero-bg" data-src="hero-bg.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
+  <div class="hero-bg-velo" aria-hidden="true"></div>
   <canvas id="heroNeuro" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
   <div class="hero-inner">
 
@@ -1915,39 +1939,53 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 })();
 </script>
 
-<!-- Sfondo video della sezione "Il Mondo si sta Adeguando".
-     Il src non e' nel markup ma in data-src: cosi' su telefono il file non
-     parte proprio, e 2,4 MB di decoro non pesano sulla connessione che
-     conta di piu'. In pausa fuori schermo e a scheda nascosta. -->
+<!-- Sfondi video decorativi (hero e sezione del globo).
+     Il src non e' nel markup ma in data-src: sotto i 901px il file non
+     parte proprio, cosi' la connessione mobile non paga megabyte di
+     decoro. In pausa fuori schermo e a scheda nascosta. -->
 <script>
 (function(){
-  var v = document.querySelector('.wai-bg');
-  if(!v) return;
+  var video = Array.prototype.slice.call(document.querySelectorAll('video[data-src]'));
+  if(!video.length) return;
 
   var mqGrande = window.matchMedia('(min-width:901px)');
   var mqMoto   = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var parti = function(){ var p = v.play(); if(p && p.catch) p.catch(function(){}); };
+  var hero     = document.querySelector('.hero');
 
-  // niente remove(): l'elemento resta e il video si aggancia solo quando serve,
-  // cosi' chi ruota il tablet in orizzontale lo ottiene lo stesso.
+  function parti(v){ var p = v.play(); if(p && p.catch) p.catch(function(){}); }
+
+  // niente remove(): l'elemento resta e il video si aggancia solo quando
+  // serve, cosi' chi ruota il tablet in orizzontale lo ottiene lo stesso.
   // Finche' il src non viene messo, non parte nessuna richiesta di rete.
   function valuta(){
-    if(mqMoto.matches || !mqGrande.matches){ v.pause(); v.style.display='none'; return; }
-    v.style.display='';
-    if(!v.getAttribute('src')){ v.setAttribute('src', v.getAttribute('data-src')); }
-    parti();
+    var attivo = mqGrande.matches && !mqMoto.matches;
+    video.forEach(function(v){
+      if(!attivo){ v.pause(); v.style.display='none'; return; }
+      v.style.display='';
+      if(!v.getAttribute('src')) v.setAttribute('src', v.getAttribute('data-src'));
+      parti(v);
+    });
+    // il canvas neurale si spegne solo quando il video della hero c'e' davvero
+    if(hero) hero.classList.toggle('con-video', attivo && !!document.querySelector('.hero-bg'));
   }
   valuta();
   (mqGrande.addEventListener ? mqGrande.addEventListener('change',valuta) : mqGrande.addListener(valuta));
   (mqMoto.addEventListener   ? mqMoto.addEventListener('change',valuta)   : mqMoto.addListener(valuta));
 
   if(typeof IntersectionObserver !== 'undefined'){
-    new IntersectionObserver(function(voci){
-      voci.forEach(function(x){ x.isIntersecting ? parti() : v.pause(); });
-    },{threshold:0.05}).observe(v);
+    var io = new IntersectionObserver(function(voci){
+      voci.forEach(function(x){
+        if(x.target.style.display === 'none') return;
+        x.isIntersecting ? parti(x.target) : x.target.pause();
+      });
+    },{threshold:0.05});
+    video.forEach(function(v){ io.observe(v); });
   }
   document.addEventListener('visibilitychange',function(){
-    if(document.hidden) v.pause(); else parti();
+    video.forEach(function(v){
+      if(v.style.display === 'none') return;
+      document.hidden ? v.pause() : parti(v);
+    });
   });
 })();
 </script>
