@@ -933,23 +933,78 @@ body{background:var(--paper);color:var(--ink);}
 .stats-wrap,footer,.contact-section{border-color:var(--line);}
 .contact-section{background:var(--paper-2);}
 
-/* --- i riquadri restano quelli di prima ---
-   L'alone viola diventa un'ombra vera a due strati: su fondo chiaro un
-   glow colorato sembra un errore di stampa. */
+/* l'alone viola diventa un'ombra vera a due strati: su fondo chiaro un
+   glow colorato sembra un errore di stampa */
 .service-card,.process-step,.contact-form,.caso-card,.featured-demo{
-  color:var(--text);
-  border-color:rgba(20,19,27,0.10);
   box-shadow:var(--ombra);
 }
-.service-card,.process-step,.contact-form{background:var(--card);}
-/* questi due erano veli traslucidi: senza il buio sotto diventavano chiari */
-.caso-card{background:var(--card);}
-.service-card.featured{background:linear-gradient(135deg,#171B33 0%,#111827 65%);}
-.featured-demo{background:var(--dark2);}
-.service-card:hover{box-shadow:0 2px 4px rgba(20,19,27,0.08),0 26px 55px -14px rgba(91,63,214,0.30);}
-.caso-card:hover{border-color:rgba(91,63,214,0.45);}
-/* il viola dell'etichetta era a 4.19 sulla card: sotto la soglia leggibile */
-.caso-tag{color:#A78BFA;}
+/* --- i riquadri chiari ---
+   Le card quasi nere stavano in contrasto troppo duro con la pagina:
+   passano a un avorio appena piu' scuro del fondo, cosi' si staccano per
+   tono e non per urto. Non basta cambiare il fondo — testo, bordi, bolle
+   della chat, campi del form e box dei casi vanno tutti ribaltati. */
+:root{
+  --card-chiara:#EFEAE2;      /* avorio della card */
+  --card-chiara-2:#E7E1D7;    /* pannelli dentro la card: chat, immagini */
+  --card-chiara-3:#FBF9F5;    /* campi e bolle in rilievo */
+  --linea-card:rgba(20,19,27,0.13);
+  --viola-su-chiaro:#4A32B4;  /* viola leggibile sopra una velatura viola */
+}
+.service-card,.process-step,.contact-form,.caso-card{
+  background:var(--card-chiara);
+  color:var(--ink);
+  border-color:var(--linea-card);
+}
+.service-card.featured{background:linear-gradient(135deg,#F2EDE5 0%,#EBE5DA 100%);}
+.service-card h3,.process-step h4,.contact-form h3,.caso-problema{color:var(--ink);}
+.service-card p,.process-step p,.caso-soluzione,
+.chat-label,.fg label,.service-pill{color:var(--ink-muted);}
+.caso-dettaglio{color:#6B6874;}
+/* con #servizi davanti, sennò vince la regola della sezione servizi */
+#servizi .service-num,.caso-tag{color:var(--violet-ink);}
+#servizi .service-pill{color:var(--ink-muted);border-top-color:var(--linea-card);}
+/* il numero del processo sta su un cerchio in gradiente: resta bianco,
+   sennò eredita l'inchiostro della card e scende a 1.04 */
+.step-num{color:#fff;}
+#servizi .service-index::after{background:linear-gradient(90deg,var(--linea-card),transparent);}
+.service-card:hover{box-shadow:0 2px 4px rgba(20,19,27,0.10),0 26px 55px -14px rgba(91,63,214,0.28);}
+.caso-card:hover{border-color:rgba(91,63,214,0.40);}
+
+/* la chat di esempio: pannello e bolle in chiaro */
+.featured-demo{background:var(--card-chiara-2);border-color:var(--linea-card);color:var(--ink);}
+.bubble{border-color:var(--linea-card);}
+.bubble.ai{background:var(--card-chiara-3);color:var(--ink);}
+.bubble.user{
+  background:rgba(91,63,214,0.12);
+  border-color:rgba(91,63,214,0.28);
+  color:var(--viola-su-chiaro);
+}
+
+/* casi studio: cornice dell'immagine e riquadro del risultato */
+.caso-img-wrap{background:var(--card-chiara-2);}
+.caso-risultato{
+  background:rgba(91,63,214,0.10);
+  border-left-color:var(--violet-ink);
+  color:var(--viola-su-chiaro);
+}
+
+/* il form: campi chiari, non pozzi neri dentro una card chiara */
+.fg input,.fg textarea,.fg select{
+  background:var(--card-chiara-3);
+  border-color:var(--linea-card);
+  color:var(--ink);
+}
+.fg input::placeholder,.fg textarea::placeholder{color:#8B8896;}
+.fg input:focus,.fg textarea:focus,.fg select:focus{
+  border-color:var(--violet-ink);
+  box-shadow:0 0 0 3px rgba(91,63,214,0.15);
+}
+.success-msg{background:rgba(0,138,168,0.10);border-color:rgba(0,138,168,0.35);color:#0A6070;}
+/* il rosso dell'errore e' inline nel markup e sul chiaro stava a 2.9 */
+#errorMsg{color:#B3261E !important;}
+
+/* sulla card chiara l'alone del beam diventa una velatura sporca */
+.beam-glow{opacity:0.22;}
 
 /* l'icona di contatto sul crema */
 .cicon{background:rgba(91,63,214,0.10);border-color:rgba(91,63,214,0.22);}
@@ -957,7 +1012,6 @@ body{background:var(--paper);color:var(--ink);}
 /* casi studio: aveva uno sfondo scuro esplicito, residuo del vecchio tema.
    Passa al crema come le altre sezioni — le sue card sono gia' scure. */
 #casi-studio{background:transparent;}
-.caso-dettaglio{color:#94A3B8;}   /* era #64748B: 4.31 sulla card, sotto soglia */
 
 /* la card Spline e' un riquadro scuro a tutti gli effetti */
 .spline-card{
