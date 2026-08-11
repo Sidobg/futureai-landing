@@ -273,99 +273,95 @@ nav{
   .forma{display:none;}
 }
 
-/* ===== SITI WEB: sequenza di fotogrammi guidata dallo scroll =====
-   La sezione e' alta 3.4 schermate e dentro c'e' un blocco appiccicato:
-   scorrendo, il riquadro cresce, le due parole si aprono ai lati e i
-   fotogrammi avanzano. Uso position:sticky invece del pin di
-   ScrollTrigger — stesso risultato visivo, ma senza che GSAP debba
-   riscrivere il layout della pagina.
-
-   Il video sorgente e' verticale (720x1280), quindi l'immersione riempie
-   l'ALTEZZA e non la larghezza: allargarlo fino a coprire uno schermo da
-   1280 vorrebbe dire ingrandire di quasi due volte un fotogramma da 540
-   e mostrarlo sfocato. */
+/* ===== SITI WEB: testo fermo, scroll dentro il telefono =====
+   Il messaggio non si muove e non svanisce: chi arriva qui deve poterlo
+   leggere in qualsiasi momento dello scorrimento. L'effetto vive tutto
+   dentro lo schermo del telefono, che e' anche il posto giusto — il
+   video sorgente e' 720x1280, la proporzione esatta di un iPhone, quindi
+   entra senza un taglio. */
 .auto-sez{
   position:relative;width:100%;
-  height:340vh;
-  overflow:clip;
+  height:260vh;
   background:#0A0E1A;
 }
 .auto-fisso{
   position:sticky;top:0;
-  height:100svh;width:100%;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  gap:0.4rem;
+  height:100svh;
+  display:flex;align-items:center;
   overflow:hidden;
 }
-.auto-fondo{
-  position:absolute;inset:0;z-index:0;
-  background:radial-gradient(ellipse at 50% 38%,rgba(123,92,245,0.16) 0%,rgba(10,14,26,0) 62%);
-}
-.auto-vignetta{
-  position:absolute;inset:0;z-index:0;
-  background:radial-gradient(ellipse at center,transparent 52%,rgba(4,6,14,0.75) 100%);
-}
-
-.auto-titolo{
-  position:relative;z-index:2;
-  font-family:'Fraunces',Georgia,serif;
-  font-weight:800;text-transform:uppercase;
-  font-size:clamp(3rem,11vw,9rem);
-  line-height:0.86;letter-spacing:-0.04em;
-  color:var(--text);
-  white-space:nowrap;pointer-events:none;
-}
-
-.auto-riquadro{
-  position:relative;z-index:1;
-  width:min(86vw,calc(62svh * 0.5625));
-  aspect-ratio:9/16;
-  border-radius:14px;overflow:hidden;
-  box-shadow:0 24px 90px rgba(0,0,0,0.6);
-  outline:1px solid rgba(255,255,255,0.10);
-  outline-offset:-1px;
-  will-change:transform;
-}
-.auto-tela{display:block;width:100%;height:100%;object-fit:cover;background:#0A0E1A;}
-
-/* il messaggio entra alla fine, quando il riquadro si e' ritirato */
-.auto-testo{
-  position:absolute;z-index:3;
-  left:50%;bottom:clamp(2rem,7vh,5rem);
-  transform:translateX(-50%);
-  width:min(92vw,620px);
-  text-align:center;
-  opacity:0;
+.auto-fisso::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 72% 50%,rgba(123,92,245,0.16) 0%,rgba(10,14,26,0) 62%);
   pointer-events:none;
 }
-.auto-testo.visibile{pointer-events:auto;}
-.auto-testo h3{
-  font-family:'Fraunces',Georgia,serif;
-  font-size:clamp(1.3rem,2.6vw,1.9rem);
-  font-weight:600;line-height:1.12;letter-spacing:-0.02em;
-  margin-bottom:0.7rem;
-  text-shadow:0 2px 20px rgba(4,6,14,0.9);
+.auto-griglia{
+  position:relative;
+  max-width:1180px;width:100%;
+  margin:0 auto;padding:0 1.5rem;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:clamp(2rem,5vw,4.5rem);
 }
+.auto-testo{min-width:0;}
 .auto-testo p{
-  color:rgba(240,244,255,0.92);
-  font-size:0.95rem;line-height:1.65;font-weight:300;
-  margin:0 auto 1.4rem;max-width:52ch;
-  text-shadow:0 1px 14px rgba(4,6,14,0.95);
+  color:var(--muted);
+  font-size:1rem;line-height:1.75;font-weight:300;
+  max-width:46ch;margin:0 0 2rem;
 }
 
-@media(max-width:768px){
-  .auto-sez{height:300vh;}
-  .auto-riquadro{width:min(72vw,calc(56svh * 0.5625));}
-  .auto-titolo{font-size:clamp(2.4rem,13vw,4rem);}
+/* il telefono, disegnato in CSS: scocca, isola dinamica e tasti laterali */
+.auto-telefono{
+  position:relative;justify-self:end;
+  width:min(34vw,calc(70svh * 0.5625));
+  /* il rapporto 9:16 va sullo SCHERMO, non sulla scocca: se lo metto qui
+     i bordi se lo mangiano e il video finisce tagliato ai lati */
+  padding:11px;
+  border-radius:46px;
+  background:linear-gradient(155deg,#39404F 0%,#181C28 42%,#0E1119 100%);
+  box-shadow:
+    0 2px 3px rgba(255,255,255,0.10) inset,
+    0 -2px 3px rgba(0,0,0,0.6) inset,
+    0 40px 90px rgba(0,0,0,0.65),
+    0 0 60px rgba(123,92,245,0.18);
+}
+.auto-schermo{
+  position:relative;
+  width:100%;aspect-ratio:9/16;
+  border-radius:36px;overflow:hidden;
+  background:#05070E;
+}
+.auto-tela{display:block;width:100%;height:100%;object-fit:cover;}
+.auto-isola{
+  position:absolute;top:22px;left:50%;
+  transform:translateX(-50%);
+  width:31%;height:3.1%;
+  min-height:18px;
+  border-radius:99px;
+  background:#05070E;
+  z-index:2;
+}
+.auto-tasto{
+  position:absolute;width:2.5px;border-radius:2px;
+  background:linear-gradient(180deg,#4A5162,#232936);
+}
+.auto-tasto-vol1{left:-2px;top:22%;height:7%;}
+.auto-tasto-vol2{left:-2px;top:31%;height:7%;}
+.auto-tasto-lato{right:-2px;top:26%;height:11%;}
+
+@media(max-width:900px){
+  .auto-sez{height:220vh;}
+  .auto-griglia{grid-template-columns:1fr;gap:2.5rem;justify-items:center;text-align:center;}
+  .auto-testo p{margin-left:auto;margin-right:auto;}
+  .auto-telefono{justify-self:center;width:min(64vw,270px);}
 }
 
-/* senza animazioni resta una scena ferma, con il primo fotogramma e il
-   messaggio gia' leggibile: la sezione deve funzionare comunque */
+/* senza animazioni la sezione diventa un blocco normale col primo
+   fotogramma fermo: il messaggio e' la parte che conta e resta intera */
 @media(prefers-reduced-motion:reduce){
   .auto-sez{height:auto;}
-  .auto-fisso{position:relative;height:auto;padding:5rem 1.5rem;gap:1.5rem;}
-  .auto-testo{position:relative;left:auto;bottom:auto;transform:none;opacity:1;pointer-events:auto;}
+  .auto-fisso{position:relative;height:auto;padding:5rem 0;}
 }
 
 /* ===== HERO ===== */
@@ -2226,30 +2222,33 @@ nav{background:rgba(8,11,20,0.94);}
 </div>
 
 <!-- WEB SECTION -->
-<!-- ===== SITI WEB: sequenza guidata dallo scroll ===== -->
+<!-- ===== SITI WEB: testo fermo a sinistra, scroll dentro il telefono ===== -->
 <section class="auto-sez" id="siti-web" aria-label="Siti web moderni">
   <div class="auto-fisso">
-    <div class="auto-fondo" aria-hidden="true"></div>
-    <div class="auto-vignetta" aria-hidden="true"></div>
+    <div class="auto-griglia">
 
-    <h2 class="auto-titolo auto-titolo-su" aria-hidden="true">SITI</h2>
+      <div class="auto-testo">
+        <div class="section-tag">— Siti Web</div>
+        <h2 class="section-title">Siti moderni, leggibili anche<br>dalle intelligenze artificiali</h2>
+        <p>Costruiamo siti veloci e curati, progettati per essere trovati non solo su
+           Google ma anche da ChatGPT, Gemini e Perplexity: dati strutturati, contenuto
+           servito in chiaro senza JavaScript e testo scritto per essere citato.
+           Quando qualcuno chiede consiglio a un'AI, il tuo nome c'&egrave;.</p>
+        <a href="#contatti" class="btn-primary">Parlane con noi
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
 
-    <div class="auto-riquadro">
-      <canvas class="auto-tela" width="540" height="960" aria-hidden="true"></canvas>
-      <noscript><img src="auto/000.webp" alt="" width="540" height="960"></noscript>
-    </div>
+      <div class="auto-telefono" aria-hidden="true">
+        <div class="auto-schermo">
+          <canvas class="auto-tela" width="540" height="960"></canvas>
+        </div>
+        <span class="auto-isola"></span>
+        <span class="auto-tasto auto-tasto-vol1"></span>
+        <span class="auto-tasto auto-tasto-vol2"></span>
+        <span class="auto-tasto auto-tasto-lato"></span>
+      </div>
 
-    <h2 class="auto-titolo auto-titolo-giu" aria-hidden="true">MODERNI</h2>
-
-    <div class="auto-testo">
-      <h3>Siti moderni, leggibili anche dalle intelligenze artificiali</h3>
-      <p>Costruiamo siti veloci e curati, progettati per essere trovati non solo su
-         Google ma anche da ChatGPT, Gemini e Perplexity: dati strutturati, contenuto
-         servito in chiaro senza JavaScript e testo scritto per essere citato.
-         Quando qualcuno chiede consiglio a un'AI, il tuo nome c'e'.</p>
-      <a href="#contatti" class="btn-primary">Parlane con noi
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
     </div>
   </div>
 </section>
@@ -2743,10 +2742,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
   var N = 54;
   var tela = sez.querySelector('.auto-tela');
-  var riquadro = sez.querySelector('.auto-riquadro');
-  var suTit = sez.querySelector('.auto-titolo-su');
-  var giuTit = sez.querySelector('.auto-titolo-giu');
-  var testo = sez.querySelector('.auto-testo');
+  var telefono = sez.querySelector('.auto-telefono');
   var ctx2d = tela.getContext('2d');
 
   var menoMoto = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -2802,19 +2798,14 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
   if(menoMoto.matches){ carica(); return; }   // scena ferma, primo fotogramma
 
-  function scalaPartenza(){ return window.innerWidth < 768 ? 0.82 : 0.62; }
-  function scalaImmersione(){
-    // riempie l'ALTEZZA: il sorgente e' verticale e allargarlo fino a
-    // coprire la finestra lo renderebbe sfocato
-    var h = riquadro.getBoundingClientRect().height / (gsap.getProperty(riquadro,'scaleY') || 1);
-    if(!h) return 1.5;
-    return (window.innerHeight / h) * 1.06;
-  }
+  // Niente piu' ingrandimento ne' titoli che si aprono: il messaggio a
+  // sinistra deve restare fermo e leggibile per tutta la sezione. Lo
+  // scroll fa una cosa sola — scorre i fotogrammi dentro lo schermo —
+  // piu' un galleggiamento minimo del telefono, che dice solo che la
+  // sezione e' viva.
+  gsap.set(telefono,{y:26});
 
-  gsap.set(riquadro,{scale:scalaPartenza(),transformOrigin:'50% 50%'});
-  gsap.set(testo,{autoAlpha:0,y:24});
-
-  var tl = gsap.timeline({
+  gsap.timeline({
     scrollTrigger:{
       trigger: sez,
       start: 'top top',
@@ -2822,24 +2813,13 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       scrub: 0.4,
       invalidateOnRefresh: true,
       onUpdate: function(self){
-        var p = gsap.utils.clamp(0, 1, (self.progress - 0.12) / 0.60);
+        // un po' di corsa a vuoto in entrata e in uscita, cosi' la
+        // sequenza non parte gia' iniziata ne' finisce di colpo
+        var p = gsap.utils.clamp(0, 1, (self.progress - 0.08) / 0.84);
         disegna(Math.min(N-1, Math.floor(p * N)));
       }
     }
-  });
-
-  tl.to(riquadro,{scale:1,ease:'power2.out',duration:0.12},0)
-    /* in pixel, non in vw: GSAP legge la stringa '-58vw' come -58 pixel
-       e i titoli si sposterebbero di mezzo dito invece che ai lati */
-    .to(suTit,{x:function(){return -window.innerWidth*(window.innerWidth<768?0.72:0.58)},ease:'power2.inOut',duration:0.12},0)
-    .to(giuTit,{x:function(){return window.innerWidth*(window.innerWidth<768?0.72:0.58)},ease:'power2.inOut',duration:0.12},0)
-
-    .to(riquadro,{scale:scalaImmersione,ease:'power2.in',duration:0.60},0.12)
-    .to([suTit,giuTit],{autoAlpha:0,ease:'power1.in',duration:0.18},0.12)
-
-    .to(riquadro,{scale:function(){return scalaPartenza()*1.1;},y:'-6vh',ease:'power3.inOut',duration:0.16},0.72)
-    .to(testo,{autoAlpha:1,y:0,ease:'power2.out',duration:0.12},0.84)
-    .add(function(){ testo.classList.add('visibile'); },0.84);
+  }).to(telefono,{y:-26,ease:'none',duration:1},0);
 
   ScrollTrigger.refresh();
 })();
