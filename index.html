@@ -211,7 +211,28 @@ nav{
   height:1.4em;line-height:1.4em;
 }
 .menu-btn-testo span{display:block;}
-.menu-btn-icona{width:15px;height:15px;flex-shrink:0;}
+/* le tre righe classiche: all'apertura la prima e la terza si incrociano
+   in una X e quella di mezzo sparisce */
+.menu-btn-icona{
+  position:relative;display:block;flex-shrink:0;
+  width:20px;height:14px;
+}
+.menu-btn-icona i{
+  position:absolute;left:0;right:0;
+  height:1.6px;border-radius:2px;
+  background:currentColor;
+}
+.menu-btn-icona i:nth-child(1){top:0;}
+.menu-btn-icona i:nth-child(2){top:50%;margin-top:-0.8px;}
+.menu-btn-icona i:nth-child(3){bottom:0;}
+
+/* la riga di divisione fra una voce e l'altra: si tira da sinistra
+   quando il menu si apre, dopo che il testo e' salito */
+.menu-riga{
+  display:block;height:1px;
+  background:linear-gradient(90deg,rgba(240,244,255,0.32),rgba(240,244,255,0.06));
+  transform:scaleX(0);transform-origin:left center;
+}
 
 .menu-schermo{
   position:fixed;inset:0;z-index:200;
@@ -1446,7 +1467,16 @@ body{background:var(--paper);color:var(--ink);}
 /* e una lieve ombra, perche' sotto scorre un video: la luminosita' cambia
    di fotogramma in fotogramma e il velo da solo non basta a garantirla */
 #servizi .service-card h3{text-shadow:0 2px 14px rgba(6,9,18,0.75);}
-#servizi .service-card p{text-shadow:0 1px 10px rgba(6,9,18,0.8);}
+/* la descrizione era nel grigio dei testi secondari, ma qui sotto scorre
+   un video: quel grigio spariva. Va portata quasi al bianco, con l'ombra
+   che la tiene staccata dai fotogrammi piu' chiari. Resta un gradino
+   sotto al titolo — sennò titolo e testo pesano uguale e la gerarchia
+   della card si appiattisce. */
+#servizi .service-card p{
+  color:rgba(244,247,255,0.94);
+  font-weight:400;
+  text-shadow:0 1px 12px rgba(6,9,18,0.9),0 0 26px rgba(6,9,18,0.65);
+}
 /* il numero d'indice sale in cima, sopra la clip */
 #servizi .service-index{
   position:absolute;top:1.5rem;left:1.75rem;right:1.75rem;
@@ -1596,7 +1626,7 @@ nav{background:rgba(8,11,20,0.94);}
     <a href="#contatti" class="nav-cta">Richiedi Preventivo</a>
     <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuSchermo">
       <span class="menu-btn-testo"><span>Menu</span><span>Chiudi</span></span>
-      <svg viewBox="0 0 16 16" fill="none" class="menu-btn-icona" aria-hidden="true"><path d="M7.33 16L7.33 0L8.67 0L8.67 16L7.33 16Z" fill="currentColor"/><path d="M16 8.67L0 8.67L0 7.33L16 7.33L16 8.67Z" fill="currentColor"/></svg>
+      <span class="menu-btn-icona" aria-hidden="true"><i></i><i></i><i></i></span>
     </button>
   </div>
 </nav>
@@ -1613,10 +1643,10 @@ nav{background:rgba(8,11,20,0.94);}
     </div>
     <div class="menu-dentro">
       <ul class="menu-voci">
-      <li class="menu-voce" data-forma="1"><a href="#servizi" class="menu-link"><span class="menu-link-testo">Servizi</span></a></li>
-      <li class="menu-voce" data-forma="2"><a href="#casi-studio" class="menu-link"><span class="menu-link-testo">I nostri lavori</span></a></li>
-      <li class="menu-voce" data-forma="3"><a href="#come-funziona" class="menu-link"><span class="menu-link-testo">Come Funziona</span></a></li>
-      <li class="menu-voce" data-forma="4"><a href="#contatti" class="menu-link"><span class="menu-link-testo">Contatti</span></a></li>
+      <li class="menu-voce" data-forma="1"><a href="#servizi" class="menu-link"><span class="menu-link-testo">Servizi</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="2"><a href="#casi-studio" class="menu-link"><span class="menu-link-testo">I nostri lavori</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="3"><a href="#come-funziona" class="menu-link"><span class="menu-link-testo">Come Funziona</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="4"><a href="#contatti" class="menu-link"><span class="menu-link-testo">Contatti</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       </ul>
       <div class="menu-piede" data-menu-fade>
         <a href="mailto:futureai@libero.it">futureai@libero.it</a>
@@ -2577,7 +2607,8 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   var link    = schermo.querySelectorAll('.menu-link-testo');
   var piede   = schermo.querySelectorAll('[data-menu-fade]');
   var parole  = bottone.querySelectorAll('.menu-btn-testo span');
-  var icona   = bottone.querySelector('.menu-btn-icona');
+  var righe   = bottone.querySelectorAll('.menu-btn-icona i');
+  var divisori= schermo.querySelectorAll('.menu-riga');
   var voci    = schermo.querySelectorAll('.menu-voce[data-forma]');
   var forme   = schermo.querySelector('.menu-forme');
 
@@ -2600,10 +2631,13 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
     linea = gsap.timeline({defaults:{ease:curva, duration:0.7}});
     linea.fromTo(parole,{yPercent:0},{yPercent:-100, stagger:0.12},0)
-      .fromTo(icona,{rotate:0},{rotate:315},0)
+      .to(righe[0],{y:6.2,rotate:45,duration:0.45},0)
+      .to(righe[1],{autoAlpha:0,duration:0.25},0)
+      .to(righe[2],{y:-6.2,rotate:-45,duration:0.45},0)
       .fromTo(velo,{autoAlpha:0},{autoAlpha:1},0)
       .fromTo(strati,{xPercent:101},{xPercent:0, stagger:0.11, duration:0.58},0)
       .fromTo(link,{yPercent:140,rotate:8},{yPercent:0,rotate:0,stagger:0.05},0.34)
+      .fromTo(divisori,{scaleX:0},{scaleX:1,stagger:0.06,duration:0.5},0.46)
       .fromTo(piede,{autoAlpha:0,yPercent:50},{autoAlpha:1,yPercent:0,stagger:0.04,clearProps:'all'},0.55);
   }
 
@@ -2619,7 +2653,8 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     linea.to(velo,{autoAlpha:0},0)
       .to(strati,{xPercent:110, stagger:0.05},0)
       .to(parole,{yPercent:0},0)
-      .to(icona,{rotate:0},0)
+      .to(righe,{y:0,rotate:0,autoAlpha:1,duration:0.35},0)
+      .to(divisori,{scaleX:0,duration:0.3},0)
       .call(function(){ schermo.style.display = 'none'; });
   }
 
