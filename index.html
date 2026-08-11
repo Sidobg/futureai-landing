@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="description" content="FutureAI – Automazioni AI per Aziende Italiane. Agenti AI, prenotazioni, webapp su misura e automazioni.">
 <title>FutureAI – Automazioni AI per Aziende</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&display=swap" rel="stylesheet">
 <style>
 :root {
   --violet: #7B5CF5;
@@ -963,7 +963,7 @@ body{background:var(--paper);color:var(--ink);}
   color:var(--ink);
   border-color:var(--linea-card);
 }
-.service-card.featured{background:linear-gradient(135deg,#F2EDE5 0%,#EBE5DA 100%);}
+.service-card.featured{background:linear-gradient(135deg,#1A2135 0%,#141A2B 100%);}
 .service-card h3,.process-step h4,.contact-form h3,.caso-problema{color:var(--ink);}
 .service-card p,.process-step p,.caso-soluzione,
 .chat-label,.fg label,.service-pill{color:var(--ink-muted);}
@@ -1131,6 +1131,33 @@ body{background:var(--paper);color:var(--ink);}
   .caso-card,.process-step{transform:none !important;transition:none;}
 }
 
+/* ===== VOCE TIPOGRAFICA DEI TITOLI =====
+   Syne e' un grottesco geometrico: e' il carattere che finisce su meta'
+   dei siti "tech" generati, e infatti si riconosceva. Al suo posto un
+   serif con carattere per titoli e numeri. Su un sito di automazioni IA
+   il serif e' la scelta che una macchina prudente non farebbe — ed e'
+   esattamente per questo che non sembra fatto da una macchina.
+   Il corpo resta DM Sans: due famiglie, non tre. */
+.section-title,
+.contact-left h2,
+.contact-form h3,
+#servizi .service-card h3,
+.process-step h4,
+.caso-card h3{
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:600;
+  letter-spacing:-0.015em;
+}
+/* i numeri passano allo stesso serif: cifre grandi in serif si leggono
+   come un bilancio, non come un cruscotto */
+.stat-number,.wai-num,.step-num,#servizi .service-num{
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-0.02em;
+}
+#servizi .service-num{font-weight:600;font-size:1rem;}
+
 /* ===== CAROSELLO DEI SERVIZI =====
    Il difetto del carosello e' che nasconde: chi arriva non sa quanta
    offerta ci sia dietro il bordo. Qui la barra di avanzamento lo dice a
@@ -1151,11 +1178,59 @@ body{background:var(--paper);color:var(--ink);}
   overscroll-behavior-x:contain;
 }
 #servizi .services-grid::-webkit-scrollbar{display:none;}
+/* le card entrano in numero intero: tre affiancate riempiono esattamente
+   la pista, cosi' nessuna resta tagliata a meta' sul bordo */
 #servizi .service-card{
-  flex:0 0 clamp(268px,29vw,370px);
+  flex:0 0 calc((100% - 2.5rem)/3);
   grid-column:auto;
   scroll-snap-align:start;
   padding:2rem;
+}
+@media(max-width:1100px){
+  #servizi .service-card{flex:0 0 calc((100% - 1.25rem)/2);}
+}
+@media(max-width:700px){
+  #servizi .service-card{flex:0 0 100%;}
+}
+
+/* ===== PISTA E FRECCE AI LATI ===== */
+.car-pista{position:relative;}
+.car-frecce{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:space-between;
+  pointer-events:none;
+}
+.car-frecce .car-btn{pointer-events:auto;}
+.car-btn[data-verso="-1"]{margin-left:-1.3rem;}
+.car-btn[data-verso="1"]{margin-right:-1.3rem;}
+.car-comandi{gap:0;}
+
+/* ===== CAROSELLO DEI CASI STUDIO: stessa meccanica ===== */
+.casi-grid[data-carosello]{
+  display:flex;
+  grid-template-columns:none;
+  gap:1.5rem;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  padding:2.5rem 0.5rem;
+  margin:-2.5rem -0.5rem -1.5rem;
+  scrollbar-width:none;-ms-overflow-style:none;
+  overscroll-behavior-x:contain;
+}
+.casi-grid[data-carosello]::-webkit-scrollbar{display:none;}
+.casi-grid[data-carosello]>.caso-card{
+  flex:0 0 calc((100% - 1.5rem)/2);
+  scroll-snap-align:start;
+}
+.casi-grid[data-carosello]>.caso-full{max-width:none;margin:0;}
+@media(max-width:700px){
+  .casi-grid[data-carosello]>.caso-card{flex:0 0 100%;}
+}
+
+/* al tocco lo scorrimento e' il dito: le frecce sparirebbero sotto il pollice */
+@media(max-width:700px){
+  .car-frecce{display:none;}
 }
 /* nel carosello tutte le card hanno la stessa misura: le composizioni
    speciali della griglia non hanno piu' senso */
@@ -1446,15 +1521,39 @@ nav{background:rgba(8,11,20,0.94);}
     <p class="section-sub">Dall'agente AI personalizzato alle automazioni avanzate — costruiamo soluzioni su misura per il tuo settore.</p>
   </div>
 
-  <div class="services-grid">
+  <div class="car-pista">
+  <div class="services-grid" data-carosello>
+<div class="service-card sp-5 fade-in">
+      <span class="beam-glow" aria-hidden="true"></span>
+      <span class="beam-ring" aria-hidden="true"></span>
+      <div class="svc-cover" aria-hidden="true"></div>
+      <div class="service-index"><span class="service-num">01</span></div>
+      <h3>WebApp su Misura</h3>
+      <p>Gestionale, CRM, portale clienti — qualsiasi strumento digitale costruito per il tuo business. Tuo, per sempre.</p>
+      <span class="service-pill">Su misura</span>
+      <a class="svc-cta" href="#contatti">Parlane con noi<svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="svc-freccia" href="#contatti" aria-label="Richiedi: WebApp su Misura"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
 
-    <div class="service-card featured fade-in">
+    <div class="service-card wide fade-in">
+      <span class="beam-glow" aria-hidden="true"></span>
+      <span class="beam-ring" aria-hidden="true"></span>
+      <div class="svc-cover" aria-hidden="true"></div>
+      <div class="service-index"><span class="service-num">02</span></div>
+      <h3>Siti Web Moderni</h3>
+      <p>Landing page e siti professionali, veloci e ottimizzati per convertire visitatori in clienti. Collegati alle tue automazioni.</p>
+      <span class="service-pill">Alta conversione</span>
+      <a class="svc-cta" href="#contatti">Parlane con noi<svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="svc-freccia" href="#contatti" aria-label="Richiedi: Siti Web Moderni"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+
+<div class="service-card featured fade-in">
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
       <div class="svc-cover" aria-hidden="true"></div>
       <div class="featured-inner">
         <div class="featured-text">
-          <div class="service-index"><span class="service-num">01</span></div>
+          <div class="service-index"><span class="service-num">03</span></div>
           <h3>Consulente AI Aziendale</h3>
           <p>Un agente AI addestrato sul tuo settore e sui tuoi documenti. Risponde a domande su produzione, procedure e processi — disponibile 24/7 per tutto il team.</p>
           <span class="service-pill">Servizio flagship</span>
@@ -1473,7 +1572,7 @@ nav{background:rgba(8,11,20,0.94);}
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
       <div class="svc-cover" aria-hidden="true"></div>
-      <div class="service-index"><span class="service-num">02</span></div>
+      <div class="service-index"><span class="service-num">04</span></div>
       <h3>Prenotazioni Online</h3>
       <p>Webapp su misura per gestire appuntamenti e disponibilità. Il cliente prenota da solo, tu ricevi la conferma. Zero commissioni esterne.</p>
       <span class="service-pill">Zero commissioni</span>
@@ -1485,19 +1584,7 @@ nav{background:rgba(8,11,20,0.94);}
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
       <div class="svc-cover" aria-hidden="true"></div>
-      <div class="service-index"><span class="service-num">03</span></div>
-      <h3>WebApp su Misura</h3>
-      <p>Gestionale, CRM, portale clienti — qualsiasi strumento digitale costruito per il tuo business. Tuo, per sempre.</p>
-      <span class="service-pill">Su misura</span>
-      <a class="svc-cta" href="#contatti">Parlane con noi<svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a class="svc-freccia" href="#contatti" aria-label="Richiedi: WebApp su Misura"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </div>
-
-    <div class="service-card sp-5 fade-in">
-      <span class="beam-glow" aria-hidden="true"></span>
-      <span class="beam-ring" aria-hidden="true"></span>
-      <div class="svc-cover" aria-hidden="true"></div>
-      <div class="service-index"><span class="service-num">04</span></div>
+      <div class="service-index"><span class="service-num">05</span></div>
       <h3>Automazioni Aziendali</h3>
       <p>Colleghiamo i tuoi strumenti (Gmail, Calendar, CRM, Excel) e automatizziamo i processi ripetitivi. Email, report, notifiche — tutto in automatico.</p>
       <span class="service-pill">n8n + AI</span>
@@ -1509,7 +1596,7 @@ nav{background:rgba(8,11,20,0.94);}
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
       <div class="svc-cover" aria-hidden="true"></div>
-      <div class="service-index"><span class="service-num">05</span></div>
+      <div class="service-index"><span class="service-num">06</span></div>
       <h3>Chiamate Automatiche AI</h3>
       <p>Un assistente vocale AI risponde alle chiamate, gestisce prenotazioni e fornisce informazioni — 24/7, senza personale dedicato.</p>
       <span class="service-pill">Voce AI</span>
@@ -1517,27 +1604,13 @@ nav{background:rgba(8,11,20,0.94);}
       <a class="svc-freccia" href="#contatti" aria-label="Richiedi: Chiamate Automatiche AI"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
 
-    <div class="service-card wide fade-in">
-      <span class="beam-glow" aria-hidden="true"></span>
-      <span class="beam-ring" aria-hidden="true"></span>
-      <div class="svc-cover" aria-hidden="true"></div>
-      <div class="service-index"><span class="service-num">06</span></div>
-      <h3>Siti Web Moderni</h3>
-      <p>Landing page e siti professionali, veloci e ottimizzati per convertire visitatori in clienti. Collegati alle tue automazioni.</p>
-      <span class="service-pill">Alta conversione</span>
-      <a class="svc-cta" href="#contatti">Parlane con noi<svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a class="svc-freccia" href="#contatti" aria-label="Richiedi: Siti Web Moderni"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </div>
-
+      </div>
+  <div class="car-frecce">
+    <button type="button" class="car-btn" data-verso="-1" aria-label="Servizi precedenti"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button type="button" class="car-btn" data-verso="1" aria-label="Servizi successivi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </div>
-
-  <div class="car-comandi">
-    <div class="car-barra" aria-hidden="true"><span></span></div>
-    <div class="car-frecce">
-      <button type="button" class="car-btn" data-verso="-1" aria-label="Servizi precedenti"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <button type="button" class="car-btn" data-verso="1" aria-label="Servizi successivi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    </div>
   </div>
+  <div class="car-comandi"><div class="car-barra" aria-hidden="true"><span></span></div></div>
 </div>
 
 <!-- COME FUNZIONA -->
@@ -1555,7 +1628,8 @@ nav{background:rgba(8,11,20,0.94);}
       <div class="section-tag">— Cosa abbiamo già costruito</div>
       <h2 class="section-title">Progetti reali, problemi reali.</h2>
       <p class="section-sub">Ogni soluzione è stata costruita su misura per il cliente. Ecco alcuni progetti completati — con i risultati concreti ottenuti.</p>
-      <div class="casi-grid">
+      <div class="car-pista">
+  <div class="casi-grid" data-carosello>
 
         <div class="caso-card">
       <span class="beam-glow" aria-hidden="true"></span>
@@ -1633,6 +1707,13 @@ nav{background:rgba(8,11,20,0.94);}
         </div>
 
       </div>
+  <div class="car-frecce">
+    <button type="button" class="car-btn" data-verso="-1" aria-label="Lavori precedenti"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button type="button" class="car-btn" data-verso="1" aria-label="Lavori successivi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </div>
+</div>
+  <div class="car-comandi"><div class="car-barra" aria-hidden="true"><span></span></div></div>
+
     </div>
   </div>
 
@@ -2299,51 +2380,59 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
      comandi e l'indicatore di quanto resta da vedere. -->
 <script>
 (function(){
-  var pista = document.querySelector('#servizi .services-grid');
-  var comandi = document.querySelector('.car-comandi');
-  if(!pista || !comandi) return;
+  var piste = Array.prototype.slice.call(document.querySelectorAll('[data-carosello]'));
+  if(!piste.length) return;
 
-  var barra = comandi.querySelector('.car-barra span');
-  var bottoni = Array.prototype.slice.call(comandi.querySelectorAll('.car-btn'));
+  piste.forEach(function(pista){
+    var contenitore = pista.closest('.car-pista');
+    var comandi = contenitore ? contenitore.nextElementSibling : null;
+    var barra = comandi && comandi.classList.contains('car-comandi') ? comandi.querySelector('.car-barra span') : null;
+    var bottoni = contenitore ? Array.prototype.slice.call(contenitore.querySelectorAll('.car-btn')) : [];
 
-  function passo(){
-    var card = pista.querySelector('.service-card');
-    if(!card) return pista.clientWidth * 0.8;
-    var gap = parseFloat(getComputedStyle(pista).columnGap) || 20;
-    return card.getBoundingClientRect().width + gap;
-  }
+    function passo(){
+      var card = pista.firstElementChild;
+      if(!card) return pista.clientWidth * 0.8;
+      var gap = parseFloat(getComputedStyle(pista).columnGap) || 20;
+      return card.getBoundingClientRect().width + gap;
+    }
 
-  function aggiorna(){
-    var max = pista.scrollWidth - pista.clientWidth;
-    var quota = pista.clientWidth / pista.scrollWidth;     // quanto se ne vede
-    var avanti = max > 1 ? pista.scrollLeft / max : 0;
-    barra.style.width = (Math.max(quota,0.12) * 100).toFixed(1) + '%';
-    barra.style.transform = 'translateX(' + (avanti * (100/Math.max(quota,0.12) - 100)).toFixed(1) + '%)';
-    bottoni[0].disabled = pista.scrollLeft <= 2;
-    bottoni[1].disabled = pista.scrollLeft >= max - 2;
-  }
+    function aggiorna(){
+      var max = pista.scrollWidth - pista.clientWidth;
+      if(barra){
+        var quota = Math.min(1, pista.clientWidth / pista.scrollWidth);
+        var avanti = max > 1 ? pista.scrollLeft / max : 0;
+        barra.style.width = (quota * 100).toFixed(1) + '%';
+        barra.style.transform = 'translateX(' + (avanti * (100/quota - 100)).toFixed(1) + '%)';
+      }
+      if(bottoni.length === 2){
+        bottoni[0].disabled = pista.scrollLeft <= 2;
+        bottoni[1].disabled = pista.scrollLeft >= max - 2;
+      }
+    }
 
-  bottoni.forEach(function(b){
-    b.addEventListener('click', function(){
-      pista.scrollBy({left: passo() * parseInt(b.getAttribute('data-verso'),10), behavior:'smooth'});
+    bottoni.forEach(function(b){
+      b.addEventListener('click', function(){
+        pista.scrollBy({left: passo() * parseInt(b.getAttribute('data-verso'),10), behavior:'smooth'});
+      });
     });
-  });
 
-  // le frecce della tastiera muovono il carosello solo quando lo si sta usando
-  pista.setAttribute('tabindex','0');
-  pista.setAttribute('role','region');
-  pista.setAttribute('aria-label','Servizi, scorrevoli orizzontalmente');
-  pista.addEventListener('keydown', function(e){
-    if(e.key === 'ArrowRight'){ e.preventDefault(); pista.scrollBy({left: passo(), behavior:'smooth'}); }
-    if(e.key === 'ArrowLeft'){  e.preventDefault(); pista.scrollBy({left:-passo(), behavior:'smooth'}); }
-  });
+    pista.setAttribute('tabindex','0');
+    pista.setAttribute('role','region');
+    if(!pista.getAttribute('aria-label')){
+      pista.setAttribute('aria-label','Contenuti scorrevoli orizzontalmente');
+    }
+    pista.addEventListener('keydown', function(e){
+      if(e.key === 'ArrowRight'){ e.preventDefault(); pista.scrollBy({left: passo(), behavior:'smooth'}); }
+      if(e.key === 'ArrowLeft'){  e.preventDefault(); pista.scrollBy({left:-passo(), behavior:'smooth'}); }
+    });
 
-  // niente throttle con requestAnimationFrame: se il frame non arriva —
-  // scheda in secondo piano, pannello nascosto — il flag resta alzato e la
-  // barra non si aggiorna mai piu'. aggiorna() costa due letture.
-  pista.addEventListener('scroll', aggiorna, {passive:true});
-  window.addEventListener('resize', aggiorna);
-  aggiorna();
+    // niente throttle con requestAnimationFrame: se il frame non arriva —
+    // scheda in secondo piano — il flag resterebbe alzato e la barra non si
+    // aggiornerebbe mai piu'. aggiorna() costa due letture.
+    pista.addEventListener('scroll', aggiorna, {passive:true});
+    window.addEventListener('resize', aggiorna);
+    aggiorna();
+  });
 })();
 </script>
 
