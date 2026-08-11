@@ -191,6 +191,110 @@ nav{
   font-weight:600 !important;
 }
 
+/* ===== MENU A TUTTO SCHERMO =====
+   I link spariscono dalla barra e diventano un pannello che entra da
+   destra. Restano sempre a vista solo logo e "Richiedi Preventivo": la
+   navigazione puo' stare dietro un clic, l'azione che porta contatti no. */
+.nav-destra{display:flex;align-items:center;gap:1rem;}
+
+.menu-btn{
+  display:flex;align-items:center;gap:0.55rem;
+  background:none;border:0;cursor:pointer;
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:500;
+  padding:0.4rem 0.2rem;
+}
+/* le due parole stanno incolonnate dentro una finestra alta una riga:
+   all'apertura scorrono e "Menu" diventa "Chiudi" */
+.menu-btn-testo{
+  display:block;overflow:hidden;
+  height:1.4em;line-height:1.4em;
+}
+.menu-btn-testo span{display:block;}
+.menu-btn-icona{width:15px;height:15px;flex-shrink:0;}
+
+.menu-schermo{
+  position:fixed;inset:0;z-index:200;
+  display:none;
+}
+.menu-velo{
+  position:absolute;inset:0;
+  background:rgba(4,6,14,0.72);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  opacity:0;
+}
+/* Attenzione: questo e' un <nav>, e nel foglio esiste gia' una regola
+   sull'elemento nav per la barra fissa in alto (height:64px, left:0,
+   position:fixed, padding, bordo). Va neutralizzata voce per voce,
+   altrimenti il pannello nasce alto 64px e incollato a sinistra. */
+.menu-pannello{
+  position:absolute;
+  top:0;right:0;bottom:0;left:auto;
+  height:auto;width:min(560px,100%);
+  padding:0;margin:0;
+  background:none;border:0;
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+  display:flex;align-items:center;justify-content:flex-start;
+  overflow:hidden;
+}
+/* tre pannelli sfalsati: entrano uno dietro l'altro e danno spessore
+   al gesto, invece di far comparire un rettangolo unico */
+.menu-fondo{position:absolute;inset:0;}
+.menu-strato{
+  position:absolute;inset:0;
+  transform:translateX(101%);
+}
+.menu-strato.prima{background:var(--violet);opacity:0.9;}
+.menu-strato.seconda{background:#141A2E;}
+.menu-strato.terza{background:var(--dark2);}
+
+.menu-forme{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.forma{
+  position:absolute;top:50%;right:-6%;
+  width:min(78%,420px);aspect-ratio:1;
+  transform:translateY(-50%);
+  opacity:0;visibility:hidden;
+}
+.forma.attiva{visibility:visible;}
+
+.menu-dentro{
+  position:relative;z-index:2;
+  width:100%;
+  padding:clamp(2rem,6vw,4rem);
+  display:flex;flex-direction:column;gap:2.5rem;
+}
+.menu-voci{list-style:none;display:flex;flex-direction:column;gap:0.2rem;}
+.menu-link{
+  display:block;text-decoration:none;
+  color:var(--text);
+  overflow:hidden;                 /* la finestra da cui il testo sale */
+  padding:0.35rem 0;
+}
+.menu-link-testo{
+  display:block;
+  font-family:'Fraunces',Georgia,serif;
+  font-size:clamp(2rem,6.5vw,3.2rem);
+  font-weight:600;line-height:1.12;letter-spacing:-0.02em;
+  transition:opacity 0.3s;
+}
+.menu-voce:hover .menu-link-testo{opacity:1;}
+.menu-voci:hover .menu-voce:not(:hover) .menu-link-testo{opacity:0.42;}
+
+.menu-piede{
+  display:flex;flex-direction:column;gap:0.3rem;
+  font-size:0.85rem;color:var(--muted);
+}
+.menu-piede a{color:var(--text);text-decoration:none;}
+.menu-piede a:hover{color:var(--violet-light);}
+
+@media(max-width:768px){
+  .nav-destra .nav-cta{display:none;}   /* sul telefono la CTA vive nel pannello */
+  .menu-pannello{width:100%;}
+}
+@media(prefers-reduced-motion:reduce){
+  .forma{display:none;}
+}
+
 /* ===== HERO ===== */
 .hero{position:relative;overflow:hidden;
   min-height:100svh;
@@ -1320,10 +1424,29 @@ body{background:var(--paper);color:var(--ink);}
 #servizi .svc-cover::after{
   content:'';position:absolute;inset:0;
   background:linear-gradient(180deg,
-    rgba(10,14,26,0.18) 0%,
-    rgba(10,14,26,0.58) 45%,
-    rgba(10,14,26,0.95) 100%);
+    rgba(8,11,20,0.42) 0%,
+    rgba(8,11,20,0.72) 38%,
+    rgba(8,11,20,0.93) 68%,
+    rgba(8,11,20,0.98) 100%);
 }
+
+/* Il testo deve stare SOPRA la copertina sempre, non solo quando il tilt
+   lo porta avanti: .svc-cover e' posizionata, titolo e paragrafo no, e fra
+   pari grado vince sempre l'elemento posizionato. Su desktop il translateZ
+   mascherava il problema; su mobile, dove le trasformazioni sono spente,
+   la copertina si mangiava il testo. */
+#servizi .svc-cover{z-index:0;}
+#servizi .service-index,
+#servizi .service-card h3,
+#servizi .service-card p,
+#servizi .service-pill,
+#servizi .svc-cta,
+#servizi .svc-freccia{position:relative;z-index:2;}
+
+/* e una lieve ombra, perche' sotto scorre un video: la luminosita' cambia
+   di fotogramma in fotogramma e il velo da solo non basta a garantirla */
+#servizi .service-card h3{text-shadow:0 2px 14px rgba(6,9,18,0.75);}
+#servizi .service-card p{text-shadow:0 1px 10px rgba(6,9,18,0.8);}
 /* il numero d'indice sale in cima, sopra la clip */
 #servizi .service-index{
   position:absolute;top:1.5rem;left:1.75rem;right:1.75rem;
@@ -1469,23 +1592,38 @@ nav{background:rgba(8,11,20,0.94);}
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo"></a>
-  <ul class="nav-links">
-    <li><a href="#servizi">Servizi</a></li>
-    <li><a href="#casi-studio">I nostri lavori</a></li>
-    <li><a href="#come-funziona">Come Funziona</a></li>
-    <li><a href="#contatti" class="nav-cta">Richiedi Preventivo</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-destra">
+    <a href="#contatti" class="nav-cta">Richiedi Preventivo</a>
+    <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuSchermo">
+      <span class="menu-btn-testo"><span>Menu</span><span>Chiudi</span></span>
+      <svg viewBox="0 0 16 16" fill="none" class="menu-btn-icona" aria-hidden="true"><path d="M7.33 16L7.33 0L8.67 0L8.67 16L7.33 16Z" fill="currentColor"/><path d="M16 8.67L0 8.67L0 7.33L16 7.33L16 8.67Z" fill="currentColor"/></svg>
+    </button>
+  </div>
 </nav>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#servizi" onclick="closeMenu()">Servizi</a>
-  <a href="#casi-studio" onclick="closeMenu()">I nostri lavori</a>
-  <a href="#come-funziona" onclick="closeMenu()">Come Funziona</a>
-  <a href="#contatti" class="mob-cta" onclick="closeMenu()">Richiedi Preventivo Gratuito →</a>
+<!-- MENU A TUTTO SCHERMO -->
+<div class="menu-schermo" id="menuSchermo" data-nav="closed" aria-hidden="true">
+  <div class="menu-velo" id="menuVelo"></div>
+  <nav class="menu-pannello" aria-label="Menu principale">
+    <div class="menu-fondo" aria-hidden="true">
+      <span class="menu-strato prima"></span>
+      <span class="menu-strato seconda"></span>
+      <span class="menu-strato terza"></span>
+      <div class="menu-forme"><svg class="forma forma-1" viewBox="0 0 400 400" fill="none" aria-hidden="true"><circle class="forma-el" cx="80" cy="120" r="42" fill="rgba(123,92,245,0.20)"/><circle class="forma-el" cx="300" cy="80" r="62" fill="rgba(0,212,255,0.14)"/><circle class="forma-el" cx="200" cy="300" r="84" fill="rgba(255,110,199,0.11)"/><circle class="forma-el" cx="350" cy="285" r="30" fill="rgba(123,92,245,0.18)"/></svg><svg class="forma forma-2" viewBox="0 0 400 400" fill="none" aria-hidden="true"><path class="forma-el" d="M0 200 Q100 100 200 200 T400 200" stroke="rgba(123,92,245,0.22)" stroke-width="62" fill="none"/><path class="forma-el" d="M0 285 Q100 185 200 285 T400 285" stroke="rgba(0,212,255,0.16)" stroke-width="42" fill="none"/></svg><svg class="forma forma-3" viewBox="0 0 400 400" fill="none" aria-hidden="true"><circle class="forma-el" cx="55" cy="60" r="8" fill="rgba(123,92,245,0.30)"/><circle class="forma-el" cx="155" cy="60" r="8" fill="rgba(0,212,255,0.28)"/><circle class="forma-el" cx="255" cy="60" r="8" fill="rgba(255,110,199,0.26)"/><circle class="forma-el" cx="355" cy="60" r="8" fill="rgba(123,92,245,0.24)"/><circle class="forma-el" cx="55" cy="160" r="12" fill="rgba(123,92,245,0.30)"/><circle class="forma-el" cx="155" cy="160" r="12" fill="rgba(0,212,255,0.28)"/><circle class="forma-el" cx="255" cy="160" r="12" fill="rgba(255,110,199,0.26)"/><circle class="forma-el" cx="355" cy="160" r="12" fill="rgba(123,92,245,0.24)"/><circle class="forma-el" cx="55" cy="260" r="10" fill="rgba(123,92,245,0.30)"/><circle class="forma-el" cx="155" cy="260" r="10" fill="rgba(0,212,255,0.28)"/><circle class="forma-el" cx="255" cy="260" r="10" fill="rgba(255,110,199,0.26)"/><circle class="forma-el" cx="355" cy="260" r="10" fill="rgba(123,92,245,0.24)"/><circle class="forma-el" cx="55" cy="350" r="6" fill="rgba(123,92,245,0.30)"/><circle class="forma-el" cx="155" cy="350" r="6" fill="rgba(0,212,255,0.28)"/><circle class="forma-el" cx="255" cy="350" r="6" fill="rgba(255,110,199,0.26)"/><circle class="forma-el" cx="355" cy="350" r="6" fill="rgba(123,92,245,0.24)"/></svg><svg class="forma forma-4" viewBox="0 0 400 400" fill="none" aria-hidden="true"><line class="forma-el" x1="0" y1="100" x2="300" y2="400" stroke="rgba(123,92,245,0.18)" stroke-width="32"/><line class="forma-el" x1="100" y1="0" x2="400" y2="300" stroke="rgba(0,212,255,0.14)" stroke-width="26"/><line class="forma-el" x1="200" y1="0" x2="400" y2="200" stroke="rgba(255,110,199,0.12)" stroke-width="20"/></svg></div>
+    </div>
+    <div class="menu-dentro">
+      <ul class="menu-voci">
+      <li class="menu-voce" data-forma="1"><a href="#servizi" class="menu-link"><span class="menu-link-testo">Servizi</span></a></li>
+      <li class="menu-voce" data-forma="2"><a href="#casi-studio" class="menu-link"><span class="menu-link-testo">I nostri lavori</span></a></li>
+      <li class="menu-voce" data-forma="3"><a href="#come-funziona" class="menu-link"><span class="menu-link-testo">Come Funziona</span></a></li>
+      <li class="menu-voce" data-forma="4"><a href="#contatti" class="menu-link"><span class="menu-link-testo">Contatti</span></a></li>
+      </ul>
+      <div class="menu-piede" data-menu-fade>
+        <a href="mailto:futureai@libero.it">futureai@libero.it</a>
+        <span>Automazioni AI per Aziende</span>
+      </div>
+    </div>
+  </nav>
 </div>
 
 <!-- HERO -->
@@ -1561,7 +1699,7 @@ nav{background:rgba(8,11,20,0.94);}
 <div class="service-card sp-5 fade-in">
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
-      <div class="svc-cover" aria-hidden="true"><img class="svc-clip" src="img/webapp.webp" alt="" loading="lazy" decoding="async" width="330" height="385"></div>
+      <div class="svc-cover" aria-hidden="true"><video class="svc-clip" src="clip-webapp.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true" width="330" height="385"></video></div>
       <div class="service-index"><span class="service-num">01</span></div>
       <h3>WebApp su Misura</h3>
       <p>Gestionale, CRM, portale clienti — qualsiasi strumento digitale costruito per il tuo business. Tuo, per sempre.</p>
@@ -1573,7 +1711,7 @@ nav{background:rgba(8,11,20,0.94);}
     <div class="service-card wide fade-in">
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
-      <div class="svc-cover" aria-hidden="true"><img class="svc-clip" src="img/siti.webp" alt="" loading="lazy" decoding="async" width="330" height="385"></div>
+      <div class="svc-cover" aria-hidden="true"><video class="svc-clip" src="clip-siti.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true" width="330" height="385"></video></div>
       <div class="service-index"><span class="service-num">02</span></div>
       <h3>Siti Web Moderni</h3>
       <p>Landing page e siti professionali, veloci e ottimizzati per convertire visitatori in clienti. Collegati alle tue automazioni.</p>
@@ -1585,7 +1723,7 @@ nav{background:rgba(8,11,20,0.94);}
 <div class="service-card featured fade-in">
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
-      <div class="svc-cover" aria-hidden="true"><img class="svc-clip" src="img/consulente.webp" alt="" loading="lazy" decoding="async" width="330" height="385"></div>
+      <div class="svc-cover" aria-hidden="true"><video class="svc-clip" src="clip-consulente.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true" width="330" height="385"></video></div>
       <div class="featured-inner">
         <div class="featured-text">
           <div class="service-index"><span class="service-num">03</span></div>
@@ -1606,7 +1744,7 @@ nav{background:rgba(8,11,20,0.94);}
     <div class="service-card sp-7 fade-in">
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
-      <div class="svc-cover" aria-hidden="true"><img class="svc-clip" src="img/prenotazioni.webp" alt="" loading="lazy" decoding="async" width="330" height="385"></div>
+      <div class="svc-cover" aria-hidden="true"><video class="svc-clip" src="clip-prenotazioni.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true" width="330" height="385"></video></div>
       <div class="service-index"><span class="service-num">04</span></div>
       <h3>Prenotazioni Online</h3>
       <p>Webapp su misura per gestire appuntamenti e disponibilità. Il cliente prenota da solo, tu ricevi la conferma. Zero commissioni esterne.</p>
@@ -1618,7 +1756,7 @@ nav{background:rgba(8,11,20,0.94);}
     <div class="service-card sp-5 fade-in">
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
-      <div class="svc-cover" aria-hidden="true"><img class="svc-clip" src="img/automazioni.webp" alt="" loading="lazy" decoding="async" width="330" height="385"></div>
+      <div class="svc-cover" aria-hidden="true"><video class="svc-clip" src="clip-automazioni.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true" width="330" height="385"></video></div>
       <div class="service-index"><span class="service-num">05</span></div>
       <h3>Automazioni Aziendali</h3>
       <p>Colleghiamo i tuoi strumenti (Gmail, Calendar, CRM, Excel) e automatizziamo i processi ripetitivi. Email, report, notifiche — tutto in automatico.</p>
@@ -1630,7 +1768,7 @@ nav{background:rgba(8,11,20,0.94);}
     <div class="service-card sp-7 fade-in">
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
-      <div class="svc-cover" aria-hidden="true"><img class="svc-clip" src="img/chiamate.webp" alt="" loading="lazy" decoding="async" width="330" height="385"></div>
+      <div class="svc-cover" aria-hidden="true"><video class="svc-clip" src="clip-chiamate.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true" width="330" height="385"></video></div>
       <div class="service-index"><span class="service-num">06</span></div>
       <h3>Chiamate Automatiche AI</h3>
       <p>Un assistente vocale AI risponde alle chiamate, gestisce prenotazioni e fornisce informazioni — 24/7, senza personale dedicato.</p>
@@ -2123,19 +2261,10 @@ nav{background:rgba(8,11,20,0.94);}
 </footer>
 
 <script>
-// Hamburger menu
-const ham = document.getElementById('hamburger');
-const mob = document.getElementById('mobileMenu');
-ham.addEventListener('click', () => {
-  ham.classList.toggle('open');
-  mob.classList.toggle('open');
-  document.body.style.overflow = mob.classList.contains('open') ? 'hidden' : '';
-});
-function closeMenu() {
-  ham.classList.remove('open');
-  mob.classList.remove('open');
-  document.body.style.overflow = '';
-}
+// Il vecchio hamburger non esiste piu': lo sostituisce il menu a tutto
+// schermo piu' in basso. closeMenu resta perche' e' ancora chiamata
+// dagli onclick di alcuni link, e senza darebbe ReferenceError.
+function closeMenu(){}
 
 // Custom cursor (desktop only)
 if (window.matchMedia('(hover: hover)').matches) {
@@ -2407,6 +2536,149 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   if(mqReduce.addEventListener) mqReduce.addEventListener('change', applicaPreferenza);
   else if(mqReduce.addListener) mqReduce.addListener(applicaPreferenza);
   applicaPreferenza();
+})();
+</script>
+
+<!-- ===== MENU A TUTTO SCHERMO =====
+     GSAP 3.12.5 e' gia' caricato. Il plugin CustomEase no, e non lo aggiungo
+     per una curva sola: l'ease "0.65, 0.01, 0.05, 0.99" e' una cubic-bezier,
+     e GSAP accetta una funzione come ease — quindi la risolvo a mano con
+     Newton-Raphson invece di scaricare un altro script da CDN. -->
+<script>
+(function(){
+  var bottone = document.getElementById('menuBtn');
+  var schermo = document.getElementById('menuSchermo');
+  if(!bottone || !schermo || typeof gsap === 'undefined') return;
+
+  function bezier(x1,y1,x2,y2){
+    function ascissa(t){ return 3*(1-t)*(1-t)*t*x1 + 3*(1-t)*t*t*x2 + t*t*t; }
+    function ordinata(t){ return 3*(1-t)*(1-t)*t*y1 + 3*(1-t)*t*t*y2 + t*t*t; }
+    function derivata(t){
+      return 3*(1-t)*(1-t)*x1 + 6*(1-t)*t*(x2-x1) + 3*t*t*(1-x2);
+    }
+    return function(p){
+      if(p <= 0) return 0;
+      if(p >= 1) return 1;
+      var t = p;
+      for(var i=0;i<6;i++){
+        var d = derivata(t);
+        if(Math.abs(d) < 1e-6) break;
+        var scarto = ascissa(t) - p;
+        if(Math.abs(scarto) < 1e-6) break;
+        t -= scarto / d;
+      }
+      return ordinata(Math.max(0, Math.min(1, t)));
+    };
+  }
+  var curva = bezier(0.65, 0.01, 0.05, 0.99);
+
+  var velo    = schermo.querySelector('.menu-velo');
+  var strati  = schermo.querySelectorAll('.menu-strato');
+  var link    = schermo.querySelectorAll('.menu-link-testo');
+  var piede   = schermo.querySelectorAll('[data-menu-fade]');
+  var parole  = bottone.querySelectorAll('.menu-btn-testo span');
+  var icona   = bottone.querySelector('.menu-btn-icona');
+  var voci    = schermo.querySelectorAll('.menu-voce[data-forma]');
+  var forme   = schermo.querySelector('.menu-forme');
+
+  var aperto = false, linea = null;
+
+  function apri(){
+    if(linea) linea.kill();
+    aperto = true;
+    schermo.setAttribute('data-nav','open');
+    schermo.setAttribute('aria-hidden','false');
+    bottone.setAttribute('aria-expanded','true');
+    document.body.style.overflow = 'hidden';
+
+    // il display va acceso PRIMA di costruire la timeline: xPercent si
+    // misura sulla larghezza dell'elemento, e con display:none il pannello
+    // non ha layout — GSAP finirebbe per calcolare il 101% sulla finestra
+    // intera invece che sui 560px del pannello.
+    schermo.style.display = 'block';
+    void schermo.offsetWidth;
+
+    linea = gsap.timeline({defaults:{ease:curva, duration:0.7}});
+    linea.fromTo(parole,{yPercent:0},{yPercent:-100, stagger:0.12},0)
+      .fromTo(icona,{rotate:0},{rotate:315},0)
+      .fromTo(velo,{autoAlpha:0},{autoAlpha:1},0)
+      .fromTo(strati,{xPercent:101},{xPercent:0, stagger:0.11, duration:0.58},0)
+      .fromTo(link,{yPercent:140,rotate:8},{yPercent:0,rotate:0,stagger:0.05},0.34)
+      .fromTo(piede,{autoAlpha:0,yPercent:50},{autoAlpha:1,yPercent:0,stagger:0.04,clearProps:'all'},0.55);
+  }
+
+  function chiudi(){
+    if(linea) linea.kill();
+    aperto = false;
+    schermo.setAttribute('data-nav','closed');
+    schermo.setAttribute('aria-hidden','true');
+    bottone.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
+
+    linea = gsap.timeline({defaults:{ease:curva, duration:0.55}});
+    linea.to(velo,{autoAlpha:0},0)
+      .to(strati,{xPercent:110, stagger:0.05},0)
+      .to(parole,{yPercent:0},0)
+      .to(icona,{rotate:0},0)
+      .call(function(){ schermo.style.display = 'none'; });
+  }
+
+  bottone.addEventListener('click', function(){ aperto ? chiudi() : apri(); });
+  velo.addEventListener('click', chiudi);
+  schermo.querySelectorAll('.menu-link').forEach(function(a){
+    a.addEventListener('click', chiudi);   // e' un'ancora interna: il pannello deve sparire
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && aperto) chiudi();
+  });
+
+  // le forme dietro le voci: una alla volta, quella della voce puntata
+  voci.forEach(function(voce){
+    var forma = forme ? forme.querySelector('.forma-' + voce.getAttribute('data-forma')) : null;
+    if(!forma) return;
+    var pezzi = forma.querySelectorAll('.forma-el');
+    voce.addEventListener('mouseenter', function(){
+      forme.querySelectorAll('.forma').forEach(function(f){ f.classList.remove('attiva'); });
+      forma.classList.add('attiva');
+      gsap.fromTo(forma,{autoAlpha:0},{autoAlpha:1,duration:0.3,overwrite:'auto'});
+      gsap.fromTo(pezzi,
+        {scale:0.5,opacity:0,rotate:-10,transformOrigin:'50% 50%'},
+        {scale:1,opacity:1,rotate:0,duration:0.6,stagger:0.08,ease:'back.out(1.7)',overwrite:'auto'});
+    });
+    voce.addEventListener('mouseleave', function(){
+      gsap.to(pezzi,{scale:0.8,opacity:0,duration:0.3,ease:'power2.in',overwrite:'auto',
+        onComplete:function(){ forma.classList.remove('attiva'); }});
+    });
+  });
+})();
+</script>
+
+<!-- Le clip delle card si fermano quando escono dalla pista o dallo schermo.
+     Sei video in decodifica contemporanea sono lavoro pagato per qualcosa che
+     nessuno sta guardando: in vista ne restano al massimo tre. -->
+<script>
+(function(){
+  var clip = Array.prototype.slice.call(document.querySelectorAll('video.svc-clip'));
+  if(!clip.length) return;
+
+  var menoMoto = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function ferma(v){ if(!v.paused) v.pause(); }
+  function parti(v){ if(v.paused && !menoMoto.matches) v.play().catch(function(){}); }
+
+  if(menoMoto.matches){ clip.forEach(ferma); return; }
+
+  if(typeof IntersectionObserver !== 'undefined'){
+    var osservatore = new IntersectionObserver(function(voci){
+      voci.forEach(function(v){
+        if(v.isIntersecting) parti(v.target); else ferma(v.target);
+      });
+    }, {threshold: 0.15});
+    clip.forEach(function(v){ osservatore.observe(v); });
+  }
+
+  document.addEventListener('visibilitychange', function(){
+    clip.forEach(document.hidden ? ferma : function(){});
+  });
 })();
 </script>
 
