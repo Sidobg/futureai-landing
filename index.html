@@ -425,13 +425,17 @@ nav{
 }
 /* Art. 50.4 AI Act: il video è generato con IA e va dichiarato */
 .hero .video-nota{
-  margin:0.6rem 0 0;
-  font-size:0.7rem;
-  line-height:1.4;
-  letter-spacing:0.04em;
+  margin:0.55rem 0 0;
+  /* 10px: e' il gradino piu' basso a cui scendo. L'Art. 50.4 chiede che
+     l'informazione sia "chiara e distinguibile", quindi sotto i 10px la
+     alleggerirei fino a renderla contestabile. Per compensare la
+     dimensione alzo il contrasto invece di abbassarlo. */
+  font-size:0.625rem;
+  line-height:1.35;
+  letter-spacing:0.05em;
   /* piu' chiara del muted: col video di sfondo scendeva a 4.35 sulle
      tracce ambra, e un'informazione dovuta per legge non sta sul limite */
-  color:#A9B2C2;
+  color:#C3CAD8;
   /* col velo piu' rado a destra puo' capitarle sotto una traccia ambra */
   text-shadow:0 1px 8px rgba(8,11,20,0.95);
   text-align:right;
