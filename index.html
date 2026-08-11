@@ -1293,11 +1293,46 @@ body{background:var(--paper);color:var(--ink);}
 #servizi .service-card:hover .svc-cta{background:rgba(123,92,245,0.24);}
 #servizi .svc-freccia{background:rgba(255,255,255,0.07);}
 #servizi .service-card:hover .svc-freccia{background:rgba(255,255,255,0.15);}
-#servizi .svc-cover{
-  background:
-    radial-gradient(120% 90% at 100% 0%,rgba(123,92,245,0.16) 0%,transparent 55%),
-    radial-gradient(90% 80% at 0% 100%,rgba(0,212,255,0.10) 0%,transparent 60%);
+/* ===== CARD SERVIZI CON CLIP A TUTTA SUPERFICIE =====
+   Le clip sono WebP animati costruiti alla misura esatta della card:
+   partono da soli come un'immagine, senza politiche di autoplay da
+   aggirare e senza JavaScript, e funzionano anche al tocco. Il velo
+   che scurisce verso il basso non e' decorazione: e' quello che tiene
+   leggibile il testo mentre sotto scorre un'immagine che cambia. */
+#servizi .service-card{
+  min-height:27rem;
+  overflow:hidden;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:1.75rem;
 }
+#servizi .svc-cover{
+  background:none;
+  overflow:hidden;
+  border-radius:inherit;
+}
+#servizi .svc-clip{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:transform 0.5s cubic-bezier(0.22,1,0.36,1);
+}
+#servizi .service-card:hover .svc-clip{transform:scale(1.05);}
+#servizi .svc-cover::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,
+    rgba(10,14,26,0.18) 0%,
+    rgba(10,14,26,0.58) 45%,
+    rgba(10,14,26,0.95) 100%);
+}
+/* il numero d'indice sale in cima, sopra la clip */
+#servizi .service-index{
+  position:absolute;top:1.5rem;left:1.75rem;right:1.75rem;
+  margin:0;
+}
+/* nella card in movimento la chat di esempio non si legge: il testo del
+   servizio prende il suo posto, come nelle altre cinque */
+#servizi .featured-demo{display:none;}
+#servizi .featured-inner{display:block;}
 
 /* ===== DIVISIONE FRA LE SEZIONI =====
    Due strumenti insieme, perche' da soli non bastano: le sezioni si
@@ -1526,7 +1561,7 @@ nav{background:rgba(8,11,20,0.94);}
 <div class="service-card sp-5 fade-in">
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
-      <div class="svc-cover" aria-hidden="true"></div>
+      <div class="svc-cover" aria-hidden="true"><img class="svc-clip" src="img/webapp.webp" alt="" loading="lazy" decoding="async" width="330" height="385"></div>
       <div class="service-index"><span class="service-num">01</span></div>
       <h3>WebApp su Misura</h3>
       <p>Gestionale, CRM, portale clienti — qualsiasi strumento digitale costruito per il tuo business. Tuo, per sempre.</p>
@@ -1538,7 +1573,7 @@ nav{background:rgba(8,11,20,0.94);}
     <div class="service-card wide fade-in">
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
-      <div class="svc-cover" aria-hidden="true"></div>
+      <div class="svc-cover" aria-hidden="true"><img class="svc-clip" src="img/siti.webp" alt="" loading="lazy" decoding="async" width="330" height="385"></div>
       <div class="service-index"><span class="service-num">02</span></div>
       <h3>Siti Web Moderni</h3>
       <p>Landing page e siti professionali, veloci e ottimizzati per convertire visitatori in clienti. Collegati alle tue automazioni.</p>
@@ -1550,7 +1585,7 @@ nav{background:rgba(8,11,20,0.94);}
 <div class="service-card featured fade-in">
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
-      <div class="svc-cover" aria-hidden="true"></div>
+      <div class="svc-cover" aria-hidden="true"><img class="svc-clip" src="img/consulente.webp" alt="" loading="lazy" decoding="async" width="330" height="385"></div>
       <div class="featured-inner">
         <div class="featured-text">
           <div class="service-index"><span class="service-num">03</span></div>
@@ -1571,7 +1606,7 @@ nav{background:rgba(8,11,20,0.94);}
     <div class="service-card sp-7 fade-in">
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
-      <div class="svc-cover" aria-hidden="true"></div>
+      <div class="svc-cover" aria-hidden="true"><img class="svc-clip" src="img/prenotazioni.webp" alt="" loading="lazy" decoding="async" width="330" height="385"></div>
       <div class="service-index"><span class="service-num">04</span></div>
       <h3>Prenotazioni Online</h3>
       <p>Webapp su misura per gestire appuntamenti e disponibilità. Il cliente prenota da solo, tu ricevi la conferma. Zero commissioni esterne.</p>
@@ -1583,7 +1618,7 @@ nav{background:rgba(8,11,20,0.94);}
     <div class="service-card sp-5 fade-in">
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
-      <div class="svc-cover" aria-hidden="true"></div>
+      <div class="svc-cover" aria-hidden="true"><img class="svc-clip" src="img/automazioni.webp" alt="" loading="lazy" decoding="async" width="330" height="385"></div>
       <div class="service-index"><span class="service-num">05</span></div>
       <h3>Automazioni Aziendali</h3>
       <p>Colleghiamo i tuoi strumenti (Gmail, Calendar, CRM, Excel) e automatizziamo i processi ripetitivi. Email, report, notifiche — tutto in automatico.</p>
@@ -1595,7 +1630,7 @@ nav{background:rgba(8,11,20,0.94);}
     <div class="service-card sp-7 fade-in">
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
-      <div class="svc-cover" aria-hidden="true"></div>
+      <div class="svc-cover" aria-hidden="true"><img class="svc-clip" src="img/chiamate.webp" alt="" loading="lazy" decoding="async" width="330" height="385"></div>
       <div class="service-index"><span class="service-num">06</span></div>
       <h3>Chiamate Automatiche AI</h3>
       <p>Un assistente vocale AI risponde alle chiamate, gestisce prenotazioni e fornisce informazioni — 24/7, senza personale dedicato.</p>
