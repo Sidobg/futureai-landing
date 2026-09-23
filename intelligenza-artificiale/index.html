@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<base href="/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>AI – Intelligenza artificiale su misura e in locale – FutureAI</title>
+<meta name="description" content="Assistenti AI sui tuoi documenti, app a comando vocale, email e riunioni riassunte. E l'AI in locale: intelligenza artificiale che gira dentro l'azienda, senza che nessun dato esca.">
+<link rel="canonical" href="https://www.futureai.it/intelligenza-artificiale/">
+<link href="/fonts/fonts.css" rel="stylesheet">
+<link href="/stile.css" rel="stylesheet">
+<script src="/vendor/email.min.js"></script>
+<script src="/vendor/gsap.min.js"></script>
+<script src="/vendor/ScrollTrigger.min.js"></script>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="grid-bg"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo"></a>
+  <div class="nav-destra">
+    <a href="/contatti/" class="nav-cta">Richiedi Preventivo</a>
+    <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuSchermo">
+      <span class="menu-btn-testo"><span>Menu</span><span>Chiudi</span></span>
+      <span class="menu-btn-icona" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MENU A TUTTO SCHERMO -->
+<div class="menu-schermo" id="menuSchermo" data-nav="closed" aria-hidden="true">
+  <div class="menu-velo" id="menuVelo"></div>
+  <nav class="menu-pannello" aria-label="Menu principale">
+    <div class="menu-fondo" aria-hidden="true">
+      <span class="menu-strato prima"></span>
+      <span class="menu-strato seconda"></span>
+      <span class="menu-strato terza"></span>
+      <div class="menu-forme"><svg class="forma forma-1" viewBox="0 0 400 400" fill="none" aria-hidden="true"><circle class="forma-el" cx="80" cy="120" r="42" fill="rgba(123,92,245,0.20)"/><circle class="forma-el" cx="300" cy="80" r="62" fill="rgba(0,212,255,0.14)"/><circle class="forma-el" cx="200" cy="300" r="84" fill="rgba(255,110,199,0.11)"/><circle class="forma-el" cx="350" cy="285" r="30" fill="rgba(123,92,245,0.18)"/></svg><svg class="forma forma-2" viewBox="0 0 400 400" fill="none" aria-hidden="true"><path class="forma-el" d="M0 200 Q100 100 200 200 T400 200" stroke="rgba(123,92,245,0.22)" stroke-width="62" fill="none"/><path class="forma-el" d="M0 285 Q100 185 200 285 T400 285" stroke="rgba(0,212,255,0.16)" stroke-width="42" fill="none"/></svg><svg class="forma forma-3" viewBox="0 0 400 400" fill="none" aria-hidden="true"><circle class="forma-el" cx="55" cy="60" r="8" fill="rgba(123,92,245,0.30)"/><circle class="forma-el" cx="155" cy="60" r="8" fill="rgba(0,212,255,0.28)"/><circle class="forma-el" cx="255" cy="60" r="8" fill="rgba(255,110,199,0.26)"/><circle class="forma-el" cx="355" cy="60" r="8" fill="rgba(123,92,245,0.24)"/><circle class="forma-el" cx="55" cy="160" r="12" fill="rgba(123,92,245,0.30)"/><circle class="forma-el" cx="155" cy="160" r="12" fill="rgba(0,212,255,0.28)"/><circle class="forma-el" cx="255" cy="160" r="12" fill="rgba(255,110,199,0.26)"/><circle class="forma-el" cx="355" cy="160" r="12" fill="rgba(123,92,245,0.24)"/><circle class="forma-el" cx="55" cy="260" r="10" fill="rgba(123,92,245,0.30)"/><circle class="forma-el" cx="155" cy="260" r="10" fill="rgba(0,212,255,0.28)"/><circle class="forma-el" cx="255" cy="260" r="10" fill="rgba(255,110,199,0.26)"/><circle class="forma-el" cx="355" cy="260" r="10" fill="rgba(123,92,245,0.24)"/><circle class="forma-el" cx="55" cy="350" r="6" fill="rgba(123,92,245,0.30)"/><circle class="forma-el" cx="155" cy="350" r="6" fill="rgba(0,212,255,0.28)"/><circle class="forma-el" cx="255" cy="350" r="6" fill="rgba(255,110,199,0.26)"/><circle class="forma-el" cx="355" cy="350" r="6" fill="rgba(123,92,245,0.24)"/></svg><svg class="forma forma-4" viewBox="0 0 400 400" fill="none" aria-hidden="true"><line class="forma-el" x1="0" y1="100" x2="300" y2="400" stroke="rgba(123,92,245,0.18)" stroke-width="32"/><line class="forma-el" x1="100" y1="0" x2="400" y2="300" stroke="rgba(0,212,255,0.14)" stroke-width="26"/><line class="forma-el" x1="200" y1="0" x2="400" y2="200" stroke="rgba(255,110,199,0.12)" stroke-width="20"/></svg></div>
+    </div>
+    <div class="menu-dentro">
+      <ul class="menu-voci">
+      <li class="menu-voce" data-forma="1"><a href="/" class="menu-link"><span class="menu-link-testo">Home</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="1"><a href="/#menu" class="menu-link"><span class="menu-link-testo">Il robot dei servizi</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="2"><a href="/siti-web/" class="menu-link"><span class="menu-link-testo">Siti Web</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="2"><a href="/app/" class="menu-link"><span class="menu-link-testo">App su misura</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="4"><a href="/intelligenza-artificiale/" class="menu-link"><span class="menu-link-testo">AI – Intelligenza artificiale</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="3"><a href="/giochi/" class="menu-link"><span class="menu-link-testo">Giochi aziendali</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="3"><a href="/prenotazioni/" class="menu-link"><span class="menu-link-testo">Prenotazioni online</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="1"><a href="/consulente-ai/" class="menu-link"><span class="menu-link-testo">Consulente AI</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="4"><a href="/automazioni/" class="menu-link"><span class="menu-link-testo">Automazioni</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="2"><a href="/chiamate-ai/" class="menu-link"><span class="menu-link-testo">Chiamate AI</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="3"><a href="/lavori/" class="menu-link"><span class="menu-link-testo">I nostri lavori</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="4"><a href="/contatti/" class="menu-link"><span class="menu-link-testo">Contatti</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      </ul>
+      <div class="menu-piede" data-menu-fade>
+        <a href="mailto:futureai@libero.it">futureai@libero.it</a>
+        <span>Siti, app e giochi creati con l'IA</span>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<main>
+<header class="sv-hero">
+  <div class="sv-hero-in">
+    <div class="sv-hero-testo">
+      <a class="pg-torna" href="/#menu"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Torna dal robot</a>
+      <div class="pg-tag">— AI · Intelligenza artificiale</div>
+      <h1 class="pg-tit">L'intelligenza artificiale, <em>costruita sul tuo lavoro.</em></h1>
+      <p class="pg-sub">Non un chatbot generico: assistenti che conoscono i tuoi documenti, app che capiscono la voce, sistemi che leggono, riassumono e decidono cosa è urgente. E se i tuoi dati non devono uscire dall'azienda, l'AI la installiamo <b>dentro casa tua</b>.</p>
+      <a href="#locale" class="sv-test">
+        <span class="sv-test-ico" aria-hidden="true">🔒</span>
+        <span><b>Scopri l'AI in locale · percorso interattivo</b><small>Un'intelligenza artificiale che lavora in azienda senza internet: nessun dato esce, mai. Provala in 6 tappe.</small></span>
+        <span class="sv-test-freccia" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <ul class="sv-punti"><li>Addestrata sui tuoi documenti</li><li>Voce, testo e immagini</li><li>Nel cloud o 100% in locale</li></ul>
+    </div>
+    <div class="sv-hero-media" aria-hidden="true">
+      <div class="sv-cornice"><video src="clip-consulente.mp4" autoplay muted loop playsinline preload="metadata" width="330" height="384"></video></div>
+      <div class="sv-bolla sv-bolla--a"><span class="sv-bolla-ico">🧠</span><span><b>"Qual è la procedura di fermo?"</b><small>risposta in 3 secondi · con la fonte</small></span></div>
+      <div class="sv-bolla sv-bolla--b"><span class="sv-bolla-ico">🔒</span><span><b>0 byte fuori dall'azienda</b><small>AI in locale</small></span></div>
+    </div>
+  </div>
+</header>
+
+<section class="sv-sez"><div class="sv-in">
+  <div class="sv-testa sv-rivela"><div class="pg-tag">— Cosa sappiamo creare</div><h2 class="sv-h2">Sei cose che l'AI fa già <em>per chi lavora con noi.</em></h2>
+    <p class="ai-testa-p">Ogni esempio è un progetto vero, costruito e in uso.</p></div>
+  <div class="sv-griglia">
+    <article class="sv-card sv-rivela"><span class="sv-ico">📚</span><h3>Assistenti sui tuoi documenti</h3><p>Manuali, procedure e listini diventano un esperto che risponde in pochi secondi, citando pagina e documento.</p><p class="ai-es"><b>Esempio reale</b> · assistente di reparto per un'azienda industriale, 100% in locale.</p></article>
+    <article class="sv-card sv-rivela"><span class="sv-ico">🎙️</span><h3>App che capiscono la voce</h3><p>Parli e l'app compila: preventivi, schede, ricerche. Niente moduli da riempire a mano.</p><p class="ai-es"><b>Esempio reale</b> · preventivi di affitti brevi dettati a voce: da 15 minuti a 30 secondi.</p></article>
+    <article class="sv-card sv-rivela"><span class="sv-ico">📧</span><h3>Email lette e smistate</h3><p>Ogni mattina l'AI legge la casella, separa urgenze, clienti e fornitori e ti manda il riassunto.</p><p class="ai-es"><b>Esempio reale</b> · 30-40 minuti risparmiati ogni mattina a un imprenditore.</p></article>
+    <article class="sv-card sv-rivela"><span class="sv-ico">📝</span><h3>Riunioni trascritte e riassunte</h3><p>Registri la call: l'AI la trascrive, riconosce chi parla e prepara il riassunto con le cose da fare.</p><p class="ai-es"><b>Esempio reale</b> · strumento di trascrizione che gira tutto sul computer, senza cloud.</p></article>
+    <article class="sv-card sv-rivela"><span class="sv-ico">🎨</span><h3>Immagini che mostrano il risultato</h3><p>Carichi una foto e l'AI mostra come verrà: un taglio, un colore, un ambiente.</p><p class="ai-es"><b>Esempio reale</b> · anteprima del look per un salone di parrucchieri.</p></article>
+    <article class="sv-card sv-rivela"><span class="sv-ico">☎️</span><h3>Assistenti che rispondono</h3><p>Al telefono o in chat, 24 ore su 24: prendono prenotazioni e informazioni, e si presentano sempre come AI.</p><p class="ai-es"><b>Su misura</b> · per ristoranti, saloni, studi e negozi.</p></article>
+  </div>
+</div></section>
+
+<!-- ============ AI IN LOCALE: percorso interattivo ============ -->
+<section class="al" id="locale" aria-labelledby="alTit">
+  <div class="al-sfondo" aria-hidden="true"></div>
+  <div class="al-in">
+    <div class="al-testa">
+      <div class="al-tag"><i></i> AI in locale · sicurezza e privacy</div>
+      <h2 id="alTit" class="al-tit">L'intelligenza artificiale <span>che non esce mai dall'azienda.</span></h2>
+      <p class="al-sub">Un assistente che conosce le vostre procedure, registra guasti e manutenzioni e risponde in pochi secondi — <b>senza internet, senza cloud</b>, su un computer dedicato dentro la vostra rete. Percorrilo in 6 tappe.</p>
+    </div>
+
+    <nav class="al-tappe" id="alTappe" aria-label="Tappe del percorso">
+      <button type="button" data-t="0" class="on"><b>1</b><span>Il rischio</span></button>
+      <button type="button" data-t="1"><b>2</b><span>Cloud o locale</span></button>
+      <button type="button" data-t="2"><b>3</b><span>Chiedilo all'AI</span></button>
+      <button type="button" data-t="3"><b>4</b><span>I 7 moduli</span></button>
+      <button type="button" data-t="4"><b>5</b><span>Diagnosi guasti</span></button>
+      <button type="button" data-t="5"><b>6</b><span>La sicurezza</span></button>
+    </nav>
+    <div class="al-avanz" aria-hidden="true"><i id="alAvanz"></i></div>
+
+    <div class="al-schermo" id="alSchermo">
+
+      <!-- 1 · IL RISCHIO -->
+      <div class="al-tappa on" data-tappa="0">
+        <div class="al-due">
+          <div>
+            <div class="al-kick">Tappa 1 · Il rischio</div>
+            <h3 class="al-h3">Ogni domanda a un chatbot online <em>è un documento che esce.</em></h3>
+            <p class="al-p">Quando un collega incolla una procedura, una ricetta o un listino in un'AI su internet, quei dati finiscono su server di altre aziende, spesso fuori dall'Europa. Per chi ha segreti industriali è un rischio che non si può prendere.</p>
+            <p class="al-p al-p--forte">Tocca i documenti qui accanto: guarda dove vanno.</p>
+          </div>
+          <div class="al-rischio" id="alRischio">
+            <div class="al-ditta">🏭<span>La tua azienda</span></div>
+            <div class="al-nuvola">☁️<span>Server esterni</span></div>
+            <button type="button" class="al-doc" style="--x:18%;--y:62%">📄<span>Procedure</span></button>
+            <button type="button" class="al-doc" style="--x:34%;--y:78%">🧪<span>Ricette</span></button>
+            <button type="button" class="al-doc" style="--x:12%;--y:84%">💶<span>Listini</span></button>
+            <button type="button" class="al-doc" style="--x:30%;--y:56%">🔧<span>Schede tecniche</span></button>
+            <div class="al-rischio-conto" id="alConto">Documenti usciti: <b>0 su 4</b></div>
+          </div>
+        </div>
+        <button type="button" class="al-avanti" data-vai="1">Qual è l'alternativa? →</button>
+      </div>
+
+      <!-- 2 · CLOUD O LOCALE -->
+      <div class="al-tappa" data-tappa="1">
+        <div class="al-kick">Tappa 2 · Cloud o locale</div>
+        <h3 class="al-h3">Stessa intelligenza. <em>Un'altra strada per i dati.</em></h3>
+        <div class="al-switch" role="group" aria-label="Scegli dove gira l'AI">
+          <button type="button" data-modo="cloud">☁️ AI nel cloud</button>
+          <button type="button" data-modo="locale" class="on">🔒 AI in locale</button>
+        </div>
+        <div class="al-flusso" id="alFlusso" data-modo="locale">
+          <div class="al-edificio">
+            <div class="al-edificio-tit">La tua azienda</div>
+            <div class="al-nodi"><span>👷 Operatore</span><span>💻 Ufficio</span><span>📱 Tablet reparto</span></div>
+            <div class="al-server">🖥️<b>Server AI dedicato</b><small>dentro la vostra rete</small></div>
+            <div class="al-particelle"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="al-fuori"><div class="al-fuori-nuvola">☁️<b>Internet</b></div></div>
+        </div>
+        <ul class="al-confronto" id="alConfronto"></ul>
+        <button type="button" class="al-avanti" data-vai="2">Provalo con una domanda →</button>
+      </div>
+
+      <!-- 3 · CHIEDILO ALL'AI -->
+      <div class="al-tappa" data-tappa="2">
+        <div class="al-due al-due--chat">
+          <div>
+            <div class="al-kick">Tappa 3 · Chiedilo all'AI</div>
+            <h3 class="al-h3">Risponde in secondi. <em>Con la fonte esatta.</em></h3>
+            <p class="al-p">Scegli una domanda che un operatore farebbe durante il turno. L'assistente cerca nei documenti dell'azienda e risponde citando documento e pagina — e il contatore di rete resta a zero.</p>
+            <div class="al-domande" id="alDomande"></div>
+            <div class="al-rete"><span class="al-led"></span>Dati inviati fuori dall'azienda: <b id="alByte">0 byte</b></div>
+          </div>
+          <div class="al-chat">
+            <div class="al-chat-testa"><span class="al-led"></span>Assistente di reparto · offline</div>
+            <div class="al-chat-corpo" id="alChat"><p class="al-chat-vuoto">Scegli una domanda a sinistra ↖</p></div>
+          </div>
+        </div>
+        <button type="button" class="al-avanti" data-vai="3">Cosa c'è dentro →</button>
+      </div>
+
+      <!-- 4 · I 7 MODULI -->
+      <div class="al-tappa" data-tappa="3">
+        <div class="al-kick">Tappa 4 · I 7 moduli</div>
+        <h3 class="al-h3">Una piattaforma sola. <em>Tutto il reparto dentro.</em></h3>
+        <div class="al-moduli">
+          <div class="al-mod-lista" id="alModLista" role="tablist"></div>
+          <div class="al-mod-dett" id="alModDett" role="tabpanel"></div>
+        </div>
+        <button type="button" class="al-avanti" data-vai="4">Guarda una diagnosi →</button>
+      </div>
+
+      <!-- 5 · DIAGNOSI -->
+      <div class="al-tappa" data-tappa="4">
+        <div class="al-due">
+          <div>
+            <div class="al-kick">Tappa 5 · Diagnosi guasti</div>
+            <h3 class="al-h3">Ragiona come un tecnico esperto. <em>E non inventa.</em></h3>
+            <p class="al-p">L'operatore allega la scheda di processo e descrive il problema. L'assistente legge i parametri, segue ogni volta lo stesso metodo in 5 passi e propone le cause in ordine di probabilità, con cosa verificare.</p>
+            <ol class="al-metodo"><li>Legge i dati della scheda</li><li>Trova i parametri critici</li><li>Segnala valori fuori range</li><li>Ordina le cause per probabilità</li><li>Propone le azioni, in ordine</li></ol>
+            <div class="al-regola">🛡️ <b>Regola anti-invenzioni:</b> se un dato manca lo dice, non lo completa. E senza misure dirette non dichiara mai più del 70% di probabilità.</div>
+          </div>
+          <div class="al-diag">
+            <div class="al-diag-dom"><span>👷</span>"Sulla linea 3 la pressione in testa sale dopo 2 ore di produzione. Allego la scheda di montaggio. Possiamo ripartire stasera?"</div>
+            <button type="button" class="al-diag-via" id="alDiagVia">▶ Avvia l'analisi</button>
+            <div class="al-diag-out" id="alDiagOut" hidden>
+              <div class="al-esito">⛔ Rischio alto — verificare prima di ripartire</div>
+              <div class="al-causa" style="--p:65"><div><b>Filtri montati in ordine sbagliato</b><span>65%</span></div><i></i><small>→ Verifica: sequenza dei filtri nella scheda, dal più grossolano al più fine</small></div>
+              <div class="al-causa" style="--p:25"><div><b>Filtro già parzialmente intasato</b><span>25%</span></div><i></i><small>→ Verifica: ore di lavoro del filtro, andamento della pressione</small></div>
+              <div class="al-causa" style="--p:10"><div><b>Usura della guarnizione di tenuta</b><span>10%</span></div><i></i><small>→ Verifica: data dell'ultimo controllo, perdite visibili</small></div>
+              <p class="al-diag-nota">Esempio dimostrativo con dati inventati.</p>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="al-avanti" data-vai="5">E la sicurezza? →</button>
+      </div>
+
+      <!-- 6 · SICUREZZA -->
+      <div class="al-tappa" data-tappa="5">
+        <div class="al-kick">Tappa 6 · La sicurezza</div>
+        <h3 class="al-h3">I vostri dati restano dentro l'azienda. <em>Sempre.</em></h3>
+        <div class="al-scudi">
+          <div class="al-scudo"><span>🚫☁️</span><b>Nessun cloud</b><small>L'AI gira su un computer dedicato nella vostra rete.</small></div>
+          <div class="al-scudo"><span>🔌</span><b>Funziona senza internet</b><small>Staccate il cavo: continua a rispondere.</small></div>
+          <div class="al-scudo"><span>🗝️</span><b>Nessuna API esterna</b><small>Nessuna domanda, nessun documento passa da altre aziende.</small></div>
+          <div class="al-scudo"><span>💶</span><b>Nessun abbonamento AI</b><small>Niente costi a consumo: un canone fisso, chiaro.</small></div>
+          <div class="al-scudo"><span>🇪🇺</span><b>GDPR e AI Act</b><small>Dati personali e segreti industriali sotto il vostro controllo.</small></div>
+          <div class="al-scudo"><span>📱</span><b>Da ogni dispositivo in rete</b><small>PC, tablet e telefono del reparto, senza uscire.</small></div>
+        </div>
+        <div class="al-grandi">
+          <b>Le grandi aziende lo fanno già.</b> Il gruppo chimico BASF ha sviluppato internamente un assistente addestrato su migliaia di documenti e procedure di sicurezza, per manutenzione e formazione del personale. Noi portiamo la stessa idea in una PMI, con tempi e costi di una PMI.
+        </div>
+        <div class="al-fine">
+          <h3>Vuoi vederlo con i tuoi documenti?</h3>
+          <p>Ti mostriamo l'assistente su una manciata dei vostri documenti, senza che escano dall'azienda.</p>
+          <div class="sv-azioni" style="justify-content:center">
+            <a href="/contatti/" class="btn-primary hero-btn"><span class="rotola"><span data-t="Prenota una dimostrazione">Prenota una dimostrazione</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <button type="button" class="btn-secondary hero-btn" data-vai="0"><span class="rotola"><span data-t="Rifai il percorso">Rifai il percorso</span></span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sv-sez"><div class="sv-in sv-stretto">
+  <div class="sv-testa sv-rivela"><div class="pg-tag">— Domande frequenti</div><h2 class="sv-h2">Le domande <em>che ci fanno tutti.</em></h2></div>
+  <div class="sv-faqs sv-rivela">
+    <details class="sv-faq"><summary>L'AI in locale è intelligente come quelle online?<span aria-hidden="true">+</span></summary><p>Per rispondere sui vostri documenti e procedure sì: usiamo modelli aperti di ultima generazione, scelti in base al computer e al lavoro da fare. Per compiti molto generici i grandi servizi online restano più potenti, ed è una scelta che valutiamo insieme.</p></details>
+    <details class="sv-faq"><summary>Serve un computer speciale?<span aria-hidden="true">+</span></summary><p>Serve un computer dedicato, dimensionato sul numero di persone e di documenti. Ti diciamo noi quale, oppure usiamo quello che avete già se è adatto.</p></details>
+    <details class="sv-faq"><summary>Chi aggiorna i documenti?<span aria-hidden="true">+</span></summary><p>Voi: caricate un documento nuovo e da subito l'assistente lo conosce. Il modulo "Registra spiegazione" trasforma anche la voce dei tecnici in documenti.</p></details>
+    <details class="sv-faq"><summary>E se l'AI sbaglia?<span aria-hidden="true">+</span></summary><p>Risponde citando la fonte, così si verifica in un attimo, e dichiara quando i dati non bastano. Le decisioni importanti restano sempre alle persone.</p></details>
+  </div>
+</div></section>
+</main>
+
+<!-- FOOTER -->
+<footer class="ft">
+  <div class="ft-griglia">
+    <div class="ft-marchio">
+      <a href="/" class="ft-logo"><img src="/img/logo-intro.webp" alt="" width="40" height="40"><span>FUTURE<b>AI</b></span></a>
+      <p>Costruiamo con l'intelligenza artificiale siti, app, automazioni e giochi su misura per le aziende italiane. Quello che hai visto qui, lo facciamo per te.</p>
+    </div>
+    <div class="ft-col" role="navigation" aria-label="Link utili">
+      <h3>Link utili</h3>
+      <ul>
+        <li><a href="/#menu">Il robot dei servizi</a></li>
+        <li><a href="/siti-web/">Siti Web</a></li>
+        <li><a href="/giochi/">Giochi aziendali</a></li>
+        <li><a href="/lavori/">I nostri lavori</a></li>
+        <li><a href="/contatti/">Contatti</a></li>
+        <li><a href="/privacy/">Privacy</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h3>Seguici</h3>
+      <ul>
+        <li><a href="https://www.instagram.com/future_ai_automazioni/" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg><span>Instagram</span></a></li>
+        <li><a href="mailto:futureai@libero.it"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg><span>futureai@libero.it</span></a></li>
+      </ul>
+    </div>
+    <div class="ft-col ft-richiamo">
+      <h3>Ti richiamiamo noi</h3>
+      <p>Lascia la tua email: ti scriviamo entro 24 ore lavorative.</p>
+      <form id="ftForm" novalidate>
+        <div class="ft-campo">
+          <input type="email" name="email" id="ftEmail" placeholder="La tua email" required aria-label="La tua email" autocomplete="email">
+          <button type="submit" id="ftBtn">Invia</button>
+        </div>
+        <label class="ft-presa"><input type="checkbox" id="ftOk" required> <span>Ho letto l'<a href="/privacy/">informativa</a>: la mia email serve solo a ricontattarmi.</span></label>
+        <div class="ft-esito" id="ftEsito" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+  <div class="ft-firma-riga">
+    <a class="fai-firma" href="https://www.futureai.it" aria-label="Sito realizzato da FUTURE AI">
+      <span class="fai-firma__occhiello">Sito realizzato da</span>
+      <svg class="fai-firma__segno" viewBox="-10.6 -48.0 392.7 156.0" aria-hidden="true" focusable="false"><path fill="currentColor" d="M211.9 100V0H242.58Q250.25 0 254.18 3.49Q258.1 6.99 259.43 13.27Q260.77 19.55 260.77 28.01Q260.77 36.19 258.69 41.08Q256.62 45.97 250.88 47.84Q255.6 48.81 257.5 52.53Q259.4 56.25 259.4 62.16V100H239.69V60.85Q239.69 56.48 237.9 55.43Q236.11 54.38 232.13 54.38V100ZM75.18 100.91Q62.68 100.91 56.77 93.89Q50.86 86.88 50.86 73.24V0H70.29V72.44Q70.29 74.94 70.58 77.24Q70.86 79.55 71.88 81.02Q72.9 82.5 75.18 82.5Q77.51 82.5 78.53 81.05Q79.55 79.6 79.81 77.27Q80.06 74.94 80.06 72.44V0H99.5V73.24Q99.5 86.88 93.59 93.89Q87.68 100.91 75.18 100.91ZM178.71 100.91Q166.21 100.91 160.3 93.89Q154.4 86.88 154.4 73.24V0H173.83V72.44Q173.83 74.94 174.11 77.24Q174.4 79.55 175.42 81.02Q176.44 82.5 178.71 82.5Q181.04 82.5 182.07 81.05Q183.09 79.6 183.34 77.27Q183.6 74.94 183.6 72.44V0H203.03V73.24Q203.03 86.88 197.12 93.89Q191.21 100.91 178.71 100.91ZM268.56 100V0H308.56V19.32H288.9V38.81H307.76V57.61H288.9V80.51H309.86V83.1C309.91 83.1 309.95 83.1 310 83.1C314.64 83.1 318.4 86.86 318.4 91.5C318.4 96.14 314.64 99.9 310 99.9C309.95 99.9 309.91 99.9 309.86 99.9V100ZM324.62 58H375.07C377.83 58 380.07 60.24 380.07 63V101C380.07 103.76 377.83 106 375.07 106H324.62C321.86 106 319.62 103.76 319.62 101V63C319.62 60.24 321.86 58 324.62 58ZM4.43 100V27H12.4V19H4.43V14H15.4V4H23.4V0H44.43V19.49H24.55V35.4H43.41V54.66H24.55V100ZM116.95 100V19.2H105.07V0H148.82V19.2H136.95V100ZM333.2 100H339.81L340.23 94.51H344.33L344.81 100H351.25L348.02 66H336.49ZM360.5 100H367.07V66H360.5ZM232.24 37.05H237.07Q241.22 37.05 241.22 28.01Q241.22 22.16 240.31 20.34Q239.4 18.52 236.9 18.52H232.24ZM6.4 -17H18.4V-5H6.4ZM25.4 -31H34.4V-22H25.4ZM-8.6 -9H-1.6V-2H-8.6ZM38.4 -46H44.4V-40H38.4ZM340.72 89.09 342.01 71.8H342.32L343.81 89.09ZM13.4 0V3H4.43V0Z"/></svg>
+    </a>
+  </div>
+  <div class="ft-legale">
+    <p>© 2026 FUTURE AI di Sidoni Manuel · P.IVA 04923480166 · <a href="/privacy/">Privacy</a> · <a href="#" id="apriCookie">Cookie</a></p>
+    <p class="footer-trasparenza">
+    <strong>Trasparenza IA</strong> — Sono generati con intelligenza artificiale:
+    il video d'ingresso, il video nella sezione iniziale, le clip di «Siti Web» e «Prenotazioni Online», il video
+    dell'hamburger nella sezione Siti Web, la grafica del gioco FUTURE AI, il robot e la città del menu e la musica di sottofondo. Le altre riprese sono video
+    d'archivio di Pexels.
+    FUTURE AI progetta e fornisce sistemi di intelligenza artificiale nel rispetto del
+    Regolamento UE 2024/1689 (AI Act).
+    </p>
+  </div>
+</footer>
+<script>
+/* «Ti richiamiamo noi»: la richiesta arriva via email come il modulo contatti (EmailJS).
+   Anti-spam a tempo, casella dell'informativa obbligatoria, nei log niente email. */
+(function(){
+  var f=document.getElementById('ftForm');if(!f)return;var t0=Date.now(),es=document.getElementById('ftEsito'),bt=document.getElementById('ftBtn');
+  function dici(t,ok){es.textContent=t;es.className='ft-esito '+(ok?'ok':'no');}
+  f.addEventListener('submit',function(e){e.preventDefault();
+    var em=document.getElementById('ftEmail').value.trim();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){dici("Controlla l'email.",false);return;}
+    if(!document.getElementById('ftOk').checked){dici("Spunta la casella dell'informativa.",false);return;}
+    if(Date.now()-t0<3000){dici('Fatto! Ti scriviamo presto.',true);f.reset();return;}
+    if(typeof emailjs==='undefined'){dici('Scrivici a futureai@libero.it',false);return;}
+    bt.disabled=true;bt.textContent='Invio…';
+    emailjs.send('service_gemvayq','template_t3abbma',{name:'Richiesta dal piè di pagina',azienda:'',email:em,servizio:'Ti richiamiamo noi',message:'Richiesta di essere ricontattati dal piè di pagina del sito.'},{publicKey:'OwJnmLJDM9NW0S1rk'})
+      .then(function(){dici('Fatto! Ti scriviamo entro 24 ore lavorative.',true);f.reset();})
+      .catch(function(err){console.error('Invio non riuscito:',err&&err.status);dici('Non è partita: scrivici a futureai@libero.it',false);})
+      .then(function(){bt.disabled=false;bt.textContent='Invia';});
+  });
+})();
+</script>
+
+
+<script>
+// Il vecchio hamburger non esiste piu': lo sostituisce il menu a tutto
+// schermo piu' in basso. closeMenu resta perche' e' ancora chiamata
+// dagli onclick di alcuni link, e senza darebbe ReferenceError.
+function closeMenu(){}
+
+// Custom cursor (desktop only)
+if (window.matchMedia('(hover: hover)').matches) {
+  const cur = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => {
+    mx=e.clientX; my=e.clientY;
+    cur.style.cssText += `;left:${mx-5}px;top:${my-5}px`;
+  });
+  (function anim(){
+    rx+=(mx-rx-16)*0.12; ry+=(my-ry-16)*0.12;
+    ring.style.cssText += `;left:${rx}px;top:${ry}px`;
+    requestAnimationFrame(anim);
+  })();
+  document.querySelectorAll('a,button,.service-card').forEach(el => {
+    el.addEventListener('mouseenter',()=>{cur.style.transform='scale(2.2)';ring.style.transform='scale(1.5)';});
+    el.addEventListener('mouseleave',()=>{cur.style.transform='scale(1)';ring.style.transform='scale(1)';});
+  });
+}
+
+// Scroll fade in
+const isMobile = window.innerWidth <= 768;
+if(isMobile){
+  document.querySelectorAll('.fade-in').forEach(el=>el.classList.add('visible'));
+} else {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e,i) => {
+      if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'), i*60);
+    });
+  }, {threshold:0.05, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+}
+
+// EmailJS init
+emailjs.init('OwJnmLJDM9NW0S1rk');
+
+// Form submit
+// Anti-spam a tempo: un modulo compilato in meno di 3 secondi e' un bot.
+// Niente honeypot nascosti: l'autofill del browser li compila e blocca le richieste vere.
+const formT0 = Date.now();
+(document.getElementById('contactForm')||{addEventListener:function(){}}).addEventListener('submit', function(e) {
+  e.preventDefault();
+  if (Date.now() - formT0 < 3000) {
+    document.getElementById('successMsg').style.display = 'block';
+    this.reset();
+    return;
+  }
+  const btn = this.querySelector('.btn-submit');
+  const successMsg = document.getElementById('successMsg');
+  const errorMsg = document.getElementById('errorMsg');
+  
+  btn.textContent = 'Invio in corso...';
+  btn.disabled = true;
+  successMsg.style.display = 'none';
+  errorMsg.style.display = 'none';
+
+  emailjs.sendForm('service_gemvayq', 'template_t3abbma', this)
+    .then(() => {
+      successMsg.style.display = 'block';
+      btn.textContent = 'Invia Richiesta Gratuita →';
+      btn.disabled = false;
+      this.reset();
+      successMsg.scrollIntoView({behavior:'smooth', block:'nearest'});
+    })
+    .catch((err) => {
+      console.error('Invio modulo non riuscito:', err && err.status);
+      errorMsg.style.display = 'block';
+      btn.textContent = 'Invia Richiesta Gratuita →';
+      btn.disabled = false;
+      errorMsg.scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
+});
+
+// Smooth scroll + close menu on nav links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+  });
+});
+
+
+
+// === HERO NEURO CANVAS ===
+(function(){const c=document.getElementById('heroNeuro');if(!c)return;const gl=c.getContext('webgl')||c.getContext('experimental-webgl');if(!gl)return;const vs='precision mediump float;attribute vec2 a_position;varying vec2 vUv;void main(){vUv=.5*(a_position+1.);gl_Position=vec4(a_position,0.0,1.0);}';const fs='precision mediump float;varying vec2 vUv;uniform float u_time;uniform float u_ratio;uniform vec2 u_pointer_position;uniform float u_scroll_progress;vec2 rotate(vec2 uv,float th){return mat2(cos(th),sin(th),-sin(th),cos(th))*uv;}float neuro_shape(vec2 uv,float t,float p){vec2 sine_acc=vec2(0.);vec2 res=vec2(0.);float scale=8.;for(int j=0;j<15;j++){uv=rotate(uv,1.);sine_acc=rotate(sine_acc,1.);vec2 layer=uv*scale+float(j)+sine_acc-t;sine_acc+=sin(layer)+2.4*p;res+=(.5+.5*cos(layer))/scale;scale*=(1.2);}return res.x+res.y;}void main(){vec2 uv=.5*vUv;uv.x*=u_ratio;vec2 pointer=vUv-u_pointer_position;pointer.x*=u_ratio;float p=clamp(length(pointer),0.,1.);p=.5*pow(1.-p,2.);float t=.001*u_time;float noise=neuro_shape(uv,t,p);noise=1.2*pow(noise,3.);noise+=pow(noise,10.);noise=max(.0,noise-.5);noise*=(1.-length(vUv-.5));vec3 color=vec3(0.5,0.15,0.65);color=mix(color,vec3(0.02,0.7,0.9),0.32+0.16*sin(2.0*u_scroll_progress+1.2));color+=vec3(0.15,0.0,0.6)*sin(2.0*u_scroll_progress+1.5);color=color*noise;gl_FragColor=vec4(color,noise);}';function mk(src,type){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;}const prog=gl.createProgram();gl.attachShader(prog,mk(vs,gl.VERTEX_SHADER));gl.attachShader(prog,mk(fs,gl.FRAGMENT_SHADER));gl.linkProgram(prog);gl.useProgram(prog);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE);const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);const loc=gl.getAttribLocation(prog,'a_position');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);const uT=gl.getUniformLocation(prog,'u_time'),uR=gl.getUniformLocation(prog,'u_ratio'),uP=gl.getUniformLocation(prog,'u_pointer_position'),uS=gl.getUniformLocation(prog,'u_scroll_progress');const ptr={x:.5,y:.5,tX:.5,tY:.5};function resize(){const dpr=Math.min(window.devicePixelRatio,2),rect=c.parentElement.getBoundingClientRect();c.width=rect.width*dpr;c.height=rect.height*dpr;gl.viewport(0,0,c.width,c.height);gl.uniform1f(uR,c.width/c.height);}resize();window.addEventListener('resize',resize);function render(){ptr.x+=(ptr.tX-ptr.x)*0.2;ptr.y+=(ptr.tY-ptr.y)*0.2;gl.uniform1f(uT,performance.now());gl.uniform2f(uP,ptr.x,1-ptr.y);gl.uniform1f(uS,window.pageYOffset/(2*window.innerHeight));gl.drawArrays(gl.TRIANGLE_STRIP,0,4);raf=requestAnimationFrame(render);}let raf=0;new IntersectionObserver(es=>{const on=es[0].isIntersecting;if(on&&!raf){raf=requestAnimationFrame(render);}else if(!on&&raf){cancelAnimationFrame(raf);raf=0;}}).observe(c);window.addEventListener('pointermove',function(e){const r=c.parentElement.getBoundingClientRect();ptr.tX=(e.clientX-r.left)/r.width;ptr.tY=(e.clientY-r.top)/r.height;});})();
+</script>
+
+<!-- MUSICA DI SOTTOFONDO -->
+<audio id="bgMusic" loop preload="none">
+  <source src="bg-music.mp3" type="audio/mpeg">
+</audio>
+<button id="musicToggle" class="music-toggle" type="button" aria-pressed="false" aria-label="Attiva la musica di sottofondo">
+  <span class="music-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+  <span class="music-label">Musica</span>
+</button>
+
+<script>
+(function(){
+  var audio = document.getElementById('bgMusic');
+  var btn   = document.getElementById('musicToggle');
+  if(!audio || !btn) return;
+
+  var VOLUME = 0.18;          // sottofondo: si sente, non copre
+  var KEY    = 'futureai-musica';
+  var fade;
+  // Lo stato sta qui, non in audio.paused: durante la dissolvenza in uscita
+  // l'audio suona ancora, e usarlo come stato rompe il doppio click.
+  var attiva = false;
+
+  function fadeTo(target, done){
+    clearInterval(fade);
+    var step = (target - audio.volume) / 18;
+    fade = setInterval(function(){
+      var v = audio.volume + step;
+      if((step > 0 && v >= target) || (step < 0 && v <= target)){
+        clearInterval(fade);
+        audio.volume = Math.min(1, Math.max(0, target));
+        if(done) done();
+      } else {
+        audio.volume = Math.min(1, Math.max(0, v));
+      }
+    }, 40);
+  }
+
+  function segna(attiva){
+    btn.classList.toggle('is-playing', attiva);
+    btn.setAttribute('aria-pressed', attiva ? 'true' : 'false');
+    btn.setAttribute('aria-label', attiva ? 'Disattiva la musica di sottofondo' : 'Attiva la musica di sottofondo');
+  }
+
+  function avvia(){
+    attiva = true;
+    if(audio.paused) audio.volume = 0;
+    var p = audio.play();
+    if(p && p.catch) p.catch(function(){ attiva = false; segna(false); });
+    segna(true);
+    fadeTo(VOLUME);
+  }
+
+  function ferma(){
+    attiva = false;
+    fadeTo(0, function(){ if(!attiva) audio.pause(); });
+    segna(false);
+  }
+
+  btn.addEventListener('click', function(){
+    if(attiva){
+      localStorage.setItem(KEY, 'off');
+      ferma();
+    } else {
+      localStorage.setItem(KEY, 'on');
+      avvia();
+    }
+  });
+
+  // I browser non lasciano partire l'audio da soli: si aspetta il primo gesto.
+  // Chi l'ha spenta una volta non se la ritrova accesa al ritorno.
+  if(localStorage.getItem(KEY) !== 'off'){
+    var primoGesto = function(e){
+      document.removeEventListener('pointerdown', primoGesto);
+      document.removeEventListener('keydown', primoGesto);
+      document.removeEventListener('touchstart', primoGesto);
+      // se il primo gesto è proprio sul pulsante, decide lui: non partire due volte
+      if(e && e.target && e.target.closest && e.target.closest('#musicToggle')) return;
+      if(!attiva) avvia();
+    };
+    document.addEventListener('pointerdown', primoGesto);
+    document.addEventListener('keydown', primoGesto);
+    document.addEventListener('touchstart', primoGesto);
+  }
+
+  // Se l'utente cambia scheda, la musica si mette in pausa per educazione.
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden){ if(!audio.paused) audio.pause(); }
+    else if(attiva && audio.paused){ audio.play().catch(function(){}); }
+  });
+})();
+</script>
+
+<!-- ===== MENU A TUTTO SCHERMO =====
+     GSAP 3.12.5 e' gia' caricato. Il plugin CustomEase no, e non lo aggiungo
+     per una curva sola: l'ease "0.65, 0.01, 0.05, 0.99" e' una cubic-bezier,
+     e GSAP accetta una funzione come ease — quindi la risolvo a mano con
+     Newton-Raphson invece di scaricare un altro script da CDN. -->
+<script>
+(function(){
+  var bottone = document.getElementById('menuBtn');
+  var schermo = document.getElementById('menuSchermo');
+  if(!bottone || !schermo || typeof gsap === 'undefined') return;
+
+  function bezier(x1,y1,x2,y2){
+    function ascissa(t){ return 3*(1-t)*(1-t)*t*x1 + 3*(1-t)*t*t*x2 + t*t*t; }
+    function ordinata(t){ return 3*(1-t)*(1-t)*t*y1 + 3*(1-t)*t*t*y2 + t*t*t; }
+    function derivata(t){
+      return 3*(1-t)*(1-t)*x1 + 6*(1-t)*t*(x2-x1) + 3*t*t*(1-x2);
+    }
+    return function(p){
+      if(p <= 0) return 0;
+      if(p >= 1) return 1;
+      var t = p;
+      for(var i=0;i<6;i++){
+        var d = derivata(t);
+        if(Math.abs(d) < 1e-6) break;
+        var scarto = ascissa(t) - p;
+        if(Math.abs(scarto) < 1e-6) break;
+        t -= scarto / d;
+      }
+      return ordinata(Math.max(0, Math.min(1, t)));
+    };
+  }
+  var curva = bezier(0.65, 0.01, 0.05, 0.99);
+
+  var velo    = schermo.querySelector('.menu-velo');
+  var strati  = schermo.querySelectorAll('.menu-strato');
+  var link    = schermo.querySelectorAll('.menu-link-testo');
+  var piede   = schermo.querySelectorAll('[data-menu-fade]');
+  var parole  = bottone.querySelectorAll('.menu-btn-testo span');
+  var righe   = bottone.querySelectorAll('.menu-btn-icona i');
+  var divisori= schermo.querySelectorAll('.menu-riga');
+  var voci    = schermo.querySelectorAll('.menu-voce[data-forma]');
+  var forme   = schermo.querySelector('.menu-forme');
+
+  var aperto = false, linea = null;
+
+  function apri(){
+    if(linea) linea.kill();
+    aperto = true;
+    schermo.setAttribute('data-nav','open');
+    schermo.setAttribute('aria-hidden','false');
+    bottone.setAttribute('aria-expanded','true');
+    document.body.style.overflow = 'hidden';
+
+    // il display va acceso PRIMA di costruire la timeline: xPercent si
+    // misura sulla larghezza dell'elemento, e con display:none il pannello
+    // non ha layout — GSAP finirebbe per calcolare il 101% sulla finestra
+    // intera invece che sui 560px del pannello.
+    schermo.style.display = 'block';
+    void schermo.offsetWidth;
+
+    linea = gsap.timeline({defaults:{ease:curva, duration:0.7}});
+    linea.fromTo(parole,{yPercent:0},{yPercent:-100, stagger:0.12},0)
+      .to(righe[0],{y:6.2,rotate:45,duration:0.45},0)
+      .to(righe[1],{autoAlpha:0,duration:0.25},0)
+      .to(righe[2],{y:-6.2,rotate:-45,duration:0.45},0)
+      .fromTo(velo,{autoAlpha:0},{autoAlpha:1},0)
+      .fromTo(strati,{xPercent:101},{xPercent:0, stagger:0.11, duration:0.58},0)
+      .fromTo(link,{yPercent:140,rotate:8},{yPercent:0,rotate:0,stagger:0.05},0.34)
+      .fromTo(divisori,{scaleX:0},{scaleX:1,stagger:0.06,duration:0.5},0.46)
+      .fromTo(piede,{autoAlpha:0,yPercent:50},{autoAlpha:1,yPercent:0,stagger:0.04,clearProps:'all'},0.55);
+  }
+
+  function chiudi(){
+    if(linea) linea.kill();
+    aperto = false;
+    schermo.setAttribute('data-nav','closed');
+    schermo.setAttribute('aria-hidden','true');
+    bottone.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
+
+    linea = gsap.timeline({defaults:{ease:curva, duration:0.55}});
+    linea.to(velo,{autoAlpha:0},0)
+      .to(strati,{xPercent:110, stagger:0.05},0)
+      .to(parole,{yPercent:0},0)
+      .to(righe,{y:0,rotate:0,autoAlpha:1,duration:0.35},0)
+      .to(divisori,{scaleX:0,duration:0.3},0)
+      .call(function(){ schermo.style.display = 'none'; });
+  }
+
+  bottone.addEventListener('click', function(){ aperto ? chiudi() : apri(); });
+  velo.addEventListener('click', chiudi);
+  schermo.querySelectorAll('.menu-link').forEach(function(a){
+    a.addEventListener('click', chiudi);   // e' un'ancora interna: il pannello deve sparire
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && aperto) chiudi();
+  });
+
+  // le forme dietro le voci: una alla volta, quella della voce puntata
+  voci.forEach(function(voce){
+    var forma = forme ? forme.querySelector('.forma-' + voce.getAttribute('data-forma')) : null;
+    if(!forma) return;
+    var pezzi = forma.querySelectorAll('.forma-el');
+    voce.addEventListener('mouseenter', function(){
+      forme.querySelectorAll('.forma').forEach(function(f){ f.classList.remove('attiva'); });
+      forma.classList.add('attiva');
+      gsap.fromTo(forma,{autoAlpha:0},{autoAlpha:1,duration:0.3,overwrite:'auto'});
+      gsap.fromTo(pezzi,
+        {scale:0.5,opacity:0,rotate:-10,transformOrigin:'50% 50%'},
+        {scale:1,opacity:1,rotate:0,duration:0.6,stagger:0.08,ease:'back.out(1.7)',overwrite:'auto'});
+    });
+    voce.addEventListener('mouseleave', function(){
+      gsap.to(pezzi,{scale:0.8,opacity:0,duration:0.3,ease:'power2.in',overwrite:'auto',
+        onComplete:function(){ forma.classList.remove('attiva'); }});
+    });
+  });
+})();
+</script>
+
+<!-- Sfondi video decorativi (hero e sezione del globo).
+     Il src non e' nel markup ma in data-src: sotto i 901px il file non
+     parte proprio, cosi' la connessione mobile non paga megabyte di
+     decoro. In pausa fuori schermo e a scheda nascosta. -->
+<script>
+(function(){
+  var video = Array.prototype.slice.call(document.querySelectorAll('video[data-src]'));
+  if(!video.length) return;
+
+  var mqGrande = window.matchMedia('(min-width:901px)');
+  var mqMoto   = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var hero     = document.querySelector('.hero');
+
+  // il video della hero (i droni che montano il logo) va una volta sola e resta sul logo:
+  // rientrando nello schermo non deve ripartire da capo
+  function parti(v){ if(v.hasAttribute('data-una-volta') && v.ended) return; var p = v.play(); if(p && p.catch) p.catch(function(){}); }
+
+  // niente remove(): l'elemento resta e il video si aggancia solo quando
+  // serve, cosi' chi ruota il tablet in orizzontale lo ottiene lo stesso.
+  // Finche' il src non viene messo, non parte nessuna richiesta di rete.
+  function valuta(){
+    var attivo = mqGrande.matches && !mqMoto.matches;
+    video.forEach(function(v){
+      if(!attivo){ v.pause(); v.style.display='none'; return; }
+      v.style.display='';
+      if(!v.getAttribute('src')) v.setAttribute('src', v.getAttribute('data-src'));
+      parti(v);
+    });
+    // il canvas neurale si spegne solo quando il video della hero c'e' davvero
+    if(hero) hero.classList.toggle('con-video', attivo && !!document.querySelector('.hero-bg'));
+  }
+  valuta();
+  (mqGrande.addEventListener ? mqGrande.addEventListener('change',valuta) : mqGrande.addListener(valuta));
+  (mqMoto.addEventListener   ? mqMoto.addEventListener('change',valuta)   : mqMoto.addListener(valuta));
+
+  if(typeof IntersectionObserver !== 'undefined'){
+    var io = new IntersectionObserver(function(voci){
+      voci.forEach(function(x){
+        if(x.target.style.display === 'none') return;
+        x.isIntersecting ? parti(x.target) : x.target.pause();
+      });
+    },{threshold:0.05});
+    video.forEach(function(v){ io.observe(v); });
+  }
+  document.addEventListener('visibilitychange',function(){
+    video.forEach(function(v){
+      if(v.style.display === 'none') return;
+      document.hidden ? v.pause() : parti(v);
+    });
+  });
+})();
+</script>
+
+<!-- ============================================================
+     RIQUADRO COOKIE — dal kit GDPR di FUTURE AI.
+     Non blocca la pagina (niente cookie wall). Le statistiche di Vercel
+     partono SOLO dopo "Accetto". La scelta resta in localStorage e si
+     riapre dal link "Cookie" nel piè di pagina.
+     ============================================================ -->
+<style>
+.cookie{position:fixed;z-index:9000;left:1rem;right:1rem;bottom:1rem;max-width:25rem;margin-inline:auto;
+  background:#111827;color:#EDF1FA;border-radius:16px;padding:1.15rem 1.3rem 1.3rem;
+  box-shadow:0 24px 60px -18px rgba(0,0,0,.7),0 0 0 1px rgba(155,127,248,.22);
+  font-family:'DM Sans',sans-serif;
+  transform:translateY(calc(100% + 2rem));opacity:0;transition:transform .55s cubic-bezier(.22,1,.36,1),opacity .4s}
+.cookie.su{transform:none;opacity:1}
+.cookie[hidden]{display:none}
+@media (min-width:760px){.cookie{left:1.5rem;right:auto;bottom:1.5rem;margin:0}}
+.cookie::before{content:"";display:block;width:2.2rem;height:3px;border-radius:3px;background:linear-gradient(90deg,#6C63FF,#4DD9E0);margin-bottom:.9rem}
+.cookie__tit{font-family:'Manrope',sans-serif;font-weight:800;font-size:1.15rem;letter-spacing:-.02em;line-height:1.15;margin:0 0 .45rem}
+.cookie__testo{font-size:.88rem;line-height:1.55;color:#AEB7CA;margin:0}
+.cookie__testo a{color:#C4B5FD}
+.cookie__az{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+.cookie__btn{flex:1 1 auto;min-height:44px;padding:.6rem 1.15rem;border-radius:999px;border:1px solid transparent;
+  background:linear-gradient(90deg,#6C63FF,#4DD9E0);color:#fff;font:600 .9rem/1 'DM Sans',sans-serif;cursor:pointer}
+.cookie__btn--no{background:transparent;border-color:rgba(255,255,255,.22);color:#EDF1FA}
+.cookie__btn:focus-visible{outline:2px solid #4DD9E0;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.cookie{transition:none}}
+/* piè di pagina legale e casella del modulo */
+.footer-legale{font-size:.78rem}
+.footer-legale a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.form-presa{display:flex;gap:.6rem;align-items:flex-start;margin:.2rem 0 1rem;font-size:.82rem;line-height:1.45;color:var(--ink-muted,#8C97AD);cursor:pointer}
+.form-presa input{margin-top:.15rem;width:1.05rem;height:1.05rem;flex:none;accent-color:#7B5CF5}
+.form-presa a{color:#C4B5FD}
+</style>
+
+<div class="cookie" id="cookie" role="dialog" aria-labelledby="cookieTit" aria-describedby="cookieTesto" hidden>
+  <p class="cookie__tit" id="cookieTit">Due parole sui cookie.</p>
+  <p class="cookie__testo" id="cookieTesto">Il sito usa solo memoria tecnica per funzionare. Se accetti, contiamo anche le visite in forma anonima e aggregata: nessun profilo, nessuna pubblicità. Puoi cambiare idea quando vuoi dal link «Cookie» in fondo alla pagina. <a href="/privacy/#cookie">Come trattiamo i dati</a></p>
+  <div class="cookie__az">
+    <button class="cookie__btn" id="cookieSi" type="button">Accetto</button>
+    <button class="cookie__btn cookie__btn--no" id="cookieNo" type="button">Solo necessari</button>
+  </div>
+</div>
+
+<script>
+/* Vercel Web Analytics (versione per siti statici): lo script arriva
+   dall'endpoint di Vercel e funziona solo sul dominio pubblicato
+   (in locale da' 404, e' atteso). Parte solo dopo il consenso. */
+window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__statsAvviate=true;
+  window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};
+  var s=document.createElement('script'); s.defer=true; s.src='/_vercel/insights/script.js'; document.body.appendChild(s);
+};
+(function(){
+  var K='futureai-cookie', b=document.getElementById('cookie'); if(!b)return;
+  function letto(){try{return localStorage.getItem(K)}catch(e){return null}}
+  function salva(v){try{localStorage.setItem(K,v)}catch(e){}}
+  function mostra(){b.hidden=false;requestAnimationFrame(function(){requestAnimationFrame(function(){b.classList.add('su')})});}
+  function chiudi(){b.classList.remove('su');setTimeout(function(){b.hidden=true},450)}
+  document.getElementById('cookieSi').addEventListener('click',function(){salva('tutti');chiudi();window.avviaStatistiche();});
+  document.getElementById('cookieNo').addEventListener('click',function(){
+    var prima=letto(); salva('necessari'); chiudi();
+    /* chi ritira il consenso: si ricarica per spegnere lo script gia' avviato */
+    if(prima==='tutti'&&window.__statsAvviate)setTimeout(function(){location.reload()},500);
+  });
+  var s=letto();
+  if(s==='tutti'){window.avviaStatistiche();}
+  else if(s!=='necessari'){setTimeout(mostra,1100);}
+  var ap=document.getElementById('apriCookie');
+  if(ap)ap.addEventListener('click',function(e){e.preventDefault();mostra();});
+})();
+</script>
+
+<script>
+/* le sezioni delle pagine servizio entrano con una leggera salita */
+(function(){var el=[].slice.call(document.querySelectorAll('.sv-rivela'));if(!el.length)return;
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){el.forEach(function(e){e.classList.add('vista');});return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('vista');io.unobserve(x.target);}});},{rootMargin:'0px 0px -8% 0px'});
+  el.forEach(function(e,i){e.style.transitionDelay=(i%3)*70+'ms';io.observe(e);});})();
+</script>
+<style>
+.ai-testa-p{color:var(--ink-muted);margin:.8rem 0 0}
+.ai-es{margin-top:.8rem!important;padding-top:.7rem;border-top:1px dashed var(--line);font-size:.85rem!important;color:var(--ink)!important}
+.ai-es b{color:var(--acqua)}
+/* ===== percorso AI in locale ===== */
+.al{position:relative;isolation:isolate;overflow:hidden;background:#070B18;color:#E8EDF8;padding:clamp(4rem,9vw,7rem) clamp(1rem,4vw,2.5rem);scroll-margin-top:60px}
+.al-sfondo{position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(ellipse 60% 50% at 15% 10%,rgba(108,99,255,.28),transparent 70%),radial-gradient(ellipse 50% 45% at 90% 80%,rgba(77,217,224,.18),transparent 70%),
+  linear-gradient(rgba(77,217,224,.06) 1px,transparent 1px) 0 0/48px 48px,linear-gradient(90deg,rgba(77,217,224,.06) 1px,transparent 1px) 0 0/48px 48px}
+.al-in{max-width:1180px;margin:0 auto}
+.al-testa{text-align:center;max-width:48rem;margin:0 auto}
+.al-tag{display:inline-flex;align-items:center;gap:.55rem;font:700 .75rem 'Space Mono',monospace;letter-spacing:.2em;text-transform:uppercase;color:#4DD9E0}
+.al-tag i{width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 12px #3ddc84;animation:alLed 1.6s ease-in-out infinite}
+@keyframes alLed{50%{opacity:.35}}
+.al-tit{font:800 clamp(2.2rem,5.2vw,4.2rem)/1 'Bricolage Grotesque',sans-serif;letter-spacing:-.04em;color:#fff;margin:1rem 0 0}
+.al-tit span{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-style:italic;letter-spacing:-.01em;
+  background:linear-gradient(100deg,#9B7FF8,#4DD9E0 55%,#7ef0b0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.al-sub{color:#C3CCE0;font-size:clamp(1rem,1.3vw,1.12rem);line-height:1.7;margin:1.2rem auto 0}
+.al-sub b{color:#fff}
+.al-tappe{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.4rem;margin:clamp(2rem,4vw,3rem) 0 0;position:relative}
+.al-tappe button{appearance:none;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:#98A3BE;border-radius:14px;padding:.7rem .5rem;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:.35rem;font:600 .82rem 'DM Sans',sans-serif;transition:all .3s}
+.al-tappe b{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:800 .85rem 'Bricolage Grotesque',sans-serif;background:rgba(255,255,255,.07);color:#fff;transition:all .3s}
+.al-tappe button:hover{border-color:rgba(77,217,224,.5);color:#fff}
+.al-tappe button.on{border-color:#4DD9E0;background:rgba(77,217,224,.1);color:#fff}
+.al-tappe button.on b,.al-tappe button.fatta b{background:linear-gradient(135deg,#6C63FF,#4DD9E0)}
+.al-avanz{height:3px;border-radius:3px;background:rgba(255,255,255,.08);margin-top:.6rem;overflow:hidden}
+.al-avanz i{display:block;height:100%;background:linear-gradient(90deg,#6C63FF,#4DD9E0);transform:scaleX(.1667);transform-origin:left;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.al-schermo{position:relative;margin-top:1.4rem;border-radius:28px;padding:clamp(1.3rem,3.5vw,2.8rem);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 40px 100px -40px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.06);min-height:520px}
+.al-tappa{display:none}
+.al-tappa.on{display:block;animation:alEntra .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes alEntra{from{opacity:0;transform:translateY(18px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.al-kick{font:700 .74rem 'Space Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:#4DD9E0}
+.al-h3{font:800 clamp(1.6rem,3.2vw,2.5rem)/1.08 'Bricolage Grotesque',sans-serif;letter-spacing:-.03em;color:#fff;margin:.6rem 0 0}
+.al-h3 em{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-style:italic;color:#9B7FF8;letter-spacing:-.01em}
+.al-p{color:#C3CCE0;line-height:1.7;margin:1rem 0 0}
+.al-p--forte{color:#fff;font-weight:600}
+.al-due{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1.5rem,4vw,3rem);align-items:center}
+.al-avanti{appearance:none;display:block;margin:2rem 0 0 auto;border:0;cursor:pointer;padding:.85rem 1.3rem;border-radius:100px;color:#fff;
+  font:700 .95rem 'Bricolage Grotesque',sans-serif;background:linear-gradient(90deg,#6C63FF,#1ea5b3);box-shadow:0 12px 30px -12px rgba(108,99,255,.8);transition:transform .2s}
+.al-avanti:hover{transform:translateX(4px)}
+/* tappa 1 */
+.al-rischio{position:relative;height:340px;border-radius:20px;background:linear-gradient(180deg,rgba(255,80,110,.08),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);overflow:hidden}
+.al-ditta,.al-nuvola{position:absolute;display:flex;flex-direction:column;align-items:center;gap:.3rem;font-size:2.6rem}
+.al-ditta span,.al-nuvola span{font:600 .75rem 'DM Sans',sans-serif;color:#C3CCE0}
+.al-ditta{left:8%;bottom:6%}.al-nuvola{right:8%;top:8%}
+.al-nuvola::after{content:"";position:absolute;inset:-18px;border-radius:50%;border:2px dashed rgba(255,90,120,.45);animation:alGira 12s linear infinite}
+@keyframes alGira{to{transform:rotate(360deg)}}
+.al-doc{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);appearance:none;border:1px solid rgba(255,255,255,.2);background:rgba(20,26,48,.9);color:#fff;
+  border-radius:12px;padding:.45rem .6rem;cursor:pointer;font-size:1.3rem;display:flex;flex-direction:column;align-items:center;gap:.1rem;transition:left 1.2s cubic-bezier(.6,0,.3,1),top 1.2s cubic-bezier(.6,0,.3,1),opacity .4s 1s,transform .3s;animation:alTrema 2.4s ease-in-out infinite}
+.al-doc span{font:600 .62rem 'DM Sans',sans-serif;color:#C3CCE0}
+.al-doc:hover{transform:translate(-50%,-50%) scale(1.08)}
+.al-doc.via{left:84%!important;top:18%!important;opacity:0;pointer-events:none;animation:none}
+@keyframes alTrema{50%{margin-top:-4px}}
+.al-rischio-conto{position:absolute;left:.8rem;top:.8rem;font:600 .82rem 'DM Sans',sans-serif;color:#ffb3c1;background:rgba(255,80,110,.12);border:1px solid rgba(255,80,110,.35);padding:.35rem .8rem;border-radius:100px;white-space:nowrap}
+.al-rischio-conto b{color:#fff}
+/* tappa 2 */
+.al-switch{display:inline-flex;margin-top:1.3rem;padding:.3rem;border-radius:100px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
+.al-switch button{appearance:none;border:0;background:none;color:#98A3BE;padding:.6rem 1.1rem;border-radius:100px;cursor:pointer;font:700 .9rem 'DM Sans',sans-serif;transition:all .3s}
+.al-switch button.on{background:#fff;color:#0E1730}
+.al-flusso{position:relative;display:grid;grid-template-columns:1fr 150px;gap:0;margin-top:1.3rem;min-height:250px}
+.al-edificio{position:relative;border-radius:22px 0 0 22px;padding:1.2rem;border:2px solid rgba(61,220,132,.6);background:rgba(61,220,132,.06);transition:border-color .5s,background .5s}
+.al-flusso[data-modo="cloud"] .al-edificio{border-color:rgba(255,90,120,.6);background:rgba(255,90,120,.06);border-right-style:dashed}
+.al-edificio-tit{font:700 .72rem 'Space Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:#7ef0b0}
+.al-flusso[data-modo="cloud"] .al-edificio-tit{color:#ffb3c1}
+.al-nodi{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem}
+.al-nodi span{padding:.45rem .7rem;border-radius:10px;background:rgba(255,255,255,.07);font-size:.85rem}
+.al-server{display:inline-flex;align-items:center;gap:.6rem;margin-top:1.4rem;padding:.8rem 1rem;border-radius:14px;background:linear-gradient(135deg,rgba(108,99,255,.35),rgba(77,217,224,.25));font-size:1.6rem;transition:opacity .5s,filter .5s}
+.al-server b{font:800 .95rem 'Bricolage Grotesque',sans-serif;display:block}
+.al-server small{font-size:.75rem;color:#C3CCE0;display:block}
+.al-flusso[data-modo="cloud"] .al-server{opacity:.25;filter:grayscale(1)}
+.al-fuori{display:flex;align-items:center;justify-content:center;border-radius:0 22px 22px 0;background:rgba(255,255,255,.02);border:1px dashed rgba(255,255,255,.12);border-left:0}
+.al-fuori-nuvola{display:flex;flex-direction:column;align-items:center;font-size:2.4rem;transition:transform .5s,filter .5s}
+.al-fuori-nuvola b{font:700 .78rem 'DM Sans',sans-serif}
+.al-flusso[data-modo="locale"] .al-fuori-nuvola{filter:grayscale(1);opacity:.35}
+.al-particelle i{position:absolute;width:9px;height:9px;border-radius:50%;background:#7ef0b0;box-shadow:0 0 10px #7ef0b0;left:20%;top:45%;animation:alGiro 2.6s linear infinite}
+.al-particelle i:nth-child(2){animation-delay:-.43s}.al-particelle i:nth-child(3){animation-delay:-.86s}.al-particelle i:nth-child(4){animation-delay:-1.3s}.al-particelle i:nth-child(5){animation-delay:-1.73s}.al-particelle i:nth-child(6){animation-delay:-2.16s}
+@keyframes alGiro{0%{left:12%;top:40%}25%{left:60%;top:35%}50%{left:40%;top:78%}75%{left:14%;top:70%}100%{left:12%;top:40%}}
+.al-flusso[data-modo="cloud"] .al-particelle i{background:#ff6f8e;box-shadow:0 0 10px #ff6f8e;animation-name:alFuga}
+@keyframes alFuga{0%{left:15%;top:55%;opacity:1}80%{opacity:1}100%{left:112%;top:40%;opacity:0}}
+.al-confronto{list-style:none;margin:1.3rem 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}
+.al-confronto li{display:flex;gap:.6rem;align-items:flex-start;padding:.8rem .9rem;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-size:.92rem;color:#D5DCEB;animation:alEntra .5s both}
+.al-confronto li b{flex:none}
+/* tappa 3 */
+.al-domande{display:grid;gap:.5rem;margin-top:1.2rem}
+.al-domande button{appearance:none;text-align:left;cursor:pointer;padding:.8rem 1rem;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:#fff;font:500 .93rem 'DM Sans',sans-serif;transition:all .2s}
+.al-domande button:hover,.al-domande button.on{border-color:#4DD9E0;background:rgba(77,217,224,.1)}
+.al-rete{display:inline-flex;align-items:center;gap:.5rem;margin-top:1rem;font-size:.85rem;color:#C3CCE0;padding:.45rem .8rem;border-radius:100px;background:rgba(61,220,132,.1);border:1px solid rgba(61,220,132,.35)}
+.al-rete b{color:#7ef0b0;font-variant-numeric:tabular-nums}
+.al-led{width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 10px #3ddc84;flex:none;animation:alLed 1.6s infinite}
+.al-chat{border-radius:20px;background:#0C1226;border:1px solid rgba(255,255,255,.1);overflow:hidden;min-height:380px;display:flex;flex-direction:column}
+.al-chat-testa{display:flex;align-items:center;gap:.55rem;padding:.8rem 1rem;border-bottom:1px solid rgba(255,255,255,.08);font:600 .85rem 'DM Sans',sans-serif;color:#C3CCE0}
+.al-chat-corpo{flex:1;padding:1rem;display:flex;flex-direction:column;gap:.7rem;overflow:auto;max-height:430px}
+.al-chat-vuoto{margin:auto;color:#6F7A95;font-size:.9rem}
+.al-msg{max-width:88%;padding:.75rem .9rem;border-radius:16px;font-size:.92rem;line-height:1.55;animation:alEntra .4s}
+.al-msg.tu{align-self:flex-end;background:linear-gradient(135deg,#6C63FF,#4b56d8);color:#fff;border-bottom-right-radius:4px}
+.al-msg.ai{align-self:flex-start;background:rgba(255,255,255,.07);color:#E8EDF8;border-bottom-left-radius:4px}
+.al-fonte{display:inline-flex;align-items:center;gap:.35rem;margin-top:.55rem;padding:.25rem .6rem;border-radius:8px;background:rgba(77,217,224,.14);color:#4DD9E0;font-size:.78rem;font-weight:600}
+.al-pensa{display:inline-flex;gap:4px}.al-pensa i{width:7px;height:7px;border-radius:50%;background:#98A3BE;animation:alPensa 1s infinite}
+.al-pensa i:nth-child(2){animation-delay:.15s}.al-pensa i:nth-child(3){animation-delay:.3s}
+@keyframes alPensa{50%{transform:translateY(-5px);opacity:.4}}
+/* tappa 4 */
+.al-moduli{display:grid;grid-template-columns:260px minmax(0,1fr);gap:1.2rem;margin-top:1.4rem}
+.al-mod-lista{display:grid;gap:.4rem;align-content:start}
+.al-mod-lista button{appearance:none;display:flex;align-items:center;gap:.7rem;text-align:left;cursor:pointer;padding:.7rem .85rem;border-radius:14px;border:1px solid transparent;background:rgba(255,255,255,.03);color:#C3CCE0;font:600 .92rem 'DM Sans',sans-serif;transition:all .2s}
+.al-mod-lista button span{font-size:1.2rem}
+.al-mod-lista button:hover{color:#fff;background:rgba(255,255,255,.07)}
+.al-mod-lista button.on{color:#fff;border-color:#4DD9E0;background:rgba(77,217,224,.1)}
+.al-mod-dett{padding:1.4rem;border-radius:20px;background:#0C1226;border:1px solid rgba(255,255,255,.1);animation:alEntra .45s}
+.al-mod-dett h4{margin:0;font:800 1.4rem 'Bricolage Grotesque',sans-serif;color:#fff;display:flex;align-items:center;gap:.6rem}
+.al-mod-dett .al-mod-sot{font:700 .72rem 'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#4DD9E0;margin-top:.35rem}
+.al-mod-dett p{color:#C3CCE0;line-height:1.65;margin:.9rem 0 0}
+.al-mod-dett ul{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.5rem}
+.al-mod-dett li{display:flex;gap:.55rem;font-size:.92rem;color:#E8EDF8;padding:.55rem .7rem;border-radius:10px;background:rgba(255,255,255,.04)}
+.al-mod-dett li::before{content:"✓";color:#7ef0b0;font-weight:800}
+/* tappa 5 */
+.al-metodo{margin:1.1rem 0 0;padding-left:1.2rem;display:grid;gap:.35rem;color:#D5DCEB;font-size:.93rem}
+.al-metodo li::marker{color:#4DD9E0;font-weight:800}
+.al-regola{margin-top:1.2rem;padding:.9rem 1rem;border-radius:14px;background:rgba(155,127,248,.12);border:1px solid rgba(155,127,248,.35);font-size:.9rem;line-height:1.55;color:#E8EDF8}
+.al-diag{border-radius:20px;background:#0C1226;border:1px solid rgba(255,255,255,.1);padding:1.2rem}
+.al-diag-dom{display:flex;gap:.7rem;padding:.9rem;border-radius:14px;background:rgba(108,99,255,.18);font-size:.93rem;line-height:1.55;color:#fff}
+.al-diag-via{appearance:none;margin-top:1rem;width:100%;border:0;cursor:pointer;padding:.85rem;border-radius:12px;color:#fff;font:700 .95rem 'Bricolage Grotesque',sans-serif;background:linear-gradient(90deg,#6C63FF,#1ea5b3)}
+.al-esito{margin-top:1rem;padding:.7rem .9rem;border-radius:12px;background:rgba(255,90,120,.14);border:1px solid rgba(255,90,120,.45);color:#ffc2cd;font-weight:700;font-size:.92rem}
+.al-causa{margin-top:.8rem}
+.al-causa div{display:flex;justify-content:space-between;gap:1rem;font-size:.92rem}
+.al-causa span{font:800 .95rem 'Bricolage Grotesque',sans-serif;color:#4DD9E0}
+.al-causa i{display:block;height:8px;border-radius:8px;margin-top:.35rem;background:rgba(255,255,255,.08);position:relative;overflow:hidden}
+.al-causa i::after{content:"";position:absolute;inset:0;width:calc(var(--p) * 1%);border-radius:8px;background:linear-gradient(90deg,#6C63FF,#4DD9E0);transform:scaleX(0);transform-origin:left;animation:alBarra 1.1s .2s cubic-bezier(.2,.8,.2,1) forwards}
+.al-causa:nth-of-type(3) i::after{animation-delay:.5s}.al-causa:nth-of-type(4) i::after{animation-delay:.8s}
+@keyframes alBarra{to{transform:scaleX(1)}}
+.al-causa small{display:block;margin-top:.3rem;color:#98A3BE;font-size:.8rem}
+.al-diag-nota{margin:.9rem 0 0;font-size:.74rem;color:#6F7A95}
+/* tappa 6 */
+.al-scudi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem;margin-top:1.4rem}
+.al-scudo{padding:1.1rem;border-radius:18px;background:rgba(61,220,132,.06);border:1px solid rgba(61,220,132,.25);opacity:0;transform:translateY(14px) scale(.97)}
+.al-tappa.on .al-scudo{animation:alScudo .55s cubic-bezier(.2,.8,.2,1) forwards}
+.al-scudo:nth-child(2){animation-delay:.1s!important}.al-scudo:nth-child(3){animation-delay:.2s!important}.al-scudo:nth-child(4){animation-delay:.3s!important}.al-scudo:nth-child(5){animation-delay:.4s!important}.al-scudo:nth-child(6){animation-delay:.5s!important}
+@keyframes alScudo{to{opacity:1;transform:none}}
+.al-scudo span{font-size:1.5rem}
+.al-scudo b{display:block;margin-top:.5rem;font:800 1.02rem 'Bricolage Grotesque',sans-serif;color:#fff}
+.al-scudo small{display:block;margin-top:.25rem;color:#C3CCE0;font-size:.85rem;line-height:1.45}
+.al-grandi{margin-top:1.4rem;padding:1rem 1.2rem;border-radius:16px;background:rgba(255,255,255,.04);border-left:3px solid #4DD9E0;color:#C3CCE0;line-height:1.6;font-size:.94rem}
+.al-grandi b{color:#fff}
+.al-fine{text-align:center;margin-top:2rem}
+.al-fine h3{margin:0;font:800 clamp(1.5rem,3vw,2.2rem) 'Bricolage Grotesque',sans-serif;color:#fff}
+.al-fine p{color:#C3CCE0;margin:.6rem 0 0}
+html .al .btn-secondary{color:#fff;background:transparent;border-color:rgba(255,255,255,.25)}
+@media(max-width:900px){
+  .al-tappe{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .al-due,.al-moduli{grid-template-columns:1fr}
+  .al-mod-lista{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .al-scudi{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .al-confronto{grid-template-columns:1fr}
+  .al-flusso{grid-template-columns:1fr 90px}
+}
+@media(max-width:560px){
+  .al-tappe span{display:none}.al-tappe{grid-template-columns:repeat(6,minmax(0,1fr))}.al-tappe button{padding:.55rem .2rem}
+  .al-scudi{grid-template-columns:1fr}.al-mod-lista{grid-template-columns:1fr}
+  .al-schermo{min-height:0;border-radius:20px}.al-rischio{height:300px}
+  .al-avanti{width:100%;margin-top:1.4rem}
+}
+@media(prefers-reduced-motion:reduce){.al-tappa.on,.al-doc,.al-particelle i,.al-nuvola::after{animation:none}.al-scudo{opacity:1;transform:none}}
+</style>
+<script>
+(function(){
+  var sez=document.getElementById('locale');if(!sez)return;
+  var tappe=[].slice.call(sez.querySelectorAll('.al-tappa')),bot=[].slice.call(sez.querySelectorAll('.al-tappe button')),avz=document.getElementById('alAvanz');
+  function vai(n,scorri){tappe.forEach(function(t,i){t.classList.toggle('on',i===n);});
+    bot.forEach(function(b,i){b.classList.toggle('on',i===n);b.classList.toggle('fatta',i<n);});
+    avz.style.transform='scaleX('+((n+1)/tappe.length)+')';
+    if(scorri){var y=document.getElementById('alTappe').getBoundingClientRect().top+scrollY-80;scrollTo({top:y,behavior:'smooth'});}
+    if(n===4){document.getElementById('alDiagOut').hidden=true;document.getElementById('alDiagVia').hidden=false;}}
+  bot.forEach(function(b,i){b.addEventListener('click',function(){vai(i,false);});});
+  sez.addEventListener('click',function(e){var t=e.target.closest('[data-vai]');if(t)vai(+t.getAttribute('data-vai'),true);});
+
+  // 1 · i documenti che escono
+  var usciti=0;[].slice.call(sez.querySelectorAll('.al-doc')).forEach(function(d){d.addEventListener('click',function(){if(d.classList.contains('via'))return;d.classList.add('via');usciti++;
+    document.querySelector('#alConto b').textContent=usciti+(usciti===4?' su 4 · fuori controllo':' su 4');});});
+
+  // 2 · cloud o locale
+  var CONF={locale:[['✅','Le domande restano nella rete interna'],['✅','I documenti non lasciano mai l\'azienda'],['✅','Funziona anche senza internet'],['✅','Nessun costo a consumo per ogni domanda']],
+            cloud:[['⚠️','Ogni domanda viaggia su internet'],['⚠️','I documenti finiscono su server esterni'],['⚠️','Senza connessione si ferma'],['⚠️','Costi che crescono con l\'uso']]};
+  var fl=document.getElementById('alFlusso'),conf=document.getElementById('alConfronto');
+  function modo(m){fl.setAttribute('data-modo',m);sez.querySelectorAll('.al-switch button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-modo')===m);});
+    conf.innerHTML=CONF[m].map(function(x,i){return '<li style="animation-delay:'+(i*80)+'ms"><b>'+x[0]+'</b>'+x[1]+'</li>';}).join('');}
+  sez.querySelectorAll('.al-switch button').forEach(function(b){b.addEventListener('click',function(){modo(b.getAttribute('data-modo'));});});modo('locale');
+
+  // 3 · la chat
+  var DOM=[{q:'Qual è la procedura per il fermo macchina della linea 2?',a:'Per il fermo programmato: 1) avvisa il capoturno e segna l\'inizio fermo; 2) porta la linea in velocità minima e chiudi l\'alimentazione materiale; 3) attendi che la temperatura scenda sotto i 60 °C prima di aprire i carter; 4) applica il lucchetto di sicurezza e compila la scheda di fermo.',f:'Procedura PR-12 «Fermi programmati» · pag. 4'},
+    {q:'Ogni quanto va cambiato l\'olio del riduttore R3?',a:'Il riduttore R3 richiede il cambio olio ogni 4.000 ore di lavoro o una volta l\'anno, se arriva prima. L\'ultimo cambio registrato è di marzo: il prossimo è previsto a settembre ed è già nel piano manutenzioni.',f:'Piano cambio oli · riga R3 · Manuale riduttori pag. 18'},
+    {q:'È già successo che il sensore di tensione desse valori instabili?',a:'Sì, due volte nell\'ultimo anno. In entrambi i casi la causa era il connettore allentato sul lato motore; la soluzione adottata è stata serrare il connettore e sostituire la guaina. Tempo di intervento: circa 20 minuti.',f:'Registro guasti · 2 casi simili · risolti'}];
+  var box=document.getElementById('alDomande'),chat=document.getElementById('alChat'),occupata=false;
+  DOM.forEach(function(d,i){var b=document.createElement('button');b.type='button';b.textContent=d.q;b.addEventListener('click',function(){chiedi(i,b);});box.appendChild(b);});
+  function chiedi(i,b){if(occupata)return;occupata=true;box.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);});
+    var d=DOM[i];chat.innerHTML='';var tu=document.createElement('div');tu.className='al-msg tu';tu.textContent=d.q;chat.appendChild(tu);
+    var ai=document.createElement('div');ai.className='al-msg ai';ai.innerHTML='<span class="al-pensa"><i></i><i></i><i></i></span>';chat.appendChild(ai);
+    setTimeout(function(){ai.textContent='';var k=0,t=setInterval(function(){k+=3;ai.textContent=d.a.slice(0,k);chat.scrollTop=chat.scrollHeight;
+      if(k>=d.a.length){clearInterval(t);var f=document.createElement('div');f.className='al-fonte';f.textContent='📄 Fonte: '+d.f;ai.appendChild(document.createElement('br'));ai.appendChild(f);occupata=false;}},18);},900);}
+
+  // 4 · i moduli
+  var MOD=[['📊','Panoramica','Cruscotto del responsabile','Tutti gli indicatori del reparto in una schermata, con accesso rapido a ogni sezione.',['Avvisi per manutenzioni scadute o in arrivo','Segnalazioni aperte a colpo d\'occhio','Domande rimaste senza risposta: sai quali documenti aggiornare','Report mensile in PDF con un clic, pronto per la direzione']],
+    ['💬','Chat assistente','Risposte dai vostri documenti','L\'operatore scrive la domanda in italiano e riceve in pochi secondi la risposta, con documento e pagina.',['Modalità «Procedure»: risponde solo con fonti ufficiali','Modalità «Esperto»: consulente tecnico di processo','Filtro per area o reparto','Fonti cliccabili alla pagina esatta']],
+    ['🛠️','Registro guasti','Storico e ricerca intelligente','Ogni anomalia viene registrata e l\'AI propone le soluzioni già adottate per guasti simili.',['Trova il guasto anche se descritto con parole diverse','Stati: aperto → in lavorazione → risolto','Riapertura se il problema si ripresenta','Esportazione in PDF']],
+    ['🔧','Manutenzioni','Scadenze, gruppi e cambi olio','Pianificazione degli interventi periodici con avvisi a colori e firma dell\'operatore.',['Scadute · questo mese · future, a colori','Gruppi di interventi per un fermo impianto','Proposta automatica della prossima scadenza','Piano cambio oli per ogni macchina']],
+    ['⚠️','Segnalazioni','Ticket interni','Anomalie, rischi e richieste di intervento: semplice come mandare un messaggio.',['Stato aperta / risolta con data e operatore','Visibili nel cruscotto','Storico sempre consultabile']],
+    ['🎙️','Registra spiegazione','Dalla voce al documento','Il tecnico esperto parla: la spiegazione viene trascritta sul posto e diventa un documento che l\'assistente impara subito.',['Trascrizione 100% offline','Testo correggibile prima di salvarlo','Il sapere dei tecnici senior non si perde']],
+    ['🕘','Cronologia','Archivio delle domande','Ogni domanda e risposta è archiviata, ricercabile ed esportabile.',['Ricerca su tutte le domande passate','Raggruppate per giorno','Fonti conservate per ogni risposta','«Rifai questa domanda» con un clic']]];
+  var ml=document.getElementById('alModLista'),md=document.getElementById('alModDett');
+  function mod(i){[].slice.call(ml.children).forEach(function(b,k){b.classList.toggle('on',k===i);b.setAttribute('aria-selected',k===i);});var m=MOD[i];
+    md.innerHTML='<h4><span>'+m[0]+'</span>'+m[1]+'</h4><div class="al-mod-sot">'+m[2]+'</div><p>'+m[3]+'</p><ul>'+m[4].map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';
+    md.style.animation='none';void md.offsetWidth;md.style.animation='';}
+  MOD.forEach(function(m,i){var b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.innerHTML='<span>'+m[0]+'</span>'+m[1];b.addEventListener('click',function(){mod(i);});ml.appendChild(b);});mod(1);
+
+  // 5 · diagnosi
+  document.getElementById('alDiagVia').addEventListener('click',function(){var v=this;v.innerHTML='<span class="al-pensa"><i></i><i></i><i></i></span> Analisi in corso…';
+    setTimeout(function(){v.hidden=true;v.textContent='▶ Avvia l\'analisi';var o=document.getElementById('alDiagOut');o.hidden=false;},1300);});
+})();
+</script>
+</body>
+</html>
