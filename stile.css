@@ -1636,3 +1636,69 @@ nav{background:rgba(8,11,20,0.94);}
 .pg-cta h2 em{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-style:italic;color:#9B7FF8}
 .pg-cta p{color:rgba(255,255,255,.75);margin:1rem auto 0;max-width:36rem;line-height:1.6}
 .pg-cta .azioni{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.8rem}
+
+/* ============================================================
+   TEMA CHIARO «avorio e blu notte» (23/09/2026)
+   Le sezioni diventano chiare: fondo avorio caldo, schede bianche con
+   ombre morbide, testi blu notte, il viola-ciano solo come accento.
+   Restano scuri i momenti «cinema»: ingresso, hero, vetrina dei siti,
+   sala giochi arcade, card del robot 3D. Il piè di pagina e' blu notte.
+   Le regole con «html» davanti battono gli stili scritti nelle sezioni.
+   ============================================================ */
+:root{
+  --paper:#F7F5F0;--paper-2:#EFEBE3;
+  --ink:#14213D;--ink-muted:#556076;
+  --line:rgba(20,33,61,.10);
+  --violet-ink:#5B4BDB;
+  --ombra:0 1px 2px rgba(20,33,61,.05),0 20px 44px -20px rgba(20,33,61,.25);
+  --card-chiara:#FFFFFF;--card-chiara-2:#F3F0EA;--card-chiara-3:#F7F5F0;
+  --linea-card:rgba(20,33,61,.10);--viola-su-chiaro:#5B4BDB;
+  --acqua:#0f8f9e;
+}
+body{background:var(--paper);color:var(--ink);}
+.grid-bg{display:none;}
+::-webkit-scrollbar-track{background:var(--paper-2);}
+/* pagine dei servizi */
+html .pg-torna{color:var(--ink);border-color:rgba(20,33,61,.18);background:#fff;box-shadow:0 6px 18px -10px rgba(20,33,61,.3)}
+html .pg-torna:hover{background:#fff;border-color:var(--violet-ink);color:var(--violet-ink)}
+html .pg-tag,html .ch-tag{color:var(--acqua)}
+html .pg-tit,html .pg-cta h2,html .ch-tit{color:var(--ink)}
+html .pg-tit em,html .ch-tit em{background:linear-gradient(100deg,#5B4BDB,#0f8f9e 55%,#c2398f);-webkit-background-clip:text;background-clip:text;color:transparent}
+html .pg-sub,html .pg-cta p,html .ch-sub{color:var(--ink-muted)}
+html .pg-cta h2 em{color:var(--violet-ink)}
+html .pg-cta{background:linear-gradient(180deg,transparent,rgba(91,75,219,.06))}
+/* pulsante secondario su fondo chiaro (fuori dalla hero, che resta scura) */
+html .btn-secondary{color:var(--ink);border-color:rgba(20,33,61,.22);background:#fff}
+html .hero .btn-secondary,html .sw .btn-secondary{color:#fff;border-color:rgba(255,255,255,.22);background:transparent}
+/* righe dei servizi */
+html .svz-tit{color:var(--ink)}
+html .svz-desc{color:var(--ink-muted)}
+html .svz-num{color:var(--acqua)} html .svz-num span{color:var(--ink-muted)}
+html .svz-punti li{color:var(--ink)} html .svz-punti svg{color:var(--acqua)}
+html .svz-cta{color:var(--ink);background:rgba(91,75,219,.07);border-color:rgba(91,75,219,.35)}
+html .svz-cta:hover{background:rgba(91,75,219,.14);border-color:var(--violet-ink)}
+html .svz-media{background:#e9e5dd;box-shadow:0 30px 60px -28px rgba(20,33,61,.45),0 0 0 1px rgba(20,33,61,.08)}
+/* chiusura della home */
+html .ch{background:var(--paper)}
+html .ch::before{background:radial-gradient(ellipse 60% 45% at 50% 30%,rgba(91,75,219,.10),transparent 70%),radial-gradient(ellipse 40% 35% at 70% 60%,rgba(15,143,158,.08),transparent 70%)}
+html .ch-card{background:#fff;border-color:var(--line);box-shadow:var(--ombra)}
+html .ch-card::after{background:radial-gradient(circle,rgba(91,75,219,.10),transparent 70%)}
+html .ch-card h3{color:var(--ink)} html .ch-card p{color:var(--ink-muted)}
+/* contatti */
+html .contact-section{background:var(--paper-2)}
+html .contact-left h2{color:var(--ink)}
+html .citem strong{color:var(--ink)}
+html .cicon{background:#fff;border-color:var(--line)}
+html .contact-form{background:#fff}
+html .fg input,html .fg textarea,html .fg select{background:var(--paper);color:var(--ink);border-color:rgba(20,33,61,.14)}
+html .fg input::placeholder,html .fg textarea::placeholder{color:#8a93a6}
+html .form-presa{color:var(--ink-muted)} html .form-presa a{color:var(--violet-ink)}
+/* numeri, processo, casi studio, globo */
+html .stat-number,html .wai-num{color:var(--violet-ink)}
+html .process-step p{color:var(--ink-muted)}
+/* piè di pagina blu notte */
+html footer{background:#101A33;border-top:0}
+html footer p,html .footer-trasparenza{color:#AEB6CC}
+html footer a{color:#dfe4f2}
+html .footer-logo span,html .footer-trasparenza strong{color:#fff}
+/* il menu in alto resta scuro: sul chiaro fa da cornice */
