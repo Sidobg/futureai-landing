@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="description" content="FutureAI – Automazioni AI per Aziende Italiane. Agenti AI, prenotazioni, webapp su misura e automazioni.">
 <title>FutureAI – Automazioni AI per Aziende</title>
+<link rel="preload" as="image" href="intro-d/000.webp" media="(min-aspect-ratio: 1/1)">
+<link rel="preload" as="image" href="intro-m/000.webp" media="(max-aspect-ratio: 1/1)">
 <link href="/fonts/fonts.css" rel="stylesheet">
 <style>
 :root {
@@ -1682,6 +1684,187 @@ nav{background:rgba(8,11,20,0.94);}
 <script src="/vendor/ScrollTrigger.min.js"></script>
 </head>
 <body>
+<!-- ===== INGRESSO: il video che porta dentro al sito =====
+     Sezione alta con uno schermo fermo (sticky): scorrendo, il video
+     avanza fotogramma per fotogramma su un canvas e alla fine il sito
+     prosegue da solo. Niente blocco dello scroll: funzionano rotella,
+     dito, tastiera e barra. 240 fotogrammi WebP (tutti quelli del video
+     Gemini, stellina tolta scontando il velo): intro-d/ 1280x720 per
+     schermi orizzontali, intro-m/ ritaglio centrale 540x720 per i telefoni
+     in verticale, che del 16:9 vedono solo quella striscia. -->
+<style>
+.ingresso{position:relative;height:450vh;background:#05070d;z-index:5}
+.ing-fisso{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.ing-tela{position:absolute;inset:0;width:100%;height:100%;display:block;transform-origin:center;will-change:transform}
+.ing-velo{position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(5,7,13,.72) 0%,rgba(5,7,13,.35) 38%,rgba(5,7,13,0) 62%),
+    linear-gradient(180deg,rgba(5,7,13,.35),rgba(5,7,13,0) 28%,rgba(5,7,13,0) 70%,rgba(5,7,13,.5))}
+.ing-marchio{position:absolute;left:clamp(1.25rem,6vw,6.5rem);top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;align-items:flex-start;gap:clamp(.9rem,2vw,1.4rem);will-change:transform,opacity,filter}
+.ing-icona{width:clamp(78px,10vw,148px);height:auto;aspect-ratio:1;border-radius:20%;
+  box-shadow:0 18px 50px -12px rgba(108,99,255,.55),0 0 0 1px rgba(255,255,255,.12)}
+.ing-nome{font-family:'Manrope',sans-serif;font-weight:800;line-height:.92;letter-spacing:-.035em;
+  font-size:clamp(3rem,9.5vw,8.5rem);color:#F2F4F8;text-shadow:0 6px 40px rgba(0,0,0,.45)}
+.ing-nome span{background:linear-gradient(90deg,#6C63FF,#4DD9E0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ing-sotto{font-family:'Space Mono',monospace;font-size:clamp(.66rem,1.1vw,.82rem);letter-spacing:.32em;
+  text-transform:uppercase;color:rgba(242,244,248,.78);padding-left:.2em;line-height:1.9;max-width:min(88vw,46rem)}
+.ing-sotto span{color:#4DD9E0;margin:0 .35em}
+.ing-invito{position:absolute;left:50%;bottom:clamp(2.2rem,7vh,3.6rem);transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.7rem;
+  font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(242,244,248,.85);transition:opacity .45s ease;pointer-events:none;white-space:nowrap}
+.ing-mouse{width:22px;height:34px;border:1.5px solid currentColor;border-radius:12px;position:relative;opacity:.9}
+.ing-mouse::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;
+  background:currentColor;animation:ingRotella 1.6s ease-in-out infinite}
+@keyframes ingRotella{0%{transform:translateY(0);opacity:1}70%{transform:translateY(9px);opacity:0}100%{transform:translateY(0);opacity:0}}
+.ing-frase{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;margin:0;padding:0 8%;
+  text-align:center;font-family:'Manrope',sans-serif;font-weight:800;letter-spacing:-.03em;
+  font-size:clamp(1.6rem,4.2vw,3.4rem);line-height:1.1;color:#1A2A6C;opacity:0;pointer-events:none;will-change:transform,opacity,filter}
+.ing-salta{position:absolute;top:clamp(1rem,3vh,1.6rem);right:clamp(1rem,3vw,2rem);z-index:3;
+  display:inline-flex;align-items:center;gap:.45rem;min-height:40px;padding:0 1rem;border-radius:100px;
+  background:rgba(8,11,20,.55);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  color:#F2F4F8;font:500 .8rem 'DM Sans',sans-serif;text-decoration:none;transition:opacity .3s,background .2s}
+.ing-salta:hover{background:rgba(8,11,20,.8)}
+.ing-salta:focus-visible{outline:2px solid #4DD9E0;outline-offset:3px}
+.ing-ia{position:absolute;right:clamp(1rem,3vw,2rem);bottom:clamp(1rem,2.6vh,1.4rem);z-index:3;
+  padding:.28rem .6rem;border-radius:100px;background:rgba(8,11,20,.6);border:1px solid rgba(255,255,255,.14);
+  color:#C3CAD8;font:400 .625rem/1.2 'DM Sans',sans-serif;letter-spacing:.05em;pointer-events:none}
+.ing-barra{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(255,255,255,.12);z-index:3}
+.ing-barra i{display:block;height:100%;background:linear-gradient(90deg,#6C63FF,#4DD9E0);transform:scaleX(0);transform-origin:left}
+.ing-uscita{position:absolute;inset:0;background:#080B14;opacity:0;pointer-events:none;z-index:4}
+/* mentre si e' nell'ingresso, menu e musica si fanno da parte */
+nav,.music-toggle{transition:opacity .4s ease}
+body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:none}
+@media (max-width:700px){
+  .ingresso{height:400vh}
+  .ing-velo{background:linear-gradient(180deg,rgba(5,7,13,.45),rgba(5,7,13,.15) 40%,rgba(5,7,13,.15) 60%,rgba(5,7,13,.6))}
+  .ing-marchio{top:auto;bottom:24vh;transform:none}
+  /* su telefono due righe pulite: il puntino diventa un a capo */
+  .ing-sotto span{display:block;height:0;overflow:hidden;margin:0}
+}
+@media (prefers-reduced-motion:reduce){.ing-mouse::after{animation:none}}
+</style>
+
+<section class="ingresso" id="ingresso" aria-label="Ingresso nel sito">
+  <div class="ing-fisso">
+    <canvas class="ing-tela" id="ingTela" aria-hidden="true"></canvas>
+    <div class="ing-velo" aria-hidden="true"></div>
+    <div class="ing-marchio" id="ingMarchio">
+      <img class="ing-icona" src="img/logo-intro.webp?v=2" alt="" width="244" height="244">
+      <div class="ing-nome" role="img" aria-label="FUTURE AI">FUTURE<span>AI</span></div>
+      <div class="ing-sotto">Automazioni AI per aziende <span aria-hidden="true">·</span> Siti web moderni</div>
+    </div>
+    <p class="ing-frase" id="ingFrase">Benvenuto nel futuro<br>della tua azienda.</p>
+    <div class="ing-invito" id="ingInvito"><span class="ing-mouse" aria-hidden="true"></span>Scorri per entrare</div>
+    <a class="ing-salta" id="ingSalta" href="#hero">Salta intro <span aria-hidden="true">↓</span></a>
+    <span class="ing-ia">Video generato con IA</span>
+    <div class="ing-uscita" id="ingUscita" aria-hidden="true"></div>
+    <div class="ing-barra" aria-hidden="true"><i id="ingBarra"></i></div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var sez=document.getElementById('ingresso'); if(!sez)return;
+  var tela=document.getElementById('ingTela'), ctx=tela.getContext('2d');
+  var marchio=document.getElementById('ingMarchio'), frase=document.getElementById('ingFrase');
+  var invito=document.getElementById('ingInvito'), barra=document.getElementById('ingBarra');
+  var uscita=document.getElementById('ingUscita'), salta=document.getElementById('ingSalta');
+  var N=240, img=new Array(N), pronto=new Array(N);
+  var cartella=innerHeight>innerWidth?'intro-m/':'intro-d/';
+  // risparmio dati attivo: un fotogramma su due basta
+  var leggero=!!(navigator.connection&&navigator.connection.saveData);
+  var fermo=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Caricamento a passate: prima il primo fotogramma, poi uno ogni 8,
+  // poi i buchi. Chi scorre subito vede comunque qualcosa di vicino.
+  var ordine=[0], visto={0:1};
+  (leggero?[8,4,2]:[8,4,2,1]).forEach(function(p){for(var i=0;i<N;i+=p)if(!visto[i]){visto[i]=1;ordine.push(i);}});
+  var attivi=0,pos=0;
+  function prossimo(){
+    // chi e' gia' dentro al sito non scarica il resto dell'ingresso
+    if(!visibile&&avanzamento()>=1)return;
+    while(attivi<6&&pos<ordine.length){
+      (function(i){attivi++;var im=new Image();im.decoding='async';
+        im.onload=function(){pronto[i]=true;attivi--;if(i===0||Math.abs(i-fatto)<3)disegna(true);prossimo();};
+        im.onerror=function(){attivi--;prossimo();};
+        im.src=cartella+String(i).padStart(3,'0')+'.webp';img[i]=im;})(ordine[pos++]);
+    }
+  }
+  prossimo();
+
+  function vicino(i){for(var d=0;d<N;d++){if(i-d>=0&&pronto[i-d])return i-d;if(i+d<N&&pronto[i+d])return i+d;}return -1;}
+
+  var W=0,H=0;
+  // si ridisegna solo se il riquadro cambia davvero: su telefono la barra
+  // del browser che compare e sparisce manda resize a ogni scroll
+  function misura(){var dpr=Math.min(window.devicePixelRatio||1,2),w=tela.clientWidth,h=tela.clientHeight;
+    if(w===W&&h===H&&tela.width)return; W=w;H=h;
+    tela.width=Math.round(W*dpr);tela.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';disegna(true);}
+  var fatto=-1;
+  function disegna(forza){
+    var i=vicino(Math.round(att*(N-1)*1));
+    if(i<0||(!forza&&i===fatto))return; fatto=i;
+    var im=img[i],s=Math.max(W/im.naturalWidth,H/im.naturalHeight),w=im.naturalWidth*s,h=im.naturalHeight*s;
+    ctx.drawImage(im,(W-w)/2,(H-h)/2,w,h);
+  }
+
+  function lim(v,a,b){return Math.min(b,Math.max(a,v));}
+  function avanzamento(){var r=sez.getBoundingClientRect(),corsa=r.height-innerHeight;return corsa>0?lim(-r.top/corsa,0,1):0;}
+  // il video occupa l'88% della corsa; nell'ultimo tratto il bianco si scioglie nel sito
+  var FINE_VIDEO=.9;
+  var obiettivo=avanzamento(), att=lim(obiettivo/FINE_VIDEO,0,1), prog=obiettivo, raf=0, visibile=true;
+
+  function applica(){
+    var v=lim(prog/FINE_VIDEO,0,1);
+    att=v; disegna(false);
+    tela.style.transform='scale('+(1+v*.06)+')';
+    var m=1-lim(prog/.28,0,1);
+    marchio.style.opacity=m;
+    marchio.style.filter='blur('+((1-m)*10)+'px)';
+    marchio.style.transform=(innerWidth>700?'translateY(-50%) ':'')+'translateY('+((1-m)*-28)+'px) scale('+(.96+m*.04)+')';
+    invito.style.opacity=prog>.015?0:1;
+    var f=lim((prog-.76)/.07,0,1)*(1-lim((prog-.9)/.05,0,1));
+    frase.style.opacity=f;
+    frase.style.filter='blur('+((1-f)*8)+'px)';
+    frase.style.transform='translateY('+((1-f)*18)+'px)';
+    uscita.style.opacity=lim((prog-.93)/.06,0,1);
+    salta.style.opacity=prog>.97?0:1;
+    barra.style.transform='scaleX('+prog+')';
+  }
+  function giro(){
+    raf=0; obiettivo=avanzamento();
+    // quando lo schermo dell'ingresso comincia a uscire, niente rincorsa:
+    // deve essere gia' scuro, anche con uno scroll velocissimo
+    var esce=sez.getBoundingClientRect().bottom<innerHeight+1;
+    prog+= (fermo||esce) ? (obiettivo-prog) : (obiettivo-prog)*.12;
+    if(Math.abs(obiettivo-prog)<.0005)prog=obiettivo;
+    applica();
+    if(visibile&&prog!==obiettivo)raf=requestAnimationFrame(giro);
+  }
+  function sveglia(){if(!raf&&visibile)raf=requestAnimationFrame(giro);}
+  addEventListener('scroll',sveglia,{passive:true});
+  addEventListener('resize',function(){misura();sveglia();});
+
+  // fuori schermo non si calcola niente; menu e musica tornano quando si esce
+  new IntersectionObserver(function(es){
+    visibile=es[0].isIntersecting;
+    document.body.classList.toggle('in-ingresso',visibile&&avanzamento()<.97);
+    if(visibile){sveglia();prossimo();}
+  }).observe(sez);
+  addEventListener('scroll',function(){document.body.classList.toggle('in-ingresso',visibile&&avanzamento()<.97);},{passive:true});
+
+  // salto secco: il sito ha scroll-behavior:smooth e un gestore che rende
+  // morbidi tutti i link #, che qui farebbero ripassare tutto il video
+  salta.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();
+    var y=sez.getBoundingClientRect().bottom+scrollY; prog=obiettivo=1; applica(); window.scrollTo({top:y,behavior:'instant'});});
+
+  misura(); applica();
+})();
+</script>
+
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
@@ -1728,7 +1911,7 @@ nav{background:rgba(8,11,20,0.94);}
 </div>
 
 <!-- HERO -->
-<div class="hero">
+<div class="hero" id="hero">
   <video class="hero-bg" data-src="hero-bg.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
   <div class="hero-bg-velo" aria-hidden="true"></div>
   <canvas id="heroNeuro" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
@@ -2375,7 +2558,7 @@ nav{background:rgba(8,11,20,0.94);}
   <p class="footer-legale">FUTURE AI di Sidoni Manuel · P.IVA 04923480166 · <a href="/privacy/">Privacy</a> · <a href="#" id="apriCookie">Cookie</a></p>
   <p class="footer-trasparenza">
     <strong>Trasparenza IA</strong> — Sono generati con intelligenza artificiale:
-    il video nella sezione iniziale, le clip di «Siti Web» e «Prenotazioni Online», l'animazione
+    il video d'ingresso, il video nella sezione iniziale, le clip di «Siti Web» e «Prenotazioni Online», l'animazione
     nel telefono della sezione Siti Web e la musica di sottofondo. Le altre riprese sono video
     d'archivio di Pexels.
     FUTURE AI progetta e fornisce sistemi di intelligenza artificiale nel rispetto del
