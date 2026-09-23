@@ -363,7 +363,13 @@ function disegnaBandiera(B){var x=B.x,y=B.y;if(x<cam-40||x>cam+W+10)return;g.fil
   var su=B.presa?0:30,ond=Math.sin(t*.12);var gr=g.createLinearGradient(x+2,0,x+30,0);gr.addColorStop(0,'#6C63FF');gr.addColorStop(1,'#4DD9E0');g.fillStyle=gr;
   for(var i=0;i<26;i++){var dy=Math.round(Math.sin(t*.12+i*.3)*1.5);g.fillRect(x+2+i,y-56+su+dy,1,18);}
   g.fillStyle='#fff';g.fillRect(x+11,y-51+su,8,7);g.fillRect(x+10,y-50+su,10,5);g.fillStyle='#6C63FF';g.fillRect(x+15,y-51+su,1,7);}
-function cuori(){for(var i=0;i<3;i++)g.drawImage(i<p.vite?CUORE:CUOREV,6+i*9,8);}
+// le vite sono il logo FUTURE AI: pieno se c'e', grigio e trasparente se persa
+var VITA=null,VITAV=null;
+function preparaVite(){if(VITA||!logo.complete||!logo.naturalWidth)return;var n=11*S;
+  var [a,x]=tela(n,n);x.imageSmoothingEnabled=true;x.imageSmoothingQuality='high';x.drawImage(logo,0,0,n,n);VITA=a;
+  var [b,y]=tela(n,n);y.imageSmoothingEnabled=true;y.imageSmoothingQuality='high';y.globalAlpha=.28;y.filter='grayscale(1)';y.drawImage(logo,0,0,n,n);VITAV=b;}
+function cuori(){preparaVite();for(var i=0;i<3;i++){var ic=i<p.vite?VITA:VITAV;
+  if(ic)g.drawImage(ic,6+i*13,5,11,11);else g.drawImage(i<p.vite?CUORE:CUOREV,6+i*9,8);}}
 function testo(s,x,y,sz,col,al){g.font='700 '+sz+'px "Space Mono",monospace';g.textAlign=al||'left';g.fillStyle='#000';g.fillText(s,x+1,y+1);g.fillStyle=col;g.fillText(s,x,y);}
 
 function disegna(){
@@ -404,7 +410,7 @@ function disegna(){
   fuochi.forEach(function(f){g.fillStyle=f.c;g.fillRect(Math.round(f.x),Math.round(f.y),2,3);});
   g.restore();
   // interfaccia
-  cuori();testo(String(punti).padStart(6,'0'),W/2,14,7,'#fff','center');testo('◈ '+raccolti+'/'+CHIP.length,6,26,6,'#ffd23f');
+  cuori();testo(String(punti).padStart(6,'0'),W/2,14,7,'#fff','center');testo('◈ '+raccolti+'/'+CHIP.length,6,27,6,'#ffd23f');
   if(boss&&boss.ingresso<=0&&boss.hp>0){testo('CRASH.EXE',W/2,30,7,'#ff3b5c','center');g.fillStyle='#160f22';g.fillRect(30,34,W-60,5);
     g.fillStyle='#ff3b5c';g.fillRect(31,35,(W-62)*boss.hp/boss.max,3);}
   if(boss&&boss.ingresso>0&&t%30<20)testo('⚠ BOSS ⚠',W/2,Math.round(H*.3),9,'#ff3b5c','center');
