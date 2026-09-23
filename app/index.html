@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<base href="/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>App e gestionali su misura – FutureAI</title>
+<meta name="description" content="Webapp, gestionali, CRM e portali clienti su misura, costruiti con l'intelligenza artificiale attorno al tuo modo di lavorare.">
+<link rel="canonical" href="https://www.futureai.it/app/">
+<link href="/fonts/fonts.css" rel="stylesheet">
+<link href="/stile.css" rel="stylesheet">
+<script src="/vendor/email.min.js"></script>
+<script src="/vendor/gsap.min.js"></script>
+<script src="/vendor/ScrollTrigger.min.js"></script>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="grid-bg"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo"></a>
+  <div class="nav-destra">
+    <a href="/contatti/" class="nav-cta">Richiedi Preventivo</a>
+    <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuSchermo">
+      <span class="menu-btn-testo"><span>Menu</span><span>Chiudi</span></span>
+      <span class="menu-btn-icona" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MENU A TUTTO SCHERMO -->
+<div class="menu-schermo" id="menuSchermo" data-nav="closed" aria-hidden="true">
+  <div class="menu-velo" id="menuVelo"></div>
+  <nav class="menu-pannello" aria-label="Menu principale">
+    <div class="menu-fondo" aria-hidden="true">
+      <span class="menu-strato prima"></span>
+      <span class="menu-strato seconda"></span>
+      <span class="menu-strato terza"></span>
+      <div class="menu-forme"><svg class="forma forma-1" viewBox="0 0 400 400" fill="none" aria-hidden="true"><circle class="forma-el" cx="80" cy="120" r="42" fill="rgba(123,92,245,0.20)"/><circle class="forma-el" cx="300" cy="80" r="62" fill="rgba(0,212,255,0.14)"/><circle class="forma-el" cx="200" cy="300" r="84" fill="rgba(255,110,199,0.11)"/><circle class="forma-el" cx="350" cy="285" r="30" fill="rgba(123,92,245,0.18)"/></svg><svg class="forma forma-2" viewBox="0 0 400 400" fill="none" aria-hidden="true"><path class="forma-el" d="M0 200 Q100 100 200 200 T400 200" stroke="rgba(123,92,245,0.22)" stroke-width="62" fill="none"/><path class="forma-el" d="M0 285 Q100 185 200 285 T400 285" stroke="rgba(0,212,255,0.16)" stroke-width="42" fill="none"/></svg><svg class="forma forma-3" viewBox="0 0 400 400" fill="none" aria-hidden="true"><circle class="forma-el" cx="55" cy="60" r="8" fill="rgba(123,92,245,0.30)"/><circle class="forma-el" cx="155" cy="60" r="8" fill="rgba(0,212,255,0.28)"/><circle class="forma-el" cx="255" cy="60" r="8" fill="rgba(255,110,199,0.26)"/><circle class="forma-el" cx="355" cy="60" r="8" fill="rgba(123,92,245,0.24)"/><circle class="forma-el" cx="55" cy="160" r="12" fill="rgba(123,92,245,0.30)"/><circle class="forma-el" cx="155" cy="160" r="12" fill="rgba(0,212,255,0.28)"/><circle class="forma-el" cx="255" cy="160" r="12" fill="rgba(255,110,199,0.26)"/><circle class="forma-el" cx="355" cy="160" r="12" fill="rgba(123,92,245,0.24)"/><circle class="forma-el" cx="55" cy="260" r="10" fill="rgba(123,92,245,0.30)"/><circle class="forma-el" cx="155" cy="260" r="10" fill="rgba(0,212,255,0.28)"/><circle class="forma-el" cx="255" cy="260" r="10" fill="rgba(255,110,199,0.26)"/><circle class="forma-el" cx="355" cy="260" r="10" fill="rgba(123,92,245,0.24)"/><circle class="forma-el" cx="55" cy="350" r="6" fill="rgba(123,92,245,0.30)"/><circle class="forma-el" cx="155" cy="350" r="6" fill="rgba(0,212,255,0.28)"/><circle class="forma-el" cx="255" cy="350" r="6" fill="rgba(255,110,199,0.26)"/><circle class="forma-el" cx="355" cy="350" r="6" fill="rgba(123,92,245,0.24)"/></svg><svg class="forma forma-4" viewBox="0 0 400 400" fill="none" aria-hidden="true"><line class="forma-el" x1="0" y1="100" x2="300" y2="400" stroke="rgba(123,92,245,0.18)" stroke-width="32"/><line class="forma-el" x1="100" y1="0" x2="400" y2="300" stroke="rgba(0,212,255,0.14)" stroke-width="26"/><line class="forma-el" x1="200" y1="0" x2="400" y2="200" stroke="rgba(255,110,199,0.12)" stroke-width="20"/></svg></div>
+    </div>
+    <div class="menu-dentro">
+      <ul class="menu-voci">
+      <li class="menu-voce" data-forma="1"><a href="/#menu" class="menu-link"><span class="menu-link-testo">Servizi</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="2"><a href="/lavori/" class="menu-link"><span class="menu-link-testo">I nostri lavori</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="3"><a href="/automazioni/#come-funziona" class="menu-link"><span class="menu-link-testo">Come Funziona</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce"><a href="/giochi/" class="menu-link"><span class="menu-link-testo">Giochi aziendali</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="4"><a href="/contatti/" class="menu-link"><span class="menu-link-testo">Contatti</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      </ul>
+      <div class="menu-piede" data-menu-fade>
+        <a href="mailto:futureai@libero.it">futureai@libero.it</a>
+        <span>Automazioni AI per Aziende</span>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<main>
+<header class="pg-testa">
+  <a class="pg-torna" href="/#menu"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Torna dal robot</a>
+  <div class="pg-tag">— App su misura</div>
+  <h1 class="pg-tit">Il tuo lavoro, <em>in un'app sola.</em></h1>
+  <p class="pg-sub">Gestionali, CRM e portali clienti costruiti attorno a come lavori tu: niente più fogli sparsi, tutto in un unico strumento da computer e da telefono.</p>
+</header>
+<style>
+#servizi .svz-intro{max-width:1180px;margin:0 auto}
+.svz-righe{max-width:1180px;margin:0 auto}
+.svz-riga{display:flex;align-items:center;justify-content:center;gap:clamp(2.5rem,6vw,5.5rem);padding:clamp(3rem,7vh,5rem) 0}
+.svz-riga--inv{flex-direction:row-reverse}
+.svz-testo{max-width:33rem;will-change:transform}
+.svz-num{font-family:'Space Mono',monospace;font-size:.78rem;letter-spacing:.18em;color:#4DD9E0;text-transform:uppercase}
+.svz-num span{color:var(--ink-muted,#8C97AD)}
+.svz-tit{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.02em;line-height:1.02;
+  font-size:clamp(2rem,3.8vw,3.1rem);margin:.8rem 0 0;color:var(--ink,#EDF1FA)}
+.svz-desc{color:rgba(237,241,250,.7);font-size:clamp(.98rem,1.2vw,1.08rem);line-height:1.7;margin:1.1rem 0 0;will-change:transform}
+.svz-punti{list-style:none;margin:1.2rem 0 0;padding:0;display:grid;gap:.55rem}
+.svz-punti li{display:flex;align-items:center;gap:.6rem;color:#EDF1FA;font-size:.95rem}
+.svz-punti svg{flex:none;color:#4DD9E0}
+.svz-cta{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.5rem;padding:.75rem 1.3rem;border-radius:100px;
+  border:1px solid rgba(155,127,248,.45);color:#EDF1FA;text-decoration:none;font-weight:500;font-size:.92rem;
+  background:rgba(123,92,245,.12);transition:background .2s,border-color .2s}
+.svz-cta:hover{background:rgba(123,92,245,.25);border-color:#9B7FF8}
+.svz-media{position:relative;flex:none;width:clamp(250px,27vw,350px);aspect-ratio:330/384;border-radius:22px;overflow:hidden;
+  background:#0D1220;box-shadow:0 30px 70px -25px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.08);
+  clip-path:inset(0 100% 0 0 round 22px);opacity:0;will-change:clip-path,opacity}
+.svz-media video{width:100%;height:100%;object-fit:cover;display:block}
+.svz-ia{position:absolute;right:.8rem;bottom:.8rem;padding:.28rem .6rem;border-radius:100px;background:rgba(8,11,20,.72);
+  border:1px solid rgba(255,255,255,.14);color:#C3CAD8;font-size:.625rem;line-height:1.2;letter-spacing:.05em;pointer-events:none}
+@media (max-width:820px){
+  .svz-riga,.svz-riga--inv{flex-direction:column;gap:1.4rem;padding:2.2rem 0}
+  /* su telefono la clip diventa una fascia orizzontale sopra il titolo:
+     in verticale e sotto il testo la sezione diventava lunghissima */
+  .svz-riga,.svz-riga--inv{align-items:stretch}
+  .svz-media{order:-1;width:100%;aspect-ratio:16/9;max-height:230px;border-radius:18px}
+  .svz-testo{max-width:34rem}
+}
+@media (prefers-reduced-motion:reduce){.svz-media{clip-path:none;opacity:1}}
+</style>
+<div class="section-wrap svz-pagina" id="servizi"><div class="svz-righe">
+<article class="svz-riga">
+      <div class="svz-testo">
+        <div class="svz-num">01 <span>— Su misura</span></div>
+        <h3 class="svz-tit">WebApp su Misura</h3>
+        <p class="svz-desc">Gestionali, CRM e portali clienti costruiti intorno a come lavori tu, non il contrario. Basta fogli Excel sparsi e programmi pensati per qualcun altro: un unico strumento, da computer e da telefono, con i dati al sicuro e un accesso per ogni persona del team. Il software è tuo, per sempre, e cresce insieme all'azienda.</p>
+        <ul class="svz-punti"><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Gestionali e CRM su misura</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Portali per i tuoi clienti</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Accessi per ruolo e dati protetti</li></ul>
+        <a class="svz-cta" href="/contatti/">Parlane con noi <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="svz-media">
+        <video src="clip-webapp.mp4" muted loop playsinline preload="none" aria-hidden="true" width="330" height="384"></video>
+      </div>
+    </article>
+</div></div>
+<script>
+(function(){
+  var righe=[].slice.call(document.querySelectorAll('.svz-riga')); if(!righe.length)return;
+  var fermo=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function lim(v){return Math.min(1,Math.max(0,v));}
+  var raf=0;
+  function giro(){
+    raf=0; var vh=innerHeight;
+    righe.forEach(function(r){
+      var b=r.getBoundingClientRect();
+      if(b.bottom<-vh||b.top>vh*2)return;
+      // come l'offset ["start end","center start"]: 0 quando la riga entra dal basso,
+      // 1 quando il suo centro arriva in cima allo schermo
+      var p=lim((vh-b.top)/(vh+b.height/2)), a=lim(p/(innerWidth>820?.7:.42));
+      var m=r.querySelector('.svz-media'), t=r.querySelector('.svz-testo'), d=r.querySelector('.svz-desc');
+      if(!fermo){
+        m.style.opacity=a;
+        m.style.clipPath='inset(0 '+((1-a)*100).toFixed(2)+'% 0 0 round 22px)';
+        // nel componente originale il paragrafo si spostava due volte e finiva
+        // sopra il titolo: qui ha solo un piccolo scarto in piu' per la profondita'
+        var amp=innerWidth>820?50:24;
+        t.style.transform='translateY('+((1-p)*-amp).toFixed(1)+'px)';
+        d.style.transform='translateY('+((1-p)*amp*.35).toFixed(1)+'px)';
+      }
+    });
+  }
+  function sveglia(){if(!raf)raf=requestAnimationFrame(giro);}
+  addEventListener('scroll',sveglia,{passive:true}); addEventListener('resize',sveglia); giro();
+  // le clip girano solo quando si vedono
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target; if(e.isIntersecting){if(v.preload!=='auto')v.preload='auto';var q=v.play();if(q&&q.catch)q.catch(function(){});}else v.pause();
+  });},{rootMargin:'200px 0px'});
+  righe.forEach(function(r){io.observe(r.querySelector('video'));});
+})();
+</script>
+<section class="pg-cta">
+  <h2>Ti piace? <em>Parliamone.</em></h2>
+  <p>La prima consulenza è gratuita: raccontaci cosa ti serve, ti diciamo come lo costruiremmo.</p>
+  <div class="azioni"><a href="/contatti/" class="btn-primary hero-btn"><span class="rotola"><span data-t="Richiedi un preventivo">Richiedi un preventivo</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a href="/#menu" class="btn-secondary hero-btn"><span class="rotola"><span data-t="Torna dal robot">Torna dal robot</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/" class="footer-logo">
+    <img src="img/92ff8bb4.webp" alt="FutureAI" onerror="this.style.display='none'">
+    <span>FUTUREAI</span>
+  </a>
+  <p>© 2026 FutureAI – Automazioni AI per Aziende</p>
+  <p>futureai@libero.it</p>
+  <p class="footer-legale">FUTURE AI di Sidoni Manuel · P.IVA 04923480166 · <a href="/privacy/">Privacy</a> · <a href="#" id="apriCookie">Cookie</a></p>
+  <p class="footer-trasparenza">
+    <strong>Trasparenza IA</strong> — Sono generati con intelligenza artificiale:
+    il video d'ingresso, il video nella sezione iniziale, le clip di «Siti Web» e «Prenotazioni Online», il video
+    dell'hamburger nella sezione Siti Web, la grafica del gioco FUTURE AI, il robot e la città del menu e la musica di sottofondo. Le altre riprese sono video
+    d'archivio di Pexels.
+    FUTURE AI progetta e fornisce sistemi di intelligenza artificiale nel rispetto del
+    Regolamento UE 2024/1689 (AI Act).
+  </p>
+</footer>
+
+<script>
+// Il vecchio hamburger non esiste piu': lo sostituisce il menu a tutto
+// schermo piu' in basso. closeMenu resta perche' e' ancora chiamata
+// dagli onclick di alcuni link, e senza darebbe ReferenceError.
+function closeMenu(){}
+
+// Custom cursor (desktop only)
+if (window.matchMedia('(hover: hover)').matches) {
+  const cur = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => {
+    mx=e.clientX; my=e.clientY;
+    cur.style.cssText += `;left:${mx-5}px;top:${my-5}px`;
+  });
+  (function anim(){
+    rx+=(mx-rx-16)*0.12; ry+=(my-ry-16)*0.12;
+    ring.style.cssText += `;left:${rx}px;top:${ry}px`;
+    requestAnimationFrame(anim);
+  })();
+  document.querySelectorAll('a,button,.service-card').forEach(el => {
+    el.addEventListener('mouseenter',()=>{cur.style.transform='scale(2.2)';ring.style.transform='scale(1.5)';});
+    el.addEventListener('mouseleave',()=>{cur.style.transform='scale(1)';ring.style.transform='scale(1)';});
+  });
+}
+
+// Scroll fade in
+const isMobile = window.innerWidth <= 768;
+if(isMobile){
+  document.querySelectorAll('.fade-in').forEach(el=>el.classList.add('visible'));
+} else {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e,i) => {
+      if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'), i*60);
+    });
+  }, {threshold:0.05, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+}
+
+// EmailJS init
+emailjs.init('OwJnmLJDM9NW0S1rk');
+
+// Form submit
+// Anti-spam a tempo: un modulo compilato in meno di 3 secondi e' un bot.
+// Niente honeypot nascosti: l'autofill del browser li compila e blocca le richieste vere.
+const formT0 = Date.now();
+(document.getElementById('contactForm')||{addEventListener:function(){}}).addEventListener('submit', function(e) {
+  e.preventDefault();
+  if (Date.now() - formT0 < 3000) {
+    document.getElementById('successMsg').style.display = 'block';
+    this.reset();
+    return;
+  }
+  const btn = this.querySelector('.btn-submit');
+  const successMsg = document.getElementById('successMsg');
+  const errorMsg = document.getElementById('errorMsg');
+  
+  btn.textContent = 'Invio in corso...';
+  btn.disabled = true;
+  successMsg.style.display = 'none';
+  errorMsg.style.display = 'none';
+
+  emailjs.sendForm('service_gemvayq', 'template_t3abbma', this)
+    .then(() => {
+      successMsg.style.display = 'block';
+      btn.textContent = 'Invia Richiesta Gratuita →';
+      btn.disabled = false;
+      this.reset();
+      successMsg.scrollIntoView({behavior:'smooth', block:'nearest'});
+    })
+    .catch((err) => {
+      console.error('Invio modulo non riuscito:', err && err.status);
+      errorMsg.style.display = 'block';
+      btn.textContent = 'Invia Richiesta Gratuita →';
+      btn.disabled = false;
+      errorMsg.scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
+});
+
+// Smooth scroll + close menu on nav links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+  });
+});
+
+
+
+// === HERO NEURO CANVAS ===
+(function(){const c=document.getElementById('heroNeuro');if(!c)return;const gl=c.getContext('webgl')||c.getContext('experimental-webgl');if(!gl)return;const vs='precision mediump float;attribute vec2 a_position;varying vec2 vUv;void main(){vUv=.5*(a_position+1.);gl_Position=vec4(a_position,0.0,1.0);}';const fs='precision mediump float;varying vec2 vUv;uniform float u_time;uniform float u_ratio;uniform vec2 u_pointer_position;uniform float u_scroll_progress;vec2 rotate(vec2 uv,float th){return mat2(cos(th),sin(th),-sin(th),cos(th))*uv;}float neuro_shape(vec2 uv,float t,float p){vec2 sine_acc=vec2(0.);vec2 res=vec2(0.);float scale=8.;for(int j=0;j<15;j++){uv=rotate(uv,1.);sine_acc=rotate(sine_acc,1.);vec2 layer=uv*scale+float(j)+sine_acc-t;sine_acc+=sin(layer)+2.4*p;res+=(.5+.5*cos(layer))/scale;scale*=(1.2);}return res.x+res.y;}void main(){vec2 uv=.5*vUv;uv.x*=u_ratio;vec2 pointer=vUv-u_pointer_position;pointer.x*=u_ratio;float p=clamp(length(pointer),0.,1.);p=.5*pow(1.-p,2.);float t=.001*u_time;float noise=neuro_shape(uv,t,p);noise=1.2*pow(noise,3.);noise+=pow(noise,10.);noise=max(.0,noise-.5);noise*=(1.-length(vUv-.5));vec3 color=vec3(0.5,0.15,0.65);color=mix(color,vec3(0.02,0.7,0.9),0.32+0.16*sin(2.0*u_scroll_progress+1.2));color+=vec3(0.15,0.0,0.6)*sin(2.0*u_scroll_progress+1.5);color=color*noise;gl_FragColor=vec4(color,noise);}';function mk(src,type){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;}const prog=gl.createProgram();gl.attachShader(prog,mk(vs,gl.VERTEX_SHADER));gl.attachShader(prog,mk(fs,gl.FRAGMENT_SHADER));gl.linkProgram(prog);gl.useProgram(prog);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE);const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);const loc=gl.getAttribLocation(prog,'a_position');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);const uT=gl.getUniformLocation(prog,'u_time'),uR=gl.getUniformLocation(prog,'u_ratio'),uP=gl.getUniformLocation(prog,'u_pointer_position'),uS=gl.getUniformLocation(prog,'u_scroll_progress');const ptr={x:.5,y:.5,tX:.5,tY:.5};function resize(){const dpr=Math.min(window.devicePixelRatio,2),rect=c.parentElement.getBoundingClientRect();c.width=rect.width*dpr;c.height=rect.height*dpr;gl.viewport(0,0,c.width,c.height);gl.uniform1f(uR,c.width/c.height);}resize();window.addEventListener('resize',resize);function render(){ptr.x+=(ptr.tX-ptr.x)*0.2;ptr.y+=(ptr.tY-ptr.y)*0.2;gl.uniform1f(uT,performance.now());gl.uniform2f(uP,ptr.x,1-ptr.y);gl.uniform1f(uS,window.pageYOffset/(2*window.innerHeight));gl.drawArrays(gl.TRIANGLE_STRIP,0,4);raf=requestAnimationFrame(render);}let raf=0;new IntersectionObserver(es=>{const on=es[0].isIntersecting;if(on&&!raf){raf=requestAnimationFrame(render);}else if(!on&&raf){cancelAnimationFrame(raf);raf=0;}}).observe(c);window.addEventListener('pointermove',function(e){const r=c.parentElement.getBoundingClientRect();ptr.tX=(e.clientX-r.left)/r.width;ptr.tY=(e.clientY-r.top)/r.height;});})();
+</script>
+
+<!-- MUSICA DI SOTTOFONDO -->
+<audio id="bgMusic" loop preload="none">
+  <source src="bg-music.mp3" type="audio/mpeg">
+</audio>
+<button id="musicToggle" class="music-toggle" type="button" aria-pressed="false" aria-label="Attiva la musica di sottofondo">
+  <span class="music-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+  <span class="music-label">Musica</span>
+</button>
+
+<script>
+(function(){
+  var audio = document.getElementById('bgMusic');
+  var btn   = document.getElementById('musicToggle');
+  if(!audio || !btn) return;
+
+  var VOLUME = 0.18;          // sottofondo: si sente, non copre
+  var KEY    = 'futureai-musica';
+  var fade;
+  // Lo stato sta qui, non in audio.paused: durante la dissolvenza in uscita
+  // l'audio suona ancora, e usarlo come stato rompe il doppio click.
+  var attiva = false;
+
+  function fadeTo(target, done){
+    clearInterval(fade);
+    var step = (target - audio.volume) / 18;
+    fade = setInterval(function(){
+      var v = audio.volume + step;
+      if((step > 0 && v >= target) || (step < 0 && v <= target)){
+        clearInterval(fade);
+        audio.volume = Math.min(1, Math.max(0, target));
+        if(done) done();
+      } else {
+        audio.volume = Math.min(1, Math.max(0, v));
+      }
+    }, 40);
+  }
+
+  function segna(attiva){
+    btn.classList.toggle('is-playing', attiva);
+    btn.setAttribute('aria-pressed', attiva ? 'true' : 'false');
+    btn.setAttribute('aria-label', attiva ? 'Disattiva la musica di sottofondo' : 'Attiva la musica di sottofondo');
+  }
+
+  function avvia(){
+    attiva = true;
+    if(audio.paused) audio.volume = 0;
+    var p = audio.play();
+    if(p && p.catch) p.catch(function(){ attiva = false; segna(false); });
+    segna(true);
+    fadeTo(VOLUME);
+  }
+
+  function ferma(){
+    attiva = false;
+    fadeTo(0, function(){ if(!attiva) audio.pause(); });
+    segna(false);
+  }
+
+  btn.addEventListener('click', function(){
+    if(attiva){
+      localStorage.setItem(KEY, 'off');
+      ferma();
+    } else {
+      localStorage.setItem(KEY, 'on');
+      avvia();
+    }
+  });
+
+  // I browser non lasciano partire l'audio da soli: si aspetta il primo gesto.
+  // Chi l'ha spenta una volta non se la ritrova accesa al ritorno.
+  if(localStorage.getItem(KEY) !== 'off'){
+    var primoGesto = function(e){
+      document.removeEventListener('pointerdown', primoGesto);
+      document.removeEventListener('keydown', primoGesto);
+      document.removeEventListener('touchstart', primoGesto);
+      // se il primo gesto è proprio sul pulsante, decide lui: non partire due volte
+      if(e && e.target && e.target.closest && e.target.closest('#musicToggle')) return;
+      if(!attiva) avvia();
+    };
+    document.addEventListener('pointerdown', primoGesto);
+    document.addEventListener('keydown', primoGesto);
+    document.addEventListener('touchstart', primoGesto);
+  }
+
+  // Se l'utente cambia scheda, la musica si mette in pausa per educazione.
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden){ if(!audio.paused) audio.pause(); }
+    else if(attiva && audio.paused){ audio.play().catch(function(){}); }
+  });
+})();
+</script>
+
+<!-- ===== MENU A TUTTO SCHERMO =====
+     GSAP 3.12.5 e' gia' caricato. Il plugin CustomEase no, e non lo aggiungo
+     per una curva sola: l'ease "0.65, 0.01, 0.05, 0.99" e' una cubic-bezier,
+     e GSAP accetta una funzione come ease — quindi la risolvo a mano con
+     Newton-Raphson invece di scaricare un altro script da CDN. -->
+<script>
+(function(){
+  var bottone = document.getElementById('menuBtn');
+  var schermo = document.getElementById('menuSchermo');
+  if(!bottone || !schermo || typeof gsap === 'undefined') return;
+
+  function bezier(x1,y1,x2,y2){
+    function ascissa(t){ return 3*(1-t)*(1-t)*t*x1 + 3*(1-t)*t*t*x2 + t*t*t; }
+    function ordinata(t){ return 3*(1-t)*(1-t)*t*y1 + 3*(1-t)*t*t*y2 + t*t*t; }
+    function derivata(t){
+      return 3*(1-t)*(1-t)*x1 + 6*(1-t)*t*(x2-x1) + 3*t*t*(1-x2);
+    }
+    return function(p){
+      if(p <= 0) return 0;
+      if(p >= 1) return 1;
+      var t = p;
+      for(var i=0;i<6;i++){
+        var d = derivata(t);
+        if(Math.abs(d) < 1e-6) break;
+        var scarto = ascissa(t) - p;
+        if(Math.abs(scarto) < 1e-6) break;
+        t -= scarto / d;
+      }
+      return ordinata(Math.max(0, Math.min(1, t)));
+    };
+  }
+  var curva = bezier(0.65, 0.01, 0.05, 0.99);
+
+  var velo    = schermo.querySelector('.menu-velo');
+  var strati  = schermo.querySelectorAll('.menu-strato');
+  var link    = schermo.querySelectorAll('.menu-link-testo');
+  var piede   = schermo.querySelectorAll('[data-menu-fade]');
+  var parole  = bottone.querySelectorAll('.menu-btn-testo span');
+  var righe   = bottone.querySelectorAll('.menu-btn-icona i');
+  var divisori= schermo.querySelectorAll('.menu-riga');
+  var voci    = schermo.querySelectorAll('.menu-voce[data-forma]');
+  var forme   = schermo.querySelector('.menu-forme');
+
+  var aperto = false, linea = null;
+
+  function apri(){
+    if(linea) linea.kill();
+    aperto = true;
+    schermo.setAttribute('data-nav','open');
+    schermo.setAttribute('aria-hidden','false');
+    bottone.setAttribute('aria-expanded','true');
+    document.body.style.overflow = 'hidden';
+
+    // il display va acceso PRIMA di costruire la timeline: xPercent si
+    // misura sulla larghezza dell'elemento, e con display:none il pannello
+    // non ha layout — GSAP finirebbe per calcolare il 101% sulla finestra
+    // intera invece che sui 560px del pannello.
+    schermo.style.display = 'block';
+    void schermo.offsetWidth;
+
+    linea = gsap.timeline({defaults:{ease:curva, duration:0.7}});
+    linea.fromTo(parole,{yPercent:0},{yPercent:-100, stagger:0.12},0)
+      .to(righe[0],{y:6.2,rotate:45,duration:0.45},0)
+      .to(righe[1],{autoAlpha:0,duration:0.25},0)
+      .to(righe[2],{y:-6.2,rotate:-45,duration:0.45},0)
+      .fromTo(velo,{autoAlpha:0},{autoAlpha:1},0)
+      .fromTo(strati,{xPercent:101},{xPercent:0, stagger:0.11, duration:0.58},0)
+      .fromTo(link,{yPercent:140,rotate:8},{yPercent:0,rotate:0,stagger:0.05},0.34)
+      .fromTo(divisori,{scaleX:0},{scaleX:1,stagger:0.06,duration:0.5},0.46)
+      .fromTo(piede,{autoAlpha:0,yPercent:50},{autoAlpha:1,yPercent:0,stagger:0.04,clearProps:'all'},0.55);
+  }
+
+  function chiudi(){
+    if(linea) linea.kill();
+    aperto = false;
+    schermo.setAttribute('data-nav','closed');
+    schermo.setAttribute('aria-hidden','true');
+    bottone.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
+
+    linea = gsap.timeline({defaults:{ease:curva, duration:0.55}});
+    linea.to(velo,{autoAlpha:0},0)
+      .to(strati,{xPercent:110, stagger:0.05},0)
+      .to(parole,{yPercent:0},0)
+      .to(righe,{y:0,rotate:0,autoAlpha:1,duration:0.35},0)
+      .to(divisori,{scaleX:0,duration:0.3},0)
+      .call(function(){ schermo.style.display = 'none'; });
+  }
+
+  bottone.addEventListener('click', function(){ aperto ? chiudi() : apri(); });
+  velo.addEventListener('click', chiudi);
+  schermo.querySelectorAll('.menu-link').forEach(function(a){
+    a.addEventListener('click', chiudi);   // e' un'ancora interna: il pannello deve sparire
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && aperto) chiudi();
+  });
+
+  // le forme dietro le voci: una alla volta, quella della voce puntata
+  voci.forEach(function(voce){
+    var forma = forme ? forme.querySelector('.forma-' + voce.getAttribute('data-forma')) : null;
+    if(!forma) return;
+    var pezzi = forma.querySelectorAll('.forma-el');
+    voce.addEventListener('mouseenter', function(){
+      forme.querySelectorAll('.forma').forEach(function(f){ f.classList.remove('attiva'); });
+      forma.classList.add('attiva');
+      gsap.fromTo(forma,{autoAlpha:0},{autoAlpha:1,duration:0.3,overwrite:'auto'});
+      gsap.fromTo(pezzi,
+        {scale:0.5,opacity:0,rotate:-10,transformOrigin:'50% 50%'},
+        {scale:1,opacity:1,rotate:0,duration:0.6,stagger:0.08,ease:'back.out(1.7)',overwrite:'auto'});
+    });
+    voce.addEventListener('mouseleave', function(){
+      gsap.to(pezzi,{scale:0.8,opacity:0,duration:0.3,ease:'power2.in',overwrite:'auto',
+        onComplete:function(){ forma.classList.remove('attiva'); }});
+    });
+  });
+})();
+</script>
+
+<!-- Sfondi video decorativi (hero e sezione del globo).
+     Il src non e' nel markup ma in data-src: sotto i 901px il file non
+     parte proprio, cosi' la connessione mobile non paga megabyte di
+     decoro. In pausa fuori schermo e a scheda nascosta. -->
+<script>
+(function(){
+  var video = Array.prototype.slice.call(document.querySelectorAll('video[data-src]'));
+  if(!video.length) return;
+
+  var mqGrande = window.matchMedia('(min-width:901px)');
+  var mqMoto   = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var hero     = document.querySelector('.hero');
+
+  // il video della hero (i droni che montano il logo) va una volta sola e resta sul logo:
+  // rientrando nello schermo non deve ripartire da capo
+  function parti(v){ if(v.hasAttribute('data-una-volta') && v.ended) return; var p = v.play(); if(p && p.catch) p.catch(function(){}); }
+
+  // niente remove(): l'elemento resta e il video si aggancia solo quando
+  // serve, cosi' chi ruota il tablet in orizzontale lo ottiene lo stesso.
+  // Finche' il src non viene messo, non parte nessuna richiesta di rete.
+  function valuta(){
+    var attivo = mqGrande.matches && !mqMoto.matches;
+    video.forEach(function(v){
+      if(!attivo){ v.pause(); v.style.display='none'; return; }
+      v.style.display='';
+      if(!v.getAttribute('src')) v.setAttribute('src', v.getAttribute('data-src'));
+      parti(v);
+    });
+    // il canvas neurale si spegne solo quando il video della hero c'e' davvero
+    if(hero) hero.classList.toggle('con-video', attivo && !!document.querySelector('.hero-bg'));
+  }
+  valuta();
+  (mqGrande.addEventListener ? mqGrande.addEventListener('change',valuta) : mqGrande.addListener(valuta));
+  (mqMoto.addEventListener   ? mqMoto.addEventListener('change',valuta)   : mqMoto.addListener(valuta));
+
+  if(typeof IntersectionObserver !== 'undefined'){
+    var io = new IntersectionObserver(function(voci){
+      voci.forEach(function(x){
+        if(x.target.style.display === 'none') return;
+        x.isIntersecting ? parti(x.target) : x.target.pause();
+      });
+    },{threshold:0.05});
+    video.forEach(function(v){ io.observe(v); });
+  }
+  document.addEventListener('visibilitychange',function(){
+    video.forEach(function(v){
+      if(v.style.display === 'none') return;
+      document.hidden ? v.pause() : parti(v);
+    });
+  });
+})();
+</script>
+
+<!-- ============================================================
+     RIQUADRO COOKIE — dal kit GDPR di FUTURE AI.
+     Non blocca la pagina (niente cookie wall). Le statistiche di Vercel
+     partono SOLO dopo "Accetto". La scelta resta in localStorage e si
+     riapre dal link "Cookie" nel piè di pagina.
+     ============================================================ -->
+<style>
+.cookie{position:fixed;z-index:9000;left:1rem;right:1rem;bottom:1rem;max-width:25rem;margin-inline:auto;
+  background:#111827;color:#EDF1FA;border-radius:16px;padding:1.15rem 1.3rem 1.3rem;
+  box-shadow:0 24px 60px -18px rgba(0,0,0,.7),0 0 0 1px rgba(155,127,248,.22);
+  font-family:'DM Sans',sans-serif;
+  transform:translateY(calc(100% + 2rem));opacity:0;transition:transform .55s cubic-bezier(.22,1,.36,1),opacity .4s}
+.cookie.su{transform:none;opacity:1}
+.cookie[hidden]{display:none}
+@media (min-width:760px){.cookie{left:1.5rem;right:auto;bottom:1.5rem;margin:0}}
+.cookie::before{content:"";display:block;width:2.2rem;height:3px;border-radius:3px;background:linear-gradient(90deg,#6C63FF,#4DD9E0);margin-bottom:.9rem}
+.cookie__tit{font-family:'Manrope',sans-serif;font-weight:800;font-size:1.15rem;letter-spacing:-.02em;line-height:1.15;margin:0 0 .45rem}
+.cookie__testo{font-size:.88rem;line-height:1.55;color:#AEB7CA;margin:0}
+.cookie__testo a{color:#C4B5FD}
+.cookie__az{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+.cookie__btn{flex:1 1 auto;min-height:44px;padding:.6rem 1.15rem;border-radius:999px;border:1px solid transparent;
+  background:linear-gradient(90deg,#6C63FF,#4DD9E0);color:#fff;font:600 .9rem/1 'DM Sans',sans-serif;cursor:pointer}
+.cookie__btn--no{background:transparent;border-color:rgba(255,255,255,.22);color:#EDF1FA}
+.cookie__btn:focus-visible{outline:2px solid #4DD9E0;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.cookie{transition:none}}
+/* piè di pagina legale e casella del modulo */
+.footer-legale{font-size:.78rem}
+.footer-legale a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.form-presa{display:flex;gap:.6rem;align-items:flex-start;margin:.2rem 0 1rem;font-size:.82rem;line-height:1.45;color:var(--ink-muted,#8C97AD);cursor:pointer}
+.form-presa input{margin-top:.15rem;width:1.05rem;height:1.05rem;flex:none;accent-color:#7B5CF5}
+.form-presa a{color:#C4B5FD}
+</style>
+
+<div class="cookie" id="cookie" role="dialog" aria-labelledby="cookieTit" aria-describedby="cookieTesto" hidden>
+  <p class="cookie__tit" id="cookieTit">Due parole sui cookie.</p>
+  <p class="cookie__testo" id="cookieTesto">Il sito usa solo memoria tecnica per funzionare. Se accetti, contiamo anche le visite in forma anonima e aggregata: nessun profilo, nessuna pubblicità. Puoi cambiare idea quando vuoi dal link «Cookie» in fondo alla pagina. <a href="/privacy/#cookie">Come trattiamo i dati</a></p>
+  <div class="cookie__az">
+    <button class="cookie__btn" id="cookieSi" type="button">Accetto</button>
+    <button class="cookie__btn cookie__btn--no" id="cookieNo" type="button">Solo necessari</button>
+  </div>
+</div>
+
+<script>
+/* Vercel Web Analytics (versione per siti statici): lo script arriva
+   dall'endpoint di Vercel e funziona solo sul dominio pubblicato
+   (in locale da' 404, e' atteso). Parte solo dopo il consenso. */
+window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__statsAvviate=true;
+  window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};
+  var s=document.createElement('script'); s.defer=true; s.src='/_vercel/insights/script.js'; document.body.appendChild(s);
+};
+(function(){
+  var K='futureai-cookie', b=document.getElementById('cookie'); if(!b)return;
+  function letto(){try{return localStorage.getItem(K)}catch(e){return null}}
+  function salva(v){try{localStorage.setItem(K,v)}catch(e){}}
+  function mostra(){b.hidden=false;requestAnimationFrame(function(){requestAnimationFrame(function(){b.classList.add('su')})});}
+  function chiudi(){b.classList.remove('su');setTimeout(function(){b.hidden=true},450)}
+  document.getElementById('cookieSi').addEventListener('click',function(){salva('tutti');chiudi();window.avviaStatistiche();});
+  document.getElementById('cookieNo').addEventListener('click',function(){
+    var prima=letto(); salva('necessari'); chiudi();
+    /* chi ritira il consenso: si ricarica per spegnere lo script gia' avviato */
+    if(prima==='tutti'&&window.__statsAvviate)setTimeout(function(){location.reload()},500);
+  });
+  var s=letto();
+  if(s==='tutti'){window.avviaStatistiche();}
+  else if(s!=='necessari'){setTimeout(mostra,1100);}
+  var ap=document.getElementById('apriCookie');
+  if(ap)ap.addEventListener('click',function(e){e.preventDefault();mostra();});
+})();
+</script>
+
+</body>
+</html>

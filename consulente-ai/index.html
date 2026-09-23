@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<base href="/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Consulente AI aziendale addestrato sui tuoi documenti – FutureAI</title>
+<meta name="description" content="Un assistente di intelligenza artificiale addestrato sui documenti della tua azienda, disponibile 24 ore su 24 per tutto il team.">
+<link rel="canonical" href="https://www.futureai.it/consulente-ai/">
+<link href="/fonts/fonts.css" rel="stylesheet">
+<link href="/stile.css" rel="stylesheet">
+<script src="/vendor/email.min.js"></script>
+<script src="/vendor/gsap.min.js"></script>
+<script src="/vendor/ScrollTrigger.min.js"></script>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="grid-bg"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo"></a>
+  <div class="nav-destra">
+    <a href="/contatti/" class="nav-cta">Richiedi Preventivo</a>
+    <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuSchermo">
+      <span class="menu-btn-testo"><span>Menu</span><span>Chiudi</span></span>
+      <span class="menu-btn-icona" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MENU A TUTTO SCHERMO -->
+<div class="menu-schermo" id="menuSchermo" data-nav="closed" aria-hidden="true">
+  <div class="menu-velo" id="menuVelo"></div>
+  <nav class="menu-pannello" aria-label="Menu principale">
+    <div class="menu-fondo" aria-hidden="true">
+      <span class="menu-strato prima"></span>
+      <span class="menu-strato seconda"></span>
+      <span class="menu-strato terza"></span>
+      <div class="menu-forme"><svg class="forma forma-1" viewBox="0 0 400 400" fill="none" aria-hidden="true"><circle class="forma-el" cx="80" cy="120" r="42" fill="rgba(123,92,245,0.20)"/><circle class="forma-el" cx="300" cy="80" r="62" fill="rgba(0,212,255,0.14)"/><circle class="forma-el" cx="200" cy="300" r="84" fill="rgba(255,110,199,0.11)"/><circle class="forma-el" cx="350" cy="285" r="30" fill="rgba(123,92,245,0.18)"/></svg><svg class="forma forma-2" viewBox="0 0 400 400" fill="none" aria-hidden="true"><path class="forma-el" d="M0 200 Q100 100 200 200 T400 200" stroke="rgba(123,92,245,0.22)" stroke-width="62" fill="none"/><path class="forma-el" d="M0 285 Q100 185 200 285 T400 285" stroke="rgba(0,212,255,0.16)" stroke-width="42" fill="none"/></svg><svg class="forma forma-3" viewBox="0 0 400 400" fill="none" aria-hidden="true"><circle class="forma-el" cx="55" cy="60" r="8" fill="rgba(123,92,245,0.30)"/><circle class="forma-el" cx="155" cy="60" r="8" fill="rgba(0,212,255,0.28)"/><circle class="forma-el" cx="255" cy="60" r="8" fill="rgba(255,110,199,0.26)"/><circle class="forma-el" cx="355" cy="60" r="8" fill="rgba(123,92,245,0.24)"/><circle class="forma-el" cx="55" cy="160" r="12" fill="rgba(123,92,245,0.30)"/><circle class="forma-el" cx="155" cy="160" r="12" fill="rgba(0,212,255,0.28)"/><circle class="forma-el" cx="255" cy="160" r="12" fill="rgba(255,110,199,0.26)"/><circle class="forma-el" cx="355" cy="160" r="12" fill="rgba(123,92,245,0.24)"/><circle class="forma-el" cx="55" cy="260" r="10" fill="rgba(123,92,245,0.30)"/><circle class="forma-el" cx="155" cy="260" r="10" fill="rgba(0,212,255,0.28)"/><circle class="forma-el" cx="255" cy="260" r="10" fill="rgba(255,110,199,0.26)"/><circle class="forma-el" cx="355" cy="260" r="10" fill="rgba(123,92,245,0.24)"/><circle class="forma-el" cx="55" cy="350" r="6" fill="rgba(123,92,245,0.30)"/><circle class="forma-el" cx="155" cy="350" r="6" fill="rgba(0,212,255,0.28)"/><circle class="forma-el" cx="255" cy="350" r="6" fill="rgba(255,110,199,0.26)"/><circle class="forma-el" cx="355" cy="350" r="6" fill="rgba(123,92,245,0.24)"/></svg><svg class="forma forma-4" viewBox="0 0 400 400" fill="none" aria-hidden="true"><line class="forma-el" x1="0" y1="100" x2="300" y2="400" stroke="rgba(123,92,245,0.18)" stroke-width="32"/><line class="forma-el" x1="100" y1="0" x2="400" y2="300" stroke="rgba(0,212,255,0.14)" stroke-width="26"/><line class="forma-el" x1="200" y1="0" x2="400" y2="200" stroke="rgba(255,110,199,0.12)" stroke-width="20"/></svg></div>
+    </div>
+    <div class="menu-dentro">
+      <ul class="menu-voci">
+      <li class="menu-voce" data-forma="1"><a href="/#menu" class="menu-link"><span class="menu-link-testo">Servizi</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="2"><a href="/lavori/" class="menu-link"><span class="menu-link-testo">I nostri lavori</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="3"><a href="/automazioni/#come-funziona" class="menu-link"><span class="menu-link-testo">Come Funziona</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce"><a href="/giochi/" class="menu-link"><span class="menu-link-testo">Giochi aziendali</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="4"><a href="/contatti/" class="menu-link"><span class="menu-link-testo">Contatti</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      </ul>
+      <div class="menu-piede" data-menu-fade>
+        <a href="mailto:futureai@libero.it">futureai@libero.it</a>
+        <span>Automazioni AI per Aziende</span>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<main>
+<header class="pg-testa">
+  <a class="pg-torna" href="/#menu"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Torna dal robot</a>
+  <div class="pg-tag">— Consulente AI</div>
+  <h1 class="pg-tit">Un esperto in più, <em>sempre acceso.</em></h1>
+  <p class="pg-sub">Un assistente AI che conosce i tuoi manuali, le tue procedure e i tuoi listini, e risponde al tuo team in pochi secondi, a qualsiasi ora.</p>
+</header>
+<style>
+#servizi .svz-intro{max-width:1180px;margin:0 auto}
+.svz-righe{max-width:1180px;margin:0 auto}
+.svz-riga{display:flex;align-items:center;justify-content:center;gap:clamp(2.5rem,6vw,5.5rem);padding:clamp(3rem,7vh,5rem) 0}
+.svz-riga--inv{flex-direction:row-reverse}
+.svz-testo{max-width:33rem;will-change:transform}
+.svz-num{font-family:'Space Mono',monospace;font-size:.78rem;letter-spacing:.18em;color:#4DD9E0;text-transform:uppercase}
+.svz-num span{color:var(--ink-muted,#8C97AD)}
+.svz-tit{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.02em;line-height:1.02;
+  font-size:clamp(2rem,3.8vw,3.1rem);margin:.8rem 0 0;color:var(--ink,#EDF1FA)}
+.svz-desc{color:rgba(237,241,250,.7);font-size:clamp(.98rem,1.2vw,1.08rem);line-height:1.7;margin:1.1rem 0 0;will-change:transform}
+.svz-punti{list-style:none;margin:1.2rem 0 0;padding:0;display:grid;gap:.55rem}
+.svz-punti li{display:flex;align-items:center;gap:.6rem;color:#EDF1FA;font-size:.95rem}
+.svz-punti svg{flex:none;color:#4DD9E0}
+.svz-cta{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.5rem;padding:.75rem 1.3rem;border-radius:100px;
+  border:1px solid rgba(155,127,248,.45);color:#EDF1FA;text-decoration:none;font-weight:500;font-size:.92rem;
+  background:rgba(123,92,245,.12);transition:background .2s,border-color .2s}
+.svz-cta:hover{background:rgba(123,92,245,.25);border-color:#9B7FF8}
+.svz-media{position:relative;flex:none;width:clamp(250px,27vw,350px);aspect-ratio:330/384;border-radius:22px;overflow:hidden;
+  background:#0D1220;box-shadow:0 30px 70px -25px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.08);
+  clip-path:inset(0 100% 0 0 round 22px);opacity:0;will-change:clip-path,opacity}
+.svz-media video{width:100%;height:100%;object-fit:cover;display:block}
+.svz-ia{position:absolute;right:.8rem;bottom:.8rem;padding:.28rem .6rem;border-radius:100px;background:rgba(8,11,20,.72);
+  border:1px solid rgba(255,255,255,.14);color:#C3CAD8;font-size:.625rem;line-height:1.2;letter-spacing:.05em;pointer-events:none}
+@media (max-width:820px){
+  .svz-riga,.svz-riga--inv{flex-direction:column;gap:1.4rem;padding:2.2rem 0}
+  /* su telefono la clip diventa una fascia orizzontale sopra il titolo:
+     in verticale e sotto il testo la sezione diventava lunghissima */
+  .svz-riga,.svz-riga--inv{align-items:stretch}
+  .svz-media{order:-1;width:100%;aspect-ratio:16/9;max-height:230px;border-radius:18px}
+  .svz-testo{max-width:34rem}
+}
+@media (prefers-reduced-motion:reduce){.svz-media{clip-path:none;opacity:1}}
+</style>
+<div class="section-wrap svz-pagina" id="servizi"><div class="svz-righe">
+<article class="svz-riga">
+      <div class="svz-testo">
+        <div class="svz-num">03 <span>— Servizio flagship</span></div>
+        <h3 class="svz-tit">Consulente AI Aziendale</h3>
+        <p class="svz-desc">Un assistente AI addestrato sui tuoi documenti: manuali, procedure, schede tecniche, listini. Il tuo team fa una domanda e riceve in pochi secondi la risposta giusta, presa dai vostri materiali e non da internet. È disponibile a qualsiasi ora e fa risparmiare ore di ricerche e di domande ai colleghi.</p>
+        <ul class="svz-punti"><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Addestrato sui tuoi documenti</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Risposte in pochi secondi</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Disponibile 24/7 per tutto il team</li></ul>
+        <a class="svz-cta" href="/contatti/">Parlane con noi <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="svz-media">
+        <video src="clip-consulente.mp4" muted loop playsinline preload="none" aria-hidden="true" width="330" height="384"></video>
+      </div>
+    </article>
+</div></div>
+<script>
+(function(){
+  var righe=[].slice.call(document.querySelectorAll('.svz-riga')); if(!righe.length)return;
+  var fermo=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function lim(v){return Math.min(1,Math.max(0,v));}
+  var raf=0;
+  function giro(){
+    raf=0; var vh=innerHeight;
+    righe.forEach(function(r){
+      var b=r.getBoundingClientRect();
+      if(b.bottom<-vh||b.top>vh*2)return;
+      // come l'offset ["start end","center start"]: 0 quando la riga entra dal basso,
+      // 1 quando il suo centro arriva in cima allo schermo
+      var p=lim((vh-b.top)/(vh+b.height/2)), a=lim(p/(innerWidth>820?.7:.42));
+      var m=r.querySelector('.svz-media'), t=r.querySelector('.svz-testo'), d=r.querySelector('.svz-desc');
+      if(!fermo){
+        m.style.opacity=a;
+        m.style.clipPath='inset(0 '+((1-a)*100).toFixed(2)+'% 0 0 round 22px)';
+        // nel componente originale il paragrafo si spostava due volte e finiva
+        // sopra il titolo: qui ha solo un piccolo scarto in piu' per la profondita'
+        var amp=innerWidth>820?50:24;
+        t.style.transform='translateY('+((1-p)*-amp).toFixed(1)+'px)';
+        d.style.transform='translateY('+((1-p)*amp*.35).toFixed(1)+'px)';
+      }
+    });
+  }
+  function sveglia(){if(!raf)raf=requestAnimationFrame(giro);}
+  addEventListener('scroll',sveglia,{passive:true}); addEventListener('resize',sveglia); giro();
+  // le clip girano solo quando si vedono
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target; if(e.isIntersecting){if(v.preload!=='auto')v.preload='auto';var q=v.play();if(q&&q.catch)q.catch(function(){});}else v.pause();
+  });},{rootMargin:'200px 0px'});
+  righe.forEach(function(r){io.observe(r.querySelector('video'));});
+})();
+</script>
+<!-- STATS -->
+<div class="stats-wrap fade-in">
+  <div class="stats">
+    <div class="stat-item">
+      <div class="stat-number">-30%</div>
+      <div class="stat-label">Riduzione costi operativi</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">24/7</div>
+      <div class="stat-label">Operatività continua</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">+40%</div>
+      <div class="stat-label">Aumento produttività</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">3 gg</div>
+      <div class="stat-label">Tempo medio di setup</div>
+    </div>
+  </div>
+</div>
+
+<!-- SPLINE HERO -->
+<style>
+.spline-section{
+  position:relative;z-index:2;
+  padding:0 1.5rem 4rem;
+  max-width:1100px;margin:0 auto;
+}
+.spline-card{
+  background:linear-gradient(145deg,rgba(13,18,32,0.97),rgba(8,11,20,0.99));
+  border:1px solid rgba(123,92,245,0.28);
+  border-radius:28px;overflow:hidden;
+  position:relative;
+  min-height:500px;
+  box-shadow:0 0 100px rgba(123,92,245,0.07);
+}
+.spline-card-orb{
+  position:absolute;pointer-events:none;z-index:0;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(123,92,245,0.13) 0%,rgba(0,212,255,0.05) 45%,transparent 70%);
+  transform:translate(-50%,-50%);
+  opacity:0;transition:opacity 0.5s ease;
+}
+.spline-layout{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:500px;position:relative;z-index:1;
+}
+.spline-left{
+  padding:3.5rem 3rem;
+  display:flex;flex-direction:column;justify-content:center;gap:1.4rem;
+}
+.spline-left .section-sub{margin-bottom:0;}
+.spline-tag-row{display:flex;align-items:center;gap:0.7rem;}
+.spline-badge{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);
+  color:var(--cyan);padding:0.3rem 0.8rem;border-radius:100px;
+  font-size:0.72rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;
+}
+.spline-badge-dot{
+  width:6px;height:6px;background:var(--cyan);border-radius:50%;
+  animation:splinePulse 2s infinite;
+}
+@keyframes splinePulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.35;transform:scale(0.65);}}
+.spline-stats{
+  display:flex;gap:2rem;padding:1.2rem 0;
+  border-top:1px solid rgba(123,92,245,0.12);
+  border-bottom:1px solid rgba(123,92,245,0.12);
+}
+.spline-stat-n{
+  font-family:'Manrope',sans-serif;font-size:1.6rem;font-weight:800;
+  background:linear-gradient(135deg,var(--violet-light),var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;
+}
+.spline-stat-l{color:var(--muted);font-size:0.78rem;margin-top:0.2rem;line-height:1.3;}
+.spline-right{
+  position:relative;overflow:hidden;
+  background:radial-gradient(ellipse at 60% 50%,rgba(123,92,245,0.08) 0%,transparent 65%);
+  border-left:1px solid rgba(123,92,245,0.1);
+  min-height:500px;
+}
+.spline-right spline-viewer{
+  width:100%;height:100%;
+  position:absolute;inset:0;
+}
+.spline-loader{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:1rem;z-index:2;pointer-events:none;
+  transition:opacity 0.6s ease;
+}
+.spline-loader-ring{
+  width:40px;height:40px;border-radius:50%;
+  border:2px solid rgba(123,92,245,0.15);
+  border-top-color:var(--violet);
+  animation:spinRing 0.9s linear infinite;
+}
+@keyframes spinRing{to{transform:rotate(360deg);}}
+.spline-loader-txt{font-size:0.75rem;color:var(--muted);letter-spacing:0.05em;}
+
+/* Hide Spline watermark */
+.spline-right::after{
+  content:'';position:absolute;
+  bottom:0;left:0;
+  width:220px;height:56px;
+  background:linear-gradient(to right, #080b14 70%, transparent 100%);
+  z-index:10;pointer-events:none;
+}
+
+@media(max-width:900px){
+  .spline-layout{grid-template-columns:1fr;}
+  .spline-left{padding:2.5rem 1.5rem 1.5rem;}
+  .spline-right{
+    border-left:none;border-top:1px solid rgba(123,92,245,0.1);
+    min-height:320px;height:320px;position:relative;
+  }
+  .spline-stats{gap:1.2rem;}
+}
+@media(max-width:480px){
+  .spline-right{min-height:260px;height:260px;}
+  .spline-stats{flex-wrap:wrap;gap:1rem;}
+}
+</style>
+
+<div class="spline-section fade-in">
+  <div class="spline-card" id="splineCard">
+    <div class="spline-card-orb" id="splineOrb"></div>
+    <div class="spline-layout">
+
+      <div class="spline-left">
+        <div class="spline-tag-row">
+          <div class="section-tag" style="margin-bottom:0">— Intelligenza Artificiale</div>
+          <div class="spline-badge"><span class="spline-badge-dot"></span>Attivo ora</div>
+        </div>
+        <h2 class="section-title" style="margin-bottom:0">Il tuo business,<br><span class="gradient-text">potenziato dall'AI</span></h2>
+        <p class="section-sub">Agenti intelligenti che lavorano per te — analizzano dati, automatizzano processi e rispondono ai tuoi clienti. Tutto in tempo reale, 24 ore su 24.</p>
+        <div class="spline-stats">
+          <div>
+            <div class="spline-stat-n">-30%</div>
+            <div class="spline-stat-l">Costi operativi</div>
+          </div>
+          <div>
+            <div class="spline-stat-n">3 gg</div>
+            <div class="spline-stat-l">Tempo di setup</div>
+          </div>
+          <div>
+            <div class="spline-stat-n">24/7</div>
+            <div class="spline-stat-l">Operatività</div>
+          </div>
+        </div>
+        <a href="/contatti/" class="btn-primary" style="align-self:flex-start">
+          Parla con noi gratis
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="spline-right" id="splineRight">
+        <div class="spline-loader" id="splineLoader">
+          <div class="spline-loader-ring"></div>
+          <span class="spline-loader-txt">Caricamento scena 3D...</span>
+        </div>
+        <spline-viewer
+          url="/vendor/spline/scene.splinecode"
+          events-target="local"
+          id="splineViewer"
+        ></spline-viewer>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// Spotlight orb
+(function(){
+  const card=document.getElementById('splineCard'),orb=document.getElementById('splineOrb');
+  if(!card||!orb)return;
+  card.addEventListener('mouseenter',()=>{orb.style.opacity='1';});
+  card.addEventListener('mouseleave',()=>{orb.style.opacity='0';});
+  card.addEventListener('mousemove',(e)=>{
+    const r=card.getBoundingClientRect();
+    orb.style.left=(e.clientX-r.left)+'px';
+    orb.style.top=(e.clientY-r.top)+'px';
+  });
+})();
+
+// Hide loader when Spline is ready
+(function(){
+  const viewer=document.getElementById('splineViewer');
+  const loader=document.getElementById('splineLoader');
+  if(!viewer||!loader)return;
+  // il viewer annuncia la fine con 'load-complete', non con 'load'
+  viewer.addEventListener('load-complete',()=>{
+    loader.style.opacity='0';
+    setTimeout(()=>loader.style.display='none',600);
+  });
+  // Script caricato solo quando la sezione si avvicina (prima era all'apertura del sito)
+  let caricato=false;
+  function carica(){
+    if(caricato)return;caricato=true;
+    const s=document.createElement('script');s.type='module';
+    s.src='/vendor/spline/spline-viewer.js';
+    document.head.appendChild(s);
+    // Fallback: hide after 8s regardless
+    setTimeout(()=>{loader.style.opacity='0';},8000);
+  }
+  if(!('IntersectionObserver' in window)){carica();return;}
+  new IntersectionObserver((es,o)=>{if(es.some(e=>e.isIntersecting)){carica();o.disconnect();}},{rootMargin:'600px 0px'}).observe(viewer);
+  // Una volta caricata, la scena disegnava 60 volte al secondo anche fuori schermo: la mettiamo in pausa
+  new IntersectionObserver(es=>{
+    const app=viewer._spline;if(!app||!app.stop)return;
+    es[0].isIntersecting?app.play():app.stop();
+  }).observe(viewer);
+  viewer.addEventListener('load-complete',()=>{
+    const r=viewer.getBoundingClientRect();
+    if(r.bottom<0||r.top>innerHeight)viewer._spline&&viewer._spline.stop&&viewer._spline.stop();
+  });
+})();
+
+// === WORLD AI GLOBE ===
+(function(){function initGlobe(){const canvas=document.getElementById('waiGlobe');if(!canvas)return;const rotY={v:0.4},rotX={v:0.3};let drag={active:false,startX:0,startY:0,startRotY:0,startRotX:0},time=0;const dots=[],numDots=1200,golden=(1+Math.sqrt(5))/2;for(let i=0;i<numDots;i++){const theta=2*Math.PI*i/golden,phi=Math.acos(1-2*(i+0.5)/numDots);dots.push([Math.cos(theta)*Math.sin(phi),Math.cos(phi),Math.sin(theta)*Math.sin(phi)]);}const markers=[{lat:37.78,lng:-122.42,label:'San Francisco'},{lat:51.51,lng:-0.13,label:'London'},{lat:35.68,lng:139.69,label:'Tokyo'},{lat:-33.87,lng:151.21,label:'Sydney'},{lat:1.35,lng:103.82,label:'Singapore'},{lat:55.76,lng:37.62,label:'Moscow'},{lat:-23.55,lng:-46.63,label:'São Paulo'},{lat:28.61,lng:77.21,label:'Delhi'}];const connections=[{from:[37.78,-122.42],to:[51.51,-0.13]},{from:[51.51,-0.13],to:[35.68,139.69]},{from:[35.68,139.69],to:[-33.87,151.21]},{from:[37.78,-122.42],to:[1.35,103.82]},{from:[51.51,-0.13],to:[28.61,77.21]},{from:[37.78,-122.42],to:[-23.55,-46.63]},{from:[1.35,103.82],to:[-33.87,151.21]}];function llXYZ(lat,lng,r){const phi=(90-lat)*Math.PI/180,theta=(lng+180)*Math.PI/180;return[-(r*Math.sin(phi)*Math.cos(theta)),r*Math.cos(phi),r*Math.sin(phi)*Math.sin(theta)];}function rX(x,y,z,a){const c=Math.cos(a),s=Math.sin(a);return[x,y*c-z*s,y*s+z*c];}function rY(x,y,z,a){const c=Math.cos(a),s=Math.sin(a);return[x*c+z*s,y,-x*s+z*c];}function pr(x,y,z,cx,cy,fov){const sc=fov/(fov+z);return[x*sc+cx,y*sc+cy,z];}const ctx=canvas.getContext('2d');let visibile=false,raf=0;function draw(){raf=0;if(!visibile)return;const dpr=Math.min(window.devicePixelRatio||1,2),w=canvas.clientWidth,h=canvas.clientHeight;if(canvas.width!==Math.round(w*dpr)||canvas.height!==Math.round(h*dpr)){canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);}ctx.setTransform(dpr,0,0,dpr,0,0);const cx=w/2,cy=h/2,radius=Math.min(w,h)*0.38,fov=600;if(!drag.active)rotY.v+=0.002;time+=0.015;ctx.clearRect(0,0,w,h);const g=ctx.createRadialGradient(cx,cy,radius*0.8,cx,cy,radius*1.5);g.addColorStop(0,'rgba(91,63,214,0.10)');g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);ctx.beginPath();ctx.arc(cx,cy,radius,0,Math.PI*2);ctx.strokeStyle='rgba(20,19,27,0.22)';ctx.lineWidth=1;ctx.stroke();const ry=rotY.v,rx=rotX.v;for(let i=0;i<dots.length;i++){let[x,y,z]=dots[i];x*=radius;y*=radius;z*=radius;[x,y,z]=rX(x,y,z,rx);[x,y,z]=rY(x,y,z,ry);if(z>0)continue;const[sx,sy]=pr(x,y,z,cx,cy,fov);const al=Math.max(0.1,1-(z+radius)/(2*radius));ctx.beginPath();ctx.arc(sx,sy,1+al*0.8,0,Math.PI*2);ctx.fillStyle=`rgba(37,52,92,${al.toFixed(2)})`;ctx.fill();}for(const conn of connections){let[x1,y1,z1]=llXYZ(conn.from[0],conn.from[1],radius);let[x2,y2,z2]=llXYZ(conn.to[0],conn.to[1],radius);[x1,y1,z1]=rX(x1,y1,z1,rx);[x1,y1,z1]=rY(x1,y1,z1,ry);[x2,y2,z2]=rX(x2,y2,z2,rx);[x2,y2,z2]=rY(x2,y2,z2,ry);if(z1>radius*0.3&&z2>radius*0.3)continue;const[sx1,sy1]=pr(x1,y1,z1,cx,cy,fov);const[sx2,sy2]=pr(x2,y2,z2,cx,cy,fov);const mx=(x1+x2)/2,my=(y1+y2)/2,mz=(z1+z2)/2,ml=Math.sqrt(mx*mx+my*my+mz*mz),ah=radius*1.25;const[scx,scy]=pr((mx/ml)*ah,(my/ml)*ah,(mz/ml)*ah,cx,cy,fov);ctx.beginPath();ctx.moveTo(sx1,sy1);ctx.quadraticCurveTo(scx,scy,sx2,sy2);ctx.strokeStyle='rgba(74,50,180,0.88)';ctx.lineWidth=1.2;ctx.stroke();const t=(Math.sin(time*1.2+conn.from[0]*0.1)+1)/2;const tx=(1-t)*(1-t)*sx1+2*(1-t)*t*scx+t*t*sx2,ty=(1-t)*(1-t)*sy1+2*(1-t)*t*scy+t*t*sy2;ctx.beginPath();ctx.arc(tx,ty,2,0,Math.PI*2);ctx.fillStyle='rgba(0,138,168,1)';ctx.fill();}for(const m of markers){let[x,y,z]=llXYZ(m.lat,m.lng,radius);[x,y,z]=rX(x,y,z,rx);[x,y,z]=rY(x,y,z,ry);if(z>radius*0.1)continue;const[sx,sy]=pr(x,y,z,cx,cy,fov);const pulse=Math.sin(time*2+m.lat)*0.5+0.5;ctx.beginPath();ctx.arc(sx,sy,4+pulse*4,0,Math.PI*2);ctx.strokeStyle=`rgba(0,138,168,${(0.35+pulse*0.25).toFixed(2)})`;ctx.lineWidth=1;ctx.stroke();ctx.beginPath();ctx.arc(sx,sy,2.5,0,Math.PI*2);ctx.fillStyle='rgba(0,138,168,1)';ctx.fill();if(m.label){ctx.font='10px Manrope,sans-serif';ctx.fillStyle='rgba(20,19,27,0.72)';ctx.fillText(m.label,sx+8,sy+3);}}raf=requestAnimationFrame(draw);}new IntersectionObserver(es=>{visibile=es[0].isIntersecting;if(visibile&&!raf)raf=requestAnimationFrame(draw);}).observe(canvas);canvas.addEventListener('pointerdown',e=>{drag={active:true,startX:e.clientX,startY:e.clientY,startRotY:rotY.v,startRotX:rotX.v};canvas.setPointerCapture(e.pointerId);});canvas.addEventListener('pointermove',e=>{if(!drag.active)return;rotY.v=drag.startRotY+(e.clientX-drag.startX)*0.005;rotX.v=Math.max(-1,Math.min(1,drag.startRotX+(e.clientY-drag.startY)*0.005));});canvas.addEventListener('pointerup',()=>{drag.active=false;});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',()=>setTimeout(initGlobe,100));}else{setTimeout(initGlobe,100);}})();
+</script>
+
+<!-- WORLD AI -->
+<div class="world-ai-section fade-in" id="world-ai">
+  <div class="wai-grid">
+  <div class="wai-testo">
+    <div class="section-tag">— Il Mondo si sta Adeguando</div>
+    <h2 class="section-title">L'AI avanza ogni giorno.<br><span class="gradient-text">Chi si ferma, resta indietro.</span></h2>
+    <p class="section-sub">Dalle PMI alle multinazionali, migliaia di aziende nel mondo stanno già integrando l'intelligenza artificiale. Non è più innovazione — è la nuova normalità competitiva. La domanda non è se adeguarsi, ma quando.</p>
+    <div class="wai-stats">
+    <div class="wai-stat"><span class="wai-num">78%</span><span class="wai-label">delle aziende usa l'AI in almeno una funzione</span></div>
+    <div class="wai-stat"><span class="wai-num">89%</span><span class="wai-label">delle piccole imprese usa strumenti AI ogni giorno</span></div>
+    <div class="wai-stat"><span class="wai-num">71%</span><span class="wai-label">usa già l'AI generativa nelle operazioni</span></div>
+  </div>
+  </div>
+  <div class="wai-globe-wrap">
+    <canvas id="waiGlobe" class="wai-globe-canvas"></canvas>
+    <span class="wai-hint">trascina per ruotare</span>
+  </div>
+  </div>
+</div>
+
+<section class="pg-cta">
+  <h2>Ti piace? <em>Parliamone.</em></h2>
+  <p>La prima consulenza è gratuita: raccontaci cosa ti serve, ti diciamo come lo costruiremmo.</p>
+  <div class="azioni"><a href="/contatti/" class="btn-primary hero-btn"><span class="rotola"><span data-t="Richiedi un preventivo">Richiedi un preventivo</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a href="/#menu" class="btn-secondary hero-btn"><span class="rotola"><span data-t="Torna dal robot">Torna dal robot</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/" class="footer-logo">
+    <img src="img/92ff8bb4.webp" alt="FutureAI" onerror="this.style.display='none'">
+    <span>FUTUREAI</span>
+  </a>
+  <p>© 2026 FutureAI – Automazioni AI per Aziende</p>
+  <p>futureai@libero.it</p>
+  <p class="footer-legale">FUTURE AI di Sidoni Manuel · P.IVA 04923480166 · <a href="/privacy/">Privacy</a> · <a href="#" id="apriCookie">Cookie</a></p>
+  <p class="footer-trasparenza">
+    <strong>Trasparenza IA</strong> — Sono generati con intelligenza artificiale:
+    il video d'ingresso, il video nella sezione iniziale, le clip di «Siti Web» e «Prenotazioni Online», il video
+    dell'hamburger nella sezione Siti Web, la grafica del gioco FUTURE AI, il robot e la città del menu e la musica di sottofondo. Le altre riprese sono video
+    d'archivio di Pexels.
+    FUTURE AI progetta e fornisce sistemi di intelligenza artificiale nel rispetto del
+    Regolamento UE 2024/1689 (AI Act).
+  </p>
+</footer>
+
+<script>
+// Il vecchio hamburger non esiste piu': lo sostituisce il menu a tutto
+// schermo piu' in basso. closeMenu resta perche' e' ancora chiamata
+// dagli onclick di alcuni link, e senza darebbe ReferenceError.
+function closeMenu(){}
+
+// Custom cursor (desktop only)
+if (window.matchMedia('(hover: hover)').matches) {
+  const cur = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => {
+    mx=e.clientX; my=e.clientY;
+    cur.style.cssText += `;left:${mx-5}px;top:${my-5}px`;
+  });
+  (function anim(){
+    rx+=(mx-rx-16)*0.12; ry+=(my-ry-16)*0.12;
+    ring.style.cssText += `;left:${rx}px;top:${ry}px`;
+    requestAnimationFrame(anim);
+  })();
+  document.querySelectorAll('a,button,.service-card').forEach(el => {
+    el.addEventListener('mouseenter',()=>{cur.style.transform='scale(2.2)';ring.style.transform='scale(1.5)';});
+    el.addEventListener('mouseleave',()=>{cur.style.transform='scale(1)';ring.style.transform='scale(1)';});
+  });
+}
+
+// Scroll fade in
+const isMobile = window.innerWidth <= 768;
+if(isMobile){
+  document.querySelectorAll('.fade-in').forEach(el=>el.classList.add('visible'));
+} else {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e,i) => {
+      if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'), i*60);
+    });
+  }, {threshold:0.05, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+}
+
+// EmailJS init
+emailjs.init('OwJnmLJDM9NW0S1rk');
+
+// Form submit
+// Anti-spam a tempo: un modulo compilato in meno di 3 secondi e' un bot.
+// Niente honeypot nascosti: l'autofill del browser li compila e blocca le richieste vere.
+const formT0 = Date.now();
+(document.getElementById('contactForm')||{addEventListener:function(){}}).addEventListener('submit', function(e) {
+  e.preventDefault();
+  if (Date.now() - formT0 < 3000) {
+    document.getElementById('successMsg').style.display = 'block';
+    this.reset();
+    return;
+  }
+  const btn = this.querySelector('.btn-submit');
+  const successMsg = document.getElementById('successMsg');
+  const errorMsg = document.getElementById('errorMsg');
+  
+  btn.textContent = 'Invio in corso...';
+  btn.disabled = true;
+  successMsg.style.display = 'none';
+  errorMsg.style.display = 'none';
+
+  emailjs.sendForm('service_gemvayq', 'template_t3abbma', this)
+    .then(() => {
+      successMsg.style.display = 'block';
+      btn.textContent = 'Invia Richiesta Gratuita →';
+      btn.disabled = false;
+      this.reset();
+      successMsg.scrollIntoView({behavior:'smooth', block:'nearest'});
+    })
+    .catch((err) => {
+      console.error('Invio modulo non riuscito:', err && err.status);
+      errorMsg.style.display = 'block';
+      btn.textContent = 'Invia Richiesta Gratuita →';
+      btn.disabled = false;
+      errorMsg.scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
+});
+
+// Smooth scroll + close menu on nav links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+  });
+});
+
+
+
+// === HERO NEURO CANVAS ===
+(function(){const c=document.getElementById('heroNeuro');if(!c)return;const gl=c.getContext('webgl')||c.getContext('experimental-webgl');if(!gl)return;const vs='precision mediump float;attribute vec2 a_position;varying vec2 vUv;void main(){vUv=.5*(a_position+1.);gl_Position=vec4(a_position,0.0,1.0);}';const fs='precision mediump float;varying vec2 vUv;uniform float u_time;uniform float u_ratio;uniform vec2 u_pointer_position;uniform float u_scroll_progress;vec2 rotate(vec2 uv,float th){return mat2(cos(th),sin(th),-sin(th),cos(th))*uv;}float neuro_shape(vec2 uv,float t,float p){vec2 sine_acc=vec2(0.);vec2 res=vec2(0.);float scale=8.;for(int j=0;j<15;j++){uv=rotate(uv,1.);sine_acc=rotate(sine_acc,1.);vec2 layer=uv*scale+float(j)+sine_acc-t;sine_acc+=sin(layer)+2.4*p;res+=(.5+.5*cos(layer))/scale;scale*=(1.2);}return res.x+res.y;}void main(){vec2 uv=.5*vUv;uv.x*=u_ratio;vec2 pointer=vUv-u_pointer_position;pointer.x*=u_ratio;float p=clamp(length(pointer),0.,1.);p=.5*pow(1.-p,2.);float t=.001*u_time;float noise=neuro_shape(uv,t,p);noise=1.2*pow(noise,3.);noise+=pow(noise,10.);noise=max(.0,noise-.5);noise*=(1.-length(vUv-.5));vec3 color=vec3(0.5,0.15,0.65);color=mix(color,vec3(0.02,0.7,0.9),0.32+0.16*sin(2.0*u_scroll_progress+1.2));color+=vec3(0.15,0.0,0.6)*sin(2.0*u_scroll_progress+1.5);color=color*noise;gl_FragColor=vec4(color,noise);}';function mk(src,type){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;}const prog=gl.createProgram();gl.attachShader(prog,mk(vs,gl.VERTEX_SHADER));gl.attachShader(prog,mk(fs,gl.FRAGMENT_SHADER));gl.linkProgram(prog);gl.useProgram(prog);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE);const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);const loc=gl.getAttribLocation(prog,'a_position');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);const uT=gl.getUniformLocation(prog,'u_time'),uR=gl.getUniformLocation(prog,'u_ratio'),uP=gl.getUniformLocation(prog,'u_pointer_position'),uS=gl.getUniformLocation(prog,'u_scroll_progress');const ptr={x:.5,y:.5,tX:.5,tY:.5};function resize(){const dpr=Math.min(window.devicePixelRatio,2),rect=c.parentElement.getBoundingClientRect();c.width=rect.width*dpr;c.height=rect.height*dpr;gl.viewport(0,0,c.width,c.height);gl.uniform1f(uR,c.width/c.height);}resize();window.addEventListener('resize',resize);function render(){ptr.x+=(ptr.tX-ptr.x)*0.2;ptr.y+=(ptr.tY-ptr.y)*0.2;gl.uniform1f(uT,performance.now());gl.uniform2f(uP,ptr.x,1-ptr.y);gl.uniform1f(uS,window.pageYOffset/(2*window.innerHeight));gl.drawArrays(gl.TRIANGLE_STRIP,0,4);raf=requestAnimationFrame(render);}let raf=0;new IntersectionObserver(es=>{const on=es[0].isIntersecting;if(on&&!raf){raf=requestAnimationFrame(render);}else if(!on&&raf){cancelAnimationFrame(raf);raf=0;}}).observe(c);window.addEventListener('pointermove',function(e){const r=c.parentElement.getBoundingClientRect();ptr.tX=(e.clientX-r.left)/r.width;ptr.tY=(e.clientY-r.top)/r.height;});})();
+</script>
+
+<!-- MUSICA DI SOTTOFONDO -->
+<audio id="bgMusic" loop preload="none">
+  <source src="bg-music.mp3" type="audio/mpeg">
+</audio>
+<button id="musicToggle" class="music-toggle" type="button" aria-pressed="false" aria-label="Attiva la musica di sottofondo">
+  <span class="music-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+  <span class="music-label">Musica</span>
+</button>
+
+<script>
+(function(){
+  var audio = document.getElementById('bgMusic');
+  var btn   = document.getElementById('musicToggle');
+  if(!audio || !btn) return;
+
+  var VOLUME = 0.18;          // sottofondo: si sente, non copre
+  var KEY    = 'futureai-musica';
+  var fade;
+  // Lo stato sta qui, non in audio.paused: durante la dissolvenza in uscita
+  // l'audio suona ancora, e usarlo come stato rompe il doppio click.
+  var attiva = false;
+
+  function fadeTo(target, done){
+    clearInterval(fade);
+    var step = (target - audio.volume) / 18;
+    fade = setInterval(function(){
+      var v = audio.volume + step;
+      if((step > 0 && v >= target) || (step < 0 && v <= target)){
+        clearInterval(fade);
+        audio.volume = Math.min(1, Math.max(0, target));
+        if(done) done();
+      } else {
+        audio.volume = Math.min(1, Math.max(0, v));
+      }
+    }, 40);
+  }
+
+  function segna(attiva){
+    btn.classList.toggle('is-playing', attiva);
+    btn.setAttribute('aria-pressed', attiva ? 'true' : 'false');
+    btn.setAttribute('aria-label', attiva ? 'Disattiva la musica di sottofondo' : 'Attiva la musica di sottofondo');
+  }
+
+  function avvia(){
+    attiva = true;
+    if(audio.paused) audio.volume = 0;
+    var p = audio.play();
+    if(p && p.catch) p.catch(function(){ attiva = false; segna(false); });
+    segna(true);
+    fadeTo(VOLUME);
+  }
+
+  function ferma(){
+    attiva = false;
+    fadeTo(0, function(){ if(!attiva) audio.pause(); });
+    segna(false);
+  }
+
+  btn.addEventListener('click', function(){
+    if(attiva){
+      localStorage.setItem(KEY, 'off');
+      ferma();
+    } else {
+      localStorage.setItem(KEY, 'on');
+      avvia();
+    }
+  });
+
+  // I browser non lasciano partire l'audio da soli: si aspetta il primo gesto.
+  // Chi l'ha spenta una volta non se la ritrova accesa al ritorno.
+  if(localStorage.getItem(KEY) !== 'off'){
+    var primoGesto = function(e){
+      document.removeEventListener('pointerdown', primoGesto);
+      document.removeEventListener('keydown', primoGesto);
+      document.removeEventListener('touchstart', primoGesto);
+      // se il primo gesto è proprio sul pulsante, decide lui: non partire due volte
+      if(e && e.target && e.target.closest && e.target.closest('#musicToggle')) return;
+      if(!attiva) avvia();
+    };
+    document.addEventListener('pointerdown', primoGesto);
+    document.addEventListener('keydown', primoGesto);
+    document.addEventListener('touchstart', primoGesto);
+  }
+
+  // Se l'utente cambia scheda, la musica si mette in pausa per educazione.
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden){ if(!audio.paused) audio.pause(); }
+    else if(attiva && audio.paused){ audio.play().catch(function(){}); }
+  });
+})();
+</script>
+
+<!-- ===== MENU A TUTTO SCHERMO =====
+     GSAP 3.12.5 e' gia' caricato. Il plugin CustomEase no, e non lo aggiungo
+     per una curva sola: l'ease "0.65, 0.01, 0.05, 0.99" e' una cubic-bezier,
+     e GSAP accetta una funzione come ease — quindi la risolvo a mano con
+     Newton-Raphson invece di scaricare un altro script da CDN. -->
+<script>
+(function(){
+  var bottone = document.getElementById('menuBtn');
+  var schermo = document.getElementById('menuSchermo');
+  if(!bottone || !schermo || typeof gsap === 'undefined') return;
+
+  function bezier(x1,y1,x2,y2){
+    function ascissa(t){ return 3*(1-t)*(1-t)*t*x1 + 3*(1-t)*t*t*x2 + t*t*t; }
+    function ordinata(t){ return 3*(1-t)*(1-t)*t*y1 + 3*(1-t)*t*t*y2 + t*t*t; }
+    function derivata(t){
+      return 3*(1-t)*(1-t)*x1 + 6*(1-t)*t*(x2-x1) + 3*t*t*(1-x2);
+    }
+    return function(p){
+      if(p <= 0) return 0;
+      if(p >= 1) return 1;
+      var t = p;
+      for(var i=0;i<6;i++){
+        var d = derivata(t);
+        if(Math.abs(d) < 1e-6) break;
+        var scarto = ascissa(t) - p;
+        if(Math.abs(scarto) < 1e-6) break;
+        t -= scarto / d;
+      }
+      return ordinata(Math.max(0, Math.min(1, t)));
+    };
+  }
+  var curva = bezier(0.65, 0.01, 0.05, 0.99);
+
+  var velo    = schermo.querySelector('.menu-velo');
+  var strati  = schermo.querySelectorAll('.menu-strato');
+  var link    = schermo.querySelectorAll('.menu-link-testo');
+  var piede   = schermo.querySelectorAll('[data-menu-fade]');
+  var parole  = bottone.querySelectorAll('.menu-btn-testo span');
+  var righe   = bottone.querySelectorAll('.menu-btn-icona i');
+  var divisori= schermo.querySelectorAll('.menu-riga');
+  var voci    = schermo.querySelectorAll('.menu-voce[data-forma]');
+  var forme   = schermo.querySelector('.menu-forme');
+
+  var aperto = false, linea = null;
+
+  function apri(){
+    if(linea) linea.kill();
+    aperto = true;
+    schermo.setAttribute('data-nav','open');
+    schermo.setAttribute('aria-hidden','false');
+    bottone.setAttribute('aria-expanded','true');
+    document.body.style.overflow = 'hidden';
+
+    // il display va acceso PRIMA di costruire la timeline: xPercent si
+    // misura sulla larghezza dell'elemento, e con display:none il pannello
+    // non ha layout — GSAP finirebbe per calcolare il 101% sulla finestra
+    // intera invece che sui 560px del pannello.
+    schermo.style.display = 'block';
+    void schermo.offsetWidth;
+
+    linea = gsap.timeline({defaults:{ease:curva, duration:0.7}});
+    linea.fromTo(parole,{yPercent:0},{yPercent:-100, stagger:0.12},0)
+      .to(righe[0],{y:6.2,rotate:45,duration:0.45},0)
+      .to(righe[1],{autoAlpha:0,duration:0.25},0)
+      .to(righe[2],{y:-6.2,rotate:-45,duration:0.45},0)
+      .fromTo(velo,{autoAlpha:0},{autoAlpha:1},0)
+      .fromTo(strati,{xPercent:101},{xPercent:0, stagger:0.11, duration:0.58},0)
+      .fromTo(link,{yPercent:140,rotate:8},{yPercent:0,rotate:0,stagger:0.05},0.34)
+      .fromTo(divisori,{scaleX:0},{scaleX:1,stagger:0.06,duration:0.5},0.46)
+      .fromTo(piede,{autoAlpha:0,yPercent:50},{autoAlpha:1,yPercent:0,stagger:0.04,clearProps:'all'},0.55);
+  }
+
+  function chiudi(){
+    if(linea) linea.kill();
+    aperto = false;
+    schermo.setAttribute('data-nav','closed');
+    schermo.setAttribute('aria-hidden','true');
+    bottone.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
+
+    linea = gsap.timeline({defaults:{ease:curva, duration:0.55}});
+    linea.to(velo,{autoAlpha:0},0)
+      .to(strati,{xPercent:110, stagger:0.05},0)
+      .to(parole,{yPercent:0},0)
+      .to(righe,{y:0,rotate:0,autoAlpha:1,duration:0.35},0)
+      .to(divisori,{scaleX:0,duration:0.3},0)
+      .call(function(){ schermo.style.display = 'none'; });
+  }
+
+  bottone.addEventListener('click', function(){ aperto ? chiudi() : apri(); });
+  velo.addEventListener('click', chiudi);
+  schermo.querySelectorAll('.menu-link').forEach(function(a){
+    a.addEventListener('click', chiudi);   // e' un'ancora interna: il pannello deve sparire
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && aperto) chiudi();
+  });
+
+  // le forme dietro le voci: una alla volta, quella della voce puntata
+  voci.forEach(function(voce){
+    var forma = forme ? forme.querySelector('.forma-' + voce.getAttribute('data-forma')) : null;
+    if(!forma) return;
+    var pezzi = forma.querySelectorAll('.forma-el');
+    voce.addEventListener('mouseenter', function(){
+      forme.querySelectorAll('.forma').forEach(function(f){ f.classList.remove('attiva'); });
+      forma.classList.add('attiva');
+      gsap.fromTo(forma,{autoAlpha:0},{autoAlpha:1,duration:0.3,overwrite:'auto'});
+      gsap.fromTo(pezzi,
+        {scale:0.5,opacity:0,rotate:-10,transformOrigin:'50% 50%'},
+        {scale:1,opacity:1,rotate:0,duration:0.6,stagger:0.08,ease:'back.out(1.7)',overwrite:'auto'});
+    });
+    voce.addEventListener('mouseleave', function(){
+      gsap.to(pezzi,{scale:0.8,opacity:0,duration:0.3,ease:'power2.in',overwrite:'auto',
+        onComplete:function(){ forma.classList.remove('attiva'); }});
+    });
+  });
+})();
+</script>
+
+<!-- Sfondi video decorativi (hero e sezione del globo).
+     Il src non e' nel markup ma in data-src: sotto i 901px il file non
+     parte proprio, cosi' la connessione mobile non paga megabyte di
+     decoro. In pausa fuori schermo e a scheda nascosta. -->
+<script>
+(function(){
+  var video = Array.prototype.slice.call(document.querySelectorAll('video[data-src]'));
+  if(!video.length) return;
+
+  var mqGrande = window.matchMedia('(min-width:901px)');
+  var mqMoto   = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var hero     = document.querySelector('.hero');
+
+  // il video della hero (i droni che montano il logo) va una volta sola e resta sul logo:
+  // rientrando nello schermo non deve ripartire da capo
+  function parti(v){ if(v.hasAttribute('data-una-volta') && v.ended) return; var p = v.play(); if(p && p.catch) p.catch(function(){}); }
+
+  // niente remove(): l'elemento resta e il video si aggancia solo quando
+  // serve, cosi' chi ruota il tablet in orizzontale lo ottiene lo stesso.
+  // Finche' il src non viene messo, non parte nessuna richiesta di rete.
+  function valuta(){
+    var attivo = mqGrande.matches && !mqMoto.matches;
+    video.forEach(function(v){
+      if(!attivo){ v.pause(); v.style.display='none'; return; }
+      v.style.display='';
+      if(!v.getAttribute('src')) v.setAttribute('src', v.getAttribute('data-src'));
+      parti(v);
+    });
+    // il canvas neurale si spegne solo quando il video della hero c'e' davvero
+    if(hero) hero.classList.toggle('con-video', attivo && !!document.querySelector('.hero-bg'));
+  }
+  valuta();
+  (mqGrande.addEventListener ? mqGrande.addEventListener('change',valuta) : mqGrande.addListener(valuta));
+  (mqMoto.addEventListener   ? mqMoto.addEventListener('change',valuta)   : mqMoto.addListener(valuta));
+
+  if(typeof IntersectionObserver !== 'undefined'){
+    var io = new IntersectionObserver(function(voci){
+      voci.forEach(function(x){
+        if(x.target.style.display === 'none') return;
+        x.isIntersecting ? parti(x.target) : x.target.pause();
+      });
+    },{threshold:0.05});
+    video.forEach(function(v){ io.observe(v); });
+  }
+  document.addEventListener('visibilitychange',function(){
+    video.forEach(function(v){
+      if(v.style.display === 'none') return;
+      document.hidden ? v.pause() : parti(v);
+    });
+  });
+})();
+</script>
+
+<!-- ============================================================
+     RIQUADRO COOKIE — dal kit GDPR di FUTURE AI.
+     Non blocca la pagina (niente cookie wall). Le statistiche di Vercel
+     partono SOLO dopo "Accetto". La scelta resta in localStorage e si
+     riapre dal link "Cookie" nel piè di pagina.
+     ============================================================ -->
+<style>
+.cookie{position:fixed;z-index:9000;left:1rem;right:1rem;bottom:1rem;max-width:25rem;margin-inline:auto;
+  background:#111827;color:#EDF1FA;border-radius:16px;padding:1.15rem 1.3rem 1.3rem;
+  box-shadow:0 24px 60px -18px rgba(0,0,0,.7),0 0 0 1px rgba(155,127,248,.22);
+  font-family:'DM Sans',sans-serif;
+  transform:translateY(calc(100% + 2rem));opacity:0;transition:transform .55s cubic-bezier(.22,1,.36,1),opacity .4s}
+.cookie.su{transform:none;opacity:1}
+.cookie[hidden]{display:none}
+@media (min-width:760px){.cookie{left:1.5rem;right:auto;bottom:1.5rem;margin:0}}
+.cookie::before{content:"";display:block;width:2.2rem;height:3px;border-radius:3px;background:linear-gradient(90deg,#6C63FF,#4DD9E0);margin-bottom:.9rem}
+.cookie__tit{font-family:'Manrope',sans-serif;font-weight:800;font-size:1.15rem;letter-spacing:-.02em;line-height:1.15;margin:0 0 .45rem}
+.cookie__testo{font-size:.88rem;line-height:1.55;color:#AEB7CA;margin:0}
+.cookie__testo a{color:#C4B5FD}
+.cookie__az{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+.cookie__btn{flex:1 1 auto;min-height:44px;padding:.6rem 1.15rem;border-radius:999px;border:1px solid transparent;
+  background:linear-gradient(90deg,#6C63FF,#4DD9E0);color:#fff;font:600 .9rem/1 'DM Sans',sans-serif;cursor:pointer}
+.cookie__btn--no{background:transparent;border-color:rgba(255,255,255,.22);color:#EDF1FA}
+.cookie__btn:focus-visible{outline:2px solid #4DD9E0;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.cookie{transition:none}}
+/* piè di pagina legale e casella del modulo */
+.footer-legale{font-size:.78rem}
+.footer-legale a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.form-presa{display:flex;gap:.6rem;align-items:flex-start;margin:.2rem 0 1rem;font-size:.82rem;line-height:1.45;color:var(--ink-muted,#8C97AD);cursor:pointer}
+.form-presa input{margin-top:.15rem;width:1.05rem;height:1.05rem;flex:none;accent-color:#7B5CF5}
+.form-presa a{color:#C4B5FD}
+</style>
+
+<div class="cookie" id="cookie" role="dialog" aria-labelledby="cookieTit" aria-describedby="cookieTesto" hidden>
+  <p class="cookie__tit" id="cookieTit">Due parole sui cookie.</p>
+  <p class="cookie__testo" id="cookieTesto">Il sito usa solo memoria tecnica per funzionare. Se accetti, contiamo anche le visite in forma anonima e aggregata: nessun profilo, nessuna pubblicità. Puoi cambiare idea quando vuoi dal link «Cookie» in fondo alla pagina. <a href="/privacy/#cookie">Come trattiamo i dati</a></p>
+  <div class="cookie__az">
+    <button class="cookie__btn" id="cookieSi" type="button">Accetto</button>
+    <button class="cookie__btn cookie__btn--no" id="cookieNo" type="button">Solo necessari</button>
+  </div>
+</div>
+
+<script>
+/* Vercel Web Analytics (versione per siti statici): lo script arriva
+   dall'endpoint di Vercel e funziona solo sul dominio pubblicato
+   (in locale da' 404, e' atteso). Parte solo dopo il consenso. */
+window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__statsAvviate=true;
+  window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};
+  var s=document.createElement('script'); s.defer=true; s.src='/_vercel/insights/script.js'; document.body.appendChild(s);
+};
+(function(){
+  var K='futureai-cookie', b=document.getElementById('cookie'); if(!b)return;
+  function letto(){try{return localStorage.getItem(K)}catch(e){return null}}
+  function salva(v){try{localStorage.setItem(K,v)}catch(e){}}
+  function mostra(){b.hidden=false;requestAnimationFrame(function(){requestAnimationFrame(function(){b.classList.add('su')})});}
+  function chiudi(){b.classList.remove('su');setTimeout(function(){b.hidden=true},450)}
+  document.getElementById('cookieSi').addEventListener('click',function(){salva('tutti');chiudi();window.avviaStatistiche();});
+  document.getElementById('cookieNo').addEventListener('click',function(){
+    var prima=letto(); salva('necessari'); chiudi();
+    /* chi ritira il consenso: si ricarica per spegnere lo script gia' avviato */
+    if(prima==='tutti'&&window.__statsAvviate)setTimeout(function(){location.reload()},500);
+  });
+  var s=letto();
+  if(s==='tutti'){window.avviaStatistiche();}
+  else if(s!=='necessari'){setTimeout(mostra,1100);}
+  var ap=document.getElementById('apriCookie');
+  if(ap)ap.addEventListener('click',function(e){e.preventDefault();mostra();});
+})();
+</script>
+
+</body>
+</html>
