@@ -66,95 +66,113 @@
 </div>
 
 <main>
-<header class="pg-testa">
-  <a class="pg-torna" href="/#menu"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Torna dal robot</a>
-  <div class="pg-tag">— App su misura</div>
-  <h1 class="pg-tit">Il tuo lavoro, <em>in un'app sola.</em></h1>
-  <p class="pg-sub">Gestionali, CRM e portali clienti costruiti attorno a come lavori tu: niente più fogli sparsi, tutto in un unico strumento da computer e da telefono.</p>
+<header class="sv-hero">
+  <div class="sv-hero-in">
+    <div class="sv-hero-testo">
+      <a class="pg-torna" href="/#menu"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Torna dal robot</a>
+      <div class="pg-tag">— App su misura</div>
+      <h1 class="pg-tit">Il tuo lavoro, <em>in un'app sola.</em></h1>
+      <p class="pg-sub">Gestionali, CRM, portali e agende costruiti con l'intelligenza artificiale attorno a come lavori tu. Niente più fogli sparsi e programmi pensati per qualcun altro: un unico strumento, da computer e da telefono.</p>
+      <div class="sv-azioni"><a href="/contatti/" class="btn-primary hero-btn"><span class="rotola"><span data-t="Richiedi un preventivo">Richiedi un preventivo</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a href="#quiz" class="btn-secondary hero-btn"><span class="rotola"><span data-t="Calcola quanto risparmi">Calcola quanto risparmi</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+      <ul class="sv-punti"><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Tua, per sempre: niente canoni a piattaforme</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Da computer e da telefono</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Dati al sicuro, accessi per persona</li></ul>
+    </div>
+    <div class="sv-hero-media" aria-hidden="true">
+      <div class="sv-cornice"><video src="clip-webapp.mp4" autoplay muted loop playsinline preload="metadata" width="330" height="384"></video></div>
+      <div class="sv-bolla sv-bolla--a"><span class="sv-bolla-ico">📊</span><span><b>Report pronto</b><small>generato alle 8:00</small></span></div><div class="sv-bolla sv-bolla--b"><span class="sv-bolla-ico">✅</span><span><b>Preventivo inviato</b><small>al cliente, in automatico</small></span></div>
+    </div>
+  </div>
 </header>
-<style>
-#servizi .svz-intro{max-width:1180px;margin:0 auto}
-.svz-righe{max-width:1180px;margin:0 auto}
-.svz-riga{display:flex;align-items:center;justify-content:center;gap:clamp(2.5rem,6vw,5.5rem);padding:clamp(3rem,7vh,5rem) 0}
-.svz-riga--inv{flex-direction:row-reverse}
-.svz-testo{max-width:33rem;will-change:transform}
-.svz-num{font-family:'Space Mono',monospace;font-size:.78rem;letter-spacing:.18em;color:#4DD9E0;text-transform:uppercase}
-.svz-num span{color:var(--ink-muted,#8C97AD)}
-.svz-tit{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.02em;line-height:1.02;
-  font-size:clamp(2rem,3.8vw,3.1rem);margin:.8rem 0 0;color:var(--ink,#EDF1FA)}
-.svz-desc{color:rgba(237,241,250,.7);font-size:clamp(.98rem,1.2vw,1.08rem);line-height:1.7;margin:1.1rem 0 0;will-change:transform}
-.svz-punti{list-style:none;margin:1.2rem 0 0;padding:0;display:grid;gap:.55rem}
-.svz-punti li{display:flex;align-items:center;gap:.6rem;color:#EDF1FA;font-size:.95rem}
-.svz-punti svg{flex:none;color:#4DD9E0}
-.svz-cta{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.5rem;padding:.75rem 1.3rem;border-radius:100px;
-  border:1px solid rgba(155,127,248,.45);color:#EDF1FA;text-decoration:none;font-weight:500;font-size:.92rem;
-  background:rgba(123,92,245,.12);transition:background .2s,border-color .2s}
-.svz-cta:hover{background:rgba(123,92,245,.25);border-color:#9B7FF8}
-.svz-media{position:relative;flex:none;width:clamp(250px,27vw,350px);aspect-ratio:330/384;border-radius:22px;overflow:hidden;
-  background:#0D1220;box-shadow:0 30px 70px -25px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.08);
-  clip-path:inset(0 100% 0 0 round 22px);opacity:0;will-change:clip-path,opacity}
-.svz-media video{width:100%;height:100%;object-fit:cover;display:block}
-.svz-ia{position:absolute;right:.8rem;bottom:.8rem;padding:.28rem .6rem;border-radius:100px;background:rgba(8,11,20,.72);
-  border:1px solid rgba(255,255,255,.14);color:#C3CAD8;font-size:.625rem;line-height:1.2;letter-spacing:.05em;pointer-events:none}
-@media (max-width:820px){
-  .svz-riga,.svz-riga--inv{flex-direction:column;gap:1.4rem;padding:2.2rem 0}
-  /* su telefono la clip diventa una fascia orizzontale sopra il titolo:
-     in verticale e sotto il testo la sezione diventava lunghissima */
-  .svz-riga,.svz-riga--inv{align-items:stretch}
-  .svz-media{order:-1;width:100%;aspect-ratio:16/9;max-height:230px;border-radius:18px}
-  .svz-testo{max-width:34rem}
-}
-@media (prefers-reduced-motion:reduce){.svz-media{clip-path:none;opacity:1}}
-</style>
-<div class="section-wrap svz-pagina" id="servizi"><div class="svz-righe">
-<article class="svz-riga">
-      <div class="svz-testo">
-        <div class="svz-num">01 <span>— Su misura</span></div>
-        <h3 class="svz-tit">WebApp su Misura</h3>
-        <p class="svz-desc">Gestionali, CRM e portali clienti costruiti intorno a come lavori tu, non il contrario. Basta fogli Excel sparsi e programmi pensati per qualcun altro: un unico strumento, da computer e da telefono, con i dati al sicuro e un accesso per ogni persona del team. Il software è tuo, per sempre, e cresce insieme all'azienda.</p>
-        <ul class="svz-punti"><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Gestionali e CRM su misura</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Portali per i tuoi clienti</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Accessi per ruolo e dati protetti</li></ul>
-        <a class="svz-cta" href="/contatti/">Parlane con noi <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<section class="sv-sez"><div class="sv-in">
+  <div class="sv-testa sv-rivela"><div class="pg-tag">— Cosa possiamo costruire</div><h2 class="sv-h2">Tutto quello che ti serve, <em>niente di più.</em></h2></div>
+  <div class="sv-griglia"><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">🗂️</span><h3>Gestionali</h3><p>Clienti, lavori, magazzino e scadenze in un posto solo, con la ricerca che trova tutto in un secondo.</p></article><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">🤝</span><h3>CRM</h3><p>Ogni contatto, ogni preventivo, ogni richiamata: sai sempre a che punto è ogni cliente.</p></article><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">🌐</span><h3>Portali clienti</h3><p>I tuoi clienti vedono documenti, stato dei lavori e fatture senza telefonarti.</p></article><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">📅</span><h3>Agende e turni</h3><p>Appuntamenti, squadre e mezzi organizzati senza incastri a mano.</p></article><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">🤖</span><h3>Assistenti AI dentro l'app</h3><p>Scrivi o detta a voce: l'app compila, riassume e prepara i documenti per te.</p></article><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">📱</span><h3>Da telefono, anche offline</h3><p>Si installa come un'app e funziona anche in cantiere o dal cliente.</p></article></div>
+</div></section>
+<!-- ===== QUESTIONARIO: quanto tempo risparmieresti con un'app su misura =====
+     5 domande, una alla volta. La stima e' volutamente prudente: conta solo il
+     60% del tempo perso ogni giorno e il 70% di quello settimanale su report e
+     documenti. Tutto calcolato nella pagina: nessun dato viene inviato. -->
+<section class="sv-sez sv-sez--quiz" id="quiz"><div class="sv-in">
+  <div class="qz">
+    <div class="qz-testa">
+      <div class="pg-tag">— Questionario · 1 minuto</div>
+      <h2 class="sv-h2">Quanto tempo <em>ti restituirebbe un'app?</em></h2>
+      <p class="qz-intro">Rispondi a 5 domande: ti mostriamo una stima delle ore che ogni settimana tornano libere.</p>
+    </div>
+    <div class="qz-corpo">
+      <div class="qz-barra" aria-hidden="true"><i id="qzBarra"></i></div>
+      <div class="qz-passo-n" id="qzN">Domanda 1 di 5</div>
+      <div id="qzDomande"></div>
+      <div class="qz-nav">
+        <button type="button" class="qz-indietro" id="qzIndietro" hidden>← Indietro</button>
       </div>
-      <div class="svz-media">
-        <video src="clip-webapp.mp4" muted loop playsinline preload="none" aria-hidden="true" width="330" height="384"></video>
+      <div class="qz-risultato" id="qzRisultato" hidden aria-live="polite">
+        <div class="qz-ris-tag">La tua stima</div>
+        <div class="qz-numeri">
+          <div><b id="qzOre">0</b><span>ore risparmiate<br>a settimana</span></div>
+          <div><b id="qzGiorni">0</b><span>giornate di lavoro<br>in più all'anno</span></div>
+          <div><b id="qzEuro">€ 0</b><span>di tempo recuperato<br>all'anno</span></div>
+        </div>
+        <label class="qz-costo">Costo orario medio del lavoro: <b id="qzCostoV">€ 25</b>
+          <input type="range" id="qzCosto" min="12" max="60" step="1" value="25"></label>
+        <p class="qz-nota">Stima indicativa e prudente, basata sulle tue risposte: la calcoliamo sul 60% del tempo perso ogni giorno. Nella consulenza gratuita la verifichiamo insieme sul tuo lavoro reale.</p>
+        <div class="sv-azioni">
+          <a href="/contatti/" class="btn-primary hero-btn" id="qzCta"><span class="rotola"><span data-t="Voglio recuperare queste ore">Voglio recuperare queste ore</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <button type="button" class="btn-secondary hero-btn" id="qzRifai"><span class="rotola"><span data-t="Rifai il questionario">Rifai il questionario</span></span></button>
+        </div>
       </div>
-    </article>
-</div></div>
+    </div>
+  </div>
+</div></section>
 <script>
 (function(){
-  var righe=[].slice.call(document.querySelectorAll('.svz-riga')); if(!righe.length)return;
-  var fermo=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function lim(v){return Math.min(1,Math.max(0,v));}
-  var raf=0;
-  function giro(){
-    raf=0; var vh=innerHeight;
-    righe.forEach(function(r){
-      var b=r.getBoundingClientRect();
-      if(b.bottom<-vh||b.top>vh*2)return;
-      // come l'offset ["start end","center start"]: 0 quando la riga entra dal basso,
-      // 1 quando il suo centro arriva in cima allo schermo
-      var p=lim((vh-b.top)/(vh+b.height/2)), a=lim(p/(innerWidth>820?.7:.42));
-      var m=r.querySelector('.svz-media'), t=r.querySelector('.svz-testo'), d=r.querySelector('.svz-desc');
-      if(!fermo){
-        m.style.opacity=a;
-        m.style.clipPath='inset(0 '+((1-a)*100).toFixed(2)+'% 0 0 round 22px)';
-        // nel componente originale il paragrafo si spostava due volte e finiva
-        // sopra il titolo: qui ha solo un piccolo scarto in piu' per la profondita'
-        var amp=innerWidth>820?50:24;
-        t.style.transform='translateY('+((1-p)*-amp).toFixed(1)+'px)';
-        d.style.transform='translateY('+((1-p)*amp*.35).toFixed(1)+'px)';
-      }
-    });
+  var D=[
+    {q:'Quante persone lavorano con te?',r:[['Solo io',1],['2–5',3.5],['6–15',10],['Più di 15',20]]},
+    {q:'Quanto tempo passa ognuno, ogni giorno, a ricopiare dati tra Excel, email, carta e programmi?',r:[['Meno di 15 minuti',10],['15–30 minuti',22],['30–60 minuti',45],['Più di un\'ora',75]]},
+    {q:'Come gestite oggi appuntamenti, ordini o lavori?',r:[['Carta e telefono',30],['Fogli Excel',20],['Più programmi che non si parlano',25],['Un gestionale che non ci soddisfa',15]]},
+    {q:'Quante volte al giorno cercate un\'informazione (un documento, un prezzo, lo stato di un lavoro)?',r:[['Poche volte',8],['5–10 volte',20],['10–20 volte',40],['Più di 20',65]]},
+    {q:'Quanto tempo a settimana va in report, preventivi, fatture o promemoria fatti a mano?',r:[['Meno di un\'ora',.5],['1–3 ore',2],['3–6 ore',4.5],['Più di 6 ore',8]]}];
+  var box=document.getElementById('qzDomande');if(!box)return;
+  var risp=[],pos=0,bar=document.getElementById('qzBarra'),n=document.getElementById('qzN'),ind=document.getElementById('qzIndietro'),ris=document.getElementById('qzRisultato');
+  function mostra(){
+    if(pos>=D.length){finito();return;}
+    ris.hidden=true;box.hidden=false;n.hidden=false;
+    var d=D[pos];box.innerHTML='<fieldset class="qz-dom"><legend>'+d.q+'</legend><div class="qz-opz"></div></fieldset>';
+    var o=box.querySelector('.qz-opz');
+    d.r.forEach(function(r,k){var b=document.createElement('button');b.type='button';b.className='qz-opz-b'+(risp[pos]===k?' scelta':'');
+      b.innerHTML='<span class="qz-lett">'+'ABCD'[k]+'</span>'+r[0];b.addEventListener('click',function(){risp[pos]=k;b.classList.add('scelta');setTimeout(function(){pos++;mostra();},220);});o.appendChild(b);});
+    n.textContent='Domanda '+(pos+1)+' di '+D.length;bar.style.transform='scaleX('+(pos/D.length)+')';ind.hidden=pos===0;
   }
-  function sveglia(){if(!raf)raf=requestAnimationFrame(giro);}
-  addEventListener('scroll',sveglia,{passive:true}); addEventListener('resize',sveglia); giro();
-  // le clip girano solo quando si vedono
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){
-    var v=e.target; if(e.isIntersecting){if(v.preload!=='auto')v.preload='auto';var q=v.play();if(q&&q.catch)q.catch(function(){});}else v.pause();
-  });},{rootMargin:'200px 0px'});
-  righe.forEach(function(r){io.observe(r.querySelector('video'));});
+  var ore=0;
+  function finito(){
+    box.hidden=true;n.hidden=true;ind.hidden=false;bar.style.transform='scaleX(1)';ris.hidden=false;
+    var persone=D[0].r[risp[0]][1],gg=D[1].r[risp[1]][1]+D[2].r[risp[2]][1]+D[3].r[risp[3]][1],sett=D[4].r[risp[4]][1];
+    // prudente: il 60% dei minuti persi ogni giorno, per 5 giorni, piu' il 70% del lavoro settimanale su documenti
+    ore=Math.max(1,Math.round(persone*gg*5*.6/60+sett*.7));
+    anima('qzOre',ore,'');anima('qzGiorni',Math.round(ore*46/8),'');euro();
+    var cta=document.getElementById('qzCta');cta.href='/contatti/?stima='+ore;
+    ris.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+  function euro(){var c=+document.getElementById('qzCosto').value;document.getElementById('qzCostoV').textContent='€ '+c;
+    anima('qzEuro',Math.round(ore*46*c/100)*100,'€ ');}
+  function anima(id,v,pre){var el=document.getElementById(id),t0=performance.now();
+    (function f(t){var k=Math.min(1,(t-t0)/700),x=Math.round(v*(1-Math.pow(1-k,3)));el.textContent=pre+x.toLocaleString('it-IT');if(k<1)requestAnimationFrame(f);})(t0);}
+  document.getElementById('qzCosto').addEventListener('input',euro);
+  ind.addEventListener('click',function(){if(pos>0)pos--;mostra();});
+  document.getElementById('qzRifai').addEventListener('click',function(){risp=[];pos=0;mostra();});
+  mostra();
 })();
 </script>
+<section class="sv-sez sv-sez--alt" id="come"><div class="sv-in">
+  <div class="sv-testa sv-rivela"><div class="pg-tag">— Come funziona</div><h2 class="sv-h2">Dall'idea al lavoro, <em>in quattro passi.</em></h2></div>
+  <ol class="sv-passi"><li class="sv-passo sv-rivela"><span class="sv-n">01</span><h3>Ci racconti come lavori</h3><p>Una chiacchierata gratuita: capiamo dove perdi tempo e cosa ti serve davvero.</p></li><li class="sv-passo sv-rivela"><span class="sv-n">02</span><h3>Ti mostriamo un'anteprima</h3><p>In pochi giorni vedi com'è fatta l'app, prima di scrivere il codice vero.</p></li><li class="sv-passo sv-rivela"><span class="sv-n">03</span><h3>La costruiamo con l'IA</h3><p>Sviluppo rapido e su misura: la provi e la aggiustiamo insieme.</p></li><li class="sv-passo sv-rivela"><span class="sv-n">04</span><h3>Online e assistita</h3><p>La mettiamo in funzione, formiamo chi la usa e restiamo al tuo fianco.</p></li></ol>
+</div></section>
+<section class="sv-sez sv-sez--chi"><div class="sv-in sv-rivela">
+  <div class="sv-testa"><div class="pg-tag">— Per chi è</div><h2 class="sv-h2">Pensato per chi <em>lavora davvero.</em></h2></div>
+  <ul class="sv-chip"><li>Artigiani e impiantisti</li><li>Negozi e laboratori</li><li>Studi professionali</li><li>Saloni e centri estetici</li><li>Associazioni sportive</li><li>Aziende di servizi</li><li>Affitti brevi</li><li>Manutenzioni e assistenza</li></ul>
+</div></section>
+<section class="sv-sez"><div class="sv-in sv-stretto">
+  <div class="sv-testa sv-rivela"><div class="pg-tag">— Domande frequenti</div><h2 class="sv-h2">Le domande <em>che ci fanno tutti.</em></h2></div>
+  <div class="sv-faqs sv-rivela"><details class="sv-faq"><summary>Quanto costa un'app su misura?<span aria-hidden="true">+</span></summary><p>Dipende da cosa deve fare: dopo la prima chiacchierata ti diamo un preventivo chiaro, con una quota iniziale e un piccolo canone mensile per hosting, assistenza e aggiornamenti.</p></details><details class="sv-faq"><summary>Quanto tempo serve?<span aria-hidden="true">+</span></summary><p>Grazie all'intelligenza artificiale i tempi si accorciano molto: per un gestionale semplice parliamo di settimane, non di mesi.</p></details><details class="sv-faq"><summary>Posso importare i dati che ho già?<span aria-hidden="true">+</span></summary><p>Sì: fogli Excel, rubriche e archivi esistenti si importano all'avvio, così non riparti da zero.</p></details><details class="sv-faq"><summary>E se poi mi serve una funzione in più?<span aria-hidden="true">+</span></summary><p>L'app cresce con te: le aggiunte si fanno quando servono, senza rifare tutto.</p></details></div>
+</div></section>
 <section class="pg-cta">
   <h2>Ti piace? <em>Parliamone.</em></h2>
   <p>La prima consulenza è gratuita: raccontaci cosa ti serve, ti diciamo come lo costruiremmo.</p>
@@ -667,5 +685,12 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
 })();
 </script>
 
+<script>
+/* le sezioni delle pagine servizio entrano con una leggera salita */
+(function(){var el=[].slice.call(document.querySelectorAll('.sv-rivela'));if(!el.length)return;
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){el.forEach(function(e){e.classList.add('vista');});return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('vista');io.unobserve(x.target);}});},{rootMargin:'0px 0px -8% 0px'});
+  el.forEach(function(e,i){e.style.transitionDelay=(i%3)*70+'ms';io.observe(e);});})();
+</script>
 </body>
 </html>

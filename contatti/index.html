@@ -72,6 +72,12 @@
   <h1 class="pg-tit">Raccontaci <em>la tua idea.</em></h1>
   <p class="pg-sub">La prima consulenza è gratuita. Scrivici qui sotto: ti rispondiamo entro 24 ore lavorative.</p>
 </header>
+<div class="ct-stima" id="ctStima" hidden><div>📊 Hai stimato di poter recuperare circa <b id="ctOre"></b> ore a settimana con un'app su misura: l'abbiamo già scritto nel messaggio qui sotto.</div></div>
+<div class="ct-dopo">
+  <div><b>1</b><span><h3>Ci scrivi</h3><p>Due righe bastano: cosa fai e cosa vorresti migliorare.</p></span></div>
+  <div><b>2</b><span><h3>Ti richiamiamo</h3><p>Entro 24 ore lavorative, per una chiacchierata gratuita e senza impegno.</p></span></div>
+  <div><b>3</b><span><h3>Ti mostriamo l'idea</h3><p>Un'anteprima e un preventivo chiaro, prima di iniziare qualsiasi lavoro.</p></span></div>
+</div>
 <div class="contact-section" id="contatti">
   <div class="contact-inner">
     <div class="contact-left fade-in">
@@ -647,5 +653,13 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
 })();
 </script>
 
+<script>
+/* arrivo dal questionario delle app: la stima finisce gia' scritta nel messaggio */
+(function(){var m=location.search.match(/[?&]stima=(\d{1,4})/);if(!m)return;var ore=+m[1];
+  document.getElementById('ctOre').textContent=ore;document.getElementById('ctStima').hidden=false;
+  var t=document.querySelector('#contactForm textarea[name=message]'),sv=document.querySelector('#contactForm select[name=servizio]');
+  if(t&&!t.value)t.value='Ho fatto il questionario sulle app su misura: secondo la stima potrei recuperare circa '+ore+' ore a settimana. Vorrei capire come.';
+  if(sv)for(var i=0;i<sv.options.length;i++)if(/WebApp/.test(sv.options[i].text))sv.selectedIndex=i;})();
+</script>
 </body>
 </html>

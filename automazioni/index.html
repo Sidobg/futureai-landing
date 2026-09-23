@@ -66,95 +66,26 @@
 </div>
 
 <main>
-<header class="pg-testa">
-  <a class="pg-torna" href="/#menu"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Torna dal robot</a>
-  <div class="pg-tag">— Automazioni</div>
-  <h1 class="pg-tit">Il lavoro ripetitivo <em>si fa da solo.</em></h1>
-  <p class="pg-sub">Colleghiamo gli strumenti che usi già e facciamo lavorare da soli i passaggi ripetitivi. Ecco anche come lavoriamo, dal primo contatto al risultato.</p>
+<header class="sv-hero">
+  <div class="sv-hero-in">
+    <div class="sv-hero-testo">
+      <a class="pg-torna" href="/#menu"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Torna dal robot</a>
+      <div class="pg-tag">— Automazioni</div>
+      <h1 class="pg-tit">Il lavoro ripetitivo <em>si fa da solo.</em></h1>
+      <p class="pg-sub">Colleghiamo gli strumenti che usi già (Gmail, Calendar, CRM, Excel) e facciamo lavorare da soli i passaggi ripetitivi. Meno copia-incolla, meno errori, più tempo per i clienti.</p>
+      <div class="sv-azioni"><a href="/contatti/" class="btn-primary hero-btn"><span class="rotola"><span data-t="Richiedi un preventivo">Richiedi un preventivo</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a href="#come-funziona" class="btn-secondary hero-btn"><span class="rotola"><span data-t="Come funziona">Come funziona</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+      <ul class="sv-punti"><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Con gli strumenti che usi già</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Report e promemoria automatici</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Nessun copia-incolla</li></ul>
+    </div>
+    <div class="sv-hero-media" aria-hidden="true">
+      <div class="sv-cornice"><video src="clip-automazioni.mp4" autoplay muted loop playsinline preload="metadata" width="330" height="384"></video></div>
+      <div class="sv-bolla sv-bolla--a"><span class="sv-bolla-ico">📥</span><span><b>Richiesta dal sito</b><small>→ salvata nel CRM</small></span></div><div class="sv-bolla sv-bolla--b"><span class="sv-bolla-ico">📧</span><span><b>Risposta inviata</b><small>in automatico, in 1 minuto</small></span></div>
+    </div>
+  </div>
 </header>
-<style>
-#servizi .svz-intro{max-width:1180px;margin:0 auto}
-.svz-righe{max-width:1180px;margin:0 auto}
-.svz-riga{display:flex;align-items:center;justify-content:center;gap:clamp(2.5rem,6vw,5.5rem);padding:clamp(3rem,7vh,5rem) 0}
-.svz-riga--inv{flex-direction:row-reverse}
-.svz-testo{max-width:33rem;will-change:transform}
-.svz-num{font-family:'Space Mono',monospace;font-size:.78rem;letter-spacing:.18em;color:#4DD9E0;text-transform:uppercase}
-.svz-num span{color:var(--ink-muted,#8C97AD)}
-.svz-tit{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.02em;line-height:1.02;
-  font-size:clamp(2rem,3.8vw,3.1rem);margin:.8rem 0 0;color:var(--ink,#EDF1FA)}
-.svz-desc{color:rgba(237,241,250,.7);font-size:clamp(.98rem,1.2vw,1.08rem);line-height:1.7;margin:1.1rem 0 0;will-change:transform}
-.svz-punti{list-style:none;margin:1.2rem 0 0;padding:0;display:grid;gap:.55rem}
-.svz-punti li{display:flex;align-items:center;gap:.6rem;color:#EDF1FA;font-size:.95rem}
-.svz-punti svg{flex:none;color:#4DD9E0}
-.svz-cta{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.5rem;padding:.75rem 1.3rem;border-radius:100px;
-  border:1px solid rgba(155,127,248,.45);color:#EDF1FA;text-decoration:none;font-weight:500;font-size:.92rem;
-  background:rgba(123,92,245,.12);transition:background .2s,border-color .2s}
-.svz-cta:hover{background:rgba(123,92,245,.25);border-color:#9B7FF8}
-.svz-media{position:relative;flex:none;width:clamp(250px,27vw,350px);aspect-ratio:330/384;border-radius:22px;overflow:hidden;
-  background:#0D1220;box-shadow:0 30px 70px -25px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.08);
-  clip-path:inset(0 100% 0 0 round 22px);opacity:0;will-change:clip-path,opacity}
-.svz-media video{width:100%;height:100%;object-fit:cover;display:block}
-.svz-ia{position:absolute;right:.8rem;bottom:.8rem;padding:.28rem .6rem;border-radius:100px;background:rgba(8,11,20,.72);
-  border:1px solid rgba(255,255,255,.14);color:#C3CAD8;font-size:.625rem;line-height:1.2;letter-spacing:.05em;pointer-events:none}
-@media (max-width:820px){
-  .svz-riga,.svz-riga--inv{flex-direction:column;gap:1.4rem;padding:2.2rem 0}
-  /* su telefono la clip diventa una fascia orizzontale sopra il titolo:
-     in verticale e sotto il testo la sezione diventava lunghissima */
-  .svz-riga,.svz-riga--inv{align-items:stretch}
-  .svz-media{order:-1;width:100%;aspect-ratio:16/9;max-height:230px;border-radius:18px}
-  .svz-testo{max-width:34rem}
-}
-@media (prefers-reduced-motion:reduce){.svz-media{clip-path:none;opacity:1}}
-</style>
-<div class="section-wrap svz-pagina" id="servizi"><div class="svz-righe">
-<article class="svz-riga">
-      <div class="svz-testo">
-        <div class="svz-num">05 <span>— n8n + AI</span></div>
-        <h3 class="svz-tit">Automazioni Aziendali</h3>
-        <p class="svz-desc">Colleghiamo gli strumenti che usi già — Gmail, Google Calendar, CRM, Excel — e facciamo lavorare da soli i passaggi ripetitivi. Risposte alle email, report settimanali, promemoria, dati copiati da un programma all'altro: tutto parte in automatico, senza errori di battitura. Il tuo team torna a occuparsi del lavoro che conta.</p>
-        <ul class="svz-punti"><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Integrazione con i tuoi strumenti</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Report e notifiche automatiche</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Meno errori, più tempo libero</li></ul>
-        <a class="svz-cta" href="/contatti/">Parlane con noi <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      </div>
-      <div class="svz-media">
-        <video src="clip-automazioni.mp4" muted loop playsinline preload="none" aria-hidden="true" width="330" height="384"></video>
-      </div>
-    </article>
-</div></div>
-<script>
-(function(){
-  var righe=[].slice.call(document.querySelectorAll('.svz-riga')); if(!righe.length)return;
-  var fermo=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function lim(v){return Math.min(1,Math.max(0,v));}
-  var raf=0;
-  function giro(){
-    raf=0; var vh=innerHeight;
-    righe.forEach(function(r){
-      var b=r.getBoundingClientRect();
-      if(b.bottom<-vh||b.top>vh*2)return;
-      // come l'offset ["start end","center start"]: 0 quando la riga entra dal basso,
-      // 1 quando il suo centro arriva in cima allo schermo
-      var p=lim((vh-b.top)/(vh+b.height/2)), a=lim(p/(innerWidth>820?.7:.42));
-      var m=r.querySelector('.svz-media'), t=r.querySelector('.svz-testo'), d=r.querySelector('.svz-desc');
-      if(!fermo){
-        m.style.opacity=a;
-        m.style.clipPath='inset(0 '+((1-a)*100).toFixed(2)+'% 0 0 round 22px)';
-        // nel componente originale il paragrafo si spostava due volte e finiva
-        // sopra il titolo: qui ha solo un piccolo scarto in piu' per la profondita'
-        var amp=innerWidth>820?50:24;
-        t.style.transform='translateY('+((1-p)*-amp).toFixed(1)+'px)';
-        d.style.transform='translateY('+((1-p)*amp*.35).toFixed(1)+'px)';
-      }
-    });
-  }
-  function sveglia(){if(!raf)raf=requestAnimationFrame(giro);}
-  addEventListener('scroll',sveglia,{passive:true}); addEventListener('resize',sveglia); giro();
-  // le clip girano solo quando si vedono
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){
-    var v=e.target; if(e.isIntersecting){if(v.preload!=='auto')v.preload='auto';var q=v.play();if(q&&q.catch)q.catch(function(){});}else v.pause();
-  });},{rootMargin:'200px 0px'});
-  righe.forEach(function(r){io.observe(r.querySelector('video'));});
-})();
-</script>
+<section class="sv-sez"><div class="sv-in">
+  <div class="sv-testa sv-rivela"><div class="pg-tag">— Cosa possiamo costruire</div><h2 class="sv-h2">Tutto quello che ti serve, <em>niente di più.</em></h2></div>
+  <div class="sv-griglia"><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">📧</span><h3>Email che si smistano</h3><p>Le richieste arrivano, vengono lette e finiscono al posto giusto.</p></article><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">📑</span><h3>Documenti automatici</h3><p>Preventivi, contratti e report compilati con i dati che hai già.</p></article><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">🔔</span><h3>Promemoria e scadenze</h3><p>Nessuna scadenza dimenticata: avvisi a te e ai clienti.</p></article><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">🔗</span><h3>Strumenti collegati</h3><p>Il modulo del sito parla col CRM, il CRM col calendario, il calendario con te.</p></article><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">📈</span><h3>Report pronti</h3><p>Ogni lunedì mattina il riepilogo della settimana nella tua casella.</p></article><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">🧠</span><h3>Con un tocco di IA</h3><p>Riassunti, classificazione delle richieste, bozze di risposta da approvare.</p></article></div>
+</div></section>
 <div class="process-bg">
 <div class="section-wrap" id="come-funziona">
     <div class="fade-in">
@@ -187,6 +118,14 @@
   </div>
 </div>
 
+<section class="sv-sez sv-sez--chi"><div class="sv-in sv-rivela">
+  <div class="sv-testa"><div class="pg-tag">— Per chi è</div><h2 class="sv-h2">Pensato per chi <em>lavora davvero.</em></h2></div>
+  <ul class="sv-chip"><li>Uffici amministrativi</li><li>Negozi online</li><li>Studi professionali</li><li>Agenzie</li><li>Aziende di servizi</li><li>Commercianti</li></ul>
+</div></section>
+<section class="sv-sez"><div class="sv-in sv-stretto">
+  <div class="sv-testa sv-rivela"><div class="pg-tag">— Domande frequenti</div><h2 class="sv-h2">Le domande <em>che ci fanno tutti.</em></h2></div>
+  <div class="sv-faqs sv-rivela"><details class="sv-faq"><summary>Devo cambiare i programmi che uso?<span aria-hidden="true">+</span></summary><p>No, di solito colleghiamo quelli che hai già.</p></details><details class="sv-faq"><summary>E se un'automazione si blocca?<span aria-hidden="true">+</span></summary><p>La teniamo sotto controllo e ti avvisiamo: nessun dato si perde.</p></details><details class="sv-faq"><summary>Quanto tempo fa risparmiare?<span aria-hidden="true">+</span></summary><p>Dipende dal lavoro: nella prima chiacchierata stimiamo insieme le ore che tornano libere.</p></details></div>
+</div></section>
 <section class="pg-cta">
   <h2>Ti piace? <em>Parliamone.</em></h2>
   <p>La prima consulenza è gratuita: raccontaci cosa ti serve, ti diciamo come lo costruiremmo.</p>
@@ -736,5 +675,12 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
 })();
 </script>
 
+<script>
+/* le sezioni delle pagine servizio entrano con una leggera salita */
+(function(){var el=[].slice.call(document.querySelectorAll('.sv-rivela'));if(!el.length)return;
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){el.forEach(function(e){e.classList.add('vista');});return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('vista');io.unobserve(x.target);}});},{rootMargin:'0px 0px -8% 0px'});
+  el.forEach(function(e,i){e.style.transitionDelay=(i%3)*70+'ms';io.observe(e);});})();
+</script>
 </body>
 </html>
