@@ -67,29 +67,83 @@
 </div>
 
 <main>
-<header class="sv-hero">
-  <div class="sv-hero-in">
-    <div class="sv-hero-testo">
-      <a class="pg-torna" href="/#menu"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Torna dal robot</a>
-      <div class="pg-tag">— AI · Intelligenza artificiale</div>
-      <h1 class="pg-tit">L'intelligenza artificiale, <em>costruita sul tuo lavoro.</em></h1>
-      <p class="pg-sub">Non un chatbot generico: assistenti che conoscono i tuoi documenti, app che capiscono la voce, sistemi che leggono, riassumono e decidono cosa è urgente. E se i tuoi dati non devono uscire dall'azienda, l'AI la installiamo <b>dentro casa tua</b>.</p>
-      <a href="#locale" class="sv-test">
-        <span class="sv-test-ico" aria-hidden="true">🔒</span>
-        <span><b>Scopri l'AI in locale · percorso interattivo</b><small>Un'intelligenza artificiale che lavora in azienda senza internet: nessun dato esce, mai. Provala in 6 tappe.</small></span>
-        <span class="sv-test-freccia" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      </a>
-      <ul class="sv-punti"><li>Addestrata sui tuoi documenti</li><li>Voce, testo e immagini</li><li>Nel cloud o 100% in locale</li></ul>
-    </div>
-    <div class="sv-hero-media" aria-hidden="true">
-      <div class="sv-cornice"><video src="clip-consulente.mp4" autoplay muted loop playsinline preload="metadata" width="330" height="384"></video></div>
-      <div class="sv-bolla sv-bolla--a"><span class="sv-bolla-ico">🧠</span><span><b>"Qual è la procedura di fermo?"</b><small>risposta in 3 secondi · con la fonte</small></span></div>
-      <div class="sv-bolla sv-bolla--b"><span class="sv-bolla-ico">🔒</span><span><b>0 byte fuori dall'azienda</b><small>AI in locale</small></span></div>
-    </div>
+<!-- ============ INGRESSO: il bivio delle due strade ============ -->
+<header class="bv" id="bivio">
+  <picture class="bv-foto">
+    <source media="(max-width:700px) and (orientation:portrait)" srcset="/intelligenza-artificiale/bivio-m.webp">
+    <img id="bvImg" src="/intelligenza-artificiale/bivio.webp" width="1672" height="941" fetchpriority="high" alt="Due strade luminose si separano: a sinistra verso una città azzurra, a destra verso una città dorata al tramonto">
+  </picture>
+  <div class="bv-velo" aria-hidden="true"></div>
+  <div class="bv-testa">
+    <a class="pg-torna bv-torna" href="/#menu"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Torna dal robot</a>
+    <h1 class="bv-tit" aria-label="Benvenuto nel mondo AI"><span class="bv-par" aria-hidden="true">Benvenuto</span> <span class="bv-par" aria-hidden="true">nel mondo</span> <span class="bv-par bv-ai" aria-hidden="true">AI</span></h1>
+    <p class="bv-sub">Due strade per portare l'intelligenza artificiale nella tua azienda. <b>Scegli da dove partire.</b></p>
   </div>
+  <a class="bv-porta bv-porta--sx" href="#modelli" data-fine="455,455" data-vicino="700,680">
+    <span class="bv-btn"><b>Modelli AI</b><small>i più potenti, nel cloud</small></span>
+    <span class="bv-filo" aria-hidden="true"></span><span class="bv-faro" aria-hidden="true"></span>
+  </a>
+  <a class="bv-porta bv-porta--dx" href="#locale" data-fine="1215,455" data-vicino="985,680">
+    <span class="bv-btn"><b>AI in locale</b><small>dentro l'azienda, 0 dati fuori</small></span>
+    <span class="bv-filo" aria-hidden="true"></span><span class="bv-faro" aria-hidden="true"></span>
+  </a>
 </header>
 
+<!-- ============ STRADA 1: MODELLI AI ============ -->
+<section class="sv-sez md" id="modelli" aria-labelledby="mdTit"><div class="sv-in">
+  <div class="sv-testa sv-rivela">
+    <div class="pg-tag md-tag"><i></i> Strada 1 · Modelli AI</div>
+    <h2 id="mdTit" class="sv-h2">L'intelligenza artificiale entra in azienda. <em>A te basta una chiamata.</em></h2>
+    <p class="md-intro">ChatGPT, Claude, Gemini: i modelli di intelligenza artificiale diventano più bravi ogni mese. Il difficile non è averli, è <b>farli lavorare sui tuoi processi</b>. È quello che faccio io: scelgo il modello giusto per ogni compito, lo collego ai tuoi documenti, alla posta e al gestionale, e lo consegno pronto a chi lavora con te.</p>
+  </div>
+
+  <div class="md-divario sv-rivela">
+    <div class="md-col md-col--no">
+      <div class="md-col-tit">L'AI «fai da te»</div>
+      <ul>
+        <li>Un abbonamento per persona, ognuno la usa a modo suo</li>
+        <li>Non conosce i tuoi listini, le procedure, i clienti</li>
+        <li>Ogni volta si ricopia tutto a mano nella chat</li>
+        <li>Nessuno sa dove finiscono i dati inseriti</li>
+      </ul>
+    </div>
+    <div class="md-freccia" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="md-col md-col--si">
+      <div class="md-col-tit">L'AI portata da FUTURE AI</div>
+      <ul>
+        <li>Uno strumento solo, uguale per tutta l'azienda</li>
+        <li>Addestrata sui tuoi documenti: risponde come un collega esperto</li>
+        <li>Collegata a email, calendario, gestionale ed Excel</li>
+        <li>Dati trattati secondo GDPR e AI Act, messo per iscritto</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<section class="sv-sez sv-sez--alt"><div class="sv-in">
+  <div class="sv-testa sv-rivela"><div class="pg-tag">— Cosa vuol dire chiamarmi</div><h2 class="sv-h2">Dalla prima telefonata <em>all'AI al lavoro.</em></h2>
+    <p class="ai-testa-p">Non compri un software a scatola chiusa: costruiamo insieme lo strumento, un passo alla volta.</p></div>
+  <ol class="sv-passi">
+    <li class="sv-passo sv-rivela"><span class="sv-n">1</span><h3>Ci sentiamo</h3><p>Mi racconti come lavorate e dove si perde tempo. Senza impegno, senza gergo tecnico.</p></li>
+    <li class="sv-passo sv-rivela"><span class="sv-n">2</span><h3>Ti dico dove rende</h3><p>Individuo i compiti in cui l'AI fa davvero la differenza e ti porto una proposta chiara, con un prezzo definito.</p></li>
+    <li class="sv-passo sv-rivela"><span class="sv-n">3</span><h3>La provi sui tuoi dati</h3><p>In pochi giorni hai un primo prototipo funzionante, da provare sul lavoro vero prima di decidere.</p></li>
+    <li class="sv-passo sv-rivela"><span class="sv-n">4</span><h3>Resto al tuo fianco</h3><p>Installo, spiego al personale come usarla e la seguo nel tempo: quando esce un modello migliore, lo aggiorno io.</p></li>
+  </ol>
+</div></section>
+
 <section class="sv-sez"><div class="sv-in">
+  <div class="sv-testa sv-rivela"><div class="pg-tag">— I vantaggi</div><h2 class="sv-h2">Cosa cambia <em>il giorno dopo.</em></h2></div>
+  <div class="sv-griglia">
+    <article class="sv-card sv-rivela"><span class="sv-ico">⏱️</span><h3>Ore restituite</h3><p>Email da smistare, preventivi, schede, riassunti: il lavoro ripetitivo lo prepara l'AI, le persone controllano e decidono.</p></article>
+    <article class="sv-card sv-rivela"><span class="sv-ico">🎯</span><h3>Risposte in secondi, con la fonte</h3><p>Chiedi e ottieni la risposta con il documento da cui arriva: si verifica in un attimo, niente «me lo ha detto l'AI».</p></article>
+    <article class="sv-card sv-rivela"><span class="sv-ico">🌙</span><h3>Attiva 24 ore su 24</h3><p>Clienti e colleghi trovano risposte anche la sera e nel fine settimana, senza straordinari.</p></article>
+    <article class="sv-card sv-rivela"><span class="sv-ico">🧠</span><h3>Il sapere resta in azienda</h3><p>Quello che oggi sa solo il collega più esperto diventa patrimonio di tutti, anche quando è in ferie o va in pensione.</p></article>
+    <article class="sv-card sv-rivela"><span class="sv-ico">🚀</span><h3>Sempre il modello migliore</h3><p>Non resti legato a un fornitore: quando esce un'AI più brava o più economica, la cambiamo senza rifare nulla.</p></article>
+    <article class="sv-card sv-rivela"><span class="sv-ico">🤝</span><h3>Un referente solo</h3><p>Niente abbonamenti sparsi e assistenza in inglese: una persona che conosce la tua azienda e risponde al telefono.</p></article>
+  </div>
+</div></section>
+
+<section class="sv-sez sv-sez--alt"><div class="sv-in">
   <div class="sv-testa sv-rivela"><div class="pg-tag">— Cosa sappiamo creare</div><h2 class="sv-h2">Sei cose che l'AI fa già <em>per chi lavora con noi.</em></h2>
     <p class="ai-testa-p">Ogni esempio è un progetto vero, costruito e in uso.</p></div>
   <div class="sv-griglia">
@@ -100,6 +154,16 @@
     <article class="sv-card sv-rivela"><span class="sv-ico">🎨</span><h3>Immagini che mostrano il risultato</h3><p>Carichi una foto e l'AI mostra come verrà: un taglio, un colore, un ambiente.</p><p class="ai-es"><b>Esempio reale</b> · anteprima del look per un salone di parrucchieri.</p></article>
     <article class="sv-card sv-rivela"><span class="sv-ico">☎️</span><h3>Assistenti che rispondono</h3><p>Al telefono o in chat, 24 ore su 24: prendono prenotazioni e informazioni, e si presentano sempre come AI.</p><p class="ai-es"><b>Su misura</b> · per ristoranti, saloni, studi e negozi.</p></article>
   </div>
+  <div class="md-cta sv-rivela">
+    <div>
+      <h3>Parliamo della tua azienda.</h3>
+      <p>Una chiamata per capire dove l'intelligenza artificiale ti fa risparmiare tempo. Se non conviene, te lo dico subito.</p>
+    </div>
+    <div class="md-cta-az">
+      <a href="/contatti/" class="md-cta-btn">Chiamami <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="#locale" class="md-cta-alt">I dati non devono uscire? Prendi l'altra strada →</a>
+    </div>
+  </div>
 </div></section>
 
 <!-- ============ AI IN LOCALE: percorso interattivo ============ -->
@@ -107,7 +171,7 @@
   <div class="al-sfondo" aria-hidden="true"></div>
   <div class="al-in">
     <div class="al-testa">
-      <div class="al-tag"><i></i> AI in locale · sicurezza e privacy</div>
+      <div class="al-tag"><i></i> Strada 2 · AI in locale · sicurezza e privacy</div>
       <h2 id="alTit" class="al-tit">L'intelligenza artificiale <span>che non esce mai dall'azienda.</span></h2>
       <p class="al-sub">Un assistente che conosce le vostre procedure, registra guasti e manutenzioni e risponde in pochi secondi — <b>senza internet, senza cloud</b>, su un computer dedicato dentro la vostra rete. Percorrilo in 6 tappe.</p>
     </div>
@@ -766,6 +830,33 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
 </script>
 
 <script>
+/* bivio: ogni pulsante si appoggia alla fine della sua strada nella foto.
+   La foto e' in "cover", quindi si ricalcola la posizione a ogni ridimensionamento;
+   se la fine strada esce dallo schermo (telefono in verticale) si usa un punto piu' vicino. */
+(function(){
+  var sez=document.getElementById('bivio'),img=document.getElementById('bvImg');if(!sez||!img)return;
+  var porte=[].slice.call(sez.querySelectorAll('.bv-porta'));
+  function pt(s){var a=s.split(',');return[+a[0],+a[1]];}
+  function piazza(){
+    var W=sez.clientWidth,H=sez.clientHeight,iw=1672,ih=941,k=Math.max(W/iw,H/ih),ox=(W-iw*k)/2,oy=(H-ih*k)/2;
+    var fuori=porte.some(function(p){var q=pt(p.dataset.fine),x=ox+q[0]*k;return x<90||x>W-90;});
+    var filo=Math.max(40,Math.min(90,H*.07));
+    porte.forEach(function(p){
+      var q=pt(fuori?p.dataset.vicino:p.dataset.fine),x=ox+q[0]*k,y=oy+q[1]*k;
+      var bw=p.querySelector('.bv-btn').offsetWidth/2+10;
+      p.style.left=x+'px';p.style.top=y+'px';p.style.setProperty('--filo',filo+'px');
+      /* se il pulsante sborda, lo si sposta dentro lasciando il faro sul punto */
+      var d=Math.max(0,bw-x)-Math.max(0,x+bw-W);p.querySelector('.bv-btn').style.marginLeft=d+'px';
+      p.classList.add('pronta');
+    });
+  }
+  window.addEventListener('resize',piazza);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(piazza);
+  if(img.complete)piazza();else img.addEventListener('load',piazza);
+  setTimeout(piazza,50);
+})();
+</script>
+<script>
 /* le sezioni delle pagine servizio entrano con una leggera salita */
 (function(){var el=[].slice.call(document.querySelectorAll('.sv-rivela'));if(!el.length)return;
   if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){el.forEach(function(e){e.classList.add('vista');});return;}
@@ -776,6 +867,74 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
 .ai-testa-p{color:var(--ink-muted);margin:.8rem 0 0}
 .ai-es{margin-top:.8rem!important;padding-top:.7rem;border-top:1px dashed var(--line);font-size:.85rem!important;color:var(--ink)!important}
 .ai-es b{color:var(--acqua)}
+/* ===== ingresso: il bivio ===== */
+.bv{position:relative;isolation:isolate;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:#0b1428;color:#fff}
+.bv-foto,.bv-foto img{position:absolute;inset:0;width:100%;height:100%}
+.bv-foto img{object-fit:cover;object-position:50% 50%;transform:scale(1.08);animation:bvZoom 2.6s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes bvZoom{to{transform:none}}
+.bv-velo{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(6,10,24,.78) 0%,rgba(6,10,24,.35) 22%,rgba(6,10,24,0) 40%,rgba(6,10,24,0) 78%,rgba(6,10,24,.45) 100%)}
+.bv-testa{position:relative;z-index:2;text-align:center;padding:clamp(5.2rem,11vh,7rem) 1.25rem 0;max-width:78rem;margin:0 auto}
+.bv-torna{color:#fff;border-color:rgba(255,255,255,.3);background:rgba(8,11,20,.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.bv-tit{margin:1.1rem 0 0;font:800 clamp(2.1rem,5.4vw,5rem)/.95 'Bricolage Grotesque',sans-serif;letter-spacing:-.035em;text-transform:uppercase;
+  text-shadow:0 4px 40px rgba(0,0,0,.45)}
+.bv-par{display:inline-block;opacity:0;transform:translateY(.5em);filter:blur(10px);animation:bvEntra 1s cubic-bezier(.2,.8,.2,1) forwards}
+.bv-par:nth-child(2){animation-delay:.18s}
+.bv-par:nth-child(3){animation-delay:.36s}
+.bv-ai{background:linear-gradient(100deg,#8C7BFF,#4DE8F0 50%,#FFC27A);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
+@keyframes bvEntra{to{opacity:1;transform:none;filter:blur(0)}}
+.bv-ai{animation-name:bvEntraAI}
+@keyframes bvEntraAI{to{opacity:1;transform:none;filter:drop-shadow(0 2px 0 rgba(6,10,24,.55)) drop-shadow(0 0 22px rgba(77,217,224,.55))}}
+.bv-sub{margin:1rem auto 0;max-width:34rem;font-size:clamp(1rem,1.5vw,1.15rem);line-height:1.55;color:rgba(255,255,255,.9);text-shadow:0 2px 16px rgba(0,0,0,.6);
+  opacity:0;animation:bvEntra .9s .7s forwards}
+/* le due porte: il punto e' la fine della strada, il pulsante sta sopra */
+.bv-porta{position:absolute;z-index:3;left:0;top:0;width:0;height:0;text-decoration:none;color:#fff;opacity:0;transition:opacity .6s}
+.bv-porta.pronta{opacity:1}
+.bv-faro{position:absolute;left:-7px;top:-7px;width:14px;height:14px;border-radius:50%;background:var(--c);box-shadow:0 0 0 4px rgba(255,255,255,.25),0 0 24px 6px var(--c)}
+.bv-faro::after{content:"";position:absolute;inset:-10px;border-radius:50%;border:2px solid var(--c);animation:bvOnda 2s ease-out infinite}
+@keyframes bvOnda{from{transform:scale(.4);opacity:1}to{transform:scale(2.2);opacity:0}}
+.bv-filo{position:absolute;left:-1px;top:0;width:2px;height:var(--filo,56px);background:linear-gradient(180deg,var(--c),rgba(255,255,255,.15))}
+.bv-btn{position:absolute;left:0;top:var(--filo,56px);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.15rem;white-space:nowrap;
+  padding:.85rem 1.5rem;border-radius:18px;background:rgba(8,12,28,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.28);box-shadow:0 18px 40px -14px rgba(0,0,0,.6),0 0 0 1px var(--c) inset,0 0 34px -6px var(--c);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),background .3s,box-shadow .3s}
+.bv-btn b{font:800 clamp(1rem,1.5vw,1.25rem)/1 'Bricolage Grotesque',sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.bv-btn small{font-size:.78rem;color:rgba(255,255,255,.8)}
+.bv-porta:hover .bv-btn,.bv-porta:focus-visible .bv-btn{transform:translateX(-50%) translateY(4px);background:rgba(8,12,28,.78);box-shadow:0 24px 50px -14px rgba(0,0,0,.7),0 0 0 1px var(--c) inset,0 0 50px -2px var(--c)}
+.bv-porta:focus-visible{outline:none}
+.bv-porta--sx{--c:#4DD9E0}
+.bv-porta--dx{--c:#FFB768}
+@media(max-width:700px){.bv-btn{padding:.7rem 1rem}.bv-btn small{font-size:.7rem}}
+@media(prefers-reduced-motion:reduce){.bv-foto img,.bv-par,.bv-sub{animation:none;opacity:1;transform:none;filter:none}.bv-faro::after{animation:none}}
+/* ===== strada 1: modelli AI ===== */
+.md{scroll-margin-top:60px}
+.md-tag{display:inline-flex;align-items:center;gap:.5rem;margin-top:0}
+.md-tag i{width:9px;height:9px;border-radius:50%;background:#4DD9E0;box-shadow:0 0 12px #4DD9E0}
+.md-intro{color:var(--ink-muted);font-size:1.08rem;line-height:1.7;margin:1.1rem 0 0}
+.md-intro b{color:var(--ink)}
+.md-divario{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:stretch;max-width:980px;margin:0 auto}
+.md-col{border-radius:22px;padding:1.6rem 1.5rem;border:1px solid var(--line)}
+.md-col--no{background:var(--paper-2)}
+.md-col--si{background:#101A33;color:#fff;box-shadow:0 30px 70px -30px rgba(20,33,61,.7);position:relative;overflow:hidden}
+.md-col--si::before{content:"";position:absolute;inset:-50% -30% auto 40%;height:140%;background:radial-gradient(circle,rgba(77,217,224,.22),transparent 60%);pointer-events:none}
+.md-col-tit{font:800 1.15rem 'Bricolage Grotesque',sans-serif;letter-spacing:-.02em;position:relative}
+.md-col ul{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.7rem;position:relative}
+.md-col li{position:relative;padding-left:1.7rem;line-height:1.5;font-size:.96rem}
+.md-col--no li{color:var(--ink-muted)}
+.md-col--no li::before{content:"✕";position:absolute;left:0;color:#c2398f;font-weight:700}
+.md-col--si li{color:#DCE3F2}
+.md-col--si li::before{content:"✓";position:absolute;left:0;color:#4DD9E0;font-weight:700}
+.md-freccia{display:grid;place-items:center;color:var(--violet-ink)}
+.md-cta{margin-top:clamp(2.5rem,5vw,3.5rem);display:flex;align-items:center;justify-content:space-between;gap:1.5rem 2.5rem;flex-wrap:wrap;
+  padding:clamp(1.5rem,4vw,2.4rem);border-radius:26px;background:linear-gradient(120deg,#1A2A6C,#3b2f9e 55%,#0f6f7e);color:#fff;box-shadow:0 40px 80px -40px rgba(20,33,61,.8)}
+.md-cta h3{font:800 clamp(1.5rem,3vw,2.1rem)/1.1 'Bricolage Grotesque',sans-serif;letter-spacing:-.03em}
+.md-cta p{margin:.5rem 0 0;color:rgba(255,255,255,.85);max-width:32rem;line-height:1.6}
+.md-cta-az{display:flex;flex-direction:column;align-items:flex-start;gap:.8rem}
+.md-cta-btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 1.7rem;border-radius:100px;background:#fff;color:#1A2A6C;text-decoration:none;
+  font:800 1.05rem 'Bricolage Grotesque',sans-serif;transition:transform .25s,box-shadow .25s}
+.md-cta-btn:hover{transform:translateY(-3px);box-shadow:0 14px 30px -10px rgba(0,0,0,.5)}
+.md-cta-alt{color:#BDF3F7;font-size:.92rem;text-decoration:none;border-bottom:1px solid rgba(189,243,247,.4)}
+@media(max-width:800px){.md-divario{grid-template-columns:1fr}.md-freccia{transform:rotate(90deg)}}
 /* ===== percorso AI in locale ===== */
 .al{position:relative;isolation:isolate;overflow:hidden;background:#070B18;color:#E8EDF8;padding:clamp(4rem,9vw,7rem) clamp(1rem,4vw,2.5rem);scroll-margin-top:60px}
 .al-sfondo{position:absolute;inset:0;z-index:-1;
