@@ -1737,3 +1737,17 @@ html .ft-legale a{color:#C9D1E3}
 @media(max-width:900px){.ft-griglia{grid-template-columns:1fr 1fr}.ft-marchio,.ft-richiamo{grid-column:1/-1}}
 @media(max-width:520px){.ft-griglia{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.fai-firma{transition:none}.fai-firma:hover{transform:none}}
+
+/* ===== HERO DA TELEFONO: il logo dei droni come insegna in cima ===== */
+@media(max-width:900px){
+  .hero.con-video{padding-top:calc(4.2rem + 60vw)}
+  .hero.con-video .hero-logo{display:none}
+  html .hero.con-video .hero-bg{position:absolute;inset:auto;top:3.6rem;left:-10vw;width:120vw;height:67.5vw;object-fit:cover;opacity:1;
+    -webkit-mask:radial-gradient(ellipse 48% 50% at 50% 50%,#000 60%,transparent 100%);mask:radial-gradient(ellipse 48% 50% at 50% 50%,#000 60%,transparent 100%)}
+  html .hero.con-video .hero-bg-velo{background:linear-gradient(180deg,var(--dark) 0%,rgba(8,11,20,0) 8%,rgba(8,11,20,0) 42%,var(--dark) 58%,var(--dark) 100%)}
+}
+
+/* menu a tutto schermo: 11 voci, una colonna sola su telefono, due da computer se serve */
+html .menu-link-testo{font-size:clamp(1.45rem,3.4vh,2.3rem);line-height:1.1}
+html .menu-link{padding:.2rem 0}
+@media(min-width:901px) and (max-height:820px){html .menu-voci{display:grid;grid-template-columns:1fr 1fr;column-gap:2.5rem}}
