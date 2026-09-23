@@ -373,10 +373,48 @@ nav{
 .hero p{margin:0 0 2rem;max-width:48ch;}
 .hero-buttons{justify-content:flex-start;}
 
-/* a due colonne il titolo ha meno larghezza: scala giù per non spezzarsi male */
+/* ===== HERO: titolo e pulsanti con un carattere loro =====
+   Bricolage Grotesque per il titolo e i pulsanti, l'accento in corsivo
+   con grazie (Instrument Serif): la coppia da studio di design, lontana
+   dal solito bastoni "da IA". Le parole entrano una alla volta. */
+.hero h1.hero-tit{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-variation-settings:'opsz' 96;
+  letter-spacing:-0.03em;line-height:0.98;animation:none}
+.hero-tit em{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-0.01em;font-size:1.1em;
+  background:linear-gradient(100deg,#9B7FF8 0%,#4DD9E0 45%,#ff6ec7 75%,#9B7FF8 100%);background-size:250% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:gradientShift 7s ease infinite;
+  padding-right:.08em}
+.hero-tit .w{display:inline-block;opacity:0;filter:blur(14px);transform:translateY(.35em);
+  animation:parola .9s cubic-bezier(.2,.75,.2,1) forwards;animation-delay:calc(var(--i) * 95ms + 150ms)}
+.hero-tit em .w{background:inherit;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+@keyframes parola{to{opacity:1;filter:none;transform:none}}
+.hero-badge{font-family:'Bricolage Grotesque',sans-serif;font-weight:500;letter-spacing:.01em}
+.hero-btn{position:relative;overflow:hidden;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1.02rem;
+  letter-spacing:-.01em;padding:1rem 1.7rem;gap:.55rem;will-change:transform}
+.hero-btn .rotola{display:inline-block;overflow:hidden;height:1.25em;line-height:1.25em}
+.hero-btn .rotola span{display:block;transition:transform .5s cubic-bezier(.7,0,.2,1)}
+.hero-btn .rotola span::after{content:attr(data-t);display:block}
+.hero-btn:hover .rotola span,.hero-btn:focus-visible .rotola span{transform:translateY(-50%)} /* lo span contiene due righe: meta' = una riga */
+.hero-btn svg{transition:transform .35s cubic-bezier(.7,0,.2,1)}
+.hero-btn.btn-primary:hover svg{transform:translateY(3px)}
+.hero-btn.btn-secondary:hover svg{transform:translateX(3px)}
+.hero-btn.btn-primary::before{content:"";position:absolute;inset:0;transform:translateX(-120%) skewX(-20deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transition:transform .8s ease}
+.hero-btn.btn-primary:hover::before{transform:translateX(120%) skewX(-20deg)}
+.hero-btn.btn-secondary{border-color:rgba(255,255,255,.22);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+@media(prefers-reduced-motion:reduce){.hero-tit .w{animation:none;opacity:1;filter:none;transform:none}}
+/* da computer: testo a sinistra, logo del video al centro, telefono a destra.
+   Il testo ha una larghezza fissa e non arriva mai sopra al logo. */
 @media(min-width:901px){
-  .hero h1{font-size:clamp(2.4rem,3.9vw,3.3rem);letter-spacing:-0.03em;}
+  .hero-inner{grid-template-columns:minmax(0,33rem) 1fr auto;}
+  .hero-media{grid-column:3;}
+  .hero h1.hero-tit{font-size:clamp(2.7rem,4.2vw,4.1rem);}
+  /* il velo resta scuro solo sotto al testo: al centro il logo deve vedersi pieno */
+  .hero.con-video .hero-bg-velo{background:linear-gradient(90deg,rgba(8,11,20,.85) 0%,rgba(8,11,20,.55) 30%,rgba(8,11,20,0) 42%,rgba(8,11,20,0) 72%,rgba(8,11,20,.2) 100%),linear-gradient(180deg,var(--dark) 0%,rgba(8,11,20,0) 22%,rgba(8,11,20,0) 80%,var(--dark) 100%)}
+  .hero.con-video .hero-bg{inset:auto;opacity:1;object-fit:contain;
+    -webkit-mask:radial-gradient(ellipse 50% 50% at 50% 50%,#000 55%,transparent 100%);mask:radial-gradient(ellipse 50% 50% at 50% 50%,#000 55%,transparent 100%)}
 }
+/* a due colonne il titolo ha meno larghezza: scala giù per non spezzarsi male */
+
 
 .hero-media{
   justify-self:end;
@@ -1843,19 +1881,13 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
     <img class="hero-logo" src="img/92ff8bb4.webp" alt="FutureAI Logo">
     <div class="hero-badge">
       <span class="hero-badge-dot"></span>
-      Sviluppo con intelligenza artificiale
+      Siti · App · Automazioni · Giochi — creati con l'IA
     </div>
-    <h1>Costruiamo con l'IA<br><span class="gradient-text">quello che gli altri raccontano.</span></h1>
-    <p>Siti che si muovono, app che rispondono, giochi con il tuo marchio. Da qui in poi, guarda con i tuoi occhi.</p>
+    <h1 class="hero-tit" aria-label="Non temere l'IA. Mettila al lavoro."><span class="w" style="--i:0" aria-hidden="true">Non</span> <span class="w" style="--i:1" aria-hidden="true">temere</span> <span class="w" style="--i:2" aria-hidden="true">l'IA.</span><br><em><span class="w" style="--i:3" aria-hidden="true">Mettila</span> <span class="w" style="--i:4" aria-hidden="true">al</span> <span class="w" style="--i:5" aria-hidden="true">lavoro.</span></em></h1>
+    <p>Usiamo l'intelligenza artificiale per costruire siti, app, automazioni e giochi su misura, in tempi che prima erano impensabili. Questo sito ne è la prova: entra e guardalo muoversi.</p>
     <div class="hero-buttons">
-      <a href="#servizi" class="btn-primary">
-        Entra
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <a href="#contatti" class="btn-secondary">
-        Parliamone
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+      <a href="#servizi" class="btn-primary hero-btn"><span class="rotola"><span data-t="Entra">Entra</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="#contatti" class="btn-secondary hero-btn"><span class="rotola"><span data-t="Parliamone">Parliamone</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
     </div>
 
@@ -3388,6 +3420,30 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     c.addEventListener('pointerleave', raddrizza);
     c.addEventListener('pointercancel', raddrizza);
   });
+})();
+</script>
+
+<script>
+(function(){
+  var hero=document.getElementById('hero'),v=hero&&hero.querySelector('.hero-bg'),copy=hero&&hero.querySelector('.hero-copy'),media=hero&&hero.querySelector('.hero-media');
+  if(!v||!copy||!media)return;
+  // il logo occupa circa un terzo della larghezza del video (scritta compresa):
+  // dimensiono il video perche' il logo riempia lo spazio tra testo e telefono
+  function posa(){
+    if(innerWidth<901){v.style.cssText='';return;}
+    var r=hero.getBoundingClientRect(),a=copy.getBoundingClientRect().right,b=media.getBoundingClientRect().left;
+    var spazio=Math.max(200,b-a),centro=(a+b)/2-r.left,w=Math.min(spazio*0.92/0.34,r.width*1.25),h=w*9/16;
+    v.style.width=w+'px';v.style.height=h+'px';v.style.left=(centro-w/2)+'px';v.style.top=(r.height*0.5-h*0.47)+'px';
+  }
+  posa();addEventListener('resize',posa);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(posa);
+  // calamita: il pulsante segue appena il puntatore
+  if(matchMedia('(hover:hover)').matches&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    hero.querySelectorAll('.hero-btn').forEach(function(bt){
+      bt.addEventListener('mousemove',function(e){var q=bt.getBoundingClientRect();
+        bt.style.transform='translate('+((e.clientX-q.left-q.width/2)*.18).toFixed(1)+'px,'+((e.clientY-q.top-q.height/2)*.28).toFixed(1)+'px)';});
+      bt.addEventListener('mouseleave',function(){bt.style.transform='';});
+    });
+  }
 })();
 </script>
 
