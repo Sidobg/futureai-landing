@@ -23,7 +23,10 @@
      schermi orizzontali, intro-m/ ritaglio centrale 540x720 portato a 720x960 per i telefoni
      in verticale, che del 16:9 vedono solo quella striscia. -->
 <style>
-.ingresso{position:relative;height:450vh;background:#05070d;z-index:5}
+/* la hero scorre gia' SOTTO l'ultima schermata dell'ingresso (margine negativo):
+   il bianco del portone si dissolve direttamente nella hero, senza stacco */
+.ingresso{position:relative;height:560vh;background:transparent;z-index:20;margin-bottom:-100vh}
+.ing-fisso{background:#05070d}
 .ing-fisso{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 .ing-tela{position:absolute;inset:0;width:100%;height:100%;display:block;transform-origin:center;will-change:transform}
 .ing-velo{position:absolute;inset:0;pointer-events:none;
@@ -76,7 +79,7 @@
 nav,.music-toggle{transition:opacity .4s ease}
 body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:none}
 @media (max-width:700px){
-  .ingresso{height:400vh}
+  .ingresso{height:500vh}
   .ing-velo{background:linear-gradient(180deg,rgba(5,7,13,.45),rgba(5,7,13,.15) 40%,rgba(5,7,13,.15) 60%,rgba(5,7,13,.6))}
   .ing-marchio{top:auto;bottom:24vh;transform:none}
   /* su telefono due righe pulite: il puntino diventa un a capo */
@@ -153,7 +156,9 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
   function lim(v,a,b){return Math.min(b,Math.max(a,v));}
   function avanzamento(){var r=sez.getBoundingClientRect(),corsa=r.height-innerHeight;return corsa>0?lim(-r.top/corsa,0,1):0;}
   // il video occupa l'88% della corsa; nell'ultimo tratto il bianco si scioglie nel sito
-  var FINE_VIDEO=.9;
+  // il video finisce presto: poi la frase resta a lungo sul bianco, e nell'ultima
+  // schermata tutto l'ingresso sfuma lasciando vedere la hero che c'e' sotto
+  var FINE_VIDEO=.62, fisso=sez.querySelector('.ing-fisso');
   var obiettivo=avanzamento(), att=lim(obiettivo/FINE_VIDEO,0,1), prog=obiettivo, raf=0, visibile=true;
 
   function applica(){
@@ -165,19 +170,22 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
     marchio.style.filter='blur('+((1-m)*10)+'px)';
     marchio.style.transform=(innerWidth>700?'translateY(-50%) ':'')+'translateY('+((1-m)*-28)+'px) scale('+(.96+m*.04)+')';
     invito.style.opacity=prog>.015?0:1;
-    var f=lim((prog-.76)/.07,0,1)*(1-lim((prog-.9)/.05,0,1));
+    var f=lim((prog-.56)/.06,0,1);
     frase.style.opacity=f;
     frase.style.filter='blur('+((1-f)*8)+'px)';
     frase.style.transform='translateY('+((1-f)*18)+'px)';
-    uscita.style.opacity=lim((prog-.93)/.06,0,1);
-    salta.style.opacity=prog>.97?0:1;
+    uscita.style.opacity=0;
+    var r=sez.getBoundingClientRect(),dissolvi=lim(r.bottom/innerHeight-1,0,1);
+    fisso.style.opacity=dissolvi;fisso.style.pointerEvents=dissolvi<.3?'none':'';
+    document.body.classList.toggle('in-ingresso',dissolvi>.35);
+    salta.style.opacity=dissolvi<.9?0:1;
     barra.style.transform='scaleX('+prog+')';
   }
   function giro(){
     raf=0; obiettivo=avanzamento();
     // quando lo schermo dell'ingresso comincia a uscire, niente rincorsa:
     // deve essere gia' scuro, anche con uno scroll velocissimo
-    var esce=sez.getBoundingClientRect().bottom<innerHeight+1;
+    var esce=sez.getBoundingClientRect().bottom<innerHeight*2;
     prog+= (fermo||esce) ? (obiettivo-prog) : (obiettivo-prog)*.12;
     if(Math.abs(obiettivo-prog)<.0005)prog=obiettivo;
     applica();
@@ -190,15 +198,14 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
   // fuori schermo non si calcola niente; menu e musica tornano quando si esce
   new IntersectionObserver(function(es){
     visibile=es[0].isIntersecting;
-    document.body.classList.toggle('in-ingresso',visibile&&avanzamento()<.97);
+    if(!visibile)document.body.classList.remove('in-ingresso');
     if(visibile){sveglia();prossimo();}
   }).observe(sez);
-  addEventListener('scroll',function(){document.body.classList.toggle('in-ingresso',visibile&&avanzamento()<.97);},{passive:true});
 
   // salto secco: il sito ha scroll-behavior:smooth e un gestore che rende
   // morbidi tutti i link #, che qui farebbero ripassare tutto il video
   salta.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();
-    var y=sez.getBoundingClientRect().bottom+scrollY; prog=obiettivo=1; applica(); window.scrollTo({top:y,behavior:'instant'});});
+    var y=sez.getBoundingClientRect().bottom+scrollY-innerHeight; prog=obiettivo=1; window.scrollTo({top:y,behavior:'instant'}); applica();});
 
   misura(); applica();
 })();
@@ -290,7 +297,7 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
      scena si tuffa verso la voce e si apre la sua pagina. Video Gemini
      ripuliti dalla stellina (menu/citta.mp4, menu/robot.mp4). -->
 <style>
-.rm{position:relative;height:calc(100vh + 9 * 52vh);background:#efeae0;color:var(--navy2,#1A2A6C)}
+.rm{position:relative;height:calc(100vh + 9 * 36vh);background:#efeae0;color:var(--navy2,#1A2A6C)}
 .rm-fisso{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 .rm-scena{position:absolute;inset:0;transform-origin:var(--ox,70%) var(--oy,50%);transition:transform .9s cubic-bezier(.7,0,.3,1),filter .9s}
 .rm.via .rm-scena{transform:scale(3.2);filter:blur(10px) brightness(1.4)}
@@ -315,7 +322,14 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
 .rm-intro{margin-bottom:.6rem}
 .rm-tag{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:#4b58a0}
 .rm-titolo{font:800 clamp(1.5rem,2.6vw,2.3rem)/1.05 'Bricolage Grotesque',sans-serif;letter-spacing:-.03em;color:#1A2A6C;margin:.5rem 0 0}
-.rm-titolo em{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-style:italic;color:#6C63FF}
+.rm-titolo em{position:relative;display:inline-block;margin-top:.12em;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-style:normal;
+  font-size:2.1em;line-height:.95;letter-spacing:-.045em;padding:0 .12em;
+  background:linear-gradient(100deg,#4b2fd6 0%,#6C63FF 35%,#0f8f9e 70%,#4b2fd6 100%);background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:gradientShift 6s ease infinite}
+/* pennellata di evidenziatore dietro «Si vive.» */
+.rm-titolo em::before{content:"";position:absolute;left:0;right:0;bottom:.08em;height:.36em;z-index:-1;border-radius:.2em;
+  background:linear-gradient(90deg,rgba(77,217,224,.55),rgba(108,99,255,.35));transform:skewX(-8deg)}
+.rm-titolo{position:relative;z-index:0}
 .rm-spiega{margin:.45rem 0 0;color:#2c3659;font-size:clamp(.88rem,1.1vw,1rem);max-width:34rem}
 .rm-finestra{position:relative;height:min(52vh,470px);overflow:hidden;
   -webkit-mask:linear-gradient(180deg,transparent 0,#000 22%,#000 78%,transparent 100%);mask:linear-gradient(180deg,transparent 0,#000 22%,#000 78%,transparent 100%)}
@@ -344,10 +358,12 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
 @media (max-width:760px){
   .rm-griglia{grid-template-columns:38% minmax(0,1fr);gap:.8rem}
   .rm-capsula{width:100%}
-  .rm-fumetto{left:30%;top:2%;font-size:.74rem;max-width:9.5rem}
+  /* da telefono il fumetto sta in basso nella capsula, sulle gambe: in alto copriva la faccia */
+  .rm-fumetto{left:6%;right:6%;top:auto;bottom:3.4rem;max-width:none;font-size:.72rem;text-align:center;border-radius:12px}
+  .rm-lista{transition-duration:.45s}
   .rm-nome{font-size:clamp(1.45rem,7vw,2.1rem)}
   .rm-desc{font-size:.84rem}
-  .rm-titolo{font-size:1.2rem}.rm-spiega{display:none}.rm-tag{font-size:.6rem}
+  .rm-titolo{font-size:1rem}.rm-spiega{display:none}.rm-tag{font-size:.6rem}
   .rm-finestra{height:min(46vh,380px)}
   .rm-velo{background:linear-gradient(90deg,rgba(245,242,235,.1),rgba(245,242,235,.9) 45%),linear-gradient(180deg,rgba(8,11,20,.6),rgba(8,11,20,0) 14%)}
   .rm-punti{right:-.4rem}
@@ -441,8 +457,20 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
   // la sezione e' alta ~5 schermate: il saluto parte appena ne entra la cima
   new IntersectionObserver(function(es){if(es[0].isIntersecting&&!salutato){salutato=true;fum.classList.add('on');
     pezzo('saluta',function(){tFum=setTimeout(function(){fum.classList.remove('on');},1600);pezzo('attesa',null,true);});}},{threshold:0,rootMargin:'0px 0px -40% 0px'}).observe(sez);
-  misura();addEventListener('resize',function(){misura();att=-1;aggiorna();});
+  // su telefono la barra del browser che compare e sparisce manda 'resize' di continuo:
+  // si ricalcola solo se cambia davvero la larghezza, altrimenti il robot ripartiva a ogni scatto
+  var largo=innerWidth;
+  misura();addEventListener('resize',function(){if(innerWidth===largo)return;largo=innerWidth;misura();att=-1;aggiorna();});
   addEventListener('scroll',aggiorna,{passive:true});aggiorna();
+  // quando smetti di scorrere dentro il menu, la pagina si assesta sulla voce al centro:
+  // niente agganci del browser, che con scatti corti della rotella riportano indietro
+  var tAss=0,dito=false;
+  function assesta(){var r=sez.getBoundingClientRect(),c=r.height-innerHeight;if(dito||uscendo||r.top>0||r.bottom<innerHeight||att<0)return;
+    var meta=scrollY+r.top+c*(att+0.5)/VOCI.length;if(Math.abs(meta-scrollY)>6)scrollTo({top:meta,behavior:'smooth'});}
+  function prenota(){clearTimeout(tAss);tAss=setTimeout(assesta,220);}
+  addEventListener('touchstart',function(){dito=true;clearTimeout(tAss);},{passive:true});
+  addEventListener('touchend',function(){dito=false;prenota();},{passive:true});
+  addEventListener('scroll',prenota,{passive:true});
   // tornando indietro dalla pagina, la scena deve essere di nuovo a posto
   addEventListener('pageshow',function(){uscendo=false;sez.classList.remove('via');fum.classList.remove('on');});
 })();
