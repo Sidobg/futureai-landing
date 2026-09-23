@@ -95,7 +95,16 @@
   <header class="strada-cop">
     <div class="strada-tag"><i></i> Strada 1</div>
     <h2 class="strada-tit">Modelli AI</h2>
-    <p class="strada-sub">I modelli di intelligenza artificiale più potenti al mondo, messi al lavoro dentro la tua azienda.</p>
+    <div class="strada-testo">
+    <p class="strada-sub">Sono le intelligenze artificiali più avanzate mai costruite, come <b>ChatGPT, Claude e Gemini</b>: hanno imparato da più testi di quanti una persona potrebbe leggere in mille vite. Scrivono, ragionano, traducono, analizzano documenti e numeri, capiscono la voce e le immagini.</p>
+    <p class="strada-sub strada-sub--forte">Noi le colleghiamo alla tua azienda: diventano un collega instancabile che conosce i tuoi clienti, i tuoi listini e le tue procedure. <b>Quello che prima richiedeva ore, ora richiede secondi.</b></p>
+    </div>
+    <ul class="strada-poteri">
+      <li><span class="strada-ico" aria-hidden="true">✍️</span><b>Scrive e risponde</b><span>Email, preventivi, offerte, risposte ai clienti: pronte in pochi secondi, con il tuo tono.</span></li>
+      <li><span class="strada-ico" aria-hidden="true">📊</span><b>Legge e analizza</b><span>Contratti, listini, fatture, fogli Excel: trova l'informazione e ti dice cosa conta davvero.</span></li>
+      <li><span class="strada-ico" aria-hidden="true">🎙️</span><b>Ascolta e vede</b><span>Capisce la voce, legge foto e documenti scansionati, trascrive e riassume le riunioni.</span></li>
+      <li><span class="strada-ico" aria-hidden="true">⚡</span><b>Lavora mentre fai altro</b><span>Collegata a email, calendario e gestionale, fa da sola i passaggi ripetitivi, giorno e notte.</span></li>
+    </ul>
     <div class="strada-az">
       <a href="#bivio" class="strada-torna"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Torna al bivio</a>
     </div>
@@ -185,7 +194,16 @@
   <header class="strada-cop">
     <div class="strada-tag"><i></i> Strada 2</div>
     <h2 class="strada-tit">AI in locale</h2>
-    <p class="strada-sub">L'intelligenza artificiale che vive dentro l'azienda: senza internet, senza cloud. Nessun dato esce, mai.</p>
+    <div class="strada-testo">
+    <p class="strada-sub">La stessa intelligenza straordinaria, ma <b>installata su un computer dentro la tua azienda</b>. Non passa da internet e non manda nulla a server esterni: progetti, clienti, ricette e segreti industriali restano tra le tue mura.</p>
+    <p class="strada-sub strada-sub--forte">È l'AI per chi non può permettersi che i dati escano: <b>tutta la potenza dell'intelligenza artificiale, zero rischi per i tuoi dati.</b></p>
+    </div>
+    <ul class="strada-poteri">
+      <li><span class="strada-ico" aria-hidden="true">🔒</span><b>Nessun dato esce</b><span>Nessun documento lascia l'azienda: riservatezza e segreto industriale garantiti per come è costruita.</span></li>
+      <li><span class="strada-ico" aria-hidden="true">📡</span><b>Va anche senza internet</b><span>Se la linea cade lavora lo stesso: in ufficio, in reparto, in magazzino.</span></li>
+      <li><span class="strada-ico" aria-hidden="true">📚</span><b>Sa tutto quello che sapete voi</b><span>Manuali, procedure, storico dei guasti: risponde in pochi secondi e cita il documento da cui prende la risposta.</span></li>
+      <li><span class="strada-ico" aria-hidden="true">♾️</span><b>Usala quanto vuoi</b><span>Il computer è vostro: nessun costo per ogni domanda, nessun limite di utilizzo.</span></li>
+    </ul>
     <div class="strada-az">
       <a href="#bivio" class="strada-torna"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Torna al bivio</a>
     </div>
@@ -902,7 +920,7 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
   function velo(){
     strade.forEach(function(s){if(s.hidden)return;
       var r=s.getBoundingClientRect(),h=innerHeight,p=Math.min(1,Math.max(0,(-r.top-h*.25)/(h*.55)));
-      s.style.setProperty('--velo',(p*.9).toFixed(3));});
+      s.style.setProperty('--velo',(p*.5).toFixed(3));});
   }
   addEventListener('scroll',velo,{passive:true});addEventListener('resize',velo);
   function daHash(){var h=location.hash.replace('#','').replace('strada-','');
@@ -971,7 +989,7 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
 .strada--modelli{--velo-c:#F7F5F0;--acc:#4DD9E0}
 .strada--locale{--velo-c:linear-gradient(160deg,#E6F6F2 0%,#EEF3FF 55%,#F3EEFF 100%);--acc:#FFB768}
 .strada-cop{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;text-align:center;color:#fff;
-  padding:clamp(6rem,14vh,8.5rem) 1.25rem 2rem;background:linear-gradient(180deg,rgba(6,10,24,.72) 0%,rgba(6,10,24,.42) 34%,rgba(6,10,24,0) 55%,rgba(6,10,24,0) 82%,rgba(6,10,24,.35) 100%)}
+  padding:clamp(6rem,14vh,8.5rem) 1.25rem 2rem;background:linear-gradient(180deg,rgba(6,10,24,.72) 0%,rgba(6,10,24,.42) 34%,rgba(6,10,24,0) 55%,rgba(6,10,24,0) 100%)}
 .strada-tag{display:inline-flex;align-items:center;gap:.55rem;font:700 .78rem 'Space Mono',monospace;letter-spacing:.22em;text-transform:uppercase;color:#fff;
   padding:.45rem .9rem;border-radius:100px;background:rgba(8,12,28,.4);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .strada-tag i{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 12px var(--acc)}
@@ -986,6 +1004,28 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
 @keyframes stradaGiu{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 html .strada .sv-sez,html .strada .sv-sez--alt,html .strada .al{background:transparent}
 html .strada .sv-sez--alt{background:rgba(239,235,227,.45)}
+.strada-sub b{color:#fff}
+.strada-testo{margin:1.1rem auto 0;max-width:46rem;padding:1.1rem 1.4rem 1.2rem;border-radius:22px;background:rgba(8,12,28,.52);
+  border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.strada-testo .strada-sub{margin-top:0;max-width:none;text-shadow:none}
+.strada-testo .strada-sub--forte{margin-top:.7rem}
+
+.strada-sub--forte{margin-top:.7rem}
+.strada-poteri{list-style:none;margin:1.6rem auto 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem;max-width:1100px;width:100%;text-align:left}
+.strada-poteri li{display:flex;flex-direction:column;gap:.35rem;padding:1rem 1.05rem 1.1rem;border-radius:18px;background:rgba(8,12,28,.5);
+  border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 18px 40px -18px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.08)}
+.strada-poteri b{font:800 1.02rem/1.2 'Bricolage Grotesque',sans-serif;color:#fff}
+.strada-poteri span:not(.strada-ico){font-size:.88rem;line-height:1.5;color:rgba(255,255,255,.82)}
+.strada-ico{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;font-size:1.1rem;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px var(--acc)}
+@media(max-width:900px){.strada-poteri{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:420px){.strada-poteri{grid-template-columns:1fr}}
+/* scorrendo la citta' resta: sfocata e velata, i testi stanno su lastre di vetro */
+.strada-bg img{filter:blur(calc(var(--velo,0) * 10px)) saturate(1.1);transform:scale(1.04)}
+html .strada .sv-testa,html .strada .al-testa{padding:clamp(1.2rem,3vw,2rem);border-radius:26px;background:rgba(255,255,255,.72);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.8);box-shadow:0 24px 60px -30px rgba(20,33,61,.45)}
+html .strada .sv-passi{padding:1.6rem 1rem;border-radius:26px;background:rgba(255,255,255,.66);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.8)}
+html .strada .sv-sez--alt{background:transparent}
+html .strada .md-col--no{background:rgba(255,255,255,.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .bv-porta.scelta .bv-btn{background:rgba(8,12,28,.8);box-shadow:0 0 0 2px var(--c) inset,0 0 50px -2px var(--c)}
 @media(prefers-reduced-motion:reduce){.strada.entra{animation:none}.strada-giu i{animation:none}}
 /* ===== strada 1: modelli AI ===== */
