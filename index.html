@@ -401,6 +401,8 @@ nav{
   background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transition:transform .8s ease}
 .hero-btn.btn-primary:hover::before{transform:translateX(120%) skewX(-20deg)}
 .hero-btn.btn-secondary{border-color:rgba(255,255,255,.22);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+/* il sottotitolo bianco pieno: sopra il video il grigio si perdeva */
+.hero p.hero-sub{color:#fff;font-weight:400;font-size:clamp(1rem,1.35vw,1.12rem);line-height:1.7;text-shadow:0 2px 14px rgba(8,11,20,.85)}
 @media(prefers-reduced-motion:reduce){.hero-tit .w{animation:none;opacity:1;filter:none;transform:none}}
 /* da computer: testo a sinistra, logo del video al centro, telefono a destra.
    Il testo ha una larghezza fissa e non arriva mai sopra al logo. */
@@ -1884,7 +1886,7 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
       Siti · App · Automazioni · Giochi — creati con l'IA
     </div>
     <h1 class="hero-tit" aria-label="Non temere l'IA. Mettila al lavoro."><span class="w" style="--i:0" aria-hidden="true">Non</span> <span class="w" style="--i:1" aria-hidden="true">temere</span> <span class="w" style="--i:2" aria-hidden="true">l'IA.</span><br><em><span class="w" style="--i:3" aria-hidden="true">Mettila</span> <span class="w" style="--i:4" aria-hidden="true">al</span> <span class="w" style="--i:5" aria-hidden="true">lavoro.</span></em></h1>
-    <p>Usiamo l'intelligenza artificiale per costruire siti, app, automazioni e giochi su misura, in tempi che prima erano impensabili. Questo sito ne è la prova: entra e guardalo muoversi.</p>
+    <p class="hero-sub">L'IA non sostituisce il tuo lavoro: lo alleggerisce. Noi la usiamo per creare siti, app e automazioni che fanno al posto tuo le cose ripetitive, così tu ti dedichi a quelle che contano. Entra e guarda cosa sa fare.</p>
     <div class="hero-buttons">
       <a href="#servizi" class="btn-primary hero-btn"><span class="rotola"><span data-t="Entra">Entra</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a href="#contatti" class="btn-secondary hero-btn"><span class="rotola"><span data-t="Parliamone">Parliamone</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
