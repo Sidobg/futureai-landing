@@ -140,7 +140,9 @@
   var D=[
     {q:'Quante persone lavorano con te?',r:[['Solo io',1],['2–5',3.5],['6–15',10],['Più di 15',20]]},
     {q:'Quanto tempo passa ognuno, ogni giorno, a ricopiare dati tra Excel, email, carta e programmi?',r:[['Meno di 15 minuti',10],['15–30 minuti',22],['30–60 minuti',45],['Più di un\'ora',75]]},
-    {q:'Come gestite oggi appuntamenti, ordini o lavori?',r:[['Carta e telefono',30],['Fogli Excel',20],['Più programmi che non si parlano',25],['Un gestionale che non ci soddisfa',15]]},
+    {q:'Qual è il lavoro che oggi vi ruba più tempo?',r:[['Appuntamenti e prenotazioni al telefono',30,'prenotazioni'],['Preventivi, offerte e documenti da preparare',25,'preventivi'],
+      ['Leggere e smistare email e messaggi',25,'email'],['Clienti, lavori e pagamenti sparsi tra Excel e carta',25,'crm'],
+      ['Schede, iscritti e abbonamenti (palestra o corsi)',25,'palestra'],['Organizzare trasferte e viaggi di lavoro',20,'viaggi']]},
     {q:'Quante volte al giorno cercate un\'informazione (un documento, un prezzo, lo stato di un lavoro)?',r:[['Poche volte',8],['5–10 volte',20],['10–20 volte',40],['Più di 20',65]]},
     {q:'Quanto tempo a settimana va in report, preventivi, fatture o promemoria fatti a mano?',r:[['Meno di un\'ora',.5],['1–3 ore',2],['3–6 ore',4.5],['Più di 6 ore',8]]}];
   var ES={
@@ -150,6 +152,10 @@
       cosa:'Il cliente sceglie servizio, giorno e ora dal sito; conferma e promemoria partono da soli e il calendario si aggiorna in tempo reale sul tablet del salone.',ris:'Zero telefonate per gestire gli appuntamenti · agenda sempre in ordine'},
     preventivi:{img:'preventivi',tit:'Preventivi a voce per un\'attività di affitti brevi',prima:'ogni preventivo richiedeva 15-20 minuti tra calcoli, scrittura e invio.',
       cosa:'Premi un tasto e descrivi il soggiorno a voce: l\'assistente AI compila il preventivo, fa i conti e lo prepara pronto da stampare o inviare.',ris:'Da 15-20 minuti a 30 secondi per preventivo'},
+    palestra:{img:'palestra',tit:'App per palestre e personal trainer',prima:'schede di carta che si perdono, progressi segnati a mano, iscritti che non sanno cosa fare oggi.',
+      cosa:'Ogni iscritto trova sul telefono l\'allenamento del giorno, segna pesi e ripetizioni e vede i suoi progressi; il trainer crea le schede, vede chi si è fermato e manda gli avvisi.',ris:'Niente più schede di carta · il trainer sa subito chi seguire per primo'},
+    viaggi:{img:'viaggi',tit:'Pianificatore di trasferte con comando vocale',prima:'ore passate a confrontare date, voli e alberghi su siti diversi.',
+      cosa:'Dici a voce mese, notti e città di partenza: l\'app confronta le date, trova le combinazioni che costano meno e prepara viaggio e alloggio da prenotare, con un avviso quando il prezzo scende.',ris:'Da un\'ora di ricerche a pochi secondi'},
     email:{img:'riassunto-email',tit:'Assistente AI che legge e smista le email',prima:'ogni mattina 30-40 minuti solo per leggere, capire e smistare la posta.',
       cosa:'Ogni mattina l\'assistente legge la casella, divide le email in scadenze, urgenti, clienti e fornitori, scarta le promozioni e ti manda un riassunto.',ris:'30-40 minuti risparmiati ogni mattina'}};
   var box=document.getElementById('qzDomande');if(!box)return;
@@ -160,7 +166,7 @@
     var d=D[pos];box.innerHTML='<fieldset class="qz-dom"><legend>'+d.q+'</legend><div class="qz-opz"></div></fieldset>';
     var o=box.querySelector('.qz-opz');
     d.r.forEach(function(r,k){var b=document.createElement('button');b.type='button';b.className='qz-opz-b'+(risp[pos]===k?' scelta':'');
-      b.innerHTML='<span class="qz-lett">'+'ABCD'[k]+'</span>'+r[0];b.addEventListener('click',function(){risp[pos]=k;b.classList.add('scelta');setTimeout(function(){pos++;mostra();},220);});o.appendChild(b);});
+      b.innerHTML='<span class="qz-lett">'+'ABCDEF'[k]+'</span>'+r[0];b.addEventListener('click',function(){risp[pos]=k;b.classList.add('scelta');setTimeout(function(){pos++;mostra();},220);});o.appendChild(b);});
     n.textContent='Domanda '+(pos+1)+' di '+D.length;bar.style.transform='scaleX('+(pos/D.length)+')';ind.hidden=pos===0;
   }
   var ore=0;
@@ -170,22 +176,16 @@
     // prudente: il 60% dei minuti persi ogni giorno, per 5 giorni, piu' il 70% del lavoro settimanale su documenti
     ore=Math.max(1,Math.round(persone*gg*5*.6/60+sett*.7));
     anima('qzOre',ore,'');anima('qzGiorni',Math.round(ore*46/8),'');euro();
-    // l'app gia' costruita piu' vicina alle risposte
-    var p={crm:0,prenotazioni:0,preventivi:0,email:0};
-    p[['prenotazioni','crm','email','crm'][risp[2]]]+=2;
-    if(risp[4]>=2)p.preventivi+=2;else if(risp[4]===1)p.preventivi+=1;
-    if(risp[1]>=2){p.email+=1;p.crm+=1;}
-    if(risp[3]>=2)p.crm+=1;
-    if(risp[0]===0)p.preventivi+=1;
-    var chi='crm';Object.keys(p).forEach(function(k){if(p[k]>p[chi])chi=k;});
+    // l'esempio e' l'app che abbiamo gia' costruito per il lavoro che ruba piu' tempo (domanda 3)
+    var chi=D[2].r[risp[2]][2];
     var e=ES[chi];document.getElementById('qzEsImg').src='app/esempi/'+e.img+'.webp';document.getElementById('qzEsImg').alt=e.tit;
     document.getElementById('qzEsTit').textContent=e.tit;document.getElementById('qzEsPrima').textContent='Il problema: '+e.prima;
     document.getElementById('qzEsCosa').textContent=e.cosa;document.getElementById('qzEsRis').textContent=e.ris;
     var cta=document.getElementById('qzCta');cta.href='/contatti/?stima='+ore+'&esempio='+chi;
     ris.scrollIntoView({behavior:'smooth',block:'nearest'});
   }
-  function euro(){var c=+document.getElementById('qzCosto').value;document.getElementById('qzCostoV').textContent='€ '+c;
-    anima('qzEuro',Math.round(ore*46*c/100)*100,'€ ');}
+  function euro(ev){var c=+document.getElementById('qzCosto').value,v=Math.round(ore*46*c/100)*100;document.getElementById('qzCostoV').textContent='€ '+c;
+    if(ev)document.getElementById('qzEuro').textContent='€ '+v.toLocaleString('it-IT');else anima('qzEuro',v,'€ ');}
   function anima(id,v,pre){var el=document.getElementById(id),t0=performance.now();
     (function f(t){var k=Math.min(1,(t-t0)/700),x=Math.round(v*(1-Math.pow(1-k,3)));el.textContent=pre+x.toLocaleString('it-IT');if(k<1)requestAnimationFrame(f);})(t0);}
   document.getElementById('qzCosto').addEventListener('input',euro);

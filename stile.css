@@ -1898,3 +1898,12 @@ html .qz .btn-secondary{color:#fff;background:transparent;border-color:rgba(255,
 .qz-es-ris{font-weight:700;color:#5B4BDB!important}
 .sv-cornice video[src*="app-video"]{object-position:50% 40%}
 @media(prefers-reduced-motion:reduce){.sv-test::after,.sv-test-freccia{animation:none}}
+.qz-numeri b{font-variant-numeric:tabular-nums}
+.qz-numeri div{min-width:0}
+.qz-esempio img{max-height:300px;object-fit:cover;object-position:top}
+.qz-risultato{overflow-anchor:none}
+/* le cifre non vanno mai a capo: quando «€ 9.900» diventava «€ 13.200» il riquadro si alzava e la pagina saltava */
+html .qz-numeri b{white-space:nowrap;font-size:clamp(1.35rem,2.5vw,2.2rem)}
+html .qz-numeri div{min-height:7.2rem;display:flex;flex-direction:column;justify-content:center}
+@media(max-width:600px){html .qz-numeri div{min-height:0;flex-direction:row;justify-content:flex-start}}
+@media(max-width:600px){html .qz-numeri b{flex:none;width:8.2ch;font-size:1.45rem}html .qz-numeri span{flex:1}}
