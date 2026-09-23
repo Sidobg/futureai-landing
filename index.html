@@ -304,7 +304,7 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
      scena si tuffa verso la voce e si apre la sua pagina. Video Gemini
      ripuliti dalla stellina (menu/citta.mp4, menu/robot.mp4). -->
 <style>
-.rm{position:relative;height:calc(100vh + 10 * 36vh);background:#efeae0;color:var(--navy2,#1A2A6C)}
+.rm{position:relative;height:calc(100vh + 10 * 24vh);background:#efeae0;color:var(--navy2,#1A2A6C)}
 .rm-fisso{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 .rm-scena{position:absolute;inset:0;transform-origin:var(--ox,70%) var(--oy,50%);transition:transform .9s cubic-bezier(.7,0,.3,1),filter .9s}
 .rm.via .rm-scena{transform:scale(3.2);filter:blur(10px) brightness(1.4)}
@@ -340,7 +340,7 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
 .rm-spiega{margin:.45rem 0 0;color:#2c3659;font-size:clamp(.88rem,1.1vw,1rem);max-width:34rem}
 .rm-finestra{position:relative;height:min(52vh,470px);overflow:hidden;
   -webkit-mask:linear-gradient(180deg,transparent 0,#000 22%,#000 78%,transparent 100%);mask:linear-gradient(180deg,transparent 0,#000 22%,#000 78%,transparent 100%)}
-.rm-lista{position:absolute;left:0;right:0;top:50%;margin:0;padding:0;list-style:none;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.rm-lista{position:absolute;left:0;right:0;top:50%;margin:0;padding:0;list-style:none;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
 .rm-voce{height:var(--h,140px);display:flex;flex-direction:column;justify-content:center;opacity:.28;transform:scale(.86);transform-origin:left center;
   transition:opacity .5s,transform .5s,filter .5s;filter:blur(1.2px)}
 .rm-voce.on{opacity:1;transform:none;filter:none}
@@ -367,7 +367,7 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
   .rm-capsula{width:100%}
   /* da telefono il fumetto sta in basso nella capsula, sulle gambe: in alto copriva la faccia */
   .rm-fumetto{left:6%;right:6%;top:auto;bottom:3.4rem;max-width:none;font-size:.72rem;text-align:center;border-radius:12px}
-  .rm-lista{transition-duration:.45s}
+  .rm-lista{transition-duration:.38s}
   .rm-nome{font-size:clamp(1.45rem,7vw,2.1rem)}
   .rm-desc{font-size:.84rem}
   .rm-titolo{font-size:1rem}.rm-spiega{display:none}.rm-tag{font-size:.6rem}
@@ -442,15 +442,22 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
   var att=-1,H=140,tFum=0,salutato=false,uscendo=false;
   function misura(){H=Math.round(Math.min(innerHeight*.18,150));voci.forEach(function(v){v.style.setProperty('--h',H+'px');});}
   function avanz(){var r=sez.getBoundingClientRect(),c=r.height-innerHeight;return c>0?Math.min(1,Math.max(0,-r.top/c)):0;}
+  // verso: voce scelta con rotella o puntini. Si mostra subito e, finche' la pagina ci arriva,
+  // le posizioni intermedie non la rimettono indietro
+  var verso=-1,versoFino=0;
   function aggiorna(){
     var p=avanz(),i=Math.min(VOCI.length-1,Math.floor(p*VOCI.length*0.999));
     scorri.style.opacity=p>0.02?0:1;
+    if(verso>=0){if(i!==verso&&performance.now()<versoFino)return;verso=-1;}
+    applica(i);
+  }
+  function applica(i){
     if(i===att)return;att=i;
     lista.style.transform='translateY('+(-(i+0.5)*H)+'px)';
     voci.forEach(function(v,k){v.classList.toggle('on',k===i);});dots.forEach(function(d,k){d.classList.toggle('on',k===i);});
     if(salutato&&!uscendo){pezzo('indica');fum.textContent=VOCI[i].e;fum.classList.add('on');clearTimeout(tFum);tFum=setTimeout(function(){fum.classList.remove('on');},1900);}
   }
-  function vaiA(i){var r=sez.getBoundingClientRect(),c=r.height-innerHeight;scrollTo({top:scrollY+r.top+c*(i+0.5)/VOCI.length,behavior:'smooth'});}
+  function vaiA(i){var r=sez.getBoundingClientRect(),c=r.height-innerHeight;verso=i;versoFino=performance.now()+900;applica(i);scrollTo({top:scrollY+r.top+c*(i+0.5)/VOCI.length,behavior:'smooth'});}
   function entra(i){if(uscendo)return;uscendo=true;
     if(i!==att)vaiA(i);
     fum.textContent=VOCI[i].f;fum.classList.add('on');clearTimeout(tFum);
@@ -475,10 +482,26 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
   var tAss=0,dito=false;
   function assesta(){var r=sez.getBoundingClientRect(),c=r.height-innerHeight;if(dito||uscendo||r.top>0||r.bottom<innerHeight||att<0)return;
     var meta=scrollY+r.top+c*(att+0.5)/VOCI.length;if(Math.abs(meta-scrollY)>6)scrollTo({top:meta,behavior:'smooth'});}
-  function prenota(){clearTimeout(tAss);tAss=setTimeout(assesta,220);}
+  function prenota(){clearTimeout(tAss);tAss=setTimeout(assesta,380);}
   addEventListener('touchstart',function(){dito=true;clearTimeout(tAss);},{passive:true});
   addEventListener('touchend',function(){dito=false;prenota();},{passive:true});
   addEventListener('scroll',prenota,{passive:true});
+  // rotella e trackpad: un gesto = una voce. Dentro il menu lo scatto non fa scorrere la pagina
+  // di un pezzetto qualsiasi: porta dritto alla voce dopo (o prima). Alla prima e all'ultima voce
+  // si lascia scorrere normalmente, cosi' si esce dal menu senza intoppi.
+  var wUltimo=0,wAcc=0,wBlocco=0,wDest=-1,wQuando=0;
+  addEventListener('wheel',function(e){
+    if(uscendo||e.ctrlKey)return;
+    var r=sez.getBoundingClientRect();if(r.top>1||r.bottom<innerHeight-1)return;
+    var d=e.deltaY*(e.deltaMode===1?40:e.deltaMode===2?innerHeight:1);if(Math.abs(d)<Math.abs(e.deltaX)||!d)return;
+    var ora=performance.now(),base=(ora-wQuando<900&&wDest>=0)?wDest:att,i=base+(d>0?1:-1);
+    if(i<0||i>=VOCI.length)return;
+    e.preventDefault();
+    var nuovo=ora-wUltimo>180;wUltimo=ora;if(nuovo)wAcc=0;wAcc+=Math.abs(d);
+    if(ora<wBlocco)return;
+    // gesto nuovo, oppure trackpad che continua a spingere: una voce per volta
+    if(nuovo||wAcc>320){wAcc=0;wBlocco=ora+(nuovo?260:420);wDest=i;wQuando=ora;vaiA(i);}
+  },{passive:false});
   // tornando indietro dalla pagina, la scena deve essere di nuovo a posto
   addEventListener('pageshow',function(){uscendo=false;sez.classList.remove('via');fum.classList.remove('on');});
 })();
