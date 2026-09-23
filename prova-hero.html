@@ -1690,7 +1690,7 @@ nav{background:rgba(8,11,20,0.94);}
      dito, tastiera e barra. 120 fotogrammi WebP in /intro/, ricavati dal
      video Gemini con la stellina tolta (velo scontato, non coperto). -->
 <style>
-.ingresso{position:relative;height:340vh;background:#05070d;z-index:5}
+.ingresso{position:relative;height:450vh;background:#05070d;z-index:5}
 .ing-fisso{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 .ing-tela{position:absolute;inset:0;width:100%;height:100%;display:block;transform-origin:center;will-change:transform}
 .ing-velo{position:absolute;inset:0;pointer-events:none;
@@ -1733,7 +1733,7 @@ nav{background:rgba(8,11,20,0.94);}
 nav,.music-toggle{transition:opacity .4s ease}
 body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:none}
 @media (max-width:700px){
-  .ingresso{height:300vh}
+  .ingresso{height:400vh}
   .ing-velo{background:linear-gradient(180deg,rgba(5,7,13,.45),rgba(5,7,13,.15) 40%,rgba(5,7,13,.15) 60%,rgba(5,7,13,.6))}
   .ing-marchio{top:auto;bottom:24vh;transform:none}
 }
@@ -1824,7 +1824,7 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
     // quando lo schermo dell'ingresso comincia a uscire, niente rincorsa:
     // deve essere gia' scuro, anche con uno scroll velocissimo
     var esce=sez.getBoundingClientRect().bottom<innerHeight+1;
-    prog+= (fermo||esce) ? (obiettivo-prog) : (obiettivo-prog)*.16;
+    prog+= (fermo||esce) ? (obiettivo-prog) : (obiettivo-prog)*.12;
     if(Math.abs(obiettivo-prog)<.0005)prog=obiettivo;
     applica();
     if(visibile&&prog!==obiettivo)raf=requestAnimationFrame(giro);
