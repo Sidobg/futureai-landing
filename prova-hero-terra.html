@@ -1779,7 +1779,7 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
       (function(i){attivi++;var im=new Image();im.decoding='async';
         im.onload=function(){pronto[i]=true;attivi--;if(i===0||Math.abs(i-fatto)<3)disegna(true);prossimo();};
         im.onerror=function(){attivi--;prossimo();};
-        im.src='intro-citta/'+String(i).padStart(3,'0')+'.webp';img[i]=im;})(ordine[pos++]);
+        im.src='intro/'+String(i).padStart(3,'0')+'.webp';img[i]=im;})(ordine[pos++]);
     }
   }
   prossimo();
