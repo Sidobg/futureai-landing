@@ -1980,106 +1980,152 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
 </div>
 
 <!-- SERVIZI -->
+<!-- ===== SERVIZI: un servizio per schermata, parallasse allo scroll =====
+     Da un componente React (framer-motion) riscritto in JS semplice: il sito
+     e' HTML statico. Il video si svela con una tendina (clip-path) e il testo
+     scende al suo posto mentre la riga attraversa lo schermo. -->
+<style>
+#servizi .svz-intro{max-width:1180px;margin:0 auto}
+.svz-righe{max-width:1180px;margin:0 auto}
+.svz-riga{min-height:88vh;display:flex;align-items:center;justify-content:center;gap:clamp(3rem,10vw,10rem)}
+.svz-riga--inv{flex-direction:row-reverse}
+.svz-testo{max-width:28rem;will-change:transform}
+.svz-num{font-family:'Space Mono',monospace;font-size:.78rem;letter-spacing:.18em;color:#4DD9E0;text-transform:uppercase}
+.svz-num span{color:var(--ink-muted,#8C97AD)}
+.svz-tit{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.02em;line-height:1.02;
+  font-size:clamp(2.1rem,4.6vw,3.7rem);margin:.9rem 0 0;color:var(--ink,#EDF1FA)}
+.svz-desc{color:rgba(237,241,250,.7);font-size:clamp(.98rem,1.2vw,1.08rem);line-height:1.7;margin:1.6rem 0 0;will-change:transform}
+.svz-cta{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.8rem;padding:.75rem 1.3rem;border-radius:100px;
+  border:1px solid rgba(155,127,248,.45);color:#EDF1FA;text-decoration:none;font-weight:500;font-size:.92rem;
+  background:rgba(123,92,245,.12);transition:background .2s,border-color .2s}
+.svz-cta:hover{background:rgba(123,92,245,.25);border-color:#9B7FF8}
+.svz-media{position:relative;flex:none;width:clamp(260px,30vw,380px);aspect-ratio:330/384;border-radius:22px;overflow:hidden;
+  background:#0D1220;box-shadow:0 30px 70px -25px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.08);
+  clip-path:inset(0 100% 0 0 round 22px);opacity:0;will-change:clip-path,opacity}
+.svz-media video{width:100%;height:100%;object-fit:cover;display:block}
+.svz-ia{position:absolute;right:.8rem;bottom:.8rem;padding:.28rem .6rem;border-radius:100px;background:rgba(8,11,20,.72);
+  border:1px solid rgba(255,255,255,.14);color:#C3CAD8;font-size:.625rem;line-height:1.2;letter-spacing:.05em;pointer-events:none}
+@media (max-width:820px){
+  .svz-riga,.svz-riga--inv{flex-direction:column;min-height:0;gap:2rem;padding:3.5rem 0}
+  .svz-media{width:min(78vw,340px)}
+  .svz-testo{max-width:34rem}
+}
+@media (prefers-reduced-motion:reduce){.svz-media{clip-path:none;opacity:1}}
+</style>
+
 <div class="section-wrap" id="servizi">
-  <div class="fade-in">
+  <div class="svz-intro fade-in">
     <div class="section-tag">— I Nostri Servizi</div>
     <h2 class="section-title">Tutto ciò di cui la tua<br>azienda ha bisogno</h2>
     <p class="section-sub">Dall'agente AI personalizzato alle automazioni avanzate — costruiamo soluzioni su misura per il tuo settore.</p>
   </div>
-
-  <div class="car-pista">
-  <div class="services-grid" data-carosello>
-<div class="service-card sp-5 fade-in">
-      <span class="beam-glow" aria-hidden="true"></span>
-      <span class="beam-ring" aria-hidden="true"></span>
-      <div class="svc-cover" aria-hidden="true"><video class="svc-clip" src="clip-webapp.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true" width="330" height="385"></video></div>
-      <div class="service-index"><span class="service-num">01</span></div>
-      <h3>WebApp su Misura</h3>
-      <p>Gestionale, CRM, portale clienti — qualsiasi strumento digitale costruito per il tuo business. Tuo, per sempre.</p>
-      <span class="service-pill">Su misura</span>
-      <a class="svc-cta" href="#contatti">Parlane con noi<svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a class="svc-freccia" href="#contatti" aria-label="Richiedi: WebApp su Misura"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </div>
-
-    <div class="service-card wide fade-in">
-      <span class="beam-glow" aria-hidden="true"></span>
-      <span class="beam-ring" aria-hidden="true"></span>
-      <div class="svc-cover" aria-hidden="true"><video class="svc-clip" src="clip-siti.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true" width="330" height="385"></video></div>
-      <span class="ia-etichetta">Video generato con IA</span>
-      <div class="service-index"><span class="service-num">02</span></div>
-      <h3>Siti Web Moderni</h3>
-      <p>Landing page e siti professionali, veloci e ottimizzati per convertire visitatori in clienti. Collegati alle tue automazioni.</p>
-      <span class="service-pill">Alta conversione</span>
-      <a class="svc-cta" href="#contatti">Parlane con noi<svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a class="svc-freccia" href="#contatti" aria-label="Richiedi: Siti Web Moderni"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </div>
-
-<div class="service-card featured fade-in">
-      <span class="beam-glow" aria-hidden="true"></span>
-      <span class="beam-ring" aria-hidden="true"></span>
-      <div class="svc-cover" aria-hidden="true"><video class="svc-clip" src="clip-consulente.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true" width="330" height="385"></video></div>
-      <div class="featured-inner">
-        <div class="featured-text">
-          <div class="service-index"><span class="service-num">03</span></div>
-          <h3>Consulente AI Aziendale</h3>
-          <p>Un agente AI addestrato sul tuo settore e sui tuoi documenti. Risponde a domande su produzione, procedure e processi — disponibile 24/7 per tutto il team.</p>
-          <span class="service-pill">Servizio flagship</span>
-      <a class="svc-cta" href="#contatti">Parlane con noi<svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a class="svc-freccia" href="#contatti" aria-label="Richiedi: Consulente AI Aziendale"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        </div>
-        <div class="featured-demo">
-          <div class="chat-label">💬 Esempio live</div>
-          <div class="bubble user">Abbiamo scarti sulla linea B, cosa facciamo?</div>
-          <div class="bubble ai">Ho analizzato i dati. Le cause più probabili: temperatura +2°C fuori range e velocità linea alta. Consiglio di ridurre la velocità del 8% e verificare il sensore T3.</div>
-        </div>
+  <div class="svz-righe">
+    <article class="svz-riga">
+      <div class="svz-testo">
+        <div class="svz-num">01 <span>— Su misura</span></div>
+        <h3 class="svz-tit">WebApp su Misura</h3>
+        <p class="svz-desc">Gestionale, CRM, portale clienti — qualsiasi strumento digitale costruito per il tuo business. Tuo, per sempre.</p>
+        <a class="svz-cta" href="#contatti">Parlane con noi <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
-    </div>
-
-    <div class="service-card sp-7 fade-in">
-      <span class="beam-glow" aria-hidden="true"></span>
-      <span class="beam-ring" aria-hidden="true"></span>
-      <div class="svc-cover" aria-hidden="true"><video class="svc-clip" src="clip-prenotazioni.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true" width="330" height="385"></video></div>
-      <span class="ia-etichetta">Video generato con IA</span>
-      <div class="service-index"><span class="service-num">04</span></div>
-      <h3>Prenotazioni Online</h3>
-      <p>Webapp su misura per gestire appuntamenti e disponibilità. Il cliente prenota da solo, tu ricevi la conferma. Zero commissioni esterne.</p>
-      <span class="service-pill">Zero commissioni</span>
-      <a class="svc-cta" href="#contatti">Parlane con noi<svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a class="svc-freccia" href="#contatti" aria-label="Richiedi: Prenotazioni Online"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </div>
-
-    <div class="service-card sp-5 fade-in">
-      <span class="beam-glow" aria-hidden="true"></span>
-      <span class="beam-ring" aria-hidden="true"></span>
-      <div class="svc-cover" aria-hidden="true"><video class="svc-clip" src="clip-automazioni.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true" width="330" height="385"></video></div>
-      <div class="service-index"><span class="service-num">05</span></div>
-      <h3>Automazioni Aziendali</h3>
-      <p>Colleghiamo i tuoi strumenti (Gmail, Calendar, CRM, Excel) e automatizziamo i processi ripetitivi. Email, report, notifiche — tutto in automatico.</p>
-      <span class="service-pill">n8n + AI</span>
-      <a class="svc-cta" href="#contatti">Parlane con noi<svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a class="svc-freccia" href="#contatti" aria-label="Richiedi: Automazioni Aziendali"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </div>
-
-    <div class="service-card sp-7 fade-in">
-      <span class="beam-glow" aria-hidden="true"></span>
-      <span class="beam-ring" aria-hidden="true"></span>
-      <div class="svc-cover" aria-hidden="true"><video class="svc-clip" src="clip-chiamate.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true" width="330" height="385"></video></div>
-      <div class="service-index"><span class="service-num">06</span></div>
-      <h3>Chiamate Automatiche AI</h3>
-      <p>Un assistente vocale AI risponde alle chiamate, gestisce prenotazioni e fornisce informazioni — 24/7, senza personale dedicato.</p>
-      <span class="service-pill">Voce AI</span>
-      <a class="svc-cta" href="#contatti">Parlane con noi<svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a class="svc-freccia" href="#contatti" aria-label="Richiedi: Chiamate Automatiche AI"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </div>
-
+      <div class="svz-media">
+        <video src="clip-webapp.mp4" muted loop playsinline preload="none" aria-hidden="true" width="330" height="384"></video>
       </div>
-  <div class="car-frecce">
-    <button type="button" class="car-btn" data-verso="-1" aria-label="Servizi precedenti"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    <button type="button" class="car-btn" data-verso="1" aria-label="Servizi successivi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </article>
+    <article class="svz-riga svz-riga--inv">
+      <div class="svz-testo">
+        <div class="svz-num">02 <span>— Alta conversione</span></div>
+        <h3 class="svz-tit">Siti Web Moderni</h3>
+        <p class="svz-desc">Landing page e siti professionali, veloci e ottimizzati per convertire visitatori in clienti. Collegati alle tue automazioni.</p>
+        <a class="svz-cta" href="#contatti">Parlane con noi <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="svz-media">
+        <video src="clip-siti.mp4" muted loop playsinline preload="none" aria-hidden="true" width="330" height="384"></video>
+        <span class="svz-ia">Video generato con IA</span>
+      </div>
+    </article>
+    <article class="svz-riga">
+      <div class="svz-testo">
+        <div class="svz-num">03 <span>— Servizio flagship</span></div>
+        <h3 class="svz-tit">Consulente AI Aziendale</h3>
+        <p class="svz-desc">Un agente AI addestrato sul tuo settore e sui tuoi documenti. Risponde a domande su produzione, procedure e processi — disponibile 24/7 per tutto il team.</p>
+        <a class="svz-cta" href="#contatti">Parlane con noi <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="svz-media">
+        <video src="clip-consulente.mp4" muted loop playsinline preload="none" aria-hidden="true" width="330" height="384"></video>
+      </div>
+    </article>
+    <article class="svz-riga svz-riga--inv">
+      <div class="svz-testo">
+        <div class="svz-num">04 <span>— Zero commissioni</span></div>
+        <h3 class="svz-tit">Prenotazioni Online</h3>
+        <p class="svz-desc">Webapp su misura per gestire appuntamenti e disponibilità. Il cliente prenota da solo, tu ricevi la conferma. Zero commissioni esterne.</p>
+        <a class="svz-cta" href="#contatti">Parlane con noi <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="svz-media">
+        <video src="clip-prenotazioni.mp4" muted loop playsinline preload="none" aria-hidden="true" width="330" height="384"></video>
+        <span class="svz-ia">Video generato con IA</span>
+      </div>
+    </article>
+    <article class="svz-riga">
+      <div class="svz-testo">
+        <div class="svz-num">05 <span>— n8n + AI</span></div>
+        <h3 class="svz-tit">Automazioni Aziendali</h3>
+        <p class="svz-desc">Colleghiamo i tuoi strumenti (Gmail, Calendar, CRM, Excel) e automatizziamo i processi ripetitivi. Email, report, notifiche — tutto in automatico.</p>
+        <a class="svz-cta" href="#contatti">Parlane con noi <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="svz-media">
+        <video src="clip-automazioni.mp4" muted loop playsinline preload="none" aria-hidden="true" width="330" height="384"></video>
+      </div>
+    </article>
+    <article class="svz-riga svz-riga--inv">
+      <div class="svz-testo">
+        <div class="svz-num">06 <span>— Voce AI</span></div>
+        <h3 class="svz-tit">Chiamate Automatiche AI</h3>
+        <p class="svz-desc">Un assistente vocale AI risponde alle chiamate, gestisce prenotazioni e fornisce informazioni — 24/7, senza personale dedicato.</p>
+        <a class="svz-cta" href="#contatti">Parlane con noi <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="svz-media">
+        <video src="clip-chiamate.mp4" muted loop playsinline preload="none" aria-hidden="true" width="330" height="384"></video>
+      </div>
+    </article>
   </div>
-  </div>
-  <div class="car-comandi"><div class="car-barra" aria-hidden="true"><span></span></div></div>
 </div>
+
+<script>
+(function(){
+  var righe=[].slice.call(document.querySelectorAll('.svz-riga')); if(!righe.length)return;
+  var fermo=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function lim(v){return Math.min(1,Math.max(0,v));}
+  var raf=0;
+  function giro(){
+    raf=0; var vh=innerHeight;
+    righe.forEach(function(r){
+      var b=r.getBoundingClientRect();
+      if(b.bottom<-vh||b.top>vh*2)return;
+      // come l'offset ["start end","center start"]: 0 quando la riga entra dal basso,
+      // 1 quando il suo centro arriva in cima allo schermo
+      var p=lim((vh-b.top)/(vh+b.height/2)), a=lim(p/.7);
+      var m=r.querySelector('.svz-media'), t=r.querySelector('.svz-testo'), d=r.querySelector('.svz-desc');
+      if(!fermo){
+        m.style.opacity=a;
+        m.style.clipPath='inset(0 '+((1-a)*100).toFixed(2)+'% 0 0 round 22px)';
+        // nel componente originale il paragrafo si spostava due volte e finiva
+        // sopra il titolo: qui ha solo un piccolo scarto in piu' per la profondita'
+        var amp=innerWidth>820?50:24;
+        t.style.transform='translateY('+((1-p)*-amp).toFixed(1)+'px)';
+        d.style.transform='translateY('+((1-p)*amp*.35).toFixed(1)+'px)';
+      }
+    });
+  }
+  function sveglia(){if(!raf)raf=requestAnimationFrame(giro);}
+  addEventListener('scroll',sveglia,{passive:true}); addEventListener('resize',sveglia); giro();
+  // le clip girano solo quando si vedono
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target; if(e.isIntersecting){if(v.preload!=='auto')v.preload='auto';var q=v.play();if(q&&q.catch)q.catch(function(){});}else v.pause();
+  });},{rootMargin:'200px 0px'});
+  righe.forEach(function(r){io.observe(r.querySelector('video'));});
+})();
+</script>
 
 <!-- COME FUNZIONA -->
 <div class="process-bg">
