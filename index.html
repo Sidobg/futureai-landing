@@ -1524,6 +1524,9 @@ body{background:var(--paper);color:var(--ink);}
     linear-gradient(90deg,rgba(8,11,20,0.82) 0%,rgba(8,11,20,0.62) 48%,rgba(8,11,20,0.45) 100%),
     linear-gradient(180deg,var(--dark) 0%,rgba(8,11,20,0.20) 28%,rgba(8,11,20,0.30) 76%,var(--dark) 100%);
 }
+/* da computer il logo lo fa il video (i droni che lo montano): quello piccolo sparisce.
+   Da telefono il video non parte, quindi il logo piccolo resta. */
+@media(min-width:901px){.hero.con-video .hero-logo{display:none;}}
 /* col video attivo il canvas neurale si spegne */
 .hero.con-video #heroNeuro{display:none;}
 
@@ -1831,7 +1834,7 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
 
 <!-- HERO -->
 <div class="hero" id="hero">
-  <video class="hero-bg" data-src="hero-bg.mp4" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
+  <video class="hero-bg" data-src="hero-bg.mp4" data-una-volta autoplay muted playsinline preload="none" aria-hidden="true"></video>
   <div class="hero-bg-velo" aria-hidden="true"></div>
   <canvas id="heroNeuro" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
   <div class="hero-inner">
@@ -3401,7 +3404,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   var mqMoto   = window.matchMedia('(prefers-reduced-motion: reduce)');
   var hero     = document.querySelector('.hero');
 
-  function parti(v){ var p = v.play(); if(p && p.catch) p.catch(function(){}); }
+  // il video della hero (i droni che montano il logo) va una volta sola e resta sul logo:
+  // rientrando nello schermo non deve ripartire da capo
+  function parti(v){ if(v.hasAttribute('data-una-volta') && v.ended) return; var p = v.play(); if(p && p.catch) p.catch(function(){}); }
 
   // niente remove(): l'elemento resta e il video si aggancia solo quando
   // serve, cosi' chi ruota il tablet in orizzontale lo ottiene lo stesso.
