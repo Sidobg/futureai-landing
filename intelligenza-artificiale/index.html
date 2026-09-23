@@ -79,17 +79,28 @@
     <h1 class="bv-tit" aria-label="Benvenuto nel mondo AI"><span class="bv-par" aria-hidden="true">Benvenuto</span> <span class="bv-par" aria-hidden="true">nel mondo</span> <span class="bv-par bv-ai" aria-hidden="true">AI</span></h1>
     <p class="bv-sub">Due strade per portare l'intelligenza artificiale nella tua azienda. <b>Scegli da dove partire.</b></p>
   </div>
-  <a class="bv-porta bv-porta--sx" href="#modelli" data-fine="455,455" data-vicino="700,680">
+  <a class="bv-porta bv-porta--sx" href="#strada-modelli" data-fine="455,455" data-vicino="700,680">
     <span class="bv-btn"><b>Modelli AI</b><small>i più potenti, nel cloud</small></span>
     <span class="bv-filo" aria-hidden="true"></span><span class="bv-faro" aria-hidden="true"></span>
   </a>
-  <a class="bv-porta bv-porta--dx" href="#locale" data-fine="1215,455" data-vicino="985,680">
+  <a class="bv-porta bv-porta--dx" href="#strada-locale" data-fine="1215,455" data-vicino="985,680">
     <span class="bv-btn"><b>AI in locale</b><small>dentro l'azienda, 0 dati fuori</small></span>
     <span class="bv-filo" aria-hidden="true"></span><span class="bv-faro" aria-hidden="true"></span>
   </a>
 </header>
 
 <!-- ============ STRADA 1: MODELLI AI ============ -->
+<div class="strada strada--modelli" id="strada-modelli" data-strada="modelli" hidden>
+  <div class="strada-bg" aria-hidden="true"><picture><source media="(max-width:700px) and (orientation:portrait)" srcset="/intelligenza-artificiale/modelli-m.webp"><img src="/intelligenza-artificiale/modelli.webp" width="1671" height="941" alt="" fetchpriority="low"></picture></div>
+  <header class="strada-cop">
+    <div class="strada-tag"><i></i> Strada 1</div>
+    <h2 class="strada-tit">Modelli AI</h2>
+    <p class="strada-sub">I modelli di intelligenza artificiale più potenti al mondo, messi al lavoro dentro la tua azienda.</p>
+    <div class="strada-az">
+      <a href="#bivio" class="strada-torna"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Torna al bivio</a>
+    </div>
+    <span class="strada-giu" aria-hidden="true">Scorri<i></i></span>
+  </header>
 <section class="sv-sez md" id="modelli" aria-labelledby="mdTit"><div class="sv-in">
   <div class="sv-testa sv-rivela">
     <div class="pg-tag md-tag"><i></i> Strada 1 · Modelli AI</div>
@@ -161,12 +172,25 @@
     </div>
     <div class="md-cta-az">
       <a href="/contatti/" class="md-cta-btn">Chiamami <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a href="#locale" class="md-cta-alt">I dati non devono uscire? Prendi l'altra strada →</a>
+      <a href="#strada-locale" class="md-cta-alt">I dati non devono uscire? Prendi l'altra strada →</a>
     </div>
   </div>
 </div></section>
 
+</div>
+
 <!-- ============ AI IN LOCALE: percorso interattivo ============ -->
+<div class="strada strada--locale" id="strada-locale" data-strada="locale" hidden>
+  <div class="strada-bg" aria-hidden="true"><picture><source media="(max-width:700px) and (orientation:portrait)" srcset="/intelligenza-artificiale/locale-m.webp"><img src="/intelligenza-artificiale/locale.webp" width="1671" height="941" alt="" fetchpriority="low"></picture></div>
+  <header class="strada-cop">
+    <div class="strada-tag"><i></i> Strada 2</div>
+    <h2 class="strada-tit">AI in locale</h2>
+    <p class="strada-sub">L'intelligenza artificiale che vive dentro l'azienda: senza internet, senza cloud. Nessun dato esce, mai.</p>
+    <div class="strada-az">
+      <a href="#bivio" class="strada-torna"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Torna al bivio</a>
+    </div>
+    <span class="strada-giu" aria-hidden="true">Scorri<i></i></span>
+  </header>
 <section class="al" id="locale" aria-labelledby="alTit">
   <div class="al-sfondo" aria-hidden="true"></div>
   <div class="al-in">
@@ -322,6 +346,7 @@
     <details class="sv-faq"><summary>E se l'AI sbaglia?<span aria-hidden="true">+</span></summary><p>Risponde citando la fonte, così si verifica in un attimo, e dichiara quando i dati non bastano. Le decisioni importanti restano sempre alle persone.</p></details>
   </div>
 </div></section>
+</div>
 </main>
 
 <!-- FOOTER -->
@@ -857,6 +882,35 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
 })();
 </script>
 <script>
+/* le due strade: si aprono solo scegliendo un pulsante del bivio (o arrivando con #modelli / #locale).
+   Il listener in cattura apre la sezione PRIMA che lo scorrimento morbido cerchi il bersaglio. */
+(function(){
+  var strade=[].slice.call(document.querySelectorAll('.strada'));if(!strade.length)return;
+  var porte=[].slice.call(document.querySelectorAll('.bv-porta'));
+  function apri(nome){
+    strade.forEach(function(s){var on=s.dataset.strada===nome;
+      if(on&&s.hidden){s.hidden=false;s.classList.remove('entra');void s.offsetWidth;s.classList.add('entra');}
+      if(!on)s.hidden=true;});
+    porte.forEach(function(p){p.classList.toggle('scelta',p.getAttribute('href')==='#strada-'+nome);});
+    velo();
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="#strada-"]');if(!a)return;
+    apri(a.getAttribute('href').slice(8));
+  },true);
+  /* velo: la foto si vede piena sulla copertina e si schiarisce quando arriva il contenuto */
+  function velo(){
+    strade.forEach(function(s){if(s.hidden)return;
+      var r=s.getBoundingClientRect(),h=innerHeight,p=Math.min(1,Math.max(0,(-r.top-h*.25)/(h*.55)));
+      s.style.setProperty('--velo',(p*.9).toFixed(3));});
+  }
+  addEventListener('scroll',velo,{passive:true});addEventListener('resize',velo);
+  function daHash(){var h=location.hash.replace('#','').replace('strada-','');
+    if(h==='modelli'||h==='locale'){apri(h);setTimeout(function(){var t=document.getElementById('strada-'+h);if(t)t.scrollIntoView({behavior:'instant'});},120);}}
+  daHash();addEventListener('hashchange',daHash);
+})();
+</script>
+<script>
 /* le sezioni delle pagine servizio entrano con una leggera salita */
 (function(){var el=[].slice.call(document.querySelectorAll('.sv-rivela'));if(!el.length)return;
   if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){el.forEach(function(e){e.classList.add('vista');});return;}
@@ -906,6 +960,34 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
 .bv-porta--dx{--c:#FFB768}
 @media(max-width:700px){.bv-btn{padding:.7rem 1rem}.bv-btn small{font-size:.7rem}}
 @media(prefers-reduced-motion:reduce){.bv-foto img,.bv-par,.bv-sub{animation:none;opacity:1;transform:none;filter:none}.bv-faro::after{animation:none}}
+/* ===== le due strade: nascoste finche' non si sceglie un pulsante del bivio ===== */
+.strada{position:relative;isolation:isolate}
+.strada[hidden]{display:none}
+.strada.entra{animation:stradaEntra .8s cubic-bezier(.2,.8,.2,1)}
+@keyframes stradaEntra{from{opacity:0}}
+.strada-bg{position:sticky;top:0;height:100vh;margin-bottom:-100vh;z-index:-1;overflow:hidden}
+.strada-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.strada-bg::after{content:"";position:absolute;inset:0;background:var(--velo-c);opacity:var(--velo,0);transition:opacity .15s linear}
+.strada--modelli{--velo-c:#F7F5F0;--acc:#4DD9E0}
+.strada--locale{--velo-c:linear-gradient(160deg,#E6F6F2 0%,#EEF3FF 55%,#F3EEFF 100%);--acc:#FFB768}
+.strada-cop{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;text-align:center;color:#fff;
+  padding:clamp(6rem,14vh,8.5rem) 1.25rem 2rem;background:linear-gradient(180deg,rgba(6,10,24,.72) 0%,rgba(6,10,24,.42) 34%,rgba(6,10,24,0) 55%,rgba(6,10,24,0) 82%,rgba(6,10,24,.35) 100%)}
+.strada-tag{display:inline-flex;align-items:center;gap:.55rem;font:700 .78rem 'Space Mono',monospace;letter-spacing:.22em;text-transform:uppercase;color:#fff;
+  padding:.45rem .9rem;border-radius:100px;background:rgba(8,12,28,.4);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.strada-tag i{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 12px var(--acc)}
+.strada-tit{margin:1rem 0 0;font:800 clamp(2.8rem,8vw,6.5rem)/.92 'Bricolage Grotesque',sans-serif;letter-spacing:-.04em;text-transform:uppercase;text-shadow:0 6px 40px rgba(0,0,0,.45)}
+.strada-sub{margin:1rem auto 0;max-width:36rem;font-size:clamp(1rem,1.5vw,1.2rem);line-height:1.55;color:rgba(255,255,255,.92);text-shadow:0 2px 16px rgba(0,0,0,.6)}
+.strada-az{margin-top:1.4rem}
+.strada-torna{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;border-radius:100px;color:#fff;text-decoration:none;font-size:.92rem;
+  background:rgba(8,12,28,.4);border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background .25s}
+.strada-torna:hover{background:rgba(8,12,28,.7)}
+.strada-giu{margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:.5rem;font:700 .7rem 'Space Mono',monospace;letter-spacing:.25em;text-transform:uppercase;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.strada-giu i{width:2px;height:38px;background:linear-gradient(180deg,#fff,transparent);animation:stradaGiu 1.8s ease-in-out infinite}
+@keyframes stradaGiu{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+html .strada .sv-sez,html .strada .sv-sez--alt,html .strada .al{background:transparent}
+html .strada .sv-sez--alt{background:rgba(239,235,227,.45)}
+.bv-porta.scelta .bv-btn{background:rgba(8,12,28,.8);box-shadow:0 0 0 2px var(--c) inset,0 0 50px -2px var(--c)}
+@media(prefers-reduced-motion:reduce){.strada.entra{animation:none}.strada-giu i{animation:none}}
 /* ===== strada 1: modelli AI ===== */
 .md{scroll-margin-top:60px}
 .md-tag{display:inline-flex;align-items:center;gap:.5rem;margin-top:0}
