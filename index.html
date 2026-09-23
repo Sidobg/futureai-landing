@@ -471,6 +471,26 @@ nav{
   justify-self:end;
   display:flex;flex-direction:column;align-items:flex-end;
 }
+/* Art. 50.4 AI Act: le clip fatte con Gemini (Siti, Prenotazioni e la
+   sequenza nel telefono) si dichiarano sul posto, come il video della hero.
+   Le altre clip sono Pexels e non hanno etichetta. */
+#servizi .ia-etichetta{
+  position:absolute;z-index:3;right:0.9rem;bottom:0.8rem;
+  padding:0.28rem 0.6rem;border-radius:100px;
+  background:rgba(8,11,20,0.72);border:1px solid rgba(255,255,255,0.14);
+  color:#C3CAD8;font-size:0.625rem;line-height:1.2;letter-spacing:0.05em;
+  pointer-events:none;
+}
+/* dentro lo schermo, in alto sotto l'isola: la sezione e' ferma mentre si
+   scorre e su telefono la parte bassa della scocca resta fuori schermo */
+.ia-nota-telefono{
+  position:absolute;z-index:3;left:50%;top:3.3rem;transform:translateX(-50%);
+  margin:0;white-space:nowrap;
+  padding:0.28rem 0.6rem;border-radius:100px;
+  background:rgba(8,11,20,0.72);border:1px solid rgba(255,255,255,0.14);
+  color:#C3CAD8;font-size:0.625rem;line-height:1.2;letter-spacing:0.05em;
+  pointer-events:none;
+}
 /* Art. 50.4 AI Act: il video è generato con IA e va dichiarato */
 .hero .video-nota{
   margin:0.55rem 0 0;
@@ -1793,6 +1813,7 @@ nav{background:rgba(8,11,20,0.94);}
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
       <div class="svc-cover" aria-hidden="true"><video class="svc-clip" src="clip-siti.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true" width="330" height="385"></video></div>
+      <span class="ia-etichetta">Video generato con IA</span>
       <div class="service-index"><span class="service-num">02</span></div>
       <h3>Siti Web Moderni</h3>
       <p>Landing page e siti professionali, veloci e ottimizzati per convertire visitatori in clienti. Collegati alle tue automazioni.</p>
@@ -1826,6 +1847,7 @@ nav{background:rgba(8,11,20,0.94);}
       <span class="beam-glow" aria-hidden="true"></span>
       <span class="beam-ring" aria-hidden="true"></span>
       <div class="svc-cover" aria-hidden="true"><video class="svc-clip" src="clip-prenotazioni.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true" width="330" height="385"></video></div>
+      <span class="ia-etichetta">Video generato con IA</span>
       <div class="service-index"><span class="service-num">04</span></div>
       <h3>Prenotazioni Online</h3>
       <p>Webapp su misura per gestire appuntamenti e disponibilità. Il cliente prenota da solo, tu ricevi la conferma. Zero commissioni esterne.</p>
@@ -2267,6 +2289,7 @@ nav{background:rgba(8,11,20,0.94);}
         <span class="auto-tasto auto-tasto-vol1"></span>
         <span class="auto-tasto auto-tasto-vol2"></span>
         <span class="auto-tasto auto-tasto-lato"></span>
+        <p class="ia-nota-telefono">Animazione generata con IA</p>
       </div>
 
     </div>
@@ -2351,8 +2374,10 @@ nav{background:rgba(8,11,20,0.94);}
   <p>futureai@libero.it</p>
   <p class="footer-legale">FUTURE AI di Sidoni Manuel · P.IVA 04923480166 · <a href="/privacy/">Privacy</a> · <a href="#" id="apriCookie">Cookie</a></p>
   <p class="footer-trasparenza">
-    <strong>Trasparenza IA</strong> — Il video nella sezione iniziale e la musica di sottofondo
-    sono generati con intelligenza artificiale. Le altre riprese sono materiale d'archivio.
+    <strong>Trasparenza IA</strong> — Sono generati con intelligenza artificiale:
+    il video nella sezione iniziale, le clip di «Siti Web» e «Prenotazioni Online», l'animazione
+    nel telefono della sezione Siti Web e la musica di sottofondo. Le altre riprese sono video
+    d'archivio di Pexels.
     FUTURE AI progetta e fornisce sistemi di intelligenza artificiale nel rispetto del
     Regolamento UE 2024/1689 (AI Act).
   </p>
