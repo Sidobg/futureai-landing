@@ -156,8 +156,8 @@ var CUORE=sprite([".kk.kk.","krrkrrk","krrrrrk",".krrrk.","..krk..","...k..."]);
 var CUOREV=(function(){var s=CUORE,[c,x]=tela(s.width,s.height);x.globalAlpha=.3;x.drawImage(s,0,0);return c;})();
 var logo=new Image();logo.src='/img/logo-intro.webp';
 // grafica fatta con Gemini: gia' scontornata e portata alla misura (2 pixel per unita')
-var IMG={};['pg-fermo','pg-corsa','pg-vittoria','n-ragno','n-granchio','n-ruota','n-do','boss'].forEach(function(n){var i=new Image();i.src='img/'+n+'.png';IMG[n]=i;});
-var SF=new Image();SF.src='img/sfondo.webp';
+var IMG={};['pg-fermo','pg-corsa','pg-vittoria','n-ragno','n-granchio','n-ruota','n-do','boss'].forEach(function(n){var i=new Image();i.src='/gioco/img/'+n+'.png';IMG[n]=i;});
+var SF=new Image();SF.src='/gioco/img/sfondo.webp';
 var TIPI=[{sp:'n-ragno',w:20,h:22},{sp:'n-granchio',w:26,h:20},{sp:'n-ruota',w:14,h:20},{sp:'n-do',w:22,h:20}];
 function spr(im,x,y,flip,hh){if(!im||!im.complete||!im.naturalWidth)return;var h=hh||im.height/S,w=im.width/S*h/(im.height/S);
   x=Math.round(x*S)/S;y=Math.round(y*S)/S;if(flip){g.save();g.translate(x+w,y);g.scale(-1,1);g.drawImage(im,0,0,w,h);g.restore();}else g.drawImage(im,x,y,w,h);}
