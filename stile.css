@@ -1702,3 +1702,38 @@ html footer p,html .footer-trasparenza{color:#AEB6CC}
 html footer a{color:#dfe4f2}
 html .footer-logo span,html .footer-trasparenza strong{color:#fff}
 /* il menu in alto resta scuro: sul chiaro fa da cornice */
+
+/* ===== PIE' DI PAGINA con la firma FUTURE AI ===== */
+html footer.ft{display:block;background:#0E1730;color:#C9D1E3;padding:clamp(3.5rem,7vw,5rem) clamp(1.25rem,4vw,2.5rem) 6rem;border:0;text-align:left}
+.ft-griglia{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.4fr .9fr .9fr 1.4fr;gap:clamp(1.8rem,4vw,3rem)}
+.ft-logo{display:inline-flex;align-items:center;gap:.7rem;text-decoration:none;color:#fff;font:800 1.3rem 'Bricolage Grotesque',sans-serif;letter-spacing:-.01em}
+.ft-logo img{width:40px;height:40px;border-radius:10px}
+.ft-logo b{background:linear-gradient(90deg,#6C63FF,#4DD9E0);-webkit-background-clip:text;background-clip:text;color:transparent}
+html .ft p{color:#AEB6CC;font-size:.92rem;line-height:1.65;margin:1rem 0 0}
+.ft-col h3{font:700 .95rem 'Bricolage Grotesque',sans-serif;color:#fff;margin:0 0 1rem;letter-spacing:.01em}
+.ft-col ul{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+html .ft-col a{color:#C9D1E3;text-decoration:none;font-size:.92rem;display:inline-flex;align-items:center;gap:.5rem;transition:color .2s}
+html .ft-col a:hover{color:#4DD9E0}
+html .ft-richiamo p{margin-top:0}
+.ft-campo{display:flex;margin-top:1rem;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);max-width:24rem}
+.ft-campo input{flex:1;min-width:0;background:transparent;border:0;color:#fff;padding:.8rem .9rem;font:inherit;font-size:.92rem}
+.ft-campo input:focus{outline:none}.ft-campo:focus-within{border-color:#4DD9E0}
+.ft-campo input::placeholder{color:#8A93AA}
+.ft-campo button{border:0;cursor:pointer;padding:0 1.1rem;font:700 .9rem 'Bricolage Grotesque',sans-serif;color:#fff;background:linear-gradient(90deg,#6C63FF,#1ea5b3);transition:filter .2s}
+.ft-campo button:hover{filter:brightness(1.1)}.ft-campo button:disabled{opacity:.6}
+.ft-presa{display:flex;gap:.5rem;align-items:flex-start;margin-top:.7rem;font-size:.78rem;color:#98A1B8;line-height:1.45;max-width:24rem;cursor:pointer}
+.ft-presa input{margin-top:.15rem;accent-color:#6C63FF;flex:none}
+html .ft-presa a{color:#C9D1E3;text-decoration:underline}
+.ft-esito{margin-top:.6rem;font-size:.85rem;font-weight:600;min-height:1.2em}
+.ft-esito.ok{color:#7fe0a5}.ft-esito.no{color:#ff9b9b}
+.ft-firma-riga{max-width:1180px;margin:clamp(2.5rem,5vw,3.5rem) auto 0;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:center;color:#fff}
+.fai-firma{display:inline-flex;flex-direction:column;gap:.9em;align-items:center;text-decoration:none;color:inherit;transition:opacity .22s,transform .22s}
+.fai-firma:hover{opacity:.78;transform:translateY(-2px)}
+.fai-firma__occhiello{font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:500;line-height:1;opacity:.55}
+.fai-firma__segno{display:block;width:clamp(140px,15vw,180px);height:auto;color:inherit}
+.ft-legale{max-width:1180px;margin:1.8rem auto 0;text-align:center}
+html .ft-legale p{font-size:.78rem;margin:.4rem auto 0;max-width:62rem}
+html .ft-legale a{color:#C9D1E3}
+@media(max-width:900px){.ft-griglia{grid-template-columns:1fr 1fr}.ft-marchio,.ft-richiamo{grid-column:1/-1}}
+@media(max-width:520px){.ft-griglia{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.fai-firma{transition:none}.fai-firma:hover{transform:none}}
