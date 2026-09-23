@@ -1710,13 +1710,21 @@ nav{background:rgba(8,11,20,0.94);}
 .ing-sotto{font-family:'Space Mono',monospace;font-size:clamp(.66rem,1.1vw,.82rem);letter-spacing:.32em;
   text-transform:uppercase;color:rgba(242,244,248,.78);padding-left:.2em;line-height:1.9;max-width:min(88vw,46rem)}
 .ing-sotto span{color:#4DD9E0;margin:0 .35em}
-.ing-invito{position:absolute;left:50%;bottom:clamp(2.2rem,7vh,3.6rem);transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:.7rem;
-  font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;
-  color:rgba(242,244,248,.85);transition:opacity .45s ease;pointer-events:none;white-space:nowrap}
-.ing-mouse{width:22px;height:34px;border:1.5px solid currentColor;border-radius:12px;position:relative;opacity:.9}
-.ing-mouse::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;
-  background:currentColor;animation:ingRotella 1.6s ease-in-out infinite}
+.ing-invito{position:absolute;left:50%;bottom:clamp(2.4rem,8vh,4.2rem);transform:translateX(-50%);z-index:3;
+  display:flex;align-items:center;gap:.85rem;padding:.85rem 1.5rem .85rem 1.1rem;border-radius:100px;
+  background:rgba(8,11,20,.62);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1.5px solid transparent;
+  background-image:linear-gradient(rgba(8,11,20,.62),rgba(8,11,20,.62)),linear-gradient(90deg,#6C63FF,#4DD9E0);
+  background-origin:border-box;background-clip:padding-box,border-box;
+  box-shadow:0 10px 40px -8px rgba(108,99,255,.6),0 0 0 6px rgba(77,217,224,.08);
+  font-family:'Manrope',sans-serif;font-weight:700;font-size:clamp(.9rem,1.4vw,1.05rem);letter-spacing:.14em;
+  text-transform:uppercase;color:#fff;transition:opacity .45s ease;pointer-events:none;white-space:nowrap;
+  animation:ingRespiro 2.4s ease-in-out infinite}
+@keyframes ingRespiro{0%,100%{box-shadow:0 10px 40px -8px rgba(108,99,255,.55),0 0 0 6px rgba(77,217,224,.06)}
+  50%{box-shadow:0 10px 50px -6px rgba(77,217,224,.7),0 0 0 10px rgba(77,217,224,.12)}}
+.ing-mouse{width:24px;height:38px;border:2px solid #4DD9E0;border-radius:13px;position:relative;flex:none}
+.ing-mouse::after{content:"";position:absolute;left:50%;top:7px;width:4px;height:8px;margin-left:-2px;border-radius:2px;
+  background:#fff;animation:ingRotella 1.6s ease-in-out infinite}
 @keyframes ingRotella{0%{transform:translateY(0);opacity:1}70%{transform:translateY(9px);opacity:0}100%{transform:translateY(0);opacity:0}}
 .ing-frase{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;margin:0;padding:0 8%;
   text-align:center;font-family:'Manrope',sans-serif;font-weight:800;letter-spacing:-.03em;
@@ -1743,7 +1751,7 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
   /* su telefono due righe pulite: il puntino diventa un a capo */
   .ing-sotto span{display:block;height:0;overflow:hidden;margin:0}
 }
-@media (prefers-reduced-motion:reduce){.ing-mouse::after{animation:none}}
+@media (prefers-reduced-motion:reduce){.ing-mouse::after,.ing-invito{animation:none}}
 </style>
 
 <section class="ingresso" id="ingresso" aria-label="Ingresso nel sito">
