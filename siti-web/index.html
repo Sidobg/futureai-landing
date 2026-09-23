@@ -165,7 +165,7 @@
         <p class="sw-nota"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span><b>Scorri e guarda l'hamburger comporsi.</b> Poi clicca <b>Menu</b>, <b>Locali</b> o <b>Ordina</b> nel browser: il sito d'esempio funziona davvero, carrello compreso.</span></p>
         <div class="sw-cta sw-azioni">
-          <a href="#" class="btn-primary sw-prova" data-apri-demo="home">▶ Prova il sito demo</a>
+          <a href="#prova-demo" class="btn-primary sw-prova" data-apri-demo="home">▶ Prova il sito demo</a>
           <a href="/contatti/" class="btn-secondary">Voglio un sito così</a>
         </div>
       </div>
@@ -275,6 +275,34 @@
 .dm-chiudi{appearance:none;border:0;background:rgba(255,255,255,.08);color:#fff;border-radius:8px;padding:.35rem .7rem;font:600 .8rem 'DM Sans',sans-serif;cursor:pointer}
 .dm-chiudi:hover{background:rgba(255,255,255,.16)}
 .dm-sito{position:relative;flex:1;overflow:auto;color:#fff6e6;font-family:'DM Sans',sans-serif;background:#120c07;scroll-behavior:smooth}
+.dm-sito.intro .dm-nav{position:absolute;left:0;right:0;transform:translateY(-110%);opacity:0;pointer-events:none}
+.dm-sito .dm-nav{transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .5s}
+.dm-scroll{position:relative;height:calc(var(--hv,600px) * 4)}
+.dm-scena{position:sticky;top:0;height:var(--hv,600px);overflow:hidden;background:#000}
+.dm-tela{position:absolute;inset:0;width:100%;height:100%;display:block}
+.dm-scena-ombra{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.65),rgba(0,0,0,0) 45%),linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,0) 25%)}
+.dm-scena-logo{position:absolute;left:clamp(1rem,3vw,2rem);top:1.1rem;font:800 1.05rem 'Manrope',sans-serif;letter-spacing:.08em;color:#fff;transition:opacity .4s}
+.dm-scena-logo span{color:#F2B544}
+.dm-fasi{position:absolute;left:clamp(1rem,4vw,3rem);bottom:clamp(2.2rem,7vh,4rem);right:30%}
+.dm-fase{position:absolute;left:0;bottom:0;margin:0;opacity:0;transform:translateY(16px);transition:opacity .45s,transform .45s;text-shadow:0 3px 24px rgba(0,0,0,.6)}
+.dm-fase.on{opacity:1;transform:none}
+.dm-fase small{display:block;font:700 .75rem 'Space Mono',monospace;letter-spacing:.2em;color:#F2B544;text-transform:uppercase}
+.dm-fase strong{display:block;font:800 clamp(1.7rem,4.2vw,3.2rem)/1.02 'Manrope',sans-serif;letter-spacing:-.035em;margin-top:.35em;color:#fff}
+.dm-scorri{position:absolute;right:clamp(1rem,3vw,2rem);bottom:1.6rem;display:flex;align-items:center;gap:.6rem;font:700 .72rem 'Space Mono',monospace;letter-spacing:.2em;
+  text-transform:uppercase;color:#fff;background:rgba(0,0,0,.45);padding:.55rem .9rem;border-radius:100px;transition:opacity .4s}
+.dm-scorri span{width:14px;height:22px;border:1.5px solid #F2B544;border-radius:8px;position:relative}
+.dm-scorri span::after{content:"";position:absolute;left:50%;top:4px;width:2px;height:5px;margin-left:-1px;background:#fff;border-radius:2px;animation:ingRotella 1.6s infinite}
+.dm-barretta{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.12)}
+.dm-barretta i{display:block;height:100%;background:#F2B544;transform:scaleX(0);transform-origin:left}
+.dm-dopo{background:radial-gradient(ellipse 70% 60% at 80% 0%,rgba(242,181,68,.18),transparent 70%),#120c07}
+/* locali e ordina: sfondo pieno, foto sfocata e bagliore caldo */
+.dm-pag[data-pag="locali"],.dm-pag[data-pag="ordina"]{position:relative;isolation:isolate;min-height:100%}
+.dm-pag[data-pag="locali"]::before,.dm-pag[data-pag="ordina"]::before{content:"";position:absolute;inset:0;z-index:-2;
+  background:url('/siti-web/demo/hero.webp') center/cover;filter:blur(22px) saturate(1.3);transform:scale(1.15);opacity:.55}
+.dm-pag[data-pag="locali"]::after,.dm-pag[data-pag="ordina"]::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(ellipse 60% 50% at 15% 10%,rgba(242,120,40,.35),transparent 70%),radial-gradient(ellipse 50% 45% at 90% 90%,rgba(242,181,68,.25),transparent 70%),
+  linear-gradient(180deg,rgba(18,12,7,.55),rgba(18,12,7,.85))}
+.dm-pag[data-pag="locali"] .dm-locale,.dm-pag[data-pag="ordina"] .dm-box{background:rgba(30,20,12,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-color:rgba(242,181,68,.25)}
 .dm-nav{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem clamp(1rem,3vw,2rem);
   background:rgba(18,12,7,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(242,181,68,.12)}
 .dm-logo{font:800 1.05rem 'Manrope',sans-serif;letter-spacing:.08em;color:#fff;background:none;border:0;cursor:pointer;padding:0}
@@ -392,19 +420,35 @@
       </div>
 
       <section class="dm-pag" data-pag="home">
-        <div class="dm-hero" style="background-image:url('/siti-web/demo/hero.webp')">
+        <div class="dm-scroll" id="dmScroll">
+          <div class="dm-scena">
+            <canvas class="dm-tela" id="dmTela"></canvas>
+            <div class="dm-scena-ombra"></div>
+            <div class="dm-scena-logo">IL TUO <span>LOCALE</span></div>
+            <div class="dm-fasi">
+              <p class="dm-fase on"><small>01 · Ingredienti</small><strong>Scelti uno a uno.</strong></p>
+              <p class="dm-fase"><small>02 · La carne</small><strong>Cotta alla griglia.</strong></p>
+              <p class="dm-fase"><small>03 · Il cuore</small><strong>Formaggio fuso<br>e salse della casa.</strong></p>
+              <p class="dm-fase"><small>04 · Il risultato</small><strong>Il burger perfetto.</strong></p>
+              <p class="dm-fase"><small>05 · Da asporto</small><strong>Ordina online,<br>ritira senza coda.</strong></p>
+            </div>
+            <div class="dm-scorri" id="dmScorri"><span></span>Scorri</div>
+            <div class="dm-barretta"><i id="dmBarretta"></i></div>
+          </div>
+        </div>
+        <div class="dm-dopo">
           <div class="dm-in">
             <div class="dm-occhio">Smash burger · fatti a mano</div>
             <h3 class="dm-h">Il burger perfetto,<br>pezzo dopo pezzo.</h3>
             <p class="dm-p">Ingredienti scelti uno a uno, carne cotta alla griglia, salse della casa. Ordina online e ritira senza fare la coda.</p>
             <div class="dm-azioni"><button class="dm-btn" type="button" data-p="menu">Guarda il menu</button><button class="dm-btn sec" type="button" data-p="ordina">Ordina ora</button></div>
+            <div class="dm-plus" style="margin-top:2rem">
+              <div><b>🔥 Alla griglia</b><span>Cotto al momento, mai scaldato.</span></div>
+              <div><b>🧀 Salse della casa</b><span>Fatte ogni mattina da noi.</span></div>
+              <div><b>🛵 Pronto in 15'</b><span>Ordini online, ritiri al volo.</span></div>
+            </div>
           </div>
         </div>
-        <div class="dm-in"><div class="dm-plus">
-          <div><b>🔥 Alla griglia</b><span>Cotto al momento, mai scaldato.</span></div>
-          <div><b>🧀 Salse della casa</b><span>Fatte ogni mattina da noi.</span></div>
-          <div><b>🛵 Pronto in 15'</b><span>Ordini online, ritiri al volo.</span></div>
-        </div></div>
       </section>
 
       <section class="dm-pag" data-pag="menu"><div class="dm-in">
@@ -482,9 +526,28 @@
     document.getElementById('dmTot').textContent=euro(tot);document.getElementById('dmConta').textContent=n;}
   disegnaCarrello();
   function avvisa(t){toast.textContent=t;toast.classList.add('on');clearTimeout(avvisa.t);avvisa.t=setTimeout(function(){toast.classList.remove('on');},1800);}
+  // effetto scroll della home: l'hamburger si compone, poi compare il menu
+  var tela=document.getElementById('dmTela'),tx=tela.getContext('2d'),scr=document.getElementById('dmScroll');
+  var fasiD=[].slice.call(dm.querySelectorAll('.dm-fase')),SOG=[0,.27,.45,.66,.86],NF=160,foto=[],pronta=[],caricato=false;
+  function carica(){if(caricato)return;caricato=true;var cart=innerWidth<900?'/burger-m/':'/burger-d/';
+    for(var i=0;i<NF;i++)(function(i){var im=new Image();im.onload=function(){pronta[i]=true;if(i===0)disegnaD();};im.src=cart+String(i).padStart(3,'0')+'.webp';foto[i]=im;})(i);}
+  function vicinaD(i){for(var d=0;d<NF;d++){if(pronta[i-d])return i-d;if(pronta[i+d])return i+d;}return -1;}
+  function disegnaD(){if(!scr.offsetParent)return;var hv=sito.clientHeight;sito.style.setProperty('--hv',hv+'px');
+    var dpr=Math.min(devicePixelRatio||1,2),w=tela.clientWidth,h=tela.clientHeight;if(tela.width!==Math.round(w*dpr)){tela.width=Math.round(w*dpr);tela.height=Math.round(h*dpr);}
+    var corsa=scr.offsetHeight-hv,pr=corsa>0?Math.min(1,Math.max(0,sito.scrollTop/corsa)):0,v=Math.min(1,pr/.92);
+    var k=vicinaD(Math.round(v*(NF-1)));if(k>=0){var im=foto[k],sc=Math.max(tela.width/im.naturalWidth,tela.height/im.naturalHeight),iw=im.naturalWidth*sc,ih=im.naturalHeight*sc;
+      tx.drawImage(im,(tela.width-iw)/2,(tela.height-ih)/2,iw,ih);}
+    var f=0;for(var j=0;j<SOG.length;j++)if(v>=SOG[j])f=j;fasiD.forEach(function(x,n){x.classList.toggle('on',n===f);});
+    document.getElementById('dmBarretta').style.transform='scaleX('+pr+')';
+    document.getElementById('dmScorri').style.opacity=pr>.03?0:1;
+    // il menu del sito compare quando l'hamburger e' pronto
+    sito.classList.toggle('intro',pr<.9);}
+  sito.addEventListener('scroll',function(){requestAnimationFrame(disegnaD);},{passive:true});
+  addEventListener('resize',function(){if(!dm.hidden)disegnaD();});
   function vai(p){dm.querySelectorAll('.dm-pag').forEach(function(s){s.classList.toggle('on',s.getAttribute('data-pag')===p);});
     dm.querySelectorAll('.dm-link button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-p')===p);});
-    document.getElementById('dmPercorso').textContent=p==='home'?'':'/'+p;sito.scrollTop=0;}
+    document.getElementById('dmPercorso').textContent=p==='home'?'':'/'+p;sito.scrollTop=0;
+    if(p==='home'){carica();sito.style.setProperty('--hv',sito.clientHeight+'px');sito.classList.add('intro');requestAnimationFrame(disegnaD);}else sito.classList.remove('intro');}
   dm.addEventListener('click',function(e){var t=e.target.closest('[data-p],[data-toast],[data-chiudi]');if(!t)return;
     if(t.hasAttribute('data-chiudi')){chiudi();return;}
     if(t.hasAttribute('data-toast')){avvisa(t.getAttribute('data-toast'));return;}
@@ -505,6 +568,8 @@
       fin.style.transition='none';fin.style.transform='translate('+(da.left-r1.left)+'px,'+(da.top-r1.top)+'px) scale('+(da.width/r1.width)+','+(da.height/r1.height)+')';
       void fin.offsetWidth;fin.style.transition='transform .75s cubic-bezier(.7,0,.2,1)';fin.style.transform='none';}
     requestAnimationFrame(function(){dm.classList.add('su');});
+    // la finestra ora e' visibile: si misura l'altezza vera per l'effetto scroll
+    requestAnimationFrame(function(){sito.style.setProperty('--hv',sito.clientHeight+'px');disegnaD();});
     setTimeout(function(){var b=dm.querySelector('.dm-chiudi');b&&b.focus();},100);}
   function chiudi(){dm.classList.remove('su');
     var r1=fin.getBoundingClientRect(),o=document.getElementById('swBrowser');var r0=o?o.getBoundingClientRect():null;
