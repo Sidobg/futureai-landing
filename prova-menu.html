@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Prova menu robot – FutureAI</title>
+<link href="/fonts/fonts.css" rel="stylesheet">
+<style>
+:root{--dark:#080B14;--navy:#1A2A6C;--viola:#6C63FF;--ciano:#4DD9E0}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--dark);color:#fff;font-family:'DM Sans',sans-serif}
+.finta{min-height:70vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.6rem;text-align:center;padding:2rem}
+.finta h1{font:800 clamp(2rem,5vw,3.6rem)/1 'Bricolage Grotesque',sans-serif;letter-spacing:-.03em;margin:0}
+.finta p{color:#9aa4b8;margin:0}
+
+/* ===== IL ROBOT CHE FA DA MENU =====
+   Sezione ferma sullo schermo (sticky): sfondo la citta' bianca che scorre,
+   a sinistra il robot nella sua capsula, a destra i servizi che passano uno
+   alla volta scorrendo. Clic su un servizio: il robot lo presenta e si entra. */
+.rm{position:relative;height:calc(100vh + 7 * 55vh);background:#efeae0}
+.rm-fisso{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.rm-citta{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rm-velo{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(245,242,235,.05) 0%,rgba(245,242,235,.35) 38%,rgba(245,242,235,.86) 62%,rgba(245,242,235,.9) 100%),
+    linear-gradient(180deg,rgba(8,11,20,.55) 0%,rgba(8,11,20,0) 16%,rgba(8,11,20,0) 86%,rgba(8,11,20,.35) 100%)}
+.rm-griglia{position:relative;z-index:2;height:100%;max-width:1280px;margin:0 auto;padding:0 clamp(1rem,3vw,2.5rem);
+  display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:clamp(1rem,5vw,5rem)}
+/* la capsula del robot */
+.rm-capsula{position:relative;width:clamp(150px,24vw,360px);aspect-ratio:9/15;border-radius:999px 999px 34px 34px;overflow:hidden;cursor:pointer;
+  background:#ececec;box-shadow:0 0 0 1px rgba(255,255,255,.9),0 0 0 8px rgba(255,255,255,.35),0 40px 90px -30px rgba(26,42,108,.55),0 0 70px -10px rgba(77,217,224,.55);
+  transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.rm-capsula:hover{transform:translateY(-4px)}
+.rm-capsula video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 38%}
+.rm-pedana{position:absolute;left:50%;bottom:-22px;width:120%;height:44px;transform:translateX(-50%);border-radius:50%;
+  background:radial-gradient(ellipse at center,rgba(77,217,224,.55),rgba(108,99,255,.25) 45%,transparent 70%);filter:blur(6px);pointer-events:none}
+.rm-fumetto{position:absolute;left:62%;top:9%;z-index:3;max-width:13rem;padding:.6rem .85rem;border-radius:14px 14px 14px 4px;
+  background:#fff;color:var(--navy);font:600 .88rem/1.35 'Bricolage Grotesque',sans-serif;box-shadow:0 12px 30px -10px rgba(26,42,108,.45);
+  opacity:0;transform:translateY(8px) scale(.96);transition:opacity .35s,transform .35s;pointer-events:none}
+.rm-fumetto.on{opacity:1;transform:none}
+.rm-sx{position:relative;display:flex;flex-direction:column;align-items:center;gap:1.4rem}
+.rm-ia{font-size:.62rem;letter-spacing:.05em;color:#3a4460;background:rgba(255,255,255,.7);padding:.2rem .55rem;border-radius:100px}
+/* il menu a destra */
+.rm-dx{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center}
+.rm-tag{font-family:'Space Mono',monospace;font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:#4b58a0;margin-bottom:1rem}
+.rm-finestra{position:relative;height:min(62vh,560px);overflow:hidden;
+  -webkit-mask:linear-gradient(180deg,transparent 0,#000 22%,#000 78%,transparent 100%);mask:linear-gradient(180deg,transparent 0,#000 22%,#000 78%,transparent 100%)}
+.rm-lista{position:absolute;left:0;right:0;top:50%;margin:0;padding:0;list-style:none;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.rm-voce{height:var(--h,150px);display:flex;flex-direction:column;justify-content:center;opacity:.28;transform:scale(.86);transform-origin:left center;
+  transition:opacity .5s,transform .5s,filter .5s;filter:blur(1.2px)}
+.rm-voce.on{opacity:1;transform:none;filter:none}
+.rm-voce a{text-decoration:none;color:var(--navy);display:block;cursor:pointer}
+.rm-num{font:700 .8rem 'Space Mono',monospace;color:var(--viola);letter-spacing:.12em}
+.rm-nome{display:block;font:800 clamp(2rem,5.2vw,4.6rem)/1 'Bricolage Grotesque',sans-serif;letter-spacing:-.035em;margin-top:.2rem}
+.rm-voce.on .rm-nome{background:linear-gradient(95deg,var(--navy) 0%,var(--viola) 55%,#1e9aa6 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rm-riga{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:.7rem;opacity:0;transform:translateY(6px);transition:opacity .45s .1s,transform .45s .1s}
+.rm-voce.on .rm-riga{opacity:1;transform:none}
+.rm-desc{font-size:clamp(.95rem,1.3vw,1.1rem);color:#2c3659;margin:0}
+.rm-entra{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1rem;border-radius:100px;background:var(--navy);color:#fff;
+  font:700 .9rem 'Bricolage Grotesque',sans-serif;transition:background .2s,transform .2s}
+.rm-voce a:hover .rm-entra{background:var(--viola);transform:translateX(3px)}
+.rm-punti{position:absolute;right:0;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.55rem}
+.rm-punti button{width:10px;height:10px;border-radius:50%;border:0;padding:0;background:rgba(26,42,108,.25);cursor:pointer;transition:background .3s,transform .3s}
+.rm-punti button.on{background:var(--viola);transform:scale(1.4)}
+.rm-scorri{position:absolute;left:50%;bottom:1.4rem;transform:translateX(-50%);z-index:3;font:600 .72rem 'Space Mono',monospace;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--navy);background:rgba(255,255,255,.75);padding:.45rem .9rem;border-radius:100px;transition:opacity .4s}
+.rm-velo-uscita{position:absolute;inset:0;z-index:5;background:#fff;opacity:0;pointer-events:none;transition:opacity .5s}
+.rm.via .rm-velo-uscita{opacity:1}
+@media (max-width:760px){
+  .rm-griglia{grid-template-columns:40% minmax(0,1fr);gap:.8rem}
+  .rm-capsula{width:100%}
+  .rm-fumetto{left:30%;top:4%;font-size:.75rem;max-width:9.5rem}
+  .rm-nome{font-size:clamp(1.5rem,7.4vw,2.2rem)}
+  .rm-desc{font-size:.85rem}
+  .rm-velo{background:linear-gradient(90deg,rgba(245,242,235,.1),rgba(245,242,235,.9) 45%),linear-gradient(180deg,rgba(8,11,20,.5),rgba(8,11,20,0) 14%)}
+  .rm-punti{right:-.4rem}
+  .rm-tag{font-size:.62rem}
+}
+@media (prefers-reduced-motion:reduce){.rm-lista,.rm-voce,.rm-riga{transition:none}}
+</style>
+</head>
+<body>
+<div class="finta"><h1>(qui sopra: la hero di adesso)</h1><p>Scorri giù per vedere il menu con il robot ↓</p></div>
+
+<section class="rm" id="rm" aria-label="I nostri servizi">
+  <div class="rm-fisso">
+    <video class="rm-citta" src="menu/citta.mp4" autoplay muted loop playsinline aria-hidden="true"></video>
+    <div class="rm-velo" aria-hidden="true"></div>
+    <div class="rm-griglia">
+      <div class="rm-sx">
+        <div class="rm-capsula" id="rmCapsula" role="button" tabindex="0" aria-label="Entra nel servizio scelto">
+          <video id="rmRobot" src="menu/robot.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
+          <div class="rm-pedana" aria-hidden="true"></div>
+        </div>
+        <div class="rm-fumetto" id="rmFumetto">Ciao! Scorri: ti presento cosa sappiamo fare.</div>
+        <span class="rm-ia">Video generati con IA</span>
+      </div>
+      <div class="rm-dx">
+        <div class="rm-tag">— Cosa costruiamo con l'IA</div>
+        <div class="rm-finestra"><ul class="rm-lista" id="rmLista"></ul></div>
+        <div class="rm-punti" id="rmPunti" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="rm-scorri" id="rmScorri">Scorri ↓</div>
+    <div class="rm-velo-uscita"></div>
+  </div>
+</section>
+<div class="finta"><h1>(qui sotto: il resto del sito)</h1></div>
+
+<script>
+(function(){
+  var SERVIZI=[
+    {n:'Siti Web',d:'Siti che si muovono e trasformano le visite in clienti.',h:'/#siti-web',f:'Ti porto sui siti web!'},
+    {n:'App su misura',d:'Gestionali, CRM e portali costruiti attorno al tuo lavoro.',h:'/#servizi',f:'Andiamo sulle app!'},
+    {n:'Giochi aziendali',d:'Il tuo marchio diventa un videogioco da condividere.',h:'/#giochi',f:'Si gioca!'},
+    {n:'Prenotazioni online',d:'Il cliente prenota da solo, zero commissioni.',h:'/#servizi',f:'Ecco le prenotazioni!'},
+    {n:'Consulente AI',d:'Un assistente addestrato sui tuoi documenti, 24 ore su 24.',h:'/#servizi',f:'Ti presento il consulente AI!'},
+    {n:'Automazioni',d:'Il lavoro ripetitivo lo fanno i tuoi strumenti, da soli.',h:'/#servizi',f:'Automatizziamo!'},
+    {n:'Chiamate AI',d:'Risponde al telefono quando tu non puoi.',h:'/#servizi',f:'Pronto? Ecco le chiamate AI!'}];
+  var sez=document.getElementById('rm'),lista=document.getElementById('rmLista'),punti=document.getElementById('rmPunti');
+  var rob=document.getElementById('rmRobot'),fum=document.getElementById('rmFumetto'),scorri=document.getElementById('rmScorri'),caps=document.getElementById('rmCapsula');
+  var freccia='<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  SERVIZI.forEach(function(s,i){
+    var li=document.createElement('li');li.className='rm-voce';
+    li.innerHTML='<a href="'+s.h+'"><span class="rm-num">0'+(i+1)+'</span><span class="rm-nome">'+s.n+'</span><span class="rm-riga"><span class="rm-desc">'+s.d+'</span><span class="rm-entra">Entra '+freccia+'</span></span></a>';
+    li.querySelector('a').addEventListener('click',function(e){e.preventDefault();entra(i);});lista.appendChild(li);
+    var b=document.createElement('button');b.type='button';b.addEventListener('click',function(){vaiA(i);});punti.appendChild(b);});
+  var voci=[].slice.call(lista.children),dots=[].slice.call(punti.children);
+
+  /* --- il robot: pezzi del video --- */
+  var PEZZI={saluta:[0.9,2.6],presenta:[2.6,6.9],attesa:[7.6,10.4],indica:[2.7,4.3]};
+  var dopo=null,fine=0,inizio=0,ciclo=false;
+  function pezzo(nome,poi,loop){var p=PEZZI[nome];inizio=p[0];fine=p[1];ciclo=!!loop;dopo=poi||null;
+    try{rob.currentTime=inizio;}catch(e){}var q=rob.play();if(q&&q.catch)q.catch(function(){});}
+  rob.addEventListener('timeupdate',function(){
+    if(rob.currentTime>=fine-0.04){if(ciclo){rob.currentTime=inizio;}else{var f=dopo;dopo=null;if(f)f();else pezzo('attesa',null,true);}}});
+  function attesa(){pezzo('attesa',null,true);}
+
+  /* --- scorrimento: quale servizio e' al centro --- */
+  var att=-1,H=150;
+  function misura(){H=Math.round(Math.min(window.innerHeight*.2,160));lista.style.setProperty('--h',H+'px');voci.forEach(function(v){v.style.setProperty('--h',H+'px');});}
+  function avanz(){var r=sez.getBoundingClientRect(),c=r.height-innerHeight;return c>0?Math.min(1,Math.max(0,-r.top/c)):0;}
+  function aggiorna(){
+    var p=avanz(),i=Math.min(SERVIZI.length-1,Math.floor(p*SERVIZI.length*0.999));
+    scorri.style.opacity=p>0.02?0:1;
+    if(i===att)return;att=i;
+    lista.style.transform='translateY('+(-(i+0.5)*H)+'px)';
+    voci.forEach(function(v,k){v.classList.toggle('on',k===i);});dots.forEach(function(d,k){d.classList.toggle('on',k===i);});
+    if(salutato&&!uscendo)pezzo('indica');
+  }
+  function vaiA(i){var r=sez.getBoundingClientRect(),c=r.height-innerHeight;scrollTo({top:scrollY+r.top+c*(i+0.5)/SERVIZI.length,behavior:'smooth'});}
+
+  /* --- clic: il robot presenta, poi si entra --- */
+  var uscendo=false;
+  function entra(i){if(uscendo)return;uscendo=true;
+    if(i!==att)vaiA(i);
+    fum.textContent=SERVIZI[i].f;fum.classList.add('on');
+    pezzo('presenta',null,false);
+    setTimeout(function(){sez.classList.add('via');},1500);
+    setTimeout(function(){location.href=SERVIZI[i].h;},2000);}
+  caps.addEventListener('click',function(){entra(Math.max(0,att));});
+  caps.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();entra(Math.max(0,att));}});
+
+  /* --- entrata nella sezione: il robot saluta --- */
+  var salutato=false;
+  new IntersectionObserver(function(es){if(es[0].isIntersecting&&!salutato){salutato=true;fum.classList.add('on');
+    pezzo('saluta',function(){setTimeout(function(){fum.classList.remove('on');},1200);attesa();});}},{threshold:.45}).observe(sez);
+  misura();addEventListener('resize',function(){misura();att=-1;aggiorna();});
+  addEventListener('scroll',aggiorna,{passive:true});aggiorna();
+  window.addEventListener('pageshow',function(){uscendo=false;sez.classList.remove('via');fum.classList.remove('on');});
+})();
+</script>
+</body>
+</html>
