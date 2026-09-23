@@ -1907,3 +1907,11 @@ html .qz-numeri b{white-space:nowrap;font-size:clamp(1.35rem,2.5vw,2.2rem)}
 html .qz-numeri div{min-height:7.2rem;display:flex;flex-direction:column;justify-content:center}
 @media(max-width:600px){html .qz-numeri div{min-height:0;flex-direction:row;justify-content:flex-start}}
 @media(max-width:600px){html .qz-numeri b{flex:none;width:8.2ch;font-size:1.45rem}html .qz-numeri span{flex:1}}
+/* etichette «generato con IA» (AI Act art. 50): la misura piu' piccola che resta leggibile, 9px,
+   compensata con un contrasto alto. Sotto, su telefono, non si leggerebbe piu' e non sarebbe «distinguibile». */
+html .svz-ia,html .sw-ia,html .ing-ia,html .gm-ia,html .rm-ia,html #servizi .ia-etichetta,html .ia-nota-telefono,html .hero .video-nota{
+  font-size:9px!important;line-height:1.2!important;letter-spacing:.03em!important;padding:.14rem .42rem!important;color:#E6EAF3!important;background:rgba(8,11,20,.78)!important;border-radius:100px}
+html .hero .video-nota{display:inline-block}
+html .rm-ia{color:#1A2A6C!important;background:rgba(255,255,255,.85)!important}
+/* dati legali e trasparenza IA nel piè di pagina: la misura piu' piccola leggibile */
+html .ft-legale p{font-size:9px;line-height:1.55;letter-spacing:.01em;color:#B7C0D6}
