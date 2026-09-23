@@ -1705,7 +1705,8 @@ nav{background:rgba(8,11,20,0.94);}
   font-size:clamp(3rem,9.5vw,8.5rem);color:#F2F4F8;text-shadow:0 6px 40px rgba(0,0,0,.45)}
 .ing-nome span{background:linear-gradient(90deg,#6C63FF,#4DD9E0);-webkit-background-clip:text;background-clip:text;color:transparent}
 .ing-sotto{font-family:'Space Mono',monospace;font-size:clamp(.66rem,1.1vw,.82rem);letter-spacing:.32em;
-  text-transform:uppercase;color:rgba(242,244,248,.78);padding-left:.2em}
+  text-transform:uppercase;color:rgba(242,244,248,.78);padding-left:.2em;line-height:1.9;max-width:min(88vw,46rem)}
+.ing-sotto span{color:#4DD9E0;margin:0 .35em}
 .ing-invito{position:absolute;left:50%;bottom:clamp(2.2rem,7vh,3.6rem);transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:.7rem;
   font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;
@@ -1747,7 +1748,7 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
     <div class="ing-marchio" id="ingMarchio">
       <img class="ing-icona" src="img/logo-intro.webp?v=2" alt="" width="244" height="244">
       <div class="ing-nome" role="img" aria-label="FUTURE AI">FUTURE<span>AI</span></div>
-      <div class="ing-sotto">Automazioni AI per aziende</div>
+      <div class="ing-sotto">Automazioni AI per aziende <span aria-hidden="true">·</span> Siti web moderni</div>
     </div>
     <p class="ing-frase" id="ingFrase">Benvenuto nel futuro<br>della tua azienda.</p>
     <div class="ing-invito" id="ingInvito"><span class="ing-mouse" aria-hidden="true"></span>Scorri per entrare</div>
