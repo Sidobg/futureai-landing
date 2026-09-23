@@ -25,7 +25,7 @@
 <nav>
   <a href="#" class="nav-logo"></a>
   <div class="nav-destra">
-    <a href="/contatti/" class="nav-cta">Richiedi Preventivo</a>
+    <a href="#quiz" class="nav-cta">⚡ Test gratuito</a>
     <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuSchermo">
       <span class="menu-btn-testo"><span>Menu</span><span>Chiudi</span></span>
       <span class="menu-btn-icona" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -73,11 +73,15 @@
       <div class="pg-tag">— App su misura</div>
       <h1 class="pg-tit">Il tuo lavoro, <em>in un'app sola.</em></h1>
       <p class="pg-sub">Gestionali, CRM, portali e agende costruiti con l'intelligenza artificiale attorno a come lavori tu. Niente più fogli sparsi e programmi pensati per qualcun altro: un unico strumento, da computer e da telefono.</p>
-      <div class="sv-azioni"><a href="/contatti/" class="btn-primary hero-btn"><span class="rotola"><span data-t="Richiedi un preventivo">Richiedi un preventivo</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a href="#quiz" class="btn-secondary hero-btn"><span class="rotola"><span data-t="Calcola quanto risparmi">Calcola quanto risparmi</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+      <a href="#quiz" class="sv-test">
+        <span class="sv-test-ico" aria-hidden="true">⚡</span>
+        <span><b>Fai il test gratuito · 1 minuto</b><small>5 domande: scopri quante ore puoi recuperare, che app ti servirebbe e quale abbiamo già costruito per un problema simile.</small></span>
+        <span class="sv-test-freccia" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
       <ul class="sv-punti"><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Tua, per sempre: niente canoni a piattaforme</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Da computer e da telefono</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Dati al sicuro, accessi per persona</li></ul>
     </div>
     <div class="sv-hero-media" aria-hidden="true">
-      <div class="sv-cornice"><video src="clip-webapp.mp4" autoplay muted loop playsinline preload="metadata" width="330" height="384"></video></div>
+      <div class="sv-cornice"><video src="app/app-video.mp4" autoplay muted loop playsinline preload="metadata" width="720" height="1280"></video><span class="svz-ia">Video generato con IA</span></div>
       <div class="sv-bolla sv-bolla--a"><span class="sv-bolla-ico">📊</span><span><b>Report pronto</b><small>generato alle 8:00</small></span></div><div class="sv-bolla sv-bolla--b"><span class="sv-bolla-ico">✅</span><span><b>Preventivo inviato</b><small>al cliente, in automatico</small></span></div>
     </div>
   </div>
@@ -93,9 +97,10 @@
 <section class="sv-sez sv-sez--quiz" id="quiz"><div class="sv-in">
   <div class="qz">
     <div class="qz-testa">
-      <div class="pg-tag">— Questionario · 1 minuto</div>
+      <div class="pg-tag">— Test gratuito · 1 minuto</div>
       <h2 class="sv-h2">Quanto tempo <em>ti restituirebbe un'app?</em></h2>
-      <p class="qz-intro">Rispondi a 5 domande: ti mostriamo una stima delle ore che ogni settimana tornano libere.</p>
+      <p class="qz-intro">Rispondi a 5 domande. Alla fine vedi <b>quante ore a settimana</b> potresti recuperare, <b>che app</b> fa al caso tuo e <b>un'app vera</b> che abbiamo già costruito per un problema simile al tuo.</p>
+      <ul class="qz-plus"><li>Gratuito</li><li>Nessun dato inviato</li><li>Risultato subito</li></ul>
     </div>
     <div class="qz-corpo">
       <div class="qz-barra" aria-hidden="true"><i id="qzBarra"></i></div>
@@ -111,11 +116,19 @@
           <div><b id="qzGiorni">0</b><span>giornate di lavoro<br>in più all'anno</span></div>
           <div><b id="qzEuro">€ 0</b><span>di tempo recuperato<br>all'anno</span></div>
         </div>
+        <div class="qz-esempio" id="qzEsempio">
+          <div class="qz-ris-tag">Un'app che abbiamo già fatto per un problema simile</div>
+          <figure><img id="qzEsImg" src="app/esempi/crm.webp" alt="" width="1405" height="622" loading="lazy"><figcaption>Schermata reale · nomi e dati sostituiti</figcaption></figure>
+          <h3 id="qzEsTit"></h3>
+          <p class="qz-es-prima" id="qzEsPrima"></p>
+          <p id="qzEsCosa"></p>
+          <p class="qz-es-ris" id="qzEsRis"></p>
+        </div>
         <label class="qz-costo">Costo orario medio del lavoro: <b id="qzCostoV">€ 25</b>
           <input type="range" id="qzCosto" min="12" max="60" step="1" value="25"></label>
         <p class="qz-nota">Stima indicativa e prudente, basata sulle tue risposte: la calcoliamo sul 60% del tempo perso ogni giorno. Nella consulenza gratuita la verifichiamo insieme sul tuo lavoro reale.</p>
         <div class="sv-azioni">
-          <a href="/contatti/" class="btn-primary hero-btn" id="qzCta"><span class="rotola"><span data-t="Voglio recuperare queste ore">Voglio recuperare queste ore</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="/contatti/" class="btn-primary hero-btn" id="qzCta"><span class="rotola"><span data-t="Voglio un'app così">Voglio un'app così</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           <button type="button" class="btn-secondary hero-btn" id="qzRifai"><span class="rotola"><span data-t="Rifai il questionario">Rifai il questionario</span></span></button>
         </div>
       </div>
@@ -130,6 +143,15 @@
     {q:'Come gestite oggi appuntamenti, ordini o lavori?',r:[['Carta e telefono',30],['Fogli Excel',20],['Più programmi che non si parlano',25],['Un gestionale che non ci soddisfa',15]]},
     {q:'Quante volte al giorno cercate un\'informazione (un documento, un prezzo, lo stato di un lavoro)?',r:[['Poche volte',8],['5–10 volte',20],['10–20 volte',40],['Più di 20',65]]},
     {q:'Quanto tempo a settimana va in report, preventivi, fatture o promemoria fatti a mano?',r:[['Meno di un\'ora',.5],['1–3 ore',2],['3–6 ore',4.5],['Più di 6 ore',8]]}];
+  var ES={
+    crm:{img:'crm',tit:'CRM in tasca per un libero professionista',prima:'clienti su Excel, lavori su carta, preventivi fatti a mano: nessun posto unico dove trovare tutto.',
+      cosa:'Un\'app da telefono con clienti, lavori attivi e chiusi, finanze, note e preventivi generati in automatico. Si apre ovunque, anche dal cliente.',ris:'Un ufficio completo sempre in tasca · zero fogli e appunti sparsi'},
+    prenotazioni:{img:'prenotazioni',tit:'Prenotazioni online per un salone',prima:'telefonate continue per prenotare, doppie prenotazioni, agenda in disordine.',
+      cosa:'Il cliente sceglie servizio, giorno e ora dal sito; conferma e promemoria partono da soli e il calendario si aggiorna in tempo reale sul tablet del salone.',ris:'Zero telefonate per gestire gli appuntamenti · agenda sempre in ordine'},
+    preventivi:{img:'preventivi',tit:'Preventivi a voce per un\'attività di affitti brevi',prima:'ogni preventivo richiedeva 15-20 minuti tra calcoli, scrittura e invio.',
+      cosa:'Premi un tasto e descrivi il soggiorno a voce: l\'assistente AI compila il preventivo, fa i conti e lo prepara pronto da stampare o inviare.',ris:'Da 15-20 minuti a 30 secondi per preventivo'},
+    email:{img:'riassunto-email',tit:'Assistente AI che legge e smista le email',prima:'ogni mattina 30-40 minuti solo per leggere, capire e smistare la posta.',
+      cosa:'Ogni mattina l\'assistente legge la casella, divide le email in scadenze, urgenti, clienti e fornitori, scarta le promozioni e ti manda un riassunto.',ris:'30-40 minuti risparmiati ogni mattina'}};
   var box=document.getElementById('qzDomande');if(!box)return;
   var risp=[],pos=0,bar=document.getElementById('qzBarra'),n=document.getElementById('qzN'),ind=document.getElementById('qzIndietro'),ris=document.getElementById('qzRisultato');
   function mostra(){
@@ -148,7 +170,18 @@
     // prudente: il 60% dei minuti persi ogni giorno, per 5 giorni, piu' il 70% del lavoro settimanale su documenti
     ore=Math.max(1,Math.round(persone*gg*5*.6/60+sett*.7));
     anima('qzOre',ore,'');anima('qzGiorni',Math.round(ore*46/8),'');euro();
-    var cta=document.getElementById('qzCta');cta.href='/contatti/?stima='+ore;
+    // l'app gia' costruita piu' vicina alle risposte
+    var p={crm:0,prenotazioni:0,preventivi:0,email:0};
+    p[['prenotazioni','crm','email','crm'][risp[2]]]+=2;
+    if(risp[4]>=2)p.preventivi+=2;else if(risp[4]===1)p.preventivi+=1;
+    if(risp[1]>=2){p.email+=1;p.crm+=1;}
+    if(risp[3]>=2)p.crm+=1;
+    if(risp[0]===0)p.preventivi+=1;
+    var chi='crm';Object.keys(p).forEach(function(k){if(p[k]>p[chi])chi=k;});
+    var e=ES[chi];document.getElementById('qzEsImg').src='app/esempi/'+e.img+'.webp';document.getElementById('qzEsImg').alt=e.tit;
+    document.getElementById('qzEsTit').textContent=e.tit;document.getElementById('qzEsPrima').textContent='Il problema: '+e.prima;
+    document.getElementById('qzEsCosa').textContent=e.cosa;document.getElementById('qzEsRis').textContent=e.ris;
+    var cta=document.getElementById('qzCta');cta.href='/contatti/?stima='+ore+'&esempio='+chi;
     ris.scrollIntoView({behavior:'smooth',block:'nearest'});
   }
   function euro(){var c=+document.getElementById('qzCosto').value;document.getElementById('qzCostoV').textContent='€ '+c;
@@ -174,9 +207,9 @@
   <div class="sv-faqs sv-rivela"><details class="sv-faq"><summary>Quanto costa un'app su misura?<span aria-hidden="true">+</span></summary><p>Dipende da cosa deve fare: dopo la prima chiacchierata ti diamo un preventivo chiaro, con una quota iniziale e un piccolo canone mensile per hosting, assistenza e aggiornamenti.</p></details><details class="sv-faq"><summary>Quanto tempo serve?<span aria-hidden="true">+</span></summary><p>Grazie all'intelligenza artificiale i tempi si accorciano molto: per un gestionale semplice parliamo di settimane, non di mesi.</p></details><details class="sv-faq"><summary>Posso importare i dati che ho già?<span aria-hidden="true">+</span></summary><p>Sì: fogli Excel, rubriche e archivi esistenti si importano all'avvio, così non riparti da zero.</p></details><details class="sv-faq"><summary>E se poi mi serve una funzione in più?<span aria-hidden="true">+</span></summary><p>L'app cresce con te: le aggiunte si fanno quando servono, senza rifare tutto.</p></details></div>
 </div></section>
 <section class="pg-cta">
-  <h2>Ti piace? <em>Parliamone.</em></h2>
-  <p>La prima consulenza è gratuita: raccontaci cosa ti serve, ti diciamo come lo costruiremmo.</p>
-  <div class="azioni"><a href="/contatti/" class="btn-primary hero-btn"><span class="rotola"><span data-t="Richiedi un preventivo">Richiedi un preventivo</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a href="/#menu" class="btn-secondary hero-btn"><span class="rotola"><span data-t="Torna dal robot">Torna dal robot</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+  <h2>Non sai ancora che app ti serve? <em>Scoprilo in un minuto.</em></h2>
+  <p>Fai il test gratuito: ti mostriamo quanto tempo puoi recuperare e un'app vera che abbiamo costruito per un problema simile al tuo.</p>
+  <div class="azioni"><a href="#quiz" class="btn-primary hero-btn"><span class="rotola"><span data-t="Fai il test gratuito">Fai il test gratuito</span></span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a href="/#menu" class="btn-secondary hero-btn"><span class="rotola"><span data-t="Torna dal robot">Torna dal robot</span></span></a></div>
 </section>
 </main>
 
