@@ -275,97 +275,6 @@ nav{
   .forma{display:none;}
 }
 
-/* ===== SITI WEB: testo fermo, scroll dentro il telefono =====
-   Il messaggio non si muove e non svanisce: chi arriva qui deve poterlo
-   leggere in qualsiasi momento dello scorrimento. L'effetto vive tutto
-   dentro lo schermo del telefono, che e' anche il posto giusto — il
-   video sorgente e' 720x1280, la proporzione esatta di un iPhone, quindi
-   entra senza un taglio. */
-.auto-sez{
-  position:relative;width:100%;
-  height:260vh;
-  background:#0A0E1A;
-}
-.auto-fisso{
-  position:sticky;top:0;
-  height:100svh;
-  display:flex;align-items:center;
-  overflow:hidden;
-}
-.auto-fisso::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 72% 50%,rgba(123,92,245,0.16) 0%,rgba(10,14,26,0) 62%);
-  pointer-events:none;
-}
-.auto-griglia{
-  position:relative;
-  max-width:1180px;width:100%;
-  margin:0 auto;padding:0 1.5rem;
-  display:grid;
-  grid-template-columns:minmax(0,1fr) auto;
-  align-items:center;
-  gap:clamp(2rem,5vw,4.5rem);
-}
-.auto-testo{min-width:0;}
-.auto-testo p{
-  color:var(--muted);
-  font-size:1rem;line-height:1.75;font-weight:300;
-  max-width:46ch;margin:0 0 2rem;
-}
-
-/* il telefono, disegnato in CSS: scocca, isola dinamica e tasti laterali */
-.auto-telefono{
-  position:relative;justify-self:end;
-  width:min(34vw,calc(70svh * 0.5625));
-  /* il rapporto 9:16 va sullo SCHERMO, non sulla scocca: se lo metto qui
-     i bordi se lo mangiano e il video finisce tagliato ai lati */
-  padding:11px;
-  border-radius:46px;
-  background:linear-gradient(155deg,#39404F 0%,#181C28 42%,#0E1119 100%);
-  box-shadow:
-    0 2px 3px rgba(255,255,255,0.10) inset,
-    0 -2px 3px rgba(0,0,0,0.6) inset,
-    0 40px 90px rgba(0,0,0,0.65),
-    0 0 60px rgba(123,92,245,0.18);
-}
-.auto-schermo{
-  position:relative;
-  width:100%;aspect-ratio:9/16;
-  border-radius:36px;overflow:hidden;
-  background:#05070E;
-}
-.auto-tela{display:block;width:100%;height:100%;object-fit:cover;}
-.auto-isola{
-  position:absolute;top:22px;left:50%;
-  transform:translateX(-50%);
-  width:31%;height:3.1%;
-  min-height:18px;
-  border-radius:99px;
-  background:#05070E;
-  z-index:2;
-}
-.auto-tasto{
-  position:absolute;width:2.5px;border-radius:2px;
-  background:linear-gradient(180deg,#4A5162,#232936);
-}
-.auto-tasto-vol1{left:-2px;top:22%;height:7%;}
-.auto-tasto-vol2{left:-2px;top:31%;height:7%;}
-.auto-tasto-lato{right:-2px;top:26%;height:11%;}
-
-@media(max-width:900px){
-  .auto-sez{height:220vh;}
-  .auto-griglia{grid-template-columns:1fr;gap:2.5rem;justify-items:center;text-align:center;}
-  .auto-testo p{margin-left:auto;margin-right:auto;}
-  .auto-telefono{justify-self:center;width:min(64vw,270px);}
-}
-
-/* senza animazioni la sezione diventa un blocco normale col primo
-   fotogramma fermo: il messaggio e' la parte che conta e resta intera */
-@media(prefers-reduced-motion:reduce){
-  .auto-sez{height:auto;}
-  .auto-fisso{position:relative;height:auto;padding:5rem 0;}
-}
-
 /* ===== HERO ===== */
 .hero{position:relative;overflow:hidden;
   min-height:100svh;
@@ -2514,37 +2423,191 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
 </div>
 
 <!-- WEB SECTION -->
-<!-- ===== SITI WEB: testo fermo a sinistra, scroll dentro il telefono ===== -->
-<section class="auto-sez" id="siti-web" aria-label="Siti web moderni">
-  <div class="auto-fisso">
-    <div class="auto-griglia">
+<!-- ===== SITI WEB: la vetrina di cosa sappiamo fare =====
+     Sezione sticky: a sinistra il messaggio, a destra una finestra di
+     browser con il sito finto di un ristorante. Scorrendo, l'hamburger si
+     compone (160 fotogrammi su canvas, video Gemini con la stellina tolta)
+     e le scritte del "sito" cambiano fase per fase. Lo stesso fotogramma,
+     disegnato su un canvas minuscolo e ingrandito, fa da sfondo sfocato.
+     burger-d/ 1280x720 per computer, burger-m/ 854x480 per telefono. -->
+<style>
+.sw{position:relative;height:340vh;background:#07090f}
+.sw-fisso{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;align-items:center}
+.sw-sfondo{position:absolute;inset:-8%;width:116%;height:116%;filter:blur(26px) saturate(1.3);opacity:.75;transform:scale(1.05)}
+.sw-velo{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 70% 50%,rgba(7,9,15,.2) 0%,rgba(7,9,15,.75) 70%),
+    linear-gradient(90deg,rgba(7,9,15,.92) 0%,rgba(7,9,15,.6) 45%,rgba(7,9,15,.35) 100%)}
+.sw-griglia{position:relative;z-index:2;max-width:1280px;width:100%;margin:0 auto;padding:0 clamp(1.25rem,3vw,2.5rem);
+  display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);align-items:center;gap:clamp(2rem,4vw,4rem)}
+.sw-tag{font-family:'Space Mono',monospace;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#4DD9E0}
+.sw-tit{font-family:'Manrope',sans-serif;font-weight:800;letter-spacing:-.035em;line-height:1;
+  font-size:clamp(2.3rem,3.7vw,3.7rem);color:#fff;margin:1rem 0 0}
+.sw-tit .riga{white-space:nowrap}
+.sw-tit .grad{background:linear-gradient(90deg,#6C63FF,#4DD9E0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sw-desc{color:rgba(237,241,250,.78);font-size:clamp(.98rem,1.2vw,1.1rem);line-height:1.7;margin:1.4rem 0 0;max-width:34rem}
+.sw-chip{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.5rem 0 0;padding:0;list-style:none}
+.sw-chip li{padding:.45rem .85rem;border-radius:100px;font-size:.84rem;font-weight:500;color:#fff;
+  background:rgba(123,92,245,.16);border:1px solid rgba(155,127,248,.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.sw-chip li:nth-child(even){background:rgba(77,217,224,.12);border-color:rgba(77,217,224,.4)}
+.sw-nota{display:flex;gap:.6rem;align-items:flex-start;margin:1.4rem 0 0;color:#C9D1E0;font-size:.9rem;line-height:1.5;max-width:32rem}
+.sw-nota b{color:#fff}
+.sw-nota svg{flex:none;color:#4DD9E0;margin-top:.15rem}
+.sw-cta{margin-top:1.6rem}
+/* la finestra del browser */
+.sw-browser{position:relative;border-radius:16px;overflow:hidden;background:#0d1018;
+  box-shadow:0 50px 110px -30px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.1),0 0 90px -20px rgba(108,99,255,.45);
+  transform:perspective(1600px) rotateY(-7deg) rotateX(2deg);transform-origin:left center;will-change:transform}
+.sw-barra{display:flex;align-items:center;gap:.8rem;padding:.6rem .9rem;background:#171b26;border-bottom:1px solid rgba(255,255,255,.06)}
+.sw-pallini{display:flex;gap:6px}.sw-pallini i{width:10px;height:10px;border-radius:50%;background:#ff5f57}
+.sw-pallini i:nth-child(2){background:#febc2e}.sw-pallini i:nth-child(3){background:#28c840}
+.sw-url{flex:1;max-width:320px;margin:0 auto;padding:.28rem .8rem;border-radius:8px;background:#0d1018;color:#8C97AD;
+  font:400 .74rem 'DM Sans',sans-serif;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sw-url b{color:#C9D1E0;font-weight:500}
+.sw-pagina{position:relative;aspect-ratio:16/9;overflow:hidden;background:#1a130c}
+.sw-tela{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sw-finto-nav{position:absolute;left:0;right:0;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;
+  padding:4% 5% 0;color:#fff;font-family:'Manrope',sans-serif}
+.sw-finto-logo{font-weight:800;letter-spacing:.08em;font-size:clamp(.7rem,1.2vw,1rem)}
+.sw-finto-logo span{color:#F2B544}
+.sw-finto-menu{display:flex;gap:1.1rem;align-items:center;font-size:clamp(.55rem,.85vw,.78rem);font-weight:600}
+.sw-finto-menu em{font-style:normal;padding:.4em .9em;border-radius:100px;background:#F2B544;color:#1a130c}
+.sw-fasi{position:absolute;left:5%;bottom:9%;z-index:2;right:40%}
+.sw-fase{position:absolute;left:0;bottom:0;opacity:0;transform:translateY(14px);transition:opacity .45s ease,transform .45s ease;
+  color:#fff;font-family:'Manrope',sans-serif;text-shadow:0 3px 24px rgba(0,0,0,.6)}
+.sw-fase.on{opacity:1;transform:none}
+.sw-fase small{display:block;font:700 clamp(.5rem,.75vw,.7rem) 'Space Mono',monospace;letter-spacing:.2em;color:#F2B544;text-transform:uppercase}
+.sw-fase strong{display:block;font-weight:800;letter-spacing:-.03em;line-height:1.02;font-size:clamp(1rem,2.3vw,2rem);margin-top:.35em}
+.sw-ombra{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(0deg,rgba(0,0,0,.55),rgba(0,0,0,0) 45%),linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,0) 22%)}
+.sw-esempio{position:absolute;top:.55rem;right:.7rem;z-index:3;padding:.22rem .55rem;border-radius:100px;
+  background:linear-gradient(90deg,#6C63FF,#4DD9E0);color:#fff;font:700 .6rem 'DM Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.sw-ia{position:absolute;right:.7rem;bottom:.7rem;z-index:3;padding:.25rem .55rem;border-radius:100px;background:rgba(8,11,20,.72);
+  border:1px solid rgba(255,255,255,.14);color:#C3CAD8;font-size:.6rem;letter-spacing:.05em}
+.sw-avanz{position:absolute;left:0;right:0;bottom:0;height:3px;z-index:3;background:rgba(255,255,255,.1)}
+.sw-avanz i{display:block;height:100%;background:#F2B544;transform:scaleX(0);transform-origin:left}
+@media (max-width:900px){
+  .sw{height:300vh}
+  .sw-fisso{align-items:flex-start;padding-top:max(4.5rem,9svh)}
+  .sw-griglia{grid-template-columns:1fr;gap:1.3rem}
+  .sw-tit{font-size:clamp(2rem,8.4vw,2.6rem);margin-top:.6rem}
+  .sw-desc{font-size:.93rem;margin-top:.8rem;line-height:1.6}
+  .sw-chip{margin-top:.9rem;gap:.4rem}.sw-chip li{font-size:.74rem;padding:.35rem .7rem}
+  .sw-nota{display:none}
+  .sw-testo{display:contents}
+  .sw-griglia{gap:0}
+  .sw-browser{margin-top:1.2rem}
+  .sw-cta{order:3;justify-self:start;margin-top:1.1rem}
+  .sw-browser{transform:none;order:2}
+  .sw-velo{background:linear-gradient(180deg,rgba(7,9,15,.9) 0%,rgba(7,9,15,.7) 55%,rgba(7,9,15,.85) 100%)}
+  .sw-finto-menu span{display:none}
+}
+@media (max-height:700px) and (max-width:900px){.sw-desc{display:none}}
+@media (prefers-reduced-motion:reduce){.sw-browser{transform:none}.sw-fase{transition:none}}
+</style>
 
-      <div class="auto-testo">
-        <div class="section-tag">— Siti Web</div>
-        <h2 class="section-title">Siti moderni, leggibili anche<br>dalle intelligenze artificiali</h2>
-        <p>Costruiamo siti veloci e curati, progettati per essere trovati non solo su
-           Google ma anche da ChatGPT, Gemini e Perplexity: dati strutturati, contenuto
-           servito in chiaro senza JavaScript e testo scritto per essere citato.
-           Quando qualcuno chiede consiglio a un'AI, il tuo nome c'&egrave;.</p>
-        <a href="#contatti" class="btn-primary">Parlane con noi
+<section class="sw" id="siti-web" aria-label="Siti web moderni">
+  <div class="sw-fisso">
+    <canvas class="sw-sfondo" id="swSfondo" width="96" height="54" aria-hidden="true"></canvas>
+    <div class="sw-velo" aria-hidden="true"></div>
+    <div class="sw-griglia">
+      <div class="sw-testo">
+        <div class="sw-tag">— Siti Web di nuova generazione</div>
+        <h2 class="sw-tit"><span class="riga">Non facciamo siti.</span><br><span class="grad">Creiamo esperienze.</span></h2>
+        <p class="sw-desc">Il sito è la prima cosa che un cliente vede di te. Noi lo trasformiamo in qualcosa che non dimentica: video che scorrono con il dito, animazioni 3D, effetti che reagiscono a ogni movimento. Velocissimo anche da telefono, trovato su Google e consigliato dalle AI.</p>
+        <ul class="sw-chip">
+          <li>Video a scorrimento</li><li>Animazioni 3D</li><li>Effetti interattivi</li><li>Veloci da telefono</li><li>Visibili su Google e sulle AI</li>
+        </ul>
+        <p class="sw-nota"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><b>Scorri e guarda l'hamburger comporsi:</b> è un esempio reale dell'effetto che possiamo mettere sul tuo sito. Anche l'ingresso di questo sito l'abbiamo costruito così.</span></p>
+        <a href="#contatti" class="btn-primary sw-cta">Voglio un sito così
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
 
-      <div class="auto-telefono" aria-hidden="true">
-        <div class="auto-schermo">
-          <canvas class="auto-tela" width="540" height="960"></canvas>
+      <div class="sw-browser" id="swBrowser" aria-label="Esempio di sito per un ristorante con video a scorrimento" role="img">
+        <div class="sw-barra" aria-hidden="true">
+          <span class="sw-pallini"><i></i><i></i><i></i></span>
+          <span class="sw-url">🔒 <b>iltuoristorante.it</b></span>
         </div>
-        <span class="auto-isola"></span>
-        <span class="auto-tasto auto-tasto-vol1"></span>
-        <span class="auto-tasto auto-tasto-vol2"></span>
-        <span class="auto-tasto auto-tasto-lato"></span>
-        <p class="ia-nota-telefono">Animazione generata con IA</p>
+        <div class="sw-pagina" aria-hidden="true">
+          <canvas class="sw-tela" id="swTela"></canvas>
+          <div class="sw-ombra"></div>
+          <div class="sw-finto-nav"><span class="sw-finto-logo">IL TUO <span>LOCALE</span></span>
+            <span class="sw-finto-menu"><span>Menu</span><span>Locali</span><em>Ordina</em></span></div>
+          <div class="sw-fasi" id="swFasi">
+            <p class="sw-fase on"><small>01 · Ingredienti</small><strong>Scelti uno a uno.</strong></p>
+            <p class="sw-fase"><small>02 · La carne</small><strong>Cotta alla griglia.</strong></p>
+            <p class="sw-fase"><small>03 · Il cuore</small><strong>Formaggio fuso<br>e salse della casa.</strong></p>
+            <p class="sw-fase"><small>04 · Il risultato</small><strong>Il burger perfetto.</strong></p>
+            <p class="sw-fase"><small>05 · Da asporto</small><strong>Ordina online,<br>ritira senza coda.</strong></p>
+          </div>
+          <span class="sw-esempio">Esempio</span>
+          <span class="sw-ia">Video generato con IA</span>
+          <div class="sw-avanz"><i id="swAvanz"></i></div>
+        </div>
       </div>
-
     </div>
   </div>
 </section>
+
+<script>
+(function(){
+  var sez=document.getElementById('siti-web'); if(!sez)return;
+  var tela=document.getElementById('swTela'), ctx=tela.getContext('2d');
+  var sf=document.getElementById('swSfondo'), sctx=sf.getContext('2d');
+  var browser=document.getElementById('swBrowser'), avanz=document.getElementById('swAvanz');
+  var fasi=[].slice.call(document.querySelectorAll('#swFasi .sw-fase'));
+  // dove cambia scena il video: pane e carne che scendono, carne sulla griglia,
+  // formaggio e salse, burger finito, scatola che si chiude
+  var SOGLIE=[0,.27,.45,.66,.86];
+  var N=160, img=new Array(N), pronto=new Array(N);
+  var cartella=innerWidth<900?'burger-m/':'burger-d/';
+  var fermo=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var leggero=!!(navigator.connection&&navigator.connection.saveData);
+  function lim(v){return Math.min(1,Math.max(0,v));}
+
+  var ordine=[0],visto={0:1};
+  (leggero?[8,4,2]:[8,4,2,1]).forEach(function(p){for(var i=0;i<N;i+=p)if(!visto[i]){visto[i]=1;ordine.push(i);}});
+  var attivi=0,pos=0,avviato=false,fatto=-1,att=0;
+  function prossimo(){
+    while(attivi<6&&pos<ordine.length){(function(i){attivi++;var im=new Image();im.decoding='async';
+      im.onload=function(){pronto[i]=true;attivi--;if(Math.abs(i-att)<4||fatto<0)disegna(true);prossimo();};
+      im.onerror=function(){attivi--;prossimo();};
+      im.src=cartella+String(i).padStart(3,'0')+'.webp';img[i]=im;})(ordine[pos++]);}
+  }
+  function vicino(i){for(var d=0;d<N;d++){if(i-d>=0&&pronto[i-d])return i-d;if(i+d<N&&pronto[i+d])return i+d;}return -1;}
+
+  var W=0,H=0;
+  function misura(){var dpr=Math.min(devicePixelRatio||1,2),w=tela.clientWidth,h=tela.clientHeight;
+    if(w===W&&h===H&&tela.width)return;W=w;H=h;tela.width=Math.round(w*dpr);tela.height=Math.round(h*dpr);
+    ctx.imageSmoothingQuality='high';disegna(true);}
+  function disegna(forza){
+    var i=vicino(att); if(i<0||(!forza&&i===fatto))return; fatto=i;
+    ctx.drawImage(img[i],0,0,tela.width,tela.height);
+    sctx.drawImage(img[i],0,0,sf.width,sf.height);
+  }
+
+  function avanzamento(){var r=sez.getBoundingClientRect(),c=r.height-innerHeight;return c>0?lim(-r.top/c):0;}
+  var prog=avanzamento(),raf=0,visibile=false;
+  function applica(){
+    var v=lim((prog-.06)/.86);
+    att=Math.round(v*(N-1)); disegna(false);
+    var k=0; for(var j=0;j<SOGLIE.length;j++) if(v>=SOGLIE[j]) k=j;
+    fasi.forEach(function(f,n){f.classList.toggle('on',n===k);});
+    avanz.style.transform='scaleX('+v+')';
+    if(innerWidth>900&&!fermo) browser.style.transform='perspective(1600px) rotateY('+(-7+v*7).toFixed(2)+'deg) rotateX('+(2-v*2).toFixed(2)+'deg)';
+  }
+  function giro(){raf=0;var o=avanzamento();prog+=fermo?(o-prog):(o-prog)*.18;if(Math.abs(o-prog)<.0005)prog=o;applica();
+    if(visibile&&prog!==o)raf=requestAnimationFrame(giro);}
+  function sveglia(){if(!raf&&visibile)raf=requestAnimationFrame(giro);}
+  addEventListener('scroll',sveglia,{passive:true});
+  addEventListener('resize',function(){misura();sveglia();});
+  // i fotogrammi partono quando la sezione e' a una schermata di distanza
+  new IntersectionObserver(function(es){if(es[0].isIntersecting&&!avviato){avviato=true;prossimo();}},{rootMargin:'100% 0px'}).observe(sez);
+  new IntersectionObserver(function(es){visibile=es[0].isIntersecting;if(visibile){misura();sveglia();}}).observe(sez);
+  applica();
+})();
+</script>
 
 <div class="contact-section" id="contatti">
   <div class="contact-inner">
@@ -2625,8 +2688,8 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
   <p class="footer-legale">FUTURE AI di Sidoni Manuel · P.IVA 04923480166 · <a href="/privacy/">Privacy</a> · <a href="#" id="apriCookie">Cookie</a></p>
   <p class="footer-trasparenza">
     <strong>Trasparenza IA</strong> — Sono generati con intelligenza artificiale:
-    il video d'ingresso, il video nella sezione iniziale, le clip di «Siti Web» e «Prenotazioni Online», l'animazione
-    nel telefono della sezione Siti Web e la musica di sottofondo. Le altre riprese sono video
+    il video d'ingresso, il video nella sezione iniziale, le clip di «Siti Web» e «Prenotazioni Online», il video
+    dell'hamburger nella sezione Siti Web e la musica di sottofondo. Le altre riprese sono video
     d'archivio di Pexels.
     FUTURE AI progetta e fornisce sistemi di intelligenza artificiale nel rispetto del
     Regolamento UE 2024/1689 (AI Act).
@@ -3035,101 +3098,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
         onComplete:function(){ forma.classList.remove('attiva'); }});
     });
   });
-})();
-</script>
-
-<!-- ===== SITI WEB: la sequenza guidata dallo scroll =====
-     54 fotogrammi disegnati su canvas. Non e' un video: un video non si
-     puo' scorrere avanti e indietro col dito in modo fluido, una
-     sequenza si. I fotogrammi partono a scaricare solo quando la sezione
-     si avvicina — 1.1 MB non devono pesare sull'apertura della pagina. -->
-<script>
-(function(){
-  var sez = document.querySelector('.auto-sez');
-  if(!sez || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-
-  var N = 54;
-  var tela = sez.querySelector('.auto-tela');
-  var telefono = sez.querySelector('.auto-telefono');
-  var ctx2d = tela.getContext('2d');
-
-  var menoMoto = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var imgs = new Array(N), ultimo = -1, avviato = false;
-
-  function url(i){ return 'auto/' + String(i).padStart(3,'0') + '.webp'; }
-
-  function disegna(i){
-    var idx = i;
-    if(!(imgs[idx] && imgs[idx].complete && imgs[idx].naturalWidth)){
-      // il fotogramma esatto non c'e' ancora: prendo il piu' vicino gia' pronto
-      var trovato = -1;
-      for(var d=1; d<N; d++){
-        if(idx-d >= 0 && imgs[idx-d] && imgs[idx-d].complete && imgs[idx-d].naturalWidth){ trovato = idx-d; break; }
-        if(idx+d < N && imgs[idx+d] && imgs[idx+d].complete && imgs[idx+d].naturalWidth){ trovato = idx+d; break; }
-      }
-      if(trovato === -1) return;
-      idx = trovato;
-    }
-    if(ultimo === idx) return;
-    ctx2d.drawImage(imgs[idx], 0, 0, tela.width, tela.height);
-    ultimo = idx;
-  }
-
-  function carica(){
-    if(avviato) return;
-    avviato = true;
-    function uno(i){
-      var im = new Image();
-      im.decoding = 'async';
-      if(i === 0) im.onload = function(){ disegna(0); };
-      im.src = url(i);
-      imgs[i] = im;
-    }
-    var PRIMI = Math.min(18, N);
-    for(var i=0;i<PRIMI;i++) uno(i);
-    var cursore = PRIMI;
-    (function lotto(){
-      if(cursore >= N) return;
-      var fine = Math.min(N, cursore + 12);
-      for(var k=cursore;k<fine;k++) uno(k);
-      cursore = fine;
-      setTimeout(lotto, 90);
-    })();
-  }
-
-  // i fotogrammi partono quando la sezione e' a una schermata di distanza
-  if(typeof IntersectionObserver !== 'undefined'){
-    new IntersectionObserver(function(v,o){
-      if(v.some(function(x){return x.isIntersecting;})){ carica(); o.disconnect(); }
-    },{rootMargin:'100% 0px'}).observe(sez);
-  } else { carica(); }
-
-  if(menoMoto.matches){ carica(); return; }   // scena ferma, primo fotogramma
-
-  // Niente piu' ingrandimento ne' titoli che si aprono: il messaggio a
-  // sinistra deve restare fermo e leggibile per tutta la sezione. Lo
-  // scroll fa una cosa sola — scorre i fotogrammi dentro lo schermo —
-  // piu' un galleggiamento minimo del telefono, che dice solo che la
-  // sezione e' viva.
-  gsap.set(telefono,{y:26});
-
-  gsap.timeline({
-    scrollTrigger:{
-      trigger: sez,
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: 0.4,
-      invalidateOnRefresh: true,
-      onUpdate: function(self){
-        // un po' di corsa a vuoto in entrata e in uscita, cosi' la
-        // sequenza non parte gia' iniziata ne' finisce di colpo
-        var p = gsap.utils.clamp(0, 1, (self.progress - 0.08) / 0.84);
-        disegna(Math.min(N-1, Math.floor(p * N)));
-      }
-    }
-  }).to(telefono,{y:-26,ease:'none',duration:1},0);
-
-  ScrollTrigger.refresh();
 })();
 </script>
 
