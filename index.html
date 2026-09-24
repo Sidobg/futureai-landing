@@ -169,7 +169,8 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
     marchio.style.opacity=m;
     marchio.style.filter='blur('+((1-m)*10)+'px)';
     marchio.style.transform=(innerWidth>700?'translateY(-50%) ':'')+'translateY('+((1-m)*-28)+'px) scale('+(.96+m*.04)+')';
-    invito.style.opacity=prog>.015?0:1;
+    // «Scorri per entrare» resta acceso finche' la porta non si apre (fotogramma ~206 di 240 = 86% del video)
+    invito.style.opacity=v<.82?1:lim((.88-v)/.06,0,1);
     var f=lim((prog-.56)/.06,0,1);
     frase.style.opacity=f;
     frase.style.filter='blur('+((1-f)*8)+'px)';
