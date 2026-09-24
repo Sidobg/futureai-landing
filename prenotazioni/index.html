@@ -83,13 +83,11 @@
   <div class="sv-testa sv-rivela"><div class="pg-tag">— Cosa possiamo costruire</div><h2 class="sv-h2">Tutto quello che ti serve, <em>niente di più.</em></h2></div>
   <div class="sv-griglia"><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">🗓️</span><h3>Agenda online</h3><p>Il cliente vede solo gli orari davvero liberi e prenota in pochi tocchi.</p></article><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">💬</span><h3>Conferme e promemoria</h3><p>Email o messaggi automatici: meno appuntamenti saltati.</p></article><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">👥</span><h3>Più operatori</h3><p>Ogni collaboratore con la sua agenda, i suoi servizi e le sue pause.</p></article><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">🧾</span><h3>Servizi e durate</h3><p>Ogni servizio con la sua durata e il suo prezzo: niente incastri sbagliati.</p></article><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">📊</span><h3>Il tuo pannello</h3><p>Tutte le prenotazioni del giorno e della settimana a colpo d'occhio.</p></article><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">🚫</span><h3>Nessuna commissione</h3><p>Non paghi percentuali a piattaforme esterne: i clienti restano tuoi.</p></article></div>
 </div></section>
-<section class="sv-sez sv-sez--alt" id="come"><div class="sv-in">
-  <div class="sv-testa sv-rivela"><div class="pg-tag">— Come funziona</div><h2 class="sv-h2">Dall'idea al lavoro, <em>in quattro passi.</em></h2></div>
+<section class="sv-sez sv-sez--alt ap-come" id="come"><div class="sv-in">
+  <div class="sv-testa sv-rivela"><div class="pg-tag">— Come funziona e per chi è</div><h2 class="sv-h2">Dall'idea al lavoro, <em>in quattro passi.</em></h2></div>
   <ol class="sv-passi"><li class="sv-passo sv-rivela"><span class="sv-n">01</span><h3>Ci dici come lavori</h3><p>Servizi, durate, operatori e orari: partiamo da qui.</p></li><li class="sv-passo sv-rivela"><span class="sv-n">02</span><h3>Anteprima grafica</h3><p>Vedi l'agenda con i tuoi colori prima di andare online.</p></li><li class="sv-passo sv-rivela"><span class="sv-n">03</span><h3>Collegamento a tutto</h3><p>Sito, Instagram, Google: il link per prenotare ovunque.</p></li><li class="sv-passo sv-rivela"><span class="sv-n">04</span><h3>Online e assistita</h3><p>La attiviamo e ti seguiamo nei primi giorni.</p></li></ol>
-</div></section>
-<section class="sv-sez sv-sez--chi"><div class="sv-in sv-rivela">
-  <div class="sv-testa"><div class="pg-tag">— Per chi è</div><h2 class="sv-h2">Pensato per chi <em>lavora davvero.</em></h2></div>
-  <ul class="sv-chip"><li>Parrucchieri e barbieri</li><li>Centri estetici</li><li>Studi medici e fisioterapisti</li><li>Personal trainer e palestre</li><li>Consulenti</li><li>Noleggi</li><li>Ristoranti</li><li>Scuole e corsi</li></ul>
+  <div class="ap-chi sv-rivela"><p class="ap-chi-tit">Pensato per chi <em>lavora davvero:</em></p>
+  <ul class="sv-chip"><li>Parrucchieri e barbieri</li><li>Centri estetici</li><li>Studi medici e fisioterapisti</li><li>Personal trainer e palestre</li><li>Consulenti</li><li>Noleggi</li><li>Ristoranti</li><li>Scuole e corsi</li></ul></div>
 </div></section>
 <section class="sv-sez"><div class="sv-in sv-stretto">
   <div class="sv-testa sv-rivela"><div class="pg-tag">— Domande frequenti</div><h2 class="sv-h2">Le domande <em>che ci fanno tutti.</em></h2></div>
@@ -486,6 +484,21 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 .form-presa{display:flex;gap:.6rem;align-items:flex-start;margin:.2rem 0 1rem;font-size:.82rem;line-height:1.45;color:var(--ink-muted,#8C97AD);cursor:pointer}
 .form-presa input{margin-top:.15rem;width:1.05rem;height:1.05rem;flex:none;accent-color:#7B5CF5}
 .form-presa a{color:#C4B5FD}
+
+.ap-come{padding-top:clamp(2.8rem,6vw,4.5rem);padding-bottom:clamp(2.8rem,6vw,4.5rem)}
+.ap-come .sv-testa{margin-bottom:clamp(1.4rem,3vw,2.2rem)}
+.ap-chi{margin-top:clamp(1.8rem,4vw,2.6rem);padding-top:clamp(1.4rem,3vw,2rem);border-top:1px solid rgba(20,33,61,.1);text-align:center}
+.ap-chi-tit{margin:0 0 .9rem;font:800 clamp(1.1rem,2vw,1.35rem) 'Bricolage Grotesque',sans-serif;letter-spacing:-.02em;color:var(--ink)}
+.ap-chi-tit em{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-style:italic;color:#5B4BDB}
+.ap-chi .sv-chip{gap:.45rem}
+.ap-chi .sv-chip li{padding:.45rem .85rem;font-size:.88rem}
+@media(max-width:600px){
+  .ap-come .sv-passi{gap:.9rem}
+  .ap-come .sv-passo{display:grid;grid-template-columns:auto 1fr;column-gap:.9rem;text-align:left;padding:0}
+  .ap-come .sv-passo .sv-n{grid-row:span 2;width:42px;height:42px;font-size:.85rem}
+  .ap-come .sv-passo h3{margin:.1rem 0 0;font-size:1rem}
+  .ap-come .sv-passo p{margin:.2rem 0 0;font-size:.88rem}
+}
 </style>
 
 <div class="cookie" id="cookie" role="dialog" aria-labelledby="cookieTit" aria-describedby="cookieTesto" hidden>
