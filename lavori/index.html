@@ -49,12 +49,9 @@
       <li class="menu-voce" data-forma="1"><a href="/#menu" class="menu-link"><span class="menu-link-testo">Il robot dei servizi</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       <li class="menu-voce" data-forma="2"><a href="/siti-web/" class="menu-link"><span class="menu-link-testo">Siti Web</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       <li class="menu-voce" data-forma="2"><a href="/app/" class="menu-link"><span class="menu-link-testo">App su misura</span></a><span class="menu-riga" aria-hidden="true"></span></li>
-      <li class="menu-voce" data-forma="4"><a href="/intelligenza-artificiale/" class="menu-link"><span class="menu-link-testo">AI – Intelligenza artificiale</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="4"><a href="/intelligenza-artificiale/" class="menu-link"><span class="menu-link-testo">Mondo AI</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       <li class="menu-voce" data-forma="3"><a href="/giochi/" class="menu-link"><span class="menu-link-testo">Giochi aziendali</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       <li class="menu-voce" data-forma="3"><a href="/prenotazioni/" class="menu-link"><span class="menu-link-testo">Prenotazioni online</span></a><span class="menu-riga" aria-hidden="true"></span></li>
-      <li class="menu-voce" data-forma="1"><a href="/consulente-ai/" class="menu-link"><span class="menu-link-testo">Consulente AI</span></a><span class="menu-riga" aria-hidden="true"></span></li>
-      <li class="menu-voce" data-forma="4"><a href="/automazioni/" class="menu-link"><span class="menu-link-testo">Automazioni</span></a><span class="menu-riga" aria-hidden="true"></span></li>
-      <li class="menu-voce" data-forma="2"><a href="/chiamate-ai/" class="menu-link"><span class="menu-link-testo">Chiamate AI</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       <li class="menu-voce" data-forma="3"><a href="/lavori/" class="menu-link"><span class="menu-link-testo">I nostri lavori</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       <li class="menu-voce" data-forma="4"><a href="/contatti/" class="menu-link"><span class="menu-link-testo">Contatti</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       </ul>
@@ -378,92 +375,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   <span class="music-label">Musica</span>
 </button>
 
-<script>
-(function(){
-  var audio = document.getElementById('bgMusic');
-  var btn   = document.getElementById('musicToggle');
-  if(!audio || !btn) return;
-
-  var VOLUME = 0.18;          // sottofondo: si sente, non copre
-  var KEY    = 'futureai-musica';
-  var fade;
-  // Lo stato sta qui, non in audio.paused: durante la dissolvenza in uscita
-  // l'audio suona ancora, e usarlo come stato rompe il doppio click.
-  var attiva = false;
-
-  function fadeTo(target, done){
-    clearInterval(fade);
-    var step = (target - audio.volume) / 18;
-    fade = setInterval(function(){
-      var v = audio.volume + step;
-      if((step > 0 && v >= target) || (step < 0 && v <= target)){
-        clearInterval(fade);
-        audio.volume = Math.min(1, Math.max(0, target));
-        if(done) done();
-      } else {
-        audio.volume = Math.min(1, Math.max(0, v));
-      }
-    }, 40);
-  }
-
-  function segna(attiva){
-    btn.classList.toggle('is-playing', attiva);
-    btn.setAttribute('aria-pressed', attiva ? 'true' : 'false');
-    btn.setAttribute('aria-label', attiva ? 'Disattiva la musica di sottofondo' : 'Attiva la musica di sottofondo');
-  }
-
-  function avvia(){
-    attiva = true;
-    if(audio.paused) audio.volume = 0;
-    var p = audio.play();
-    if(p && p.catch) p.catch(function(){ attiva = false; segna(false); });
-    segna(true);
-    fadeTo(VOLUME);
-  }
-
-  function ferma(){
-    attiva = false;
-    fadeTo(0, function(){ if(!attiva) audio.pause(); });
-    segna(false);
-  }
-
-  btn.addEventListener('click', function(){
-    if(attiva){
-      localStorage.setItem(KEY, 'off');
-      ferma();
-    } else {
-      localStorage.setItem(KEY, 'on');
-      avvia();
-    }
-  });
-
-  // I browser non lasciano partire l'audio da soli: si aspetta il primo gesto.
-  // Chi l'ha spenta una volta non se la ritrova accesa al ritorno.
-  if(localStorage.getItem(KEY) !== 'off'){
-    // Safari e iPhone lasciano partire l'audio solo su un clic completato (click, touchend, tasto):
-    // la pressione (pointerdown/touchstart) non basta. Se il browser rifiuta, si riprova al clic dopo.
-    var EV = ['click','touchend','keydown'];
-    var togli = function(){ EV.forEach(function(t){ document.removeEventListener(t, primoGesto, true); }); };
-    var primoGesto = function(e){
-      // se il primo gesto è proprio sul pulsante, decide lui: non partire due volte
-      if(e && e.target && e.target.closest && e.target.closest('#musicToggle')){ togli(); return; }
-      if(attiva){ togli(); return; }
-      attiva = true;
-      if(audio.paused) audio.volume = 0;
-      var p = audio.play();
-      if(p && p.then){ p.then(function(){ togli(); segna(true); fadeTo(VOLUME); }, function(){ attiva = false; segna(false); }); }
-      else { togli(); segna(true); fadeTo(VOLUME); }
-    };
-    EV.forEach(function(t){ document.addEventListener(t, primoGesto, true); });
-  }
-
-  // Se l'utente cambia scheda, la musica si mette in pausa per educazione.
-  document.addEventListener('visibilitychange', function(){
-    if(document.hidden){ if(!audio.paused) audio.pause(); }
-    else if(attiva && audio.paused){ audio.play().catch(function(){}); }
-  });
-})();
-</script>
+<script src="/musica.js"></script>
 
 <!-- ===== MENU A TUTTO SCHERMO =====
      GSAP 3.12.5 e' gia' caricato. Il plugin CustomEase no, e non lo aggiungo
@@ -805,5 +717,6 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
 })();
 </script>
 
+<script src="/assistente.js" defer></script>
 </body>
 </html>

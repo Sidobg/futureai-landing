@@ -49,12 +49,9 @@
       <li class="menu-voce" data-forma="1"><a href="/#menu" class="menu-link"><span class="menu-link-testo">Il robot dei servizi</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       <li class="menu-voce" data-forma="2"><a href="/siti-web/" class="menu-link"><span class="menu-link-testo">Siti Web</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       <li class="menu-voce" data-forma="2"><a href="/app/" class="menu-link"><span class="menu-link-testo">App su misura</span></a><span class="menu-riga" aria-hidden="true"></span></li>
-      <li class="menu-voce" data-forma="4"><a href="/intelligenza-artificiale/" class="menu-link"><span class="menu-link-testo">AI – Intelligenza artificiale</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="4"><a href="/intelligenza-artificiale/" class="menu-link"><span class="menu-link-testo">Mondo AI</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       <li class="menu-voce" data-forma="3"><a href="/giochi/" class="menu-link"><span class="menu-link-testo">Giochi aziendali</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       <li class="menu-voce" data-forma="3"><a href="/prenotazioni/" class="menu-link"><span class="menu-link-testo">Prenotazioni online</span></a><span class="menu-riga" aria-hidden="true"></span></li>
-      <li class="menu-voce" data-forma="1"><a href="/consulente-ai/" class="menu-link"><span class="menu-link-testo">Consulente AI</span></a><span class="menu-riga" aria-hidden="true"></span></li>
-      <li class="menu-voce" data-forma="4"><a href="/automazioni/" class="menu-link"><span class="menu-link-testo">Automazioni</span></a><span class="menu-riga" aria-hidden="true"></span></li>
-      <li class="menu-voce" data-forma="2"><a href="/chiamate-ai/" class="menu-link"><span class="menu-link-testo">Chiamate AI</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       <li class="menu-voce" data-forma="3"><a href="/lavori/" class="menu-link"><span class="menu-link-testo">I nostri lavori</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       <li class="menu-voce" data-forma="4"><a href="/contatti/" class="menu-link"><span class="menu-link-testo">Contatti</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       </ul>
@@ -94,7 +91,7 @@
       <video id="bvPorte" src="/intelligenza-artificiale/negozio-porte.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
     </span>
   </button>
-  <span class="ng-ia">Immagini e video generati con IA</span>
+  <span class="ng-ia bv-ia">Immagini e video generati con IA</span>
 </header>
 
 <!-- ============ STRADA 1: MODELLI AI ============ -->
@@ -749,92 +746,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   <span class="music-label">Musica</span>
 </button>
 
-<script>
-(function(){
-  var audio = document.getElementById('bgMusic');
-  var btn   = document.getElementById('musicToggle');
-  if(!audio || !btn) return;
-
-  var VOLUME = 0.18;          // sottofondo: si sente, non copre
-  var KEY    = 'futureai-musica';
-  var fade;
-  // Lo stato sta qui, non in audio.paused: durante la dissolvenza in uscita
-  // l'audio suona ancora, e usarlo come stato rompe il doppio click.
-  var attiva = false;
-
-  function fadeTo(target, done){
-    clearInterval(fade);
-    var step = (target - audio.volume) / 18;
-    fade = setInterval(function(){
-      var v = audio.volume + step;
-      if((step > 0 && v >= target) || (step < 0 && v <= target)){
-        clearInterval(fade);
-        audio.volume = Math.min(1, Math.max(0, target));
-        if(done) done();
-      } else {
-        audio.volume = Math.min(1, Math.max(0, v));
-      }
-    }, 40);
-  }
-
-  function segna(attiva){
-    btn.classList.toggle('is-playing', attiva);
-    btn.setAttribute('aria-pressed', attiva ? 'true' : 'false');
-    btn.setAttribute('aria-label', attiva ? 'Disattiva la musica di sottofondo' : 'Attiva la musica di sottofondo');
-  }
-
-  function avvia(){
-    attiva = true;
-    if(audio.paused) audio.volume = 0;
-    var p = audio.play();
-    if(p && p.catch) p.catch(function(){ attiva = false; segna(false); });
-    segna(true);
-    fadeTo(VOLUME);
-  }
-
-  function ferma(){
-    attiva = false;
-    fadeTo(0, function(){ if(!attiva) audio.pause(); });
-    segna(false);
-  }
-
-  btn.addEventListener('click', function(){
-    if(attiva){
-      localStorage.setItem(KEY, 'off');
-      ferma();
-    } else {
-      localStorage.setItem(KEY, 'on');
-      avvia();
-    }
-  });
-
-  // I browser non lasciano partire l'audio da soli: si aspetta il primo gesto.
-  // Chi l'ha spenta una volta non se la ritrova accesa al ritorno.
-  if(localStorage.getItem(KEY) !== 'off'){
-    // Safari e iPhone lasciano partire l'audio solo su un clic completato (click, touchend, tasto):
-    // la pressione (pointerdown/touchstart) non basta. Se il browser rifiuta, si riprova al clic dopo.
-    var EV = ['click','touchend','keydown'];
-    var togli = function(){ EV.forEach(function(t){ document.removeEventListener(t, primoGesto, true); }); };
-    var primoGesto = function(e){
-      // se il primo gesto è proprio sul pulsante, decide lui: non partire due volte
-      if(e && e.target && e.target.closest && e.target.closest('#musicToggle')){ togli(); return; }
-      if(attiva){ togli(); return; }
-      attiva = true;
-      if(audio.paused) audio.volume = 0;
-      var p = audio.play();
-      if(p && p.then){ p.then(function(){ togli(); segna(true); fadeTo(VOLUME); }, function(){ attiva = false; segna(false); }); }
-      else { togli(); segna(true); fadeTo(VOLUME); }
-    };
-    EV.forEach(function(t){ document.addEventListener(t, primoGesto, true); });
-  }
-
-  // Se l'utente cambia scheda, la musica si mette in pausa per educazione.
-  document.addEventListener('visibilitychange', function(){
-    if(document.hidden){ if(!audio.paused) audio.pause(); }
-    else if(attiva && audio.paused){ audio.play().catch(function(){}); }
-  });
-})();
-</script>
+<script src="/musica.js"></script>
 
 <!-- ===== MENU A TUTTO SCHERMO =====
      GSAP 3.12.5 e' gia' caricato. Il plugin CustomEase no, e non lo aggiungo
@@ -1086,12 +998,19 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
   var sez=document.getElementById('bivio'),img=document.getElementById('bvImg');if(!sez||!img)return;
   var porte=[].slice.call(sez.querySelectorAll('.bv-porta'));
   function pt(s){var a=s.split(',');return[+a[0],+a[1]];}
-  function piazza(){
+  function piazza(stretto){
     var W=sez.clientWidth,H=sez.clientHeight,iw=1672,ih=941,k=Math.max(W/iw,H/ih),ox=(W-iw*k)/2,oy=(H-ih*k)/2;
     var fuori=porte.some(function(p){var q=pt(p.dataset.fine),x=ox+q[0]*k;return x<90||x>W-90;});
-    var filo=Math.max(40,Math.min(90,H*.07));
+    if(stretto===undefined)sez.classList.remove('bv--stretto');
+    var filo=fuori?(stretto?22:34):Math.max(40,Math.min(90,H*.07));
+    /* da telefono i tasti stanno nello spazio libero tra il titolo e il negozio, mai sopra */
+    var r0=sez.getBoundingClientRect(),su=sez.querySelector('.bv-testa').getBoundingClientRect().bottom-r0.top+10,
+        neg=document.getElementById('bvNegozio'),giu=neg?neg.getBoundingClientRect().top-r0.top-10:H;
+    var bh=0;porte.forEach(function(p){bh=Math.max(bh,p.querySelector('.bv-btn').offsetHeight);});
+    if(fuori&&!stretto&&giu-su<filo+bh+18){sez.classList.add('bv--stretto');return piazza(true);}
     porte.forEach(function(p){
       var q=pt(fuori?p.dataset.vicino:p.dataset.fine),x=ox+q[0]*k,y=oy+q[1]*k;
+      if(fuori)y=Math.max(su,Math.min(y,giu-filo-bh));
       var bw=p.querySelector('.bv-btn').offsetWidth/2+10;
       p.style.left=x+'px';p.style.top=y+'px';p.style.setProperty('--filo',filo+'px');
       /* se il pulsante sborda, lo si sposta dentro lasciando il faro sul punto */
@@ -1099,10 +1018,11 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
       p.classList.add('pronta');
     });
   }
-  window.addEventListener('resize',piazza);
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(piazza);
-  if(img.complete)piazza();else img.addEventListener('load',piazza);
-  setTimeout(piazza,50);
+  window.addEventListener('resize',function(){piazza();});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){piazza();});
+  if(img.complete)piazza();else img.addEventListener('load',function(){piazza();});
+  setTimeout(function(){piazza();},50);
+  setTimeout(function(){piazza();},1300);
 })();
 </script>
 <script>
@@ -1539,7 +1459,7 @@ html .strada .md-col--no{background:rgba(255,255,255,.8);backdrop-filter:blur(12
 @media(max-width:860px){
   .mp{grid-template-columns:1fr;top:auto;bottom:0;left:0;width:100%;max-height:92dvh;border-radius:24px 24px 0 0;transform:translateY(40px);}
   .mp.su{transform:none}
-  .mp-prova{border-radius:0;order:-1}
+  .mp-prova{border-radius:0}
   .mp-chiudi{position:fixed;right:.8rem;top:auto;margin-top:.8rem}
 }
 /* le prove */
@@ -1632,6 +1552,19 @@ html .strada .md-col--no{background:rgba(255,255,255,.8);backdrop-filter:blur(12
 .dm-idea p{margin:.45rem 0 0;font-size:.9rem;line-height:1.55;color:#3D4A68}
 .dm-idea a{margin-top:.8rem;align-self:flex-start;font:700 .88rem 'DM Sans',sans-serif;color:#14213D}
 @media(max-width:760px){.ng-torna{top:auto;bottom:auto;top:4.4rem;left:.75rem}.ng-torna-btn{min-height:36px;padding:.4rem .75rem;font-size:.78rem}.ng-testa{top:7.2rem}.ng-salta{top:auto!important;bottom:1.2rem!important;right:50%!important;transform:translateX(50%)}}
+/* bivio su schermi bassi: via le spiegazioni lunghe dei tasti, testo piu' corto */
+.bv--stretto .bv-btn small{display:none}
+.bv--stretto .bv-btn{padding:.6rem .9rem}
+@media(max-width:700px){.bv-sub{font-size:.9rem;margin-top:.6rem}.bv-testa{padding-top:4.6rem}.bv-tit{margin-top:.7rem}
+  .bv-btn{max-width:46vw;padding:.6rem .8rem}.bv-btn b{font-size:.92rem}}
+@media(max-width:700px) and (max-height:700px){.bv-torna{display:none}.bv-sub{font-size:.84rem}}
+@media(max-width:760px){
+  .ng-etich{padding:.3rem;left:18px;top:-17px;border-radius:10px}.ng-etich b{display:none}.ng-etich i{border:0;padding:.2rem .3rem}
+  .ng-punto--sx .ng-etich{left:auto;right:18px}.ng-punto--alto .ng-etich{left:-50%;bottom:20px;top:auto}
+}
+@media(max-width:760px) and (max-height:760px){.ng-sub{display:none}.ng-tit{font-size:1.7rem}}
+.bv-ia{left:auto;right:9rem;bottom:1.9rem}
+.ng-scena .ng-ia{left:6.5rem}
 /* ===== strada 1: modelli AI ===== */
 .md{scroll-margin-top:60px}
 .md-tag{display:inline-flex;align-items:center;gap:.5rem;margin-top:0}
@@ -1934,5 +1867,6 @@ html .al .btn-secondary{color:#14213D;background:#fff;border-color:rgba(20,33,61
     setTimeout(function(){v.hidden=true;v.textContent='▶ Avvia l\'analisi';var o=document.getElementById('alDiagOut');o.hidden=false;},1300);});
 })();
 </script>
+<script src="/assistente.js" defer></script>
 </body>
 </html>
