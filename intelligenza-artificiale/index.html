@@ -51,7 +51,6 @@
       <li class="menu-voce" data-forma="2"><a href="/app/" class="menu-link"><span class="menu-link-testo">App su misura</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       <li class="menu-voce" data-forma="4"><a href="/intelligenza-artificiale/" class="menu-link"><span class="menu-link-testo">Mondo AI</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       <li class="menu-voce" data-forma="3"><a href="/giochi/" class="menu-link"><span class="menu-link-testo">Giochi aziendali</span></a><span class="menu-riga" aria-hidden="true"></span></li>
-      <li class="menu-voce" data-forma="3"><a href="/prenotazioni/" class="menu-link"><span class="menu-link-testo">Prenotazioni online</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       <li class="menu-voce" data-forma="3"><a href="/lavori/" class="menu-link"><span class="menu-link-testo">I nostri lavori</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       <li class="menu-voce" data-forma="4"><a href="/contatti/" class="menu-link"><span class="menu-link-testo">Contatti</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       </ul>
@@ -84,7 +83,7 @@
     <span class="bv-btn"><b>AI in locale</b><small>L'AI installata su un computer in azienda: nessun dato esce, mai</small></span>
     <span class="bv-filo" aria-hidden="true"></span><span class="bv-faro" aria-hidden="true"></span>
   </a>
-  <button type="button" class="bv-negozio" id="bvNegozio" aria-label="AI al lavoro: entra nel negozio del futuro e prova Consulente AI, Automazioni, Chiamate AI e AI su misura">
+  <button type="button" class="bv-negozio" id="bvNegozio" aria-label="AI al lavoro: entra nel negozio del futuro e prova Consulente AI, Automazioni, Chiamate AI, Prenotazioni online e AI su misura">
     <span class="bv-cartello"><b>AI al lavoro</b><small>Entra nel negozio: l'intelligenza artificiale lavora davanti a te, bancone per bancone</small><i>Tocca per entrare</i></span>
     <span class="bv-edificio">
       <img src="/intelligenza-artificiale/negozio-fuori.webp" width="640" height="318" alt="">
@@ -386,9 +385,13 @@
           <span class="ng-anello" aria-hidden="true"></span>
           <span class="ng-etich"><i>02</i><b>Automazioni</b><small>il nastro che lavora da solo</small></span>
         </button>
-        <button type="button" class="ng-punto ng-punto--misura" data-mp="misura" style="--x:50%;--y:66%" aria-label="Bancone 4: AI su misura">
+        <button type="button" class="ng-punto" data-mp="prenota" style="--x:25%;--y:73%" aria-label="Bancone 4: Prenotazioni online">
           <span class="ng-anello" aria-hidden="true"></span>
-          <span class="ng-etich"><i>04</i><b>AI su misura</b><small>la costruiamo per te</small></span>
+          <span class="ng-etich"><i>04</i><b>Prenotazioni</b><small>il cliente prenota da solo</small></span>
+        </button>
+        <button type="button" class="ng-punto ng-punto--misura" data-mp="misura" style="--x:50%;--y:66%" aria-label="Bancone 5: AI su misura">
+          <span class="ng-anello" aria-hidden="true"></span>
+          <span class="ng-etich"><i>05</i><b>AI su misura</b><small>la costruiamo per te</small></span>
         </button>
         <button type="button" class="ng-punto ng-punto--sx" data-mp="chiamate" style="--x:79%;--y:74%" aria-label="Bancone 3: Chiamate AI">
           <span class="ng-anello" aria-hidden="true"></span>
@@ -399,7 +402,7 @@
       <div class="ng-testa">
         <div class="strada-tag"><i></i> Strada 3 · AI al lavoro</div>
         <h2 id="ngTit" class="ng-tit">Entra nel negozio <em>del futuro.</em></h2>
-        <p class="ng-sub"><span class="ng-sub-lungo">Qui l'intelligenza artificiale non è una promessa: <b>lavora</b>. </span>Questi banconi sono <b>solo alcuni esempi</b> di quello che l'AI può fare per un'azienda: <b>tocca un bancone e provalo.</b></p>
+        <p class="ng-sub"><span class="ng-sub-lungo">Qui l'intelligenza artificiale non è una promessa: <b>lavora</b>. </span><span class="ng-sub-tel">Cinque banconi, cinque esempi. <b>Toccane uno per provarlo.</b></span><span class="ng-sub-pc">Questi banconi sono <b>solo alcuni esempi</b> di quello che l'AI può fare per un'azienda: <b>tocca un bancone e provalo.</b></span></p>
       </div>
       <div class="ng-torna">
         <a href="#bivio" class="ng-torna-btn"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg> Mondo AI</a>
@@ -408,10 +411,11 @@
       <button type="button" class="ng-salta" id="ngSalta">Salta il video <span aria-hidden="true">››</span></button>
       <p class="ng-guida" id="ngGuida" aria-hidden="true"><span class="ng-guida-pc">Tocca un bancone</span><span class="ng-guida-tel">← trascina per guardarti intorno →</span></p>
       <div class="ng-scelte" role="group" aria-label="I banconi del negozio">
-        <button type="button" data-mp="consulente"><i>01</i> Consulente AI</button>
-        <button type="button" data-mp="automazioni"><i>02</i> Automazioni</button>
-        <button type="button" data-mp="chiamate"><i>03</i> Chiamate AI</button>
-        <button type="button" data-mp="misura" class="ng-scelta-misura"><i>04</i> AI su misura</button>
+        <button type="button" data-mp="consulente"><i>01</i> <span class="ng-sc-nome">Consulente AI<small>il commesso che sa tutto</small></span></button>
+        <button type="button" data-mp="automazioni"><i>02</i> <span class="ng-sc-nome">Automazioni<small>il nastro che lavora da solo</small></span></button>
+        <button type="button" data-mp="chiamate"><i>03</i> <span class="ng-sc-nome">Chiamate AI<small>il telefono che risponde sempre</small></span></button>
+        <button type="button" data-mp="prenota"><i>04</i> <span class="ng-sc-nome">Prenotazioni<small>il cliente prenota da solo</small></span></button>
+        <button type="button" data-mp="misura" class="ng-scelta-misura"><i>05</i> <span class="ng-sc-nome">AI su misura<small>la costruiamo per te</small></span></button>
       </div>
       <span class="ng-ia">Video generato con IA</span>
     </div>
@@ -420,7 +424,7 @@
   <section class="ng-dopo">
     <div class="ng-dopo-in">
       <p class="ng-dopo-kick">— E non finisce qui</p>
-      <h3 class="ng-dopo-tit">Quattro banconi, solo qualche esempio. <em>Il tuo sarà diverso.</em></h3>
+      <h3 class="ng-dopo-tit">Cinque banconi, solo qualche esempio. <em>Il tuo sarà diverso.</em></h3>
       <p class="ng-dopo-p">Ogni azienda ha il suo lavoro ripetitivo, le sue domande che tornano sempre, le sue telefonate perse. Raccontaci come lavori: ti diciamo quale strumento ti fa risparmiare più tempo, e lo costruiamo attorno a te.</p>
       <div class="ng-dopo-az">
         <a href="/contatti/" class="md-cta-btn ng-dopo-btn">Raccontaci il tuo lavoro <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -530,10 +534,40 @@
     </div>
   </section>
 
+  <section class="mp" id="mp-prenota" role="dialog" aria-modal="true" aria-labelledby="mpT5" hidden>
+    <button type="button" class="mp-chiudi" aria-label="Chiudi">×</button>
+    <div class="mp-col mp-racconto">
+      <p class="mp-kick"><i>04</i> Bancone 4 · Prenotazioni online</p>
+      <h3 id="mpT5" class="mp-tit">Il cliente prenota da solo. <em>Anche a mezzanotte.</em></h3>
+      <p class="mp-p">Una pagina di prenotazione tutta tua: il cliente sceglie servizio, giorno e orario dal telefono, <b>24 ore su 24</b>. A te arriva l'appuntamento in agenda, a lui la conferma e il promemoria. <b>Nessuna commissione ai portali</b>: lo strumento è tuo.</p>
+      <ul class="mp-punti">
+        <li><b>Niente più telefonate</b> per fissare, spostare o disdire.</li>
+        <li><b>Promemoria automatici</b>: meno appuntamenti dimenticati, meno buchi in agenda.</li>
+        <li><b>Con il tuo marchio</b>, i tuoi servizi e i tuoi orari: non una vetrina in mezzo ai concorrenti.</li>
+      </ul>
+      <div class="mp-az">
+        <a href="/prenotazioni/" class="mp-btn">Scopri tutto sulle Prenotazioni →</a>
+        <a href="/contatti/" class="mp-link">La voglio per la mia attività</a>
+      </div>
+    </div>
+    <div class="mp-col mp-prova">
+      <div class="dm dm--pren" id="dmPren">
+        <div class="dm-testa"><span class="dm-led"></span> Prova · prenota al Salone Aurora <em>(esempio)</em></div>
+        <p class="dm-domanda">1. Cosa ti serve?</p>
+        <div class="dm-pill" id="dmPrServ"><button type="button" data-v="Taglio · 30 min">Taglio</button><button type="button" data-v="Colore · 90 min">Colore</button><button type="button" data-v="Piega · 45 min">Piega</button></div>
+        <p class="dm-domanda">2. Quando?</p>
+        <div class="dm-pill" id="dmPrGiorno"></div>
+        <div class="dm-orari" id="dmPrOre"></div>
+        <button type="button" class="dm-conferma" id="dmPrOk" disabled>Conferma la prenotazione</button>
+        <div class="dm-esito" id="dmPrEsito" aria-live="polite" hidden></div>
+      </div>
+    </div>
+  </section>
+
   <section class="mp" id="mp-misura" role="dialog" aria-modal="true" aria-labelledby="mpT4" hidden>
     <button type="button" class="mp-chiudi" aria-label="Chiudi">×</button>
     <div class="mp-col mp-racconto">
-      <p class="mp-kick"><i>04</i> Bancone 4 · AI su misura</p>
+      <p class="mp-kick"><i>05</i> Bancone 5 · AI su misura</p>
       <h3 id="mpT4" class="mp-tit">L'AI si modella. <em>Sul tuo lavoro.</em></h3>
       <p class="mp-p">Quelli che hai visto sono solo alcuni esempi. L'intelligenza artificiale si può <b>modellare e addestrare per tantissimi usi quotidiani</b>: leggere, scrivere, ascoltare, riconoscere, calcolare, ricordare. Se ci spieghi la tua esigenza, creiamo <b>applicazioni e automazioni su misura</b>, pensate attorno a come lavori tu, non adattate da un programma fatto per tutti.</p>
       <ul class="mp-punti">
@@ -1040,9 +1074,37 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
     document.dispatchEvent(new CustomEvent('strada-aperta',{detail:nome}));
   }
   window.apriStrada=apri;
+  var calmo=matchMedia('(prefers-reduced-motion: reduce)').matches,bv=document.getElementById('bivio'),inCorsa=false;
+  var transito=document.createElement('div');transito.className='bv-transito';document.body.appendChild(transito);
+  function vaiA(nome){var t=document.getElementById('strada-'+nome);if(t)t.scrollIntoView({behavior:'instant'});}
+  /* scegliere una strada = percorrerla: la foto zooma verso la fine della strada, poi si e' dentro */
+  function viaggio(p,nome){
+    if(calmo||!bv){apri(nome);vaiA(nome);return;}
+    if(inCorsa)return;inCorsa=true;
+    var W=bv.clientWidth,H=bv.clientHeight,x=parseFloat(p.style.left)||W/2,y=parseFloat(p.style.top)||H/2;
+    bv.style.setProperty('--zx',x+'px');bv.style.setProperty('--zy',y+'px');
+    bv.style.setProperty('--tx',(W/2-x)+'px');bv.style.setProperty('--ty',(H*.45-y)+'px');
+    transito.className='bv-transito '+(p.classList.contains('bv-porta--dx')?'caldo':'freddo');
+    bv.classList.add('in-viaggio');
+    setTimeout(function(){transito.classList.add('su');},800);
+    setTimeout(function(){apri(nome);vaiA(nome);bv.classList.remove('in-viaggio');
+      setTimeout(function(){transito.classList.remove('su');inCorsa=false;},80);},1150);
+  }
+  /* tornare al bivio chiude la strada aperta: niente pagine lasciate "sotto" */
+  function tornaBivio(){
+    transito.className='bv-transito scuro su';
+    setTimeout(function(){strade.forEach(function(s){s.hidden=true;});porte.forEach(function(p){p.classList.remove('scelta');});
+      scrollTo({top:0,behavior:'instant'});try{history.replaceState(null,'',location.pathname);}catch(e){}
+      setTimeout(function(){transito.classList.remove('su');},60);},260);
+  }
   document.addEventListener('click',function(e){
-    var a=e.target.closest&&e.target.closest('a[href^="#strada-"]');if(!a)return;
-    apri(a.getAttribute('href').slice(8));
+    if(!e.target.closest)return;
+    var t=e.target.closest('a[href="#bivio"]');
+    if(t){e.preventDefault();e.stopPropagation();tornaBivio();return;}
+    var a=e.target.closest('a[href^="#strada-"]');if(!a)return;
+    var nome=a.getAttribute('href').slice(8);
+    if(a.classList.contains('bv-porta')){e.preventDefault();e.stopPropagation();viaggio(a,nome);return;}
+    apri(nome);
   },true);
   /* velo: la foto si vede piena sulla copertina e si schiarisce quando arriva il contenuto */
   function velo(){
@@ -1109,15 +1171,15 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
   function impagina(){
     W=scena.clientWidth;var H=scena.clientHeight,k=Math.max(W/1280,H/720);tw=1280*k;var th=720*k;
     tela.style.width=tw+'px';tela.style.height=th+'px';
-    ox=(W-tw)/2;if(W<700)ox=Math.min(0,Math.max(W-tw,W*.16-tw*.365));tela.style.transform='translate('+ox+'px,'+((H-th)/2)+'px)';tela.dataset.oy=(H-th)/2;
+    ox=(W-tw)/2;tela.style.transform='translate('+ox+'px,'+((H-th)/2)+'px)';tela.dataset.oy=(H-th)/2;
   }
   function sposta(x){ox=Math.min(0,Math.max(W-tw,x));tela.style.transform='translate('+ox+'px,'+tela.dataset.oy+'px)';}
   addEventListener('resize',function(){if(partito)impagina();});
   var tira=null;
-  scena.addEventListener('pointerdown',function(e){if(tw<=W+2||e.target.closest('button'))return;tira={x:e.clientX,o:ox};});
+  scena.addEventListener('pointerdown',function(e){if(innerWidth<=760||tw<=W+2||e.target.closest('button'))return;tira={x:e.clientX,o:ox};});
   addEventListener('pointermove',function(e){if(tira)sposta(tira.o+e.clientX-tira.x);});
   addEventListener('pointerup',function(){tira=null;});
-  scena.addEventListener('touchstart',function(e){if(tw<=W+2||e.target.closest('button'))return;tira={x:e.touches[0].clientX,o:ox};},{passive:true});
+  scena.addEventListener('touchstart',function(e){if(innerWidth<=760||tw<=W+2||e.target.closest('button'))return;tira={x:e.touches[0].clientX,o:ox};},{passive:true});
   scena.addEventListener('touchmove',function(e){if(tira)sposta(tira.o+e.touches[0].clientX-tira.x);},{passive:true});
   scena.addEventListener('touchend',function(){tira=null;});
 
@@ -1216,6 +1278,29 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
   function componi(){if(mis.s<0||mis.p<0)return;var S=SETT[mis.s],P=PROB[mis.p];
     idea.classList.remove('pronta');void idea.offsetWidth;idea.classList.add('pronta');
     idea.innerHTML='<span class="dm-idea-kick">Un\'idea per '+S[0]+'</span><b>'+P[0]+'</b><p>'+P[1].replace('{x}',S[1])+'</p><p><b style="display:inline;font-size:.9rem">Risultato atteso:</b> '+P[2]+'.</p><a href="/contatti/">È la mia situazione, parliamone →</a>';}
+  /* 5e. prova delle Prenotazioni: servizio, giorno, ora, conferma */
+  (function(){
+    var serv=null,giorno=null,ora=null,G=['Dom','Lun','Mar','Mer','Gio','Ven','Sab'],M=['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+    var boxG=document.getElementById('dmPrGiorno'),boxO=document.getElementById('dmPrOre'),ok=document.getElementById('dmPrOk'),esito=document.getElementById('dmPrEsito');
+    var d=new Date(),n=0;
+    while(n<5){d.setDate(d.getDate()+1);if(d.getDay()===0)continue;var b=document.createElement('button');b.type='button';
+      b.dataset.v=G[d.getDay()]+' '+d.getDate()+' '+M[d.getMonth()];b.textContent=G[d.getDay()]+' '+d.getDate();b.dataset.i=n;boxG.appendChild(b);n++;}
+    var ORE=['9:00','9:30','10:30','11:00','14:30','15:00','16:30','17:30'];
+    function pronto(){ok.disabled=!(serv&&giorno&&ora);}
+    function scegli(box,cb){box.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||b.disabled)return;
+      [].forEach.call(box.children,function(x){x.classList.toggle('on',x===b);});cb(b);pronto();});}
+    scegli(document.getElementById('dmPrServ'),function(b){serv=b.dataset.v;});
+    scegli(boxG,function(b){giorno=b.dataset.v;ora=null;boxO.innerHTML='';var i=+b.dataset.i;
+      ORE.forEach(function(o,k){var x=document.createElement('button');x.type='button';x.textContent=o;x.disabled=((k*7+i*3)%5===0);boxO.appendChild(x);});});
+    scegli(boxO,function(b){ora=b.textContent;});
+    var fatto=false;
+    ok.addEventListener('click',function(){
+      if(fatto){fatto=false;esito.hidden=true;ok.textContent='Conferma la prenotazione';return;}
+      if(ok.disabled)return;fatto=true;esito.hidden=false;
+      esito.innerHTML='<div><small>Al cliente · WhatsApp</small><b>Prenotato! ✓</b>'+serv.split(' ·')[0]+', '+giorno+' alle '+ora+'. Ti ricordiamo il giorno prima.</div>'+
+        '<div><small>Al titolare · agenda</small><b>'+giorno+' · '+ora+'</b>'+serv+' · prenotato online, nessuna commissione.</div>';
+      ok.textContent='Prenota di nuovo';});
+  })();
   var PROVE={chiamate:function(){tel.reset();}};
   /* arrivando con #lavoro la strada e' gia' aperta prima di questo script */
   if(!document.getElementById('strada-lavoro').hidden)avvia();
@@ -1380,6 +1465,7 @@ html .strada .md-col--no{background:rgba(255,255,255,.8);backdrop-filter:blur(12
 .ng.pronto .ng-punto:nth-of-type(2){transition-delay:.65s}
 .ng.pronto .ng-punto:nth-of-type(3){transition-delay:.85s}
 .ng.pronto .ng-punto:nth-of-type(4){transition-delay:1.05s}
+.ng.pronto .ng-punto:nth-of-type(5){transition-delay:1.25s}
 .ng-anello{position:absolute;left:-15px;top:-15px;width:30px;height:30px;border-radius:50%;background:#fff;box-shadow:0 0 0 6px rgba(77,217,224,.35),0 0 30px 8px rgba(77,217,224,.7)}
 .ng-anello::before,.ng-anello::after{content:"";position:absolute;inset:-12px;border-radius:50%;border:2px solid rgba(255,255,255,.85);animation:ngOnda 2.4s ease-out infinite}
 .ng-anello::after{animation-delay:1.2s}
@@ -1565,6 +1651,58 @@ html .strada .md-col--no{background:rgba(255,255,255,.8);backdrop-filter:blur(12
 @media(max-width:760px) and (max-height:760px){.ng-sub{display:none}.ng-tit{font-size:1.7rem}}
 .bv-ia{left:auto;right:9rem;bottom:1.9rem}
 .ng-scena .ng-ia{left:6.5rem}
+.dm-orari{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.4rem}
+.dm-orari button{min-height:40px;border-radius:10px;cursor:pointer;color:#E8EDF8;font:600 .86rem 'DM Sans',sans-serif;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);font-variant-numeric:tabular-nums}
+.dm-orari button:hover:not(:disabled){border-color:#4DD9E0}
+.dm-orari button.on{background:#4DD9E0;border-color:#4DD9E0;color:#062a2e;font-weight:800}
+.dm-orari button:disabled{opacity:.3;text-decoration:line-through;cursor:not-allowed}
+.dm-orari:empty::before{content:"Scegli un giorno per vedere gli orari liberi";grid-column:1/-1;color:#6B7A96;font-size:.85rem}
+.dm-conferma{min-height:48px;border:0;border-radius:100px;background:#3ddc84;color:#06240f;font:800 .95rem 'DM Sans',sans-serif;cursor:pointer}
+.dm-conferma:disabled{background:rgba(255,255,255,.1);color:#6B7A96;cursor:not-allowed}
+.dm-esito{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;animation:dmEntra .45s cubic-bezier(.22,1,.36,1)}
+.dm-esito>div{padding:.8rem .9rem;border-radius:14px;background:#F7F5F0;color:#14213D;font-size:.84rem;line-height:1.45}
+.dm-esito b{display:block;font:800 .98rem 'Bricolage Grotesque',sans-serif;margin-top:.2rem}
+.dm-esito small{display:block;font:700 .62rem 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#0f8f9e}
+@media(max-width:420px){.dm-esito{grid-template-columns:1fr}.dm-orari{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* il viaggio lungo la strada */
+.bv.in-viaggio .bv-foto img{animation:bvViaggio 1.15s cubic-bezier(.55,.02,.8,.35) forwards;transform-origin:var(--zx) var(--zy)}
+@keyframes bvViaggio{from{transform:none;filter:none}to{transform:translate(var(--tx),var(--ty)) scale(5.5);filter:blur(4px) brightness(1.25)}}
+.bv.in-viaggio .bv-testa,.bv.in-viaggio .bv-porta,.bv.in-viaggio .bv-negozio,.bv.in-viaggio .ng-ia,.bv.in-viaggio .bv-velo{opacity:0!important;transition:opacity .35s}
+.bv-transito{position:fixed;inset:0;z-index:7000;pointer-events:none;opacity:0;transition:opacity .3s}
+.bv-transito.su{opacity:1}
+.bv-transito.freddo{background:radial-gradient(circle at 50% 45%,#fff,#c9f6ff 35%,#0B1120 100%)}
+.bv-transito.caldo{background:radial-gradient(circle at 50% 45%,#fff,#ffe2bf 35%,#1a1008 100%)}
+.bv-transito.scuro{background:#0B1120;transition-duration:.25s}
+/* arrivati: la copertina della strada continua il movimento e si assesta */
+.strada.entra .strada-bg img{animation:stradaArrivo 1.3s cubic-bezier(.22,1,.36,1)}
+@keyframes stradaArrivo{from{transform:scale(1.25);filter:blur(3px)}}
+@media(prefers-reduced-motion:reduce){.bv.in-viaggio .bv-foto img,.strada.entra .strada-bg img{animation:none}}
+/* ===== negozio da telefono: foto come sfondo + elenco chiaro dei banconi (24/09/2026) ===== */
+.ng-sc-nome small{display:none}
+.ng-sub-tel{display:none}
+@media(max-width:760px){
+  .ng-scena{height:auto;min-height:100svh;display:flex;flex-direction:column;padding:4.3rem 1rem 1.4rem;touch-action:auto}
+  .ng-punto,.ng-guida{display:none!important}
+  .ng-velo{background:linear-gradient(180deg,rgba(6,10,24,.8) 0%,rgba(6,10,24,.55) 35%,rgba(6,10,24,.78) 100%)}
+  .ng-torna{position:relative;left:auto;top:auto;z-index:4;order:-1}
+  .ng-salta{order:-2}
+  .ng-testa{position:relative;left:auto;right:auto;top:auto;padding:0;margin-top:1.1rem;text-align:left}
+  .ng-testa .strada-tag{font-size:.64rem;letter-spacing:.16em}
+  .ng-tit{font-size:2.05rem;margin-top:.7rem}
+  .ng-sub{display:block!important;margin:.6rem 0 0;font-size:.95rem}
+  .ng-sub-lungo,.ng-sub-pc{display:none}.ng-sub-tel{display:inline}
+  .ng-scelte{position:relative;left:auto;right:auto;bottom:auto;transform:none;flex-direction:column;flex-wrap:nowrap;gap:.55rem;margin-top:1.2rem;z-index:3}
+  .ng-scelte button{justify-content:flex-start;gap:.8rem;width:100%;min-height:62px;padding:.7rem 2.6rem .7rem .8rem;border-radius:16px;position:relative;text-align:left;
+    background:rgba(8,12,28,.72);border:1px solid rgba(255,255,255,.18);font-size:1rem}
+  .ng-scelte button::after{content:"›";position:absolute;right:1rem;top:50%;transform:translateY(-52%);font-size:1.6rem;color:#4DD9E0}
+  .ng-scelte button i{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:11px;border:1px solid rgba(77,217,224,.55);font-size:.78rem}
+  .ng-scelte .ng-scelta-misura i{border-color:rgba(255,183,104,.6)}
+  .ng-sc-nome{display:flex;flex-direction:column;font:700 1rem/1.2 'Bricolage Grotesque',sans-serif;color:#fff}
+  .ng-sc-nome small{display:block;margin-top:.15rem;font:500 .8rem 'DM Sans',sans-serif;color:rgba(255,255,255,.72)}
+  .ng-salta{top:4.3rem!important;right:1rem!important}
+  .ng-ia{display:block;position:relative;left:auto!important;bottom:auto;align-self:flex-start;margin-top:.9rem;background:transparent;padding:0;color:rgba(255,255,255,.55)}
+}
+@media(max-width:760px) and (max-height:700px){.ng-scelte button{min-height:54px;padding-block:.5rem}.ng-tit{font-size:1.8rem}.ng-testa{margin-top:.8rem}}
 /* ===== strada 1: modelli AI ===== */
 .md{scroll-margin-top:60px}
 .md-tag{display:inline-flex;align-items:center;gap:.5rem;margin-top:0}

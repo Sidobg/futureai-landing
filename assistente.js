@@ -11,7 +11,7 @@
   var PAGINE={
     '/intelligenza-artificiale/':{
       t:'Benvenuto nel <b>Mondo AI</b>! Qui hai tre scelte: la strada dei <b>Modelli AI</b>, quella dell\'<b>AI in locale</b>, e in basso il <b>negozio</b> dove provi l\'AI al lavoro.',
-      d:[{q:'Da dove comincio?',r:'Se vuoi vedere subito l\'AI all\'opera, entra nel negozio in basso: ci sono quattro banconi da provare, uno per ogni esempio.',clic:'#bvNegozio',etich:'Portami nel negozio'},
+      d:[{q:'Da dove comincio?',r:'Se vuoi vedere subito l\'AI all\'opera, entra nel negozio in basso: ci sono cinque banconi da provare, uno per ogni esempio.',clic:'#bvNegozio',etich:'Portami nel negozio'},
          {q:'Che differenza c\'è tra le due strade?',r:'I <b>Modelli AI</b> lavorano nel cloud e sono i più potenti. L\'<b>AI in locale</b> gira su un computer dentro l\'azienda, così nessun dato esce. Spesso si usano insieme.'},
          COSTO]},
     '/siti-web/':{
