@@ -87,7 +87,7 @@
     <span class="bv-btn"><b>AI in locale</b><small>L'AI installata su un computer in azienda: nessun dato esce, mai</small></span>
     <span class="bv-filo" aria-hidden="true"></span><span class="bv-faro" aria-hidden="true"></span>
   </a>
-  <button type="button" class="bv-negozio" id="bvNegozio" aria-label="AI al lavoro: entra nel negozio del futuro e prova Consulente AI, Automazioni e Chiamate AI">
+  <button type="button" class="bv-negozio" id="bvNegozio" aria-label="AI al lavoro: entra nel negozio del futuro e prova Consulente AI, Automazioni, Chiamate AI e AI su misura">
     <span class="bv-cartello"><b>AI al lavoro</b><small>Entra nel negozio: l'intelligenza artificiale lavora davanti a te, bancone per bancone</small><i>Tocca per entrare</i></span>
     <span class="bv-edificio">
       <img src="/intelligenza-artificiale/negozio-fuori.webp" width="640" height="318" alt="">
@@ -381,13 +381,17 @@
       <div class="ng-tela" id="ngTela">
         <img class="ng-fine" src="/intelligenza-artificiale/negozio-fine.webp" width="1280" height="720" alt="Il salone del negozio del futuro: tre banconi, robot commessi e un nastro olografico sospeso al centro" fetchpriority="low">
         <video class="ng-video" id="ngVideo" src="/intelligenza-artificiale/negozio.mp4" muted playsinline preload="none" aria-hidden="true"></video>
-        <button type="button" class="ng-punto" data-mp="consulente" style="--x:36.5%;--y:64%" aria-label="Bancone 1: Consulente AI">
+        <button type="button" class="ng-punto ng-punto--sx" data-mp="consulente" style="--x:36.5%;--y:64%" aria-label="Bancone 1: Consulente AI">
           <span class="ng-anello" aria-hidden="true"></span>
           <span class="ng-etich"><i>01</i><b>Consulente AI</b><small>il commesso che sa tutto</small></span>
         </button>
         <button type="button" class="ng-punto ng-punto--alto" data-mp="automazioni" style="--x:50%;--y:47%" aria-label="Bancone 2: Automazioni">
           <span class="ng-anello" aria-hidden="true"></span>
           <span class="ng-etich"><i>02</i><b>Automazioni</b><small>il nastro che lavora da solo</small></span>
+        </button>
+        <button type="button" class="ng-punto ng-punto--misura" data-mp="misura" style="--x:50%;--y:66%" aria-label="Bancone 4: AI su misura">
+          <span class="ng-anello" aria-hidden="true"></span>
+          <span class="ng-etich"><i>04</i><b>AI su misura</b><small>la costruiamo per te</small></span>
         </button>
         <button type="button" class="ng-punto ng-punto--sx" data-mp="chiamate" style="--x:79%;--y:74%" aria-label="Bancone 3: Chiamate AI">
           <span class="ng-anello" aria-hidden="true"></span>
@@ -398,14 +402,19 @@
       <div class="ng-testa">
         <div class="strada-tag"><i></i> Strada 3 · AI al lavoro</div>
         <h2 id="ngTit" class="ng-tit">Entra nel negozio <em>del futuro.</em></h2>
-        <p class="ng-sub"><span class="ng-sub-lungo">Qui l'intelligenza artificiale non è una promessa: <b>lavora</b>. Ogni bancone è uno strumento che le aziende usano già oggi. </span>Sono alcuni esempi di quello che si può fare: <b>tocca un bancone e provalo.</b></p>
+        <p class="ng-sub"><span class="ng-sub-lungo">Qui l'intelligenza artificiale non è una promessa: <b>lavora</b>. </span>Questi banconi sono <b>solo alcuni esempi</b> di quello che l'AI può fare per un'azienda: <b>tocca un bancone e provalo.</b></p>
       </div>
-      <button type="button" class="ng-salta" id="ngSalta">Salta l'ingresso <span aria-hidden="true">›</span></button>
+      <div class="ng-torna">
+        <a href="#bivio" class="ng-torna-btn"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg> Mondo AI</a>
+        <a href="/#menu" class="ng-torna-btn">Menu del robot</a>
+      </div>
+      <button type="button" class="ng-salta" id="ngSalta">Salta il video <span aria-hidden="true">››</span></button>
       <p class="ng-guida" id="ngGuida" aria-hidden="true"><span class="ng-guida-pc">Tocca un bancone</span><span class="ng-guida-tel">← trascina per guardarti intorno →</span></p>
       <div class="ng-scelte" role="group" aria-label="I banconi del negozio">
         <button type="button" data-mp="consulente"><i>01</i> Consulente AI</button>
         <button type="button" data-mp="automazioni"><i>02</i> Automazioni</button>
         <button type="button" data-mp="chiamate"><i>03</i> Chiamate AI</button>
+        <button type="button" data-mp="misura" class="ng-scelta-misura"><i>04</i> AI su misura</button>
       </div>
       <span class="ng-ia">Video generato con IA</span>
     </div>
@@ -414,7 +423,7 @@
   <section class="ng-dopo">
     <div class="ng-dopo-in">
       <p class="ng-dopo-kick">— E non finisce qui</p>
-      <h3 class="ng-dopo-tit">Tre banconi, tre esempi. <em>Il tuo sarà diverso.</em></h3>
+      <h3 class="ng-dopo-tit">Quattro banconi, solo qualche esempio. <em>Il tuo sarà diverso.</em></h3>
       <p class="ng-dopo-p">Ogni azienda ha il suo lavoro ripetitivo, le sue domande che tornano sempre, le sue telefonate perse. Raccontaci come lavori: ti diciamo quale strumento ti fa risparmiare più tempo, e lo costruiamo attorno a te.</p>
       <div class="ng-dopo-az">
         <a href="/contatti/" class="md-cta-btn ng-dopo-btn">Raccontaci il tuo lavoro <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -520,6 +529,40 @@
           <span class="dm-agenda-kick">Agenda · aggiunto dall'assistente</span>
           <b>Sabato · 11:00 — Giulia</b><span>Taglio e piega · conferma inviata via SMS</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mp" id="mp-misura" role="dialog" aria-modal="true" aria-labelledby="mpT4" hidden>
+    <button type="button" class="mp-chiudi" aria-label="Chiudi">×</button>
+    <div class="mp-col mp-racconto">
+      <p class="mp-kick"><i>04</i> Bancone 4 · AI su misura</p>
+      <h3 id="mpT4" class="mp-tit">L'AI si modella. <em>Sul tuo lavoro.</em></h3>
+      <p class="mp-p">Quelli che hai visto sono solo alcuni esempi. L'intelligenza artificiale si può <b>modellare e addestrare per tantissimi usi quotidiani</b>: leggere, scrivere, ascoltare, riconoscere, calcolare, ricordare. Se ci spieghi la tua esigenza, creiamo <b>applicazioni e automazioni su misura</b>, pensate attorno a come lavori tu, non adattate da un programma fatto per tutti.</p>
+      <ul class="mp-punti">
+        <li><b>Parti da un problema</b>, non dalla tecnologia: «perdo un'ora al giorno per…» basta.</li>
+        <li><b>Ti mostriamo un'anteprima</b> prima di costruire, così vedi subito se è quello che serve.</li>
+        <li><b>Cresce con te</b>: si aggiunge una funzione alla volta, quando ti serve.</li>
+      </ul>
+      <div class="mp-az">
+        <a href="/contatti/" class="mp-btn">Raccontaci la tua esigenza →</a>
+        <a href="/app/" class="mp-link">Guarda le app su misura</a>
+      </div>
+    </div>
+    <div class="mp-col mp-prova">
+      <div class="dm dm--misura" id="dmMisura">
+        <div class="dm-testa"><span class="dm-led"></span> Prova · componi la tua idea</div>
+        <p class="dm-domanda">1. Che lavoro fai?</p>
+        <div class="dm-pill" id="dmSettore">
+          <button type="button" data-v="0">Officina</button><button type="button" data-v="1">Studio professionale</button><button type="button" data-v="2">Negozio</button>
+          <button type="button" data-v="3">Ristorante</button><button type="button" data-v="4">Impresa edile</button><button type="button" data-v="5">Salone o centro estetico</button>
+        </div>
+        <p class="dm-domanda">2. Dove perdi più tempo?</p>
+        <div class="dm-pill" id="dmProblema">
+          <button type="button" data-v="0">Preventivi</button><button type="button" data-v="1">Telefonate</button><button type="button" data-v="2">Documenti e pratiche</button>
+          <button type="button" data-v="3">Agenda e appuntamenti</button><button type="button" data-v="4">Magazzino e ordini</button><button type="button" data-v="5">Email e messaggi</button>
+        </div>
+        <div class="dm-idea" id="dmIdea" aria-live="polite"><p class="dm-vuoto">Scegli le due risposte: ti mostriamo cosa potremmo costruire.</p></div>
       </div>
     </div>
   </section>
@@ -768,17 +811,21 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   // I browser non lasciano partire l'audio da soli: si aspetta il primo gesto.
   // Chi l'ha spenta una volta non se la ritrova accesa al ritorno.
   if(localStorage.getItem(KEY) !== 'off'){
+    // Safari e iPhone lasciano partire l'audio solo su un clic completato (click, touchend, tasto):
+    // la pressione (pointerdown/touchstart) non basta. Se il browser rifiuta, si riprova al clic dopo.
+    var EV = ['click','touchend','keydown'];
+    var togli = function(){ EV.forEach(function(t){ document.removeEventListener(t, primoGesto, true); }); };
     var primoGesto = function(e){
-      document.removeEventListener('pointerdown', primoGesto);
-      document.removeEventListener('keydown', primoGesto);
-      document.removeEventListener('touchstart', primoGesto);
       // se il primo gesto è proprio sul pulsante, decide lui: non partire due volte
-      if(e && e.target && e.target.closest && e.target.closest('#musicToggle')) return;
-      if(!attiva) avvia();
+      if(e && e.target && e.target.closest && e.target.closest('#musicToggle')){ togli(); return; }
+      if(attiva){ togli(); return; }
+      attiva = true;
+      if(audio.paused) audio.volume = 0;
+      var p = audio.play();
+      if(p && p.then){ p.then(function(){ togli(); segna(true); fadeTo(VOLUME); }, function(){ attiva = false; segna(false); }); }
+      else { togli(); segna(true); fadeTo(VOLUME); }
     };
-    document.addEventListener('pointerdown', primoGesto);
-    document.addEventListener('keydown', primoGesto);
-    document.addEventListener('touchstart', primoGesto);
+    EV.forEach(function(t){ document.addEventListener(t, primoGesto, true); });
   }
 
   // Se l'utente cambia scheda, la musica si mette in pausa per educazione.
@@ -1233,6 +1280,22 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
     tel.t.push(setTimeout(function(){tel.stop();stato.innerHTML='<b>Chiamata terminata</b><span>durata 00:'+String(sec).padStart(2,'0')+' · riassunto inviato al titolare</span>';
       agenda.hidden=false;risp.hidden=false;risp.textContent='Richiama da capo';},t));
   });
+  /* 5d. prova di AI su misura: settore x problema = un'idea concreta */
+  var SETT=[['un\'officina','schede lavoro e ricambi'],['uno studio professionale','pratiche e scadenze dei clienti'],['un negozio','prodotti e clienti affezionati'],['un ristorante','coperti, piatti e fornitori'],['un\'impresa edile','cantieri, squadre e materiali'],['un salone o centro estetico','clienti, trattamenti e prodotti']];
+  var PROB=[
+    ['Preventivi dettati a voce','Descrivi il lavoro a voce, anche dal furgone: l\'AI prende i prezzi dal tuo listino e compila il preventivo con il tuo logo, pronto da inviare.','45 minuti → 3 minuti a preventivo'],
+    ['Il telefono che risponde per te','Un assistente vocale risponde quando hai le mani occupate, dà le informazioni giuste su {x} e fissa gli appuntamenti in agenda.','nessuna chiamata persa'],
+    ['L\'archivio che si legge da solo','Fotografi o carichi i documenti: l\'AI li legge, li archivia e ti avvisa prima di ogni scadenza. Chiedi «dov\'è il contratto di…» e lo trova.','ore di ricerca risparmiate ogni settimana'],
+    ['L\'agenda che si riempie da sola','Il cliente prenota online o su WhatsApp, riceve il promemoria, e se disdice il posto viene proposto a chi aspetta.','meno buchi in agenda'],
+    ['Il magazzino che ti avvisa','L\'AI tiene d\'occhio {x}, ti avvisa quando qualcosa sta finendo e prepara la bozza dell\'ordine al fornitore.','niente più «è finito proprio adesso»'],
+    ['La casella che si smista da sola','Ogni mattina l\'AI legge email e messaggi, separa le urgenze e prepara le risposte: tu le controlli e le invii.','30-40 minuti in meno ogni mattina']];
+  var mis={s:-1,p:-1},idea=document.getElementById('dmIdea');
+  function scegli(id,k){document.getElementById(id).addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+    [].forEach.call(this.children,function(x){x.classList.toggle('on',x===b);});mis[k]=+b.dataset.v;componi();});}
+  scegli('dmSettore','s');scegli('dmProblema','p');
+  function componi(){if(mis.s<0||mis.p<0)return;var S=SETT[mis.s],P=PROB[mis.p];
+    idea.classList.remove('pronta');void idea.offsetWidth;idea.classList.add('pronta');
+    idea.innerHTML='<span class="dm-idea-kick">Un\'idea per '+S[0]+'</span><b>'+P[0]+'</b><p>'+P[1].replace('{x}',S[1])+'</p><p><b style="display:inline;font-size:.9rem">Risultato atteso:</b> '+P[2]+'.</p><a href="/contatti/">È la mia situazione, parliamone →</a>';}
   var PROVE={chiamate:function(){tel.reset();}};
   /* arrivando con #lavoro la strada e' gia' aperta prima di questo script */
   if(!document.getElementById('strada-lavoro').hidden)avvia();
@@ -1396,6 +1459,7 @@ html .strada .md-col--no{background:rgba(255,255,255,.8);backdrop-filter:blur(12
 .ng.pronto .ng-punto:nth-of-type(1){transition-delay:.45s}
 .ng.pronto .ng-punto:nth-of-type(2){transition-delay:.65s}
 .ng.pronto .ng-punto:nth-of-type(3){transition-delay:.85s}
+.ng.pronto .ng-punto:nth-of-type(4){transition-delay:1.05s}
 .ng-anello{position:absolute;left:-15px;top:-15px;width:30px;height:30px;border-radius:50%;background:#fff;box-shadow:0 0 0 6px rgba(77,217,224,.35),0 0 30px 8px rgba(77,217,224,.7)}
 .ng-anello::before,.ng-anello::after{content:"";position:absolute;inset:-12px;border-radius:50%;border:2px solid rgba(255,255,255,.85);animation:ngOnda 2.4s ease-out infinite}
 .ng-anello::after{animation-delay:1.2s}
@@ -1545,6 +1609,29 @@ html .strada .md-col--no{background:rgba(255,255,255,.8);backdrop-filter:blur(12
   .bv-cartello b{font-size:.85rem}.bv-cartello small{font-size:.66rem}.bv-cartello i{display:none}
   .bv-btn small{font-size:.66rem}
 }
+.ng-tit em{background:linear-gradient(100deg,#FFD08A,#FF9A5C 60%,#FF6F91);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;
+  filter:drop-shadow(0 2px 0 rgba(6,10,24,.5)) drop-shadow(0 0 24px rgba(255,154,92,.55));padding-right:.08em}
+.ng-torna{position:absolute;z-index:4;left:1.2rem;top:clamp(4.6rem,9vh,5.6rem);display:flex;gap:.5rem;flex-wrap:wrap}
+.ng-torna-btn{display:inline-flex;align-items:center;gap:.4rem;min-height:40px;padding:.5rem .95rem;border-radius:100px;color:#fff;text-decoration:none;font:600 .86rem 'DM Sans',sans-serif;
+  background:rgba(8,12,28,.55);border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background .2s,border-color .2s}
+.ng-torna-btn:hover{background:rgba(8,12,28,.85);border-color:#fff}
+.ng-salta{font-weight:700;font-size:.95rem;padding:.7rem 1.25rem;background:#fff;color:#0B1120;border-color:#fff;box-shadow:0 10px 30px -10px rgba(0,0,0,.6)}
+.ng-salta:hover{background:#FFD08A;border-color:#FFD08A}
+.ng-punto--misura .ng-anello{background:#FFD08A;box-shadow:0 0 0 6px rgba(255,176,104,.35),0 0 30px 8px rgba(255,154,92,.7)}
+.ng-punto--misura .ng-etich i{color:#FFB768;border-color:rgba(255,183,104,.6)}
+.ng-scelte .ng-scelta-misura i{color:#FFB768}
+.dm-domanda{margin:.2rem 0 0;font:700 .95rem 'Bricolage Grotesque',sans-serif;color:#fff}
+.dm-pill{display:flex;flex-wrap:wrap;gap:.4rem}
+.dm-pill button{min-height:40px;padding:.5rem .85rem;border-radius:100px;cursor:pointer;color:#E8EDF8;font:500 .85rem 'DM Sans',sans-serif;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);transition:all .2s}
+.dm-pill button:hover{border-color:#FFB768}
+.dm-pill button.on{background:#FFB768;border-color:#FFB768;color:#1A1206;font-weight:700}
+.dm-idea{min-height:150px;display:flex;flex-direction:column;justify-content:center;padding:1.1rem 1.2rem;border-radius:18px;background:rgba(255,255,255,.04);border:1px dashed rgba(255,255,255,.18)}
+.dm-idea.pronta{background:#F7F5F0;color:#14213D;border:0;animation:dmEntra .45s cubic-bezier(.22,1,.36,1)}
+.dm-idea-kick{font:700 .66rem 'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#C2410C}
+.dm-idea b{display:block;margin-top:.35rem;font:800 1.15rem/1.2 'Bricolage Grotesque',sans-serif}
+.dm-idea p{margin:.45rem 0 0;font-size:.9rem;line-height:1.55;color:#3D4A68}
+.dm-idea a{margin-top:.8rem;align-self:flex-start;font:700 .88rem 'DM Sans',sans-serif;color:#14213D}
+@media(max-width:760px){.ng-torna{top:auto;bottom:auto;top:4.4rem;left:.75rem}.ng-torna-btn{min-height:36px;padding:.4rem .75rem;font-size:.78rem}.ng-testa{top:7.2rem}.ng-salta{top:auto!important;bottom:1.2rem!important;right:50%!important;transform:translateX(50%)}}
 /* ===== strada 1: modelli AI ===== */
 .md{scroll-margin-top:60px}
 .md-tag{display:inline-flex;align-items:center;gap:.5rem;margin-top:0}

@@ -376,17 +376,21 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   // I browser non lasciano partire l'audio da soli: si aspetta il primo gesto.
   // Chi l'ha spenta una volta non se la ritrova accesa al ritorno.
   if(localStorage.getItem(KEY) !== 'off'){
+    // Safari e iPhone lasciano partire l'audio solo su un clic completato (click, touchend, tasto):
+    // la pressione (pointerdown/touchstart) non basta. Se il browser rifiuta, si riprova al clic dopo.
+    var EV = ['click','touchend','keydown'];
+    var togli = function(){ EV.forEach(function(t){ document.removeEventListener(t, primoGesto, true); }); };
     var primoGesto = function(e){
-      document.removeEventListener('pointerdown', primoGesto);
-      document.removeEventListener('keydown', primoGesto);
-      document.removeEventListener('touchstart', primoGesto);
       // se il primo gesto è proprio sul pulsante, decide lui: non partire due volte
-      if(e && e.target && e.target.closest && e.target.closest('#musicToggle')) return;
-      if(!attiva) avvia();
+      if(e && e.target && e.target.closest && e.target.closest('#musicToggle')){ togli(); return; }
+      if(attiva){ togli(); return; }
+      attiva = true;
+      if(audio.paused) audio.volume = 0;
+      var p = audio.play();
+      if(p && p.then){ p.then(function(){ togli(); segna(true); fadeTo(VOLUME); }, function(){ attiva = false; segna(false); }); }
+      else { togli(); segna(true); fadeTo(VOLUME); }
     };
-    document.addEventListener('pointerdown', primoGesto);
-    document.addEventListener('keydown', primoGesto);
-    document.addEventListener('touchstart', primoGesto);
+    EV.forEach(function(t){ document.addEventListener(t, primoGesto, true); });
   }
 
   // Se l'utente cambia scheda, la musica si mette in pausa per educazione.

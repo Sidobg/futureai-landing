@@ -304,7 +304,7 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
      scena si tuffa verso la voce e si apre la sua pagina. Video Gemini
      ripuliti dalla stellina (menu/citta.mp4, menu/robot.mp4). -->
 <style>
-.rm{position:relative;height:calc(100vh + 10 * 24vh);background:#efeae0;color:var(--navy2,#1A2A6C)}
+.rm{position:relative;height:calc(100vh + 7 * 24vh);background:#efeae0;color:var(--navy2,#1A2A6C)}
 .rm-fisso{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 .rm-scena{position:absolute;inset:0;transform-origin:var(--ox,70%) var(--oy,50%);transition:transform .9s cubic-bezier(.7,0,.3,1),filter .9s}
 .rm.via .rm-scena{transform:scale(3.2);filter:blur(10px) brightness(1.4)}
@@ -412,12 +412,9 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
   var VOCI=[
     {n:'Siti Web',d:'Siti che si muovono e trasformano le visite in clienti.',h:'/siti-web/',e:'Ecco i Siti Web!',f:'Ti porto sui siti web!'},
     {n:'App su misura',d:'Gestionali, CRM e portali costruiti attorno al tuo lavoro.',h:'/app/',e:'Le App su misura!',f:'Andiamo sulle app!'},
-    {n:'AI – Intelligenza artificiale',d:'Assistenti sui tuoi documenti e AI in locale: nessun dato esce dall\'azienda.',h:'/intelligenza-artificiale/',e:'L\'Intelligenza artificiale!',f:'Entriamo nel mondo dell\'AI!'},
+    {n:'AI – Intelligenza artificiale',d:'Entra e scopri il mondo AI di FUTURE AI e tutto quello che offre.',h:'/intelligenza-artificiale/',e:'L\'Intelligenza artificiale!',f:'Entriamo nel mondo dell\'AI!'},
     {n:'Giochi aziendali',d:'Il tuo marchio diventa un videogioco da condividere.',h:'/giochi/',e:'I Giochi aziendali!',f:'Si gioca!'},
     {n:'Prenotazioni online',d:'Il cliente prenota da solo, zero commissioni.',h:'/prenotazioni/',e:'Le Prenotazioni online!',f:'Ecco le prenotazioni!'},
-    {n:'Consulente AI',d:'Un assistente addestrato sui tuoi documenti, 24 ore su 24.',h:'/consulente-ai/',e:'Il Consulente AI!',f:'Ti presento il consulente AI!'},
-    {n:'Automazioni',d:'Il lavoro ripetitivo lo fanno i tuoi strumenti, da soli.',h:'/automazioni/',e:'Ecco le Automazioni!',f:'Automatizziamo!'},
-    {n:'Chiamate AI',d:'Risponde al telefono quando tu non puoi.',h:'/chiamate-ai/',e:'Le Chiamate AI!',f:'Pronto? Ecco le chiamate AI!'},
     {n:'I nostri lavori',d:'Progetti veri, per aziende vere.',h:'/lavori/',e:'I nostri lavori!',f:'Guarda cosa abbiamo fatto!'},
     {n:'Contatti',d:'Raccontaci la tua idea: la prima consulenza è gratuita.',h:'/contatti/',e:'Scrivici!',f:'Ti porto dai contatti!'}];
   var sez=document.getElementById('menu');if(!sez)return;
@@ -853,17 +850,21 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   // I browser non lasciano partire l'audio da soli: si aspetta il primo gesto.
   // Chi l'ha spenta una volta non se la ritrova accesa al ritorno.
   if(localStorage.getItem(KEY) !== 'off'){
+    // Safari e iPhone lasciano partire l'audio solo su un clic completato (click, touchend, tasto):
+    // la pressione (pointerdown/touchstart) non basta. Se il browser rifiuta, si riprova al clic dopo.
+    var EV = ['click','touchend','keydown'];
+    var togli = function(){ EV.forEach(function(t){ document.removeEventListener(t, primoGesto, true); }); };
     var primoGesto = function(e){
-      document.removeEventListener('pointerdown', primoGesto);
-      document.removeEventListener('keydown', primoGesto);
-      document.removeEventListener('touchstart', primoGesto);
       // se il primo gesto è proprio sul pulsante, decide lui: non partire due volte
-      if(e && e.target && e.target.closest && e.target.closest('#musicToggle')) return;
-      if(!attiva) avvia();
+      if(e && e.target && e.target.closest && e.target.closest('#musicToggle')){ togli(); return; }
+      if(attiva){ togli(); return; }
+      attiva = true;
+      if(audio.paused) audio.volume = 0;
+      var p = audio.play();
+      if(p && p.then){ p.then(function(){ togli(); segna(true); fadeTo(VOLUME); }, function(){ attiva = false; segna(false); }); }
+      else { togli(); segna(true); fadeTo(VOLUME); }
     };
-    document.addEventListener('pointerdown', primoGesto);
-    document.addEventListener('keydown', primoGesto);
-    document.addEventListener('touchstart', primoGesto);
+    EV.forEach(function(t){ document.addEventListener(t, primoGesto, true); });
   }
 
   // Se l'utente cambia scheda, la musica si mette in pausa per educazione.
