@@ -63,7 +63,9 @@
 </div>
 
 <main>
-<header class="sv-hero">
+<header class="sv-hero ap-hero">
+  <!-- sfondo: robot con l'orologio (il tempo che l'app ti restituisce). Orizzontale da computer, verticale da telefono -->
+  <div class="ap-sfondo" aria-hidden="true"><video id="apVideo" muted loop playsinline autoplay preload="auto"></video><span class="ap-ia">Video generato con IA</span></div>
   <div class="sv-hero-in">
     <div class="sv-hero-testo">
       <a class="pg-torna" href="/#menu"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Torna dal robot</a>
@@ -77,12 +79,14 @@
       </a>
       <ul class="sv-punti"><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Tua, per sempre: niente canoni a piattaforme</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Da computer e da telefono</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Dati al sicuro, accessi per persona</li></ul>
     </div>
-    <div class="sv-hero-media" aria-hidden="true">
-      <div class="sv-cornice"><video src="app/app-video.mp4" autoplay muted loop playsinline preload="metadata" width="720" height="1280"></video><span class="svz-ia">Video generato con IA</span></div>
-      <div class="sv-bolla sv-bolla--a"><span class="sv-bolla-ico">📊</span><span><b>Report pronto</b><small>generato alle 8:00</small></span></div><div class="sv-bolla sv-bolla--b"><span class="sv-bolla-ico">✅</span><span><b>Preventivo inviato</b><small>al cliente, in automatico</small></span></div>
-    </div>
   </div>
 </header>
+<script>
+/* sfondo dell'apertura: verticale su schermi stretti o verticali, orizzontale sugli altri */
+(function(){var v=document.getElementById('apVideo');if(!v)return;
+  var tel=innerWidth<=900||innerHeight>innerWidth,n=tel?'robottel':'robotpc';
+  v.poster='/app/sfondo-'+n+'.webp';v.src='/app/sfondo-'+n+'.mp4';var p=v.play();if(p&&p.catch)p.catch(function(){});})();
+</script>
 <section class="sv-sez"><div class="sv-in">
   <div class="sv-testa sv-rivela"><div class="pg-tag">— Cosa possiamo costruire</div><h2 class="sv-h2">Tutto quello che ti serve, <em>niente di più.</em></h2></div>
   <div class="sv-griglia"><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">🗂️</span><h3>Gestionali</h3><p>Clienti, lavori, magazzino e scadenze in un posto solo, con la ricerca che trova tutto in un secondo.</p></article><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">🤝</span><h3>CRM</h3><p>Ogni contatto, ogni preventivo, ogni richiamata: sai sempre a che punto è ogni cliente.</p></article><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">🌐</span><h3>Portali clienti</h3><p>I tuoi clienti vedono documenti, stato dei lavori e fatture senza telefonarti.</p></article><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">📅</span><h3>Agende e turni</h3><p>Appuntamenti, squadre e mezzi organizzati senza incastri a mano.</p></article><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">🤖</span><h3>Assistenti AI dentro l'app</h3><p>Scrivi o detta a voce: l'app compila, riassume e prepara i documenti per te.</p></article><article class="sv-card sv-rivela"><span class="sv-ico" aria-hidden="true">📱</span><h3>Da telefono, anche offline</h3><p>Si installa come un'app e funziona anche in cantiere o dal cliente.</p></article></div>
@@ -594,6 +598,34 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 .form-presa{display:flex;gap:.6rem;align-items:flex-start;margin:.2rem 0 1rem;font-size:.82rem;line-height:1.45;color:var(--ink-muted,#8C97AD);cursor:pointer}
 .form-presa input{margin-top:.15rem;width:1.05rem;height:1.05rem;flex:none;accent-color:#7B5CF5}
 .form-presa a{color:#C4B5FD}
+
+/* ===== apertura con il robot di sfondo (24/09/2026) ===== */
+.ap-hero{isolation:isolate}
+.ap-hero::before{display:none}
+.ap-sfondo{position:absolute;z-index:-1;overflow:hidden;pointer-events:none}
+.ap-sfondo video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ap-sfondo::after{content:"";position:absolute;inset:0}
+.ap-ia{position:absolute;z-index:2;font-size:9px;color:#556076;background:rgba(247,245,240,.8);padding:2px 6px;border-radius:6px}
+@media(min-width:901px){
+  .ap-hero{min-height:min(100vh,860px);display:flex;align-items:center}
+  .ap-hero .sv-hero-in{width:100%;grid-template-columns:minmax(0,1fr)}
+  .ap-hero .sv-hero-testo{max-width:min(36rem,44vw)}
+  .ap-sfondo{top:0;right:0;bottom:0;width:62%}
+  .ap-sfondo video{object-position:42% 45%}
+  /* sfuma verso le scritte a sinistra e verso la pagina in basso: il robot resta pieno a destra */
+  .ap-sfondo::after{background:linear-gradient(90deg,#F7F5F0 0%,rgba(247,245,240,.88) 10%,rgba(247,245,240,.35) 26%,rgba(247,245,240,0) 42%),
+    linear-gradient(0deg,#F7F5F0 0%,rgba(247,245,240,0) 20%),linear-gradient(180deg,rgba(247,245,240,.5) 0%,rgba(247,245,240,0) 14%)}
+  .ap-ia{right:1rem;bottom:24%}
+}
+@media(max-width:900px){
+  .ap-hero{padding-top:0}
+  .ap-sfondo{position:relative;z-index:0;display:block;height:min(58vh,540px);margin:56px calc(-1 * clamp(1.25rem,4vw,2.5rem)) 0}
+  .ap-sfondo video{object-position:50% 35%}
+  /* in basso sfuma nel colore della pagina: le scritte partono dove il fondo e' gia' pieno */
+  .ap-sfondo::after{background:linear-gradient(0deg,#F7F5F0 0%,rgba(247,245,240,.85) 16%,rgba(247,245,240,0) 42%)}
+  .ap-hero .sv-hero-in{position:relative;z-index:1;margin-top:-3.2rem}
+  .ap-ia{right:.8rem;top:.7rem}
+}
 </style>
 
 <div class="cookie" id="cookie" role="dialog" aria-labelledby="cookieTit" aria-describedby="cookieTesto" hidden>
