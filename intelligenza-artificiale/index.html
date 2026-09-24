@@ -77,16 +77,24 @@
   <div class="bv-testa">
     <a class="pg-torna bv-torna" href="/#menu"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Torna dal robot</a>
     <h1 class="bv-tit" aria-label="Benvenuto nel mondo AI"><span class="bv-par" aria-hidden="true">Benvenuto</span> <span class="bv-par" aria-hidden="true">nel mondo</span> <span class="bv-par bv-ai" aria-hidden="true">AI</span></h1>
-    <p class="bv-sub">Due strade per portare l'intelligenza artificiale nella tua azienda. <b>Scegli da dove partire.</b></p>
+    <p class="bv-sub">Due strade per portare l'intelligenza artificiale nella tua azienda, e un negozio dove vederla già al lavoro. <b>Scegli da dove partire.</b></p>
   </div>
-  <a class="bv-porta bv-porta--sx" href="#strada-modelli" data-fine="455,455" data-vicino="700,680">
-    <span class="bv-btn"><b>Modelli AI</b><small>i più potenti, nel cloud</small></span>
+  <a class="bv-porta bv-porta--sx" href="#strada-modelli" data-fine="455,455" data-vicino="700,520">
+    <span class="bv-btn"><b>Modelli AI</b><small>ChatGPT, Claude e Gemini collegati ai tuoi documenti, alla posta e al gestionale</small></span>
     <span class="bv-filo" aria-hidden="true"></span><span class="bv-faro" aria-hidden="true"></span>
   </a>
-  <a class="bv-porta bv-porta--dx" href="#strada-locale" data-fine="1215,455" data-vicino="985,680">
-    <span class="bv-btn"><b>AI in locale</b><small>dentro l'azienda, 0 dati fuori</small></span>
+  <a class="bv-porta bv-porta--dx" href="#strada-locale" data-fine="1215,455" data-vicino="985,520">
+    <span class="bv-btn"><b>AI in locale</b><small>L'AI installata su un computer in azienda: nessun dato esce, mai</small></span>
     <span class="bv-filo" aria-hidden="true"></span><span class="bv-faro" aria-hidden="true"></span>
   </a>
+  <button type="button" class="bv-negozio" id="bvNegozio" aria-label="AI al lavoro: entra nel negozio del futuro e prova Consulente AI, Automazioni e Chiamate AI">
+    <span class="bv-cartello"><b>AI al lavoro</b><small>Entra nel negozio: l'intelligenza artificiale lavora davanti a te, bancone per bancone</small><i>Tocca per entrare</i></span>
+    <span class="bv-edificio">
+      <img src="/intelligenza-artificiale/negozio-fuori.webp" width="640" height="318" alt="">
+      <video id="bvPorte" src="/intelligenza-artificiale/negozio-porte.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
+    </span>
+  </button>
+  <span class="ng-ia">Immagini e video generati con IA</span>
 </header>
 
 <!-- ============ STRADA 1: MODELLI AI ============ -->
@@ -364,6 +372,157 @@
     <details class="sv-faq"><summary>E se l'AI sbaglia?<span aria-hidden="true">+</span></summary><p>Risponde citando la fonte, così si verifica in un attimo, e dichiara quando i dati non bastano. Le decisioni importanti restano sempre alle persone.</p></details>
   </div>
 </div></section>
+</div>
+
+<!-- ============ STRADA 3: AI AL LAVORO — il negozio del futuro ============ -->
+<div class="strada strada--lavoro" id="strada-lavoro" data-strada="lavoro" hidden>
+  <section class="ng" id="negozio" aria-labelledby="ngTit">
+    <div class="ng-scena" id="ngScena">
+      <div class="ng-tela" id="ngTela">
+        <img class="ng-fine" src="/intelligenza-artificiale/negozio-fine.webp" width="1280" height="720" alt="Il salone del negozio del futuro: tre banconi, robot commessi e un nastro olografico sospeso al centro" fetchpriority="low">
+        <video class="ng-video" id="ngVideo" src="/intelligenza-artificiale/negozio.mp4" muted playsinline preload="none" aria-hidden="true"></video>
+        <button type="button" class="ng-punto" data-mp="consulente" style="--x:36.5%;--y:64%" aria-label="Bancone 1: Consulente AI">
+          <span class="ng-anello" aria-hidden="true"></span>
+          <span class="ng-etich"><i>01</i><b>Consulente AI</b><small>il commesso che sa tutto</small></span>
+        </button>
+        <button type="button" class="ng-punto ng-punto--alto" data-mp="automazioni" style="--x:50%;--y:47%" aria-label="Bancone 2: Automazioni">
+          <span class="ng-anello" aria-hidden="true"></span>
+          <span class="ng-etich"><i>02</i><b>Automazioni</b><small>il nastro che lavora da solo</small></span>
+        </button>
+        <button type="button" class="ng-punto ng-punto--sx" data-mp="chiamate" style="--x:79%;--y:74%" aria-label="Bancone 3: Chiamate AI">
+          <span class="ng-anello" aria-hidden="true"></span>
+          <span class="ng-etich"><i>03</i><b>Chiamate AI</b><small>il telefono che risponde sempre</small></span>
+        </button>
+      </div>
+      <div class="ng-velo" aria-hidden="true"></div>
+      <div class="ng-testa">
+        <div class="strada-tag"><i></i> Strada 3 · AI al lavoro</div>
+        <h2 id="ngTit" class="ng-tit">Entra nel negozio <em>del futuro.</em></h2>
+        <p class="ng-sub"><span class="ng-sub-lungo">Qui l'intelligenza artificiale non è una promessa: <b>lavora</b>. Ogni bancone è uno strumento che le aziende usano già oggi. </span>Sono alcuni esempi di quello che si può fare: <b>tocca un bancone e provalo.</b></p>
+      </div>
+      <button type="button" class="ng-salta" id="ngSalta">Salta l'ingresso <span aria-hidden="true">›</span></button>
+      <p class="ng-guida" id="ngGuida" aria-hidden="true"><span class="ng-guida-pc">Tocca un bancone</span><span class="ng-guida-tel">← trascina per guardarti intorno →</span></p>
+      <div class="ng-scelte" role="group" aria-label="I banconi del negozio">
+        <button type="button" data-mp="consulente"><i>01</i> Consulente AI</button>
+        <button type="button" data-mp="automazioni"><i>02</i> Automazioni</button>
+        <button type="button" data-mp="chiamate"><i>03</i> Chiamate AI</button>
+      </div>
+      <span class="ng-ia">Video generato con IA</span>
+    </div>
+  </section>
+
+  <section class="ng-dopo">
+    <div class="ng-dopo-in">
+      <p class="ng-dopo-kick">— E non finisce qui</p>
+      <h3 class="ng-dopo-tit">Tre banconi, tre esempi. <em>Il tuo sarà diverso.</em></h3>
+      <p class="ng-dopo-p">Ogni azienda ha il suo lavoro ripetitivo, le sue domande che tornano sempre, le sue telefonate perse. Raccontaci come lavori: ti diciamo quale strumento ti fa risparmiare più tempo, e lo costruiamo attorno a te.</p>
+      <div class="ng-dopo-az">
+        <a href="/contatti/" class="md-cta-btn ng-dopo-btn">Raccontaci il tuo lavoro <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#bivio" class="strada-torna ng-dopo-torna"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Torna al bivio</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- mini-pagine dei banconi -->
+  <div class="mp-fondo" id="mpFondo" hidden></div>
+
+  <section class="mp" id="mp-consulente" role="dialog" aria-modal="true" aria-labelledby="mpT1" hidden>
+    <button type="button" class="mp-chiudi" aria-label="Chiudi">×</button>
+    <div class="mp-col mp-racconto">
+      <p class="mp-kick"><i>01</i> Bancone 1 · Consulente AI</p>
+      <h3 id="mpT1" class="mp-tit">Un esperto che ha letto <em>tutti i tuoi documenti.</em></h3>
+      <p class="mp-p">Carichiamo manuali, listini, procedure e contratti. Da quel momento chiunque in azienda — o i tuoi clienti — fa una domanda e riceve la risposta in pochi secondi, <b>con il documento da cui arriva</b>. Di giorno, di notte, nel fine settimana.</p>
+      <ul class="mp-punti">
+        <li><b>Nessuno interrompe più il collega esperto</b> per la solita domanda.</li>
+        <li><b>I nuovi assunti sono operativi subito</b>: chiedono all'assistente.</li>
+        <li><b>Risponde anche ai clienti</b>, 24 ore su 24, e dice sempre che è un'AI.</li>
+      </ul>
+      <div class="mp-az">
+        <a href="/consulente-ai/" class="mp-btn">Scopri tutto sul Consulente AI →</a>
+        <a href="/contatti/" class="mp-link">Provalo sui tuoi documenti</a>
+      </div>
+    </div>
+    <div class="mp-col mp-prova">
+      <div class="dm dm--chat" id="dmChat">
+        <div class="dm-testa"><span class="dm-led"></span> Prova · ditta di impianti termici <em>(dati inventati)</em></div>
+        <div class="dm-chat" id="dmChatCorpo"><p class="dm-vuoto">Scegli una domanda qui sotto ↓</p></div>
+        <div class="dm-scelte" id="dmChatScelte">
+          <button type="button" data-q="0">Come si resetta l'errore E4 sulla caldaia X20?</button>
+          <button type="button" data-q="1">Quanto costa un intervento di sabato?</button>
+          <button type="button" data-q="2">Quanto dura la garanzia sul bruciatore?</button>
+        </div>
+        <div class="dm-conto"><span>Risposta in <b id="dmChatT">—</b></span><span>Cercando a mano: <b>~15 minuti</b></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mp" id="mp-automazioni" role="dialog" aria-modal="true" aria-labelledby="mpT2" hidden>
+    <button type="button" class="mp-chiudi" aria-label="Chiudi">×</button>
+    <div class="mp-col mp-racconto">
+      <p class="mp-kick"><i>02</i> Bancone 2 · Automazioni</p>
+      <h3 id="mpT2" class="mp-tit">Il lavoro ripetitivo <em>si fa da solo.</em></h3>
+      <p class="mp-p">Colleghiamo gli strumenti che usi già — <b>Gmail, Calendar, Excel, il gestionale</b> — e i passaggi di tutti i giorni li fa il sistema: legge, smista, compila, avvisa. Tu controlli e decidi, senza più copia-incolla.</p>
+      <ul class="mp-punti">
+        <li><b>Ogni richiesta arriva al posto giusto</b>, anche alle 3 di notte.</li>
+        <li><b>Preventivi e documenti già compilati</b>, da approvare con un clic.</li>
+        <li><b>Nessuna scadenza dimenticata</b>: promemoria automatici a te e ai clienti.</li>
+      </ul>
+      <div class="mp-az">
+        <a href="/automazioni/" class="mp-btn">Scopri tutto sulle Automazioni →</a>
+        <a href="/contatti/" class="mp-link">Cosa si può automatizzare da te?</a>
+      </div>
+    </div>
+    <div class="mp-col mp-prova">
+      <div class="dm dm--flusso" id="dmFlusso">
+        <div class="dm-testa"><span class="dm-led"></span> Prova · arriva una mail. Guarda dove va.</div>
+        <div class="dm-mail" id="dmMail">
+          <button type="button" data-m="0"><b>Mario Bianchi</b><span>Preventivo per 3 finestre in PVC</span></button>
+          <button type="button" data-m="1"><b>Forniture Rossi srl</b><span>Fattura n. 482 in allegato</span></button>
+          <button type="button" data-m="2"><b>Laura Conti</b><span>URGENTE: consegna sbagliata</span></button>
+        </div>
+        <ol class="dm-passi" id="dmPassi">
+          <li><i>1</i><div><b>Arriva</b><span data-t>—</span></div></li>
+          <li><i>2</i><div><b>L'AI la legge e capisce</b><span data-t>—</span></div></li>
+          <li><i>3</i><div><b>Il sistema fa i passaggi</b><span data-t>—</span></div></li>
+          <li><i>4</i><div><b>Risultato</b><span data-t>—</span></div></li>
+        </ol>
+        <div class="dm-conto"><span>Minuti risparmiati in questa prova: <b id="dmMin">0</b></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mp" id="mp-chiamate" role="dialog" aria-modal="true" aria-labelledby="mpT3" hidden>
+    <button type="button" class="mp-chiudi" aria-label="Chiudi">×</button>
+    <div class="mp-col mp-racconto">
+      <p class="mp-kick"><i>03</i> Bancone 3 · Chiamate AI</p>
+      <h3 id="mpT3" class="mp-tit">Il telefono risponde <em>anche quando tu non puoi.</em></h3>
+      <p class="mp-p">Un assistente vocale risponde alle chiamate <b>24 ore su 24</b>: prende prenotazioni, dà informazioni su orari e servizi, e ti manda il riassunto. Si presenta sempre come assistente AI e, quando serve, passa la chiamata a una persona.</p>
+      <ul class="mp-punti">
+        <li><b>Nessuna chiamata persa</b>: né la sera, né quando hai le mani occupate.</li>
+        <li><b>Le prenotazioni finiscono in agenda</b>, senza che tu tocchi niente.</li>
+        <li><b>Parla come parli tu</b>: tono, informazioni e regole le decidi tu.</li>
+      </ul>
+      <div class="mp-az">
+        <a href="/chiamate-ai/" class="mp-btn">Scopri tutto sulle Chiamate AI →</a>
+        <a href="/contatti/" class="mp-link">Quante chiamate perdi ogni settimana?</a>
+      </div>
+    </div>
+    <div class="mp-col mp-prova">
+      <div class="dm dm--tel" id="dmTel">
+        <div class="dm-testa"><span class="dm-led"></span> Prova · Salone Aurora, ore 21:40, negozio chiuso <em>(esempio)</em></div>
+        <div class="dm-tel-schermo">
+          <div class="dm-tel-stato" id="dmTelStato"><b>Chiamata in arrivo</b><span>+39 347 ••• ••12</span></div>
+          <div class="dm-onda" id="dmOnda" aria-hidden="true"></div>
+          <div class="dm-trascr" id="dmTrascr" aria-live="polite"></div>
+          <button type="button" class="dm-rispondi" id="dmRispondi">Fai rispondere all'assistente</button>
+        </div>
+        <div class="dm-agenda" id="dmAgenda" hidden>
+          <span class="dm-agenda-kick">Agenda · aggiunto dall'assistente</span>
+          <b>Sabato · 11:00 — Giulia</b><span>Taglio e piega · conferma inviata via SMS</span>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 </main>
 
@@ -911,7 +1070,9 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
       if(!on)s.hidden=true;});
     porte.forEach(function(p){p.classList.toggle('scelta',p.getAttribute('href')==='#strada-'+nome);});
     velo();
+    document.dispatchEvent(new CustomEvent('strada-aperta',{detail:nome}));
   }
+  window.apriStrada=apri;
   document.addEventListener('click',function(e){
     var a=e.target.closest&&e.target.closest('a[href^="#strada-"]');if(!a)return;
     apri(a.getAttribute('href').slice(8));
@@ -924,8 +1085,157 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
   }
   addEventListener('scroll',velo,{passive:true});addEventListener('resize',velo);
   function daHash(){var h=location.hash.replace('#','').replace('strada-','');
-    if(h==='modelli'||h==='locale'){apri(h);setTimeout(function(){var t=document.getElementById('strada-'+h);if(t)t.scrollIntoView({behavior:'instant'});},120);}}
+    if(h==='modelli'||h==='locale'||h==='lavoro'){apri(h);setTimeout(function(){var t=document.getElementById('strada-'+h);if(t)t.scrollIntoView({behavior:'instant'});},120);}}
   daHash();addEventListener('hashchange',daHash);
+})();
+</script>
+<script>
+/* ===== AI AL LAVORO: il negozio in basso al bivio, le porte che si aprono, il salone coi banconi ===== */
+(function(){
+  var btn=document.getElementById('bvNegozio'),porte=document.getElementById('bvPorte');
+  var ng=document.getElementById('negozio');if(!btn||!ng)return;
+  var scena=document.getElementById('ngScena'),tela=document.getElementById('ngTela'),vid=document.getElementById('ngVideo'),salta=document.getElementById('ngSalta');
+  var calmo=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var lampo=document.createElement('div');lampo.className='bv-lampo';document.body.appendChild(lampo);
+  var occupato=false;
+
+  /* 1. il clic sul negozio: si aprono le porte, si entra dalla porta */
+  function entra(){
+    if(occupato)return;occupato=true;
+    if(calmo){vai();return;}
+    btn.classList.add('apre');
+    try{porte.currentTime=0;}catch(e){}
+    var p=porte.play(),fatto=false;
+    function dopo(){if(fatto)return;fatto=true;btn.classList.add('dentro');
+      setTimeout(function(){lampo.classList.add('su');},520);
+      setTimeout(vai,1000);}
+    porte.onended=dopo;
+    if(p&&p.catch)p.catch(dopo);
+    setTimeout(dopo,4600);
+  }
+  function vai(){
+    window.apriStrada('lavoro');
+    var s=document.getElementById('strada-lavoro');s.scrollIntoView({behavior:'instant'});
+    setTimeout(function(){lampo.classList.remove('su');btn.classList.remove('apre','dentro');occupato=false;},120);
+  }
+  btn.addEventListener('click',entra);
+
+  /* 2. dentro: il video d'ingresso, poi il salone. La seconda volta si e' gia' dentro */
+  var partito=false;
+  function pronto(){ng.classList.add('pronto');try{vid.pause();}catch(e){}try{sessionStorage.setItem('ng-dentro','1');}catch(e){}}
+  function avvia(){
+    if(partito)return;partito=true;impagina();
+    var gia=false;try{gia=sessionStorage.getItem('ng-dentro')==='1';}catch(e){}
+    if(gia||calmo){pronto();return;}
+    ng.classList.remove('pronto');vid.preload='auto';
+    try{vid.currentTime=0;}catch(e){}
+    var p=vid.play();if(p&&p.catch)p.catch(pronto);
+    vid.onended=pronto;
+  }
+  salta.addEventListener('click',pronto);
+  document.addEventListener('strada-aperta',function(e){if(e.detail==='lavoro')avvia();});
+  /* il video del salone si scarica in sottofondo mentre si legge il bivio */
+  addEventListener('load',function(){setTimeout(function(){if(!partito){vid.preload='auto';try{vid.load();}catch(e){}}},2500);});
+
+  /* 3. il salone riempie lo schermo; da telefono si trascina per guardarsi intorno */
+  var ox=0,tw=0,W=0;
+  function impagina(){
+    W=scena.clientWidth;var H=scena.clientHeight,k=Math.max(W/1280,H/720);tw=1280*k;var th=720*k;
+    tela.style.width=tw+'px';tela.style.height=th+'px';
+    ox=(W-tw)/2;if(W<700)ox=Math.min(0,Math.max(W-tw,W*.16-tw*.365));tela.style.transform='translate('+ox+'px,'+((H-th)/2)+'px)';tela.dataset.oy=(H-th)/2;
+  }
+  function sposta(x){ox=Math.min(0,Math.max(W-tw,x));tela.style.transform='translate('+ox+'px,'+tela.dataset.oy+'px)';}
+  addEventListener('resize',function(){if(partito)impagina();});
+  var tira=null;
+  scena.addEventListener('pointerdown',function(e){if(tw<=W+2||e.target.closest('button'))return;tira={x:e.clientX,o:ox};});
+  addEventListener('pointermove',function(e){if(tira)sposta(tira.o+e.clientX-tira.x);});
+  addEventListener('pointerup',function(){tira=null;});
+  scena.addEventListener('touchstart',function(e){if(tw<=W+2||e.target.closest('button'))return;tira={x:e.touches[0].clientX,o:ox};},{passive:true});
+  scena.addEventListener('touchmove',function(e){if(tira)sposta(tira.o+e.touches[0].clientX-tira.x);},{passive:true});
+  scena.addEventListener('touchend',function(){tira=null;});
+
+  /* 4. le mini-pagine: stanno nel body, cosi' passano sopra a tutto */
+  var fondo=document.getElementById('mpFondo'),aperta=null,daDove=null;
+  [fondo].concat([].slice.call(document.querySelectorAll('.mp'))).forEach(function(el){document.body.appendChild(el);});
+  function apriMp(nome,da){
+    var mp=document.getElementById('mp-'+nome);if(!mp)return;chiudiMp(true);
+    aperta=mp;daDove=da||null;fondo.hidden=false;mp.hidden=false;document.documentElement.style.overflow='hidden';
+    requestAnimationFrame(function(){requestAnimationFrame(function(){fondo.classList.add('su');mp.classList.add('su');});});
+    mp.scrollTop=0;mp.querySelector('.mp-chiudi').focus({preventScroll:true});
+    if(PROVE[nome])PROVE[nome]();
+  }
+  function chiudiMp(subito){
+    if(!aperta)return;var mp=aperta;aperta=null;
+    mp.classList.remove('su');fondo.classList.remove('su');document.documentElement.style.overflow='';
+    if(tel.stop)tel.stop();
+    setTimeout(function(){mp.hidden=true;if(!aperta)fondo.hidden=true;},subito===true?0:380);
+    if(daDove)try{daDove.focus({preventScroll:true});}catch(e){}
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-mp]');if(b){apriMp(b.dataset.mp,b);return;}
+    if(e.target.closest('.mp-chiudi')||e.target===fondo)chiudiMp();
+  });
+  addEventListener('keydown',function(e){if(e.key==='Escape')chiudiMp();});
+
+  /* 5a. prova del Consulente AI */
+  var CHAT=[
+    {r:"L'errore E4 indica <b>pressione bassa</b> nell'impianto.<br>1. Guarda il manometro: deve stare tra 1 e 1,5 bar.<br>2. Se è sotto, riempi dal rubinetto di carico.<br>3. Tieni premuto <b>RESET</b> per 5 secondi.<br>Se l'errore torna entro 24 ore, serve un tecnico.",f:'Manuale tecnico X20 · pag. 42, «Codici di errore»',t:'2,3 s'},
+    {r:"Il sabato mattina l'uscita costa <b>85 € + IVA</b>, più 45 € l'ora di manodopera. Dalle 13 si applica la tariffa festiva (+30%). Per chi ha il contratto di manutenzione, l'uscita è compresa.",f:'Listino interventi 2026 · riga 14',t:'1,8 s'},
+    {r:"Il bruciatore è garantito <b>5 anni</b> dall'installazione, se la manutenzione annuale è stata fatta regolarmente. Senza manutenzione registrata, la garanzia scende a 2 anni.",f:'Condizioni di garanzia · art. 3.2',t:'2,0 s'}];
+  var chatCorpo=document.getElementById('dmChatCorpo'),chatT=document.getElementById('dmChatT'),chatOcc=false;
+  document.getElementById('dmChatScelte').addEventListener('click',function(e){
+    var b=e.target.closest('button');if(!b||chatOcc)return;chatOcc=true;b.classList.add('usata');var d=CHAT[+b.dataset.q];
+    var v=chatCorpo.querySelector('.dm-vuoto');if(v)v.remove();
+    var tu=document.createElement('div');tu.className='dm-bolla dm-bolla--tu';tu.textContent=b.textContent;chatCorpo.appendChild(tu);
+    var ai=document.createElement('div');ai.className='dm-bolla dm-bolla--ai';ai.innerHTML='<span class="dm-scrive"><i></i><i></i><i></i></span>';
+    setTimeout(function(){chatCorpo.appendChild(ai);ai.scrollIntoView({block:'nearest'});},350);
+    setTimeout(function(){ai.innerHTML=d.r+'<div class="dm-fonte">Fonte: '+d.f+'</div>';chatT.textContent=d.t;ai.scrollIntoView({block:'nearest'});chatOcc=false;},calmo?400:1700);
+  });
+
+  /* 5b. prova delle Automazioni */
+  var MAIL=[
+    {p:['Ore 06:12 · «Vorrei un preventivo per 3 finestre in PVC, le misure sono in allegato»','Nuova richiesta di preventivo · 3 finestre · misure nel PDF · cliente nuovo','Crea la scheda cliente nel CRM, prende i prezzi dal listino e compila la bozza del preventivo','Bozza pronta da approvare con un clic, più il promemoria per richiamare tra 3 giorni'],m:18},
+    {p:['Ore 09:40 · fattura n. 482 da 1.240,00 € in PDF','Fattura di un fornitore · 1.240,00 € · scadenza 30 ottobre','Salva il PDF nella cartella Fatture 2026, aggiunge la riga su Excel e la scadenza in calendario','Tutto archiviato senza aprire niente. Il 27 ottobre ti arriva l\'avviso di pagamento'],m:7},
+    {p:['Ore 18:55 · «URGENTE: mi avete consegnato il modello sbagliato»','Reclamo · priorità alta · riferito all\'ordine n. 3317','Recupera l\'ordine, avvisa subito il responsabile e prepara una risposta di scuse con la soluzione','Risposta pronta in un minuto: la cliente si sente seguita, tu decidi solo se inviarla'],m:15}];
+  var passi=[].slice.call(document.querySelectorAll('#dmPassi li')),minEl=document.getElementById('dmMin'),minTot=0,flTimer=[];
+  document.getElementById('dmMail').addEventListener('click',function(e){
+    var b=e.target.closest('button');if(!b)return;var d=MAIL[+b.dataset.m];
+    [].forEach.call(this.children,function(x){x.classList.toggle('on',x===b);});
+    flTimer.forEach(clearTimeout);flTimer=[];
+    passi.forEach(function(li){li.classList.remove('on');li.querySelector('[data-t]').textContent='—';});
+    passi.forEach(function(li,i){flTimer.push(setTimeout(function(){li.classList.add('on');li.querySelector('[data-t]').textContent=d.p[i];
+      if(i===3){minTot+=d.m;minEl.textContent=minTot;}},calmo?0:250+i*850));});
+  });
+
+  /* 5c. prova delle Chiamate AI */
+  var TEL=[['ai','Buonasera, sono l\'assistente virtuale del Salone Aurora: sono un\'intelligenza artificiale. Come posso aiutarla?'],
+    ['cl','Buonasera, vorrei prenotare un taglio per sabato mattina.'],
+    ['ai','Certo. Sabato mattina ho libero alle 9:30 oppure alle 11:00. Quale preferisce?'],
+    ['cl','Le 11 vanno benissimo. Sono Giulia.'],
+    ['ai','Perfetto Giulia: sabato alle 11:00, taglio e piega. Le mando un SMS di conferma. Buona serata!']];
+  var tel={},onda=document.getElementById('dmOnda'),trascr=document.getElementById('dmTrascr'),stato=document.getElementById('dmTelStato'),
+      risp=document.getElementById('dmRispondi'),agenda=document.getElementById('dmAgenda');
+  for(var i=0;i<28;i++)onda.appendChild(document.createElement('i'));
+  var barre=[].slice.call(onda.children);
+  tel.reset=function(){tel.stop();trascr.innerHTML='';agenda.hidden=true;stato.innerHTML='<b>Chiamata in arrivo</b><span>+39 347 ••• ••12</span>';
+    risp.hidden=false;risp.textContent='Fai rispondere all\'assistente';risp.classList.add('squilla');};
+  tel.stop=function(){(tel.t||[]).forEach(clearTimeout);tel.t=[];clearInterval(tel.o);clearInterval(tel.c);barre.forEach(function(b){b.style.height='4px';});};
+  function parla(chi){clearInterval(tel.o);tel.o=setInterval(function(){barre.forEach(function(b,k){b.style.height=(chi?6+Math.random()*(chi==='ai'?34:22)*Math.sin(Math.PI*k/barre.length):4)+'px';b.style.background=chi==='cl'?'#FFB768':'#4DD9E0';});},110);}
+  risp.addEventListener('click',function(){
+    if(risp.textContent.indexOf('Richiama')===0){tel.reset();return;}
+    tel.stop();risp.hidden=true;risp.classList.remove('squilla');trascr.innerHTML='';agenda.hidden=true;
+    var sec=0;stato.innerHTML='<b>In chiamata · assistente AI</b><span id="dmSec">00:00</span>';
+    tel.c=setInterval(function(){sec++;var s=document.getElementById('dmSec');if(s)s.textContent='00:'+String(sec).padStart(2,'0');},1000);
+    var t=calmo?300:600;
+    TEL.forEach(function(r){
+      tel.t.push(setTimeout(function(){parla(r[0]);var p=document.createElement('p');p.className=r[0];p.innerHTML='<b>'+(r[0]==='ai'?'Assistente AI':'Cliente')+'</b>'+r[1];trascr.appendChild(p);trascr.scrollTop=trascr.scrollHeight;},t));
+      t+=calmo?300:Math.max(1800,r[1].length*38);});
+    tel.t.push(setTimeout(function(){tel.stop();stato.innerHTML='<b>Chiamata terminata</b><span>durata 00:'+String(sec).padStart(2,'0')+' · riassunto inviato al titolare</span>';
+      agenda.hidden=false;risp.hidden=false;risp.textContent='Richiama da capo';},t));
+  });
+  var PROVE={chiamate:function(){tel.reset();}};
+  /* arrivando con #lavoro la strada e' gia' aperta prima di questo script */
+  if(!document.getElementById('strada-lavoro').hidden)avvia();
 })();
 </script>
 <script>
@@ -1028,6 +1338,213 @@ html .strada .sv-sez--alt{background:transparent}
 html .strada .md-col--no{background:rgba(255,255,255,.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .bv-porta.scelta .bv-btn{background:rgba(8,12,28,.8);box-shadow:0 0 0 2px var(--c) inset,0 0 50px -2px var(--c)}
 @media(prefers-reduced-motion:reduce){.strada.entra{animation:none}.strada-giu i{animation:none}}
+/* ===== bivio: spiegazioni nei tasti + il negozio in basso al centro ===== */
+.bv-btn{white-space:normal;width:max-content;max-width:min(17rem,44vw);text-align:center}
+.bv-btn small{line-height:1.35;margin-top:.2rem}
+.bv-negozio{position:absolute;z-index:3;left:50%;bottom:clamp(.6rem,2.5vh,1.6rem);transform:translateX(-50%);width:clamp(200px,21vw,300px);
+  padding:0;border:0;background:none;cursor:pointer;color:#fff;opacity:0;animation:bvAppare .9s 1.1s forwards;-webkit-tap-highlight-color:transparent}
+.bv-cartello{position:relative;display:block;margin:0 auto .5rem;width:max-content;max-width:min(19rem,86vw);padding:.55rem .95rem .6rem;border-radius:12px;text-align:center;
+  background:rgba(8,12,28,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3);
+  box-shadow:0 0 0 1px rgba(77,217,224,.35) inset,0 0 28px -6px rgba(77,217,224,.6),0 14px 30px -12px rgba(0,0,0,.7);transform-origin:50% 0;animation:bvDondola 5s ease-in-out infinite}
+.bv-cartello::before,.bv-cartello::after{content:"";position:absolute;top:100%;width:1px;height:.5rem;background:rgba(255,255,255,.45)}
+.bv-cartello::before{left:22%}.bv-cartello::after{right:22%}
+@keyframes bvDondola{50%{transform:rotate(-1.2deg)}}
+@keyframes bvAppare{to{opacity:1}}
+.bv-cartello b{display:block;font:800 clamp(.95rem,1.3vw,1.1rem)/1 'Bricolage Grotesque',sans-serif;letter-spacing:.08em;text-transform:uppercase;
+  color:#fff;text-shadow:0 0 12px rgba(77,217,224,.9)}
+.bv-cartello small{display:block;margin-top:.3rem;font-size:.76rem;line-height:1.35;color:rgba(255,255,255,.85)}
+.bv-cartello i{display:inline-block;margin-top:.35rem;font:700 .62rem 'Space Mono',monospace;font-style:normal;letter-spacing:.18em;text-transform:uppercase;color:#4DD9E0}
+.bv-edificio{position:relative;display:block;aspect-ratio:640/318;transition:transform .45s cubic-bezier(.22,1,.36,1)}
+.bv-edificio::after{content:"";position:absolute;left:8%;right:4%;bottom:-6%;height:16%;border-radius:50%;z-index:-1;background:radial-gradient(ellipse,rgba(0,0,0,.55),transparent 70%)}
+.bv-edificio img,.bv-edificio video{position:absolute;inset:0;width:100%;height:100%;display:block}
+.bv-edificio video{-webkit-mask:url(/intelligenza-artificiale/negozio-maschera.png) center/100% 100% no-repeat;mask:url(/intelligenza-artificiale/negozio-maschera.png) center/100% 100% no-repeat;opacity:0}
+.bv-negozio.apre .bv-edificio video{opacity:1}
+.bv-negozio:hover .bv-edificio,.bv-negozio:focus-visible .bv-edificio{transform:translateY(-4px) scale(1.03)}
+.bv-negozio:focus-visible{outline:none}
+.bv-negozio:focus-visible .bv-cartello{box-shadow:0 0 0 2px #4DD9E0}
+/* si entra: zoom verso la porta, poi la luce */
+.bv-negozio.dentro .bv-edificio{transform:scale(7);transform-origin:28% 68%;transition:transform 1s cubic-bezier(.7,0,.84,0)}
+.bv-negozio.dentro .bv-cartello{opacity:0;transition:opacity .3s}
+.bv-lampo{position:fixed;inset:0;z-index:7000;pointer-events:none;background:radial-gradient(circle at 50% 70%,#fff,#dff8ff 40%,#0B1120 100%);opacity:0;transition:opacity .45s}
+.bv-lampo.su{opacity:1}
+@media(max-width:700px){.bv-negozio{width:190px}.bv-cartello{padding:.45rem .75rem .5rem}.bv-cartello small{font-size:.7rem}}
+
+/* ===== strada 3: il negozio del futuro ===== */
+.strada--lavoro{background:#0B1120;--acc:#4DD9E0}
+.ng-scena{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:#0B1120;touch-action:pan-y}
+.ng-tela{position:absolute;left:0;top:0;will-change:transform}
+.ng-fine,.ng-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.ng-video{transition:opacity .6s}
+.ng.pronto .ng-video{opacity:0;pointer-events:none}
+.ng-velo{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(6,10,24,.78) 0%,rgba(6,10,24,.3) 26%,rgba(6,10,24,0) 42%,rgba(6,10,24,0) 80%,rgba(6,10,24,.55) 100%);
+  opacity:0;transition:opacity .8s}
+.ng.pronto .ng-velo{opacity:1}
+.ng-testa{position:absolute;z-index:3;left:0;right:0;top:clamp(4.6rem,10vh,6.2rem);text-align:center;padding:0 1.25rem;color:#fff;pointer-events:none;
+  opacity:0;transform:translateY(14px);transition:opacity .8s .15s,transform .8s .15s cubic-bezier(.22,1,.36,1)}
+.ng.pronto .ng-testa{opacity:1;transform:none}
+.ng-tit{margin:.8rem 0 0;font:800 clamp(2.2rem,5.6vw,4.6rem)/.95 'Bricolage Grotesque',sans-serif;letter-spacing:-.04em;text-shadow:0 6px 36px rgba(0,0,0,.5)}
+.ng-tit em{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-style:italic;letter-spacing:-.01em}
+.ng-sub{margin:.9rem auto 0;max-width:40rem;font-size:clamp(.95rem,1.4vw,1.1rem);line-height:1.55;color:rgba(255,255,255,.9);text-shadow:0 2px 14px rgba(0,0,0,.7)}
+.ng-sub b{color:#fff}
+.ng-salta{position:absolute;z-index:4;right:1.2rem;bottom:1.2rem;padding:.6rem 1.1rem;border-radius:100px;border:1px solid rgba(255,255,255,.35);
+  background:rgba(8,12,28,.55);color:#fff;font:600 .88rem 'DM Sans',sans-serif;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:opacity .4s}
+.ng.pronto .ng-salta{opacity:0;pointer-events:none}
+/* i banconi: anello che respira sul punto, etichetta che si apre */
+.ng-punto{position:absolute;left:var(--x);top:var(--y);width:0;height:0;padding:0;border:0;background:none;cursor:pointer;color:#fff;z-index:2;
+  opacity:0;transform:scale(.6);transition:opacity .5s,transform .6s cubic-bezier(.22,1,.36,1)}
+.ng.pronto .ng-punto{opacity:1;transform:none}
+.ng.pronto .ng-punto:nth-of-type(1){transition-delay:.45s}
+.ng.pronto .ng-punto:nth-of-type(2){transition-delay:.65s}
+.ng.pronto .ng-punto:nth-of-type(3){transition-delay:.85s}
+.ng-anello{position:absolute;left:-15px;top:-15px;width:30px;height:30px;border-radius:50%;background:#fff;box-shadow:0 0 0 6px rgba(77,217,224,.35),0 0 30px 8px rgba(77,217,224,.7)}
+.ng-anello::before,.ng-anello::after{content:"";position:absolute;inset:-12px;border-radius:50%;border:2px solid rgba(255,255,255,.85);animation:ngOnda 2.4s ease-out infinite}
+.ng-anello::after{animation-delay:1.2s}
+@keyframes ngOnda{from{transform:scale(.5);opacity:1}to{transform:scale(2.1);opacity:0}}
+.ng-etich{position:absolute;left:24px;top:-26px;display:grid;grid-template-columns:auto 1fr;column-gap:.6rem;align-items:center;text-align:left;white-space:nowrap;
+  padding:.6rem 1rem .65rem .7rem;border-radius:16px;background:rgba(8,12,28,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.28);box-shadow:0 18px 40px -14px rgba(0,0,0,.7);transition:transform .35s cubic-bezier(.22,1,.36,1),background .3s,border-color .3s}
+.ng-etich i{grid-row:span 2;font:700 .78rem 'Space Mono',monospace;font-style:normal;color:#4DD9E0;border:1px solid rgba(77,217,224,.6);border-radius:8px;padding:.35rem .4rem}
+.ng-etich b{font:800 1.05rem/1.1 'Bricolage Grotesque',sans-serif;letter-spacing:-.01em}
+.ng-etich small{font-size:.76rem;color:rgba(255,255,255,.78)}
+.ng-punto--alto .ng-etich{top:auto;bottom:22px;left:-50%;transform:translateX(-50%)}
+.ng-punto:hover .ng-etich,.ng-punto:focus-visible .ng-etich{background:rgba(8,12,28,.92);border-color:#4DD9E0;transform:translateY(-4px)}
+.ng-punto--alto:hover .ng-etich,.ng-punto--alto:focus-visible .ng-etich{transform:translateX(-50%) translateY(-4px)}
+.ng-punto:focus-visible{outline:none}
+.ng-guida{position:absolute;z-index:3;left:50%;bottom:5.4rem;transform:translateX(-50%);margin:0;font:700 .72rem 'Space Mono',monospace;letter-spacing:.2em;text-transform:uppercase;color:#fff;
+  text-shadow:0 2px 10px rgba(0,0,0,.8);opacity:0;transition:opacity .6s 1.2s;pointer-events:none;white-space:nowrap}
+.ng.pronto .ng-guida{opacity:1}
+.ng-guida-tel{display:none}
+.ng-scelte{position:absolute;z-index:3;left:50%;bottom:1.3rem;transform:translateX(-50%);display:flex;gap:.5rem;opacity:0;transition:opacity .6s 1s;pointer-events:none}
+.ng.pronto .ng-scelte{opacity:1;pointer-events:auto}
+.ng-scelte button{display:inline-flex;align-items:center;gap:.45rem;padding:.6rem .95rem;min-height:44px;border-radius:100px;cursor:pointer;color:#fff;
+  font:600 .88rem 'DM Sans',sans-serif;background:rgba(8,12,28,.6);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:border-color .2s,background .2s}
+.ng-scelte button:hover{border-color:#4DD9E0;background:rgba(8,12,28,.85)}
+.ng-scelte i{font:700 .7rem 'Space Mono',monospace;font-style:normal;color:#4DD9E0}
+.ng-ia{position:absolute;z-index:3;left:1rem;bottom:1rem;font-size:9px;letter-spacing:.04em;color:rgba(255,255,255,.75);background:rgba(8,12,28,.5);padding:.2rem .45rem;border-radius:6px}
+@media(max-width:760px){
+  .ng-etich{padding:.45rem .7rem .5rem .5rem;left:20px;top:-22px}.ng-etich b{font-size:.92rem}.ng-etich small{display:none}.ng-etich i{grid-row:auto}
+  .ng-guida-pc{display:none}.ng-guida-tel{display:inline}
+  .ng-scelte{left:.75rem;right:.75rem;transform:none;justify-content:center;flex-wrap:wrap;gap:.4rem}
+  .ng-scelte button{font-size:.8rem;padding:.5rem .75rem}
+  .ng-guida{bottom:7.6rem}
+  .ng-salta{bottom:auto;top:4.6rem;right:.8rem}
+  .ng-ia{display:none}
+}
+/* sotto la scena */
+.ng-dopo{position:relative;padding:clamp(4rem,9vw,7rem) clamp(1.25rem,4vw,2.5rem);background:#F7F5F0;color:#14213D}
+.ng-dopo-in{max-width:760px}
+@media(min-width:900px){.ng-dopo-in{margin-left:12%}}
+.ng-dopo-kick{font:700 .75rem 'Space Mono',monospace;letter-spacing:.22em;text-transform:uppercase;color:#0f8f9e}
+.ng-dopo-tit{margin:.9rem 0 0;font:800 clamp(2rem,4.4vw,3.4rem)/1.02 'Bricolage Grotesque',sans-serif;letter-spacing:-.035em}
+.ng-dopo-tit em{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-style:italic;color:#5B4BDB}
+.ng-dopo-p{margin:1.1rem 0 0;font-size:1.08rem;line-height:1.7;color:#3D4A68;max-width:36rem}
+.ng-dopo-az{margin-top:1.8rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center}
+.ng-dopo-btn{background:#14213D;color:#fff}
+.ng-dopo-torna{color:#14213D;background:transparent;border-color:rgba(20,33,61,.2);backdrop-filter:none}
+.ng-dopo-torna:hover{background:rgba(20,33,61,.06)}
+
+/* ===== mini-pagine dei banconi ===== */
+.mp-fondo{position:fixed;inset:0;z-index:8000;background:rgba(6,10,24,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;transition:opacity .35s}
+.mp-fondo.su{opacity:1}
+.mp{position:fixed;z-index:8001;left:50%;top:50%;width:min(1080px,calc(100vw - 2.5rem));max-height:calc(100vh - 2.5rem);max-height:calc(100dvh - 2.5rem);overflow:auto;overscroll-behavior:contain;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);border-radius:28px;background:#F7F5F0;color:#14213D;
+  box-shadow:0 1px 2px rgba(0,0,0,.2),0 50px 120px -30px rgba(0,0,0,.8);transform:translate(-50%,-46%) scale(.97);opacity:0;
+  transition:opacity .35s,transform .5s cubic-bezier(.22,1,.36,1)}
+.mp.su{opacity:1;transform:translate(-50%,-50%)}
+.mp[hidden],.mp-fondo[hidden]{display:none}
+.mp-chiudi{position:absolute;z-index:2;right:.9rem;top:.9rem;width:44px;height:44px;border-radius:50%;border:1px solid rgba(20,33,61,.15);background:#fff;color:#14213D;font-size:1.5rem;line-height:1;cursor:pointer;transition:transform .2s}
+.mp-chiudi:hover{transform:rotate(90deg)}
+.mp-col{padding:clamp(1.6rem,3.5vw,2.8rem)}
+.mp-kick{display:flex;align-items:center;gap:.6rem;font:700 .74rem 'Space Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:#0f8f9e}
+.mp-kick i{font-style:normal;color:#fff;background:#14213D;border-radius:7px;padding:.25rem .4rem;letter-spacing:0}
+.mp-tit{margin:1rem 0 0;font:800 clamp(1.8rem,3.2vw,2.6rem)/1.02 'Bricolage Grotesque',sans-serif;letter-spacing:-.035em}
+.mp-tit em{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-style:italic;letter-spacing:-.01em;color:#5B4BDB}
+.mp-p{margin:1.1rem 0 0;line-height:1.7;color:#3D4A68}
+.mp-p b{color:#14213D}
+.mp-punti{list-style:none;margin:1.3rem 0 0;padding:0;display:grid;gap:.75rem;counter-reset:mp}
+.mp-punti li{position:relative;padding:0 0 0 1.9rem;line-height:1.5;color:#3D4A68;font-size:.95rem;counter-increment:mp}
+.mp-punti li::before{content:counter(mp);position:absolute;left:0;top:.05rem;width:1.3rem;height:1.3rem;border-radius:50%;display:grid;place-items:center;
+  font:700 .7rem 'Space Mono',monospace;color:#0f8f9e;border:1px solid rgba(15,143,158,.45)}
+.mp-punti b{color:#14213D}
+.mp-az{margin-top:1.8rem;display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:center}
+.mp-btn{display:inline-flex;align-items:center;min-height:48px;padding:.8rem 1.3rem;border-radius:100px;background:#14213D;color:#fff;text-decoration:none;font:700 .95rem 'DM Sans',sans-serif;transition:transform .2s,box-shadow .2s}
+.mp-btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px -12px rgba(20,33,61,.8)}
+.mp-link{color:#14213D;font-size:.92rem;text-underline-offset:3px}
+.mp-prova{background:#0E1628;color:#E8EDF8;display:flex;align-items:stretch;border-radius:0 28px 28px 0;position:relative;overflow:hidden}
+.mp-prova::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:28px 28px}
+@media(max-width:860px){
+  .mp{grid-template-columns:1fr;top:auto;bottom:0;left:0;width:100%;max-height:92dvh;border-radius:24px 24px 0 0;transform:translateY(40px);}
+  .mp.su{transform:none}
+  .mp-prova{border-radius:0;order:-1}
+  .mp-chiudi{position:fixed;right:.8rem;top:auto;margin-top:.8rem}
+}
+/* le prove */
+.dm{position:relative;width:100%;display:flex;flex-direction:column;gap:1rem}
+.dm-testa{display:flex;align-items:center;gap:.55rem;font:700 .7rem 'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#9FB0CC;padding-right:3rem}
+.dm-testa em{font-style:normal;color:#6B7A96;text-transform:none;letter-spacing:0}
+.dm-led{width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 10px #3ddc84;flex:none}
+.dm-chat{flex:1;min-height:220px;display:flex;flex-direction:column;gap:.7rem;padding:1rem;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+.dm-vuoto{margin:auto;color:#6B7A96;font-size:.9rem}
+.dm-bolla{max-width:88%;padding:.7rem .9rem;border-radius:16px;font-size:.92rem;line-height:1.5;animation:dmEntra .35s cubic-bezier(.22,1,.36,1)}
+.dm-bolla--tu{align-self:flex-end;background:#2A3B63;border-bottom-right-radius:4px}
+.dm-bolla--ai{align-self:flex-start;background:#F7F5F0;color:#14213D;border-bottom-left-radius:4px}
+.dm-fonte{display:flex;gap:.5rem;align-items:center;margin-top:.6rem;padding:.45rem .6rem;border-radius:10px;background:#E6F6F2;color:#0b6b76;font:600 .76rem 'DM Sans',sans-serif}
+.dm-fonte::before{content:"";width:14px;height:17px;flex:none;border-radius:2px;border:1.5px solid currentColor;background:linear-gradient(currentColor,currentColor) 3px 5px/7px 1.5px no-repeat,linear-gradient(currentColor,currentColor) 3px 9px/5px 1.5px no-repeat}
+.dm-scrive{display:inline-flex;gap:4px}.dm-scrive i{width:6px;height:6px;border-radius:50%;background:#556076;animation:dmPunti 1s infinite}.dm-scrive i:nth-child(2){animation-delay:.15s}.dm-scrive i:nth-child(3){animation-delay:.3s}
+@keyframes dmPunti{50%{transform:translateY(-4px);opacity:.4}}
+@keyframes dmEntra{from{opacity:0;transform:translateY(8px)}}
+.dm-scelte{display:grid;gap:.5rem}
+.dm-scelte button,.dm-mail button{text-align:left;min-height:44px;padding:.7rem .9rem;border-radius:14px;cursor:pointer;color:#E8EDF8;font:500 .9rem/1.35 'DM Sans',sans-serif;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);transition:border-color .2s,background .2s,transform .2s}
+.dm-scelte button:hover,.dm-mail button:hover{border-color:#4DD9E0;background:rgba(77,217,224,.08);transform:translateX(3px)}
+.dm-scelte button.usata{opacity:.5}
+.dm-conto{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.4rem 1rem;font-size:.8rem;color:#9FB0CC;border-top:1px dashed rgba(255,255,255,.15);padding-top:.8rem}
+.dm-conto b{color:#fff;font-variant-numeric:tabular-nums}
+/* flusso automazioni */
+.dm-mail{display:grid;gap:.5rem}
+.dm-mail b{display:block;font-size:.82rem;color:#9FB0CC;font-weight:600}
+.dm-mail span{display:block}
+.dm-mail button.on{border-color:#4DD9E0;background:rgba(77,217,224,.12)}
+.dm-passi{list-style:none;margin:0;padding:0;display:grid;gap:.45rem;position:relative}
+.dm-passi::before{content:"";position:absolute;left:17px;top:18px;bottom:18px;width:2px;background:rgba(255,255,255,.1)}
+.dm-passi li{position:relative;display:flex;gap:.8rem;align-items:flex-start;padding:.45rem 0;opacity:.38;transition:opacity .4s}
+.dm-passi li.on{opacity:1}
+.dm-passi i{position:relative;z-index:1;flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font:700 .8rem 'Space Mono',monospace;font-style:normal;
+  background:#0E1628;border:2px solid rgba(255,255,255,.2);transition:border-color .3s,box-shadow .3s,background .3s}
+.dm-passi li.on i{border-color:#4DD9E0;background:#123040;box-shadow:0 0 18px -2px #4DD9E0}
+.dm-passi b{display:block;font:700 .92rem 'Bricolage Grotesque',sans-serif}
+.dm-passi span{display:block;margin-top:.15rem;font-size:.86rem;line-height:1.45;color:#C3CCE0}
+/* telefono */
+.dm-tel-schermo{flex:1;display:flex;flex-direction:column;gap:.8rem;padding:1.1rem;border-radius:22px;background:linear-gradient(180deg,#16223D,#0B1120);border:1px solid rgba(255,255,255,.1);min-height:300px}
+.dm-tel-stato{text-align:center}
+.dm-tel-stato b{display:block;font:800 1.1rem 'Bricolage Grotesque',sans-serif}
+.dm-tel-stato span{display:block;margin-top:.2rem;font-size:.82rem;color:#9FB0CC;font-variant-numeric:tabular-nums}
+.dm-onda{height:44px;display:flex;align-items:center;justify-content:center;gap:3px}
+.dm-onda i{width:3px;border-radius:3px;background:#4DD9E0;height:4px;transition:height .12s}
+.dm-trascr{flex:1;display:flex;flex-direction:column;gap:.5rem;max-height:220px;overflow:auto}
+.dm-trascr p{margin:0;padding:.55rem .75rem;border-radius:12px;font-size:.88rem;line-height:1.45;animation:dmEntra .35s cubic-bezier(.22,1,.36,1)}
+.dm-trascr p b{display:block;font:700 .68rem 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.15rem}
+.dm-trascr .ai{background:rgba(77,217,224,.1);border:1px solid rgba(77,217,224,.25)}.dm-trascr .ai b{color:#4DD9E0}
+.dm-trascr .cl{background:rgba(255,255,255,.06);align-self:flex-end;max-width:85%}.dm-trascr .cl b{color:#FFB768}
+.dm-rispondi{min-height:48px;border:0;border-radius:100px;background:#3ddc84;color:#06240f;font:800 .95rem 'DM Sans',sans-serif;cursor:pointer;transition:transform .2s}
+.dm-rispondi:hover{transform:scale(1.02)}
+.dm-rispondi.squilla{animation:dmSquilla 1.1s ease-in-out infinite}
+@keyframes dmSquilla{0%,100%{transform:none}10%,30%{transform:rotate(-2deg)}20%,40%{transform:rotate(2deg)}}
+.dm-agenda{padding:.9rem 1rem;border-radius:16px;background:#F7F5F0;color:#14213D;animation:dmEntra .5s cubic-bezier(.22,1,.36,1)}
+.dm-agenda-kick{display:block;font:700 .66rem 'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#0f8f9e}
+.dm-agenda b{display:block;margin-top:.3rem;font:800 1.05rem 'Bricolage Grotesque',sans-serif}
+.dm-agenda span{display:block;font-size:.85rem;color:#556076}
+@media(prefers-reduced-motion:reduce){.ng-anello::before,.ng-anello::after,.bv-centro-porta::after,.dm-rispondi.squilla{animation:none}}
+.ng-punto--sx .ng-etich{left:auto;right:24px}
+.ng-salta{top:clamp(4.6rem,9vh,5.6rem);bottom:auto!important;right:1.2rem!important}
+@media(max-width:760px){.ng-sub-lungo{display:none}.ng-testa{top:4.4rem}.ng-tit{font-size:2rem}.ng-sub{font-size:.88rem}.ng-scelte{bottom:4.4rem}.ng-guida{bottom:11.2rem}}
+.bv-cartello{left:50%;translate:-50% 0}
+@media(max-width:700px){
+  .bv-negozio{width:150px;bottom:3.6rem}
+  .bv-cartello{max-width:15rem;padding:.4rem .7rem .45rem;margin-bottom:.35rem}
+  .bv-cartello b{font-size:.85rem}.bv-cartello small{font-size:.66rem}.bv-cartello i{display:none}
+  .bv-btn small{font-size:.66rem}
+}
 /* ===== strada 1: modelli AI ===== */
 .md{scroll-margin-top:60px}
 .md-tag{display:inline-flex;align-items:center;gap:.5rem;margin-top:0}
