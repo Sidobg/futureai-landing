@@ -145,7 +145,7 @@
 @media (prefers-reduced-motion:reduce){.gm-pavimento,.gm-tag i,.gm-play small{animation:none}}
 /* ===== il cabinato arcade FUTURE AI ===== */
 .gm{padding-top:clamp(6.5rem,11vw,8.5rem)}
-.gm-torna{color:#fff;border-color:rgba(255,255,255,.28);background:rgba(11,4,24,.5);margin-bottom:1.4rem}
+.gm-torna{display:flex;width:max-content;margin:0 auto 1.4rem;color:#fff;border-color:rgba(255,255,255,.28);background:rgba(11,4,24,.5)}
 .gm-sub b{color:#ffd23f;font-weight:700}
 .cab{position:relative;width:min(760px,100%);margin:clamp(2.5rem,5vw,3.5rem) auto 0;padding:0 clamp(10px,2.4vw,22px);
   --lato:#1b0b33;--neon1:#ff4fd8;--neon2:#4DD9E0}
@@ -178,28 +178,12 @@
 .cab-attesa b{font:700 clamp(1.1rem,3.2vw,2rem) 'Space Mono',monospace;letter-spacing:.2em;color:#ffd23f;text-shadow:0 0 12px rgba(255,210,63,.9),0 3px 0 #7a4b00;animation:gmLamp 1.1s steps(2) infinite}
 .cab-attesa small{font:600 .72rem 'Space Mono',monospace;letter-spacing:.2em;color:#fff;text-transform:uppercase}
 /* la pulsantiera, inclinata verso chi gioca */
-.cab-plancia{position:relative;display:flex;align-items:center;gap:clamp(.8rem,3vw,2rem);padding:1rem clamp(1rem,4vw,2.2rem) 1.1rem;
-  margin:0 calc(-1 * clamp(10px,2.4vw,22px));border-radius:6px 6px 14px 14px;background:linear-gradient(180deg,#2a1150,#140726);
-  box-shadow:0 -2px 0 rgba(255,255,255,.12) inset,0 16px 30px -12px rgba(0,0,0,.8);transform:perspective(700px) rotateX(18deg);transform-origin:50% 0}
-.cab-joy{position:relative;width:54px;height:54px;flex:none;border-radius:50%;background:radial-gradient(circle,#0b0418 40%,#1f0c3b 41%);box-shadow:inset 0 3px 8px rgba(0,0,0,.8)}
-.cab-joy i{position:absolute;left:50%;bottom:50%;width:8px;height:30px;margin-left:-4px;border-radius:4px;background:linear-gradient(90deg,#999,#eee,#888);transform-origin:50% 100%;animation:cabLeva 3s ease-in-out infinite}
-.cab-joy i::before{content:"";position:absolute;left:50%;top:-16px;width:26px;height:26px;margin-left:-13px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff8fe8,#ff4fd8 60%,#8a1f79);box-shadow:0 3px 0 #4a0f40}
-@keyframes cabLeva{0%,100%{transform:rotate(0)}20%{transform:rotate(-16deg)}40%{transform:rotate(12deg)}60%{transform:rotate(0)}}
-.cab-start{flex:none;min-height:44px;padding:.55rem 1.1rem;border-radius:12px;border:0;cursor:pointer;font:700 .85rem 'Space Mono',monospace;letter-spacing:.18em;color:#1a0b00;
-  background:radial-gradient(circle at 35% 30%,#fff3b0,#ffd23f 55%,#b58400);box-shadow:0 5px 0 #6b4a00,0 0 22px rgba(255,210,63,.7);transition:transform .1s,box-shadow .1s}
-.cab-start:hover{box-shadow:0 5px 0 #6b4a00,0 0 34px rgba(255,210,63,1)}
-.cab-start:active{transform:translateY(4px);box-shadow:0 1px 0 #6b4a00,0 0 22px rgba(255,210,63,.7)}
-.cab-start:focus-visible{outline:3px solid #4DD9E0;outline-offset:3px}
-.cab-tasti{display:flex;gap:.6rem}
-.cab-tasti i{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#9ff6ff,#4DD9E0 60%,#1d6b73);box-shadow:0 4px 0 #0d3a3f}
-.cab-tasti i+i{background:radial-gradient(circle at 35% 35%,#ff8fe8,#ff4fd8 60%,#8a1f79);box-shadow:0 4px 0 #4a0f40}
-.cab-comandi{margin:0 0 0 auto;font:.72rem 'Space Mono',monospace;color:#b9b3d6;letter-spacing:.04em;text-align:right}
 .cab-base{position:relative;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.1rem clamp(1rem,4vw,2rem) 1.2rem;margin-top:-2px;
   background:linear-gradient(180deg,#12061f,#0b0418);border-radius:0 0 10px 10px;box-shadow:0 30px 60px -20px rgba(0,0,0,.9)}
 .cab-moneta{display:inline-flex;align-items:center;gap:.6rem;font:700 .68rem 'Space Mono',monospace;letter-spacing:.2em;color:#ff4fd8;text-shadow:0 0 8px rgba(255,79,216,.8)}
 .cab-moneta i{width:10px;height:26px;border-radius:3px;background:#05020b;box-shadow:0 0 0 2px #ff4fd8,0 0 12px rgba(255,79,216,.8)}
-@media(max-width:600px){.cab-comandi{display:none}.cab-tasti i{width:28px;height:28px}.cab-joy{width:46px;height:46px}.cab-moneta{font-size:.6rem;letter-spacing:.12em}.cab-plancia{transform:none}}
-@media(prefers-reduced-motion:reduce){.cab-marquee::after,.cab-logo,.cab-crt img,.cab-joy i,.cab-attesa b{animation:none}}
+@media(max-width:600px){.cab-moneta{font-size:.6rem;letter-spacing:.12em}}
+@media(prefers-reduced-motion:reduce){.cab-marquee::after,.cab-logo,.cab-crt img,.cab-attesa b{animation:none}}
 /* in fondo niente stacco: la chiusura resta nella sala giochi */
 html .pg-cta{background:#0A0E1A;position:relative}
 html .pg-cta h2{color:#fff}html .pg-cta h2 em{color:#ff8fe8}html .pg-cta p{color:rgba(255,255,255,.75)}
@@ -207,6 +191,17 @@ html .pg-cta .btn-secondary,html .pg-cta a:not(.btn-primary){color:#fff;border-c
 .cab-attesa{padding:1rem 1.6rem;border-radius:14px;background:rgba(7,3,15,.72);box-shadow:0 0 0 1px rgba(255,210,63,.35),0 0 30px rgba(255,210,63,.25)}
 .cab-attesa b{animation-name:cabLampo}
 @keyframes cabLampo{50%{opacity:.35}}
+/* schermo piu' grande, niente comandi finti: si gioca con la tastiera */
+.cab{width:min(1040px,100%)}
+.cab-cornice{padding:clamp(8px,1.6vw,16px)}
+.cab-legenda{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem 1.6rem;padding:.9rem 1rem 1rem;margin:0 calc(-1 * clamp(10px,2.4vw,22px));
+  background:linear-gradient(180deg,#2a1150,#140726);border-radius:6px 6px 0 0;font:600 .86rem 'DM Sans',sans-serif;color:#d9d3f2}
+.cab-legenda span{display:inline-flex;align-items:center;gap:.35rem}
+.cab-legenda kbd{display:inline-grid;place-items:center;min-width:2rem;height:2rem;padding:0 .45rem;border-radius:7px;font:700 .82rem 'Space Mono',monospace;color:#1a0b33;
+  background:linear-gradient(180deg,#fff,#d8d2ee);box-shadow:0 3px 0 #7d6fb0,0 0 0 1px rgba(255,255,255,.4) inset}
+.cab-legenda kbd.lungo{padding:0 .8rem}
+.cab-base{border-radius:0 0 10px 10px}
+@media(max-width:600px){.cab-legenda{font-size:.78rem}}
 </style>
 
 <section class="gm" id="giochi" aria-labelledby="gmTit">
@@ -230,16 +225,16 @@ html .pg-cta .btn-secondary,html .pg-cta a:not(.btn-primary){color:#fff;border-c
         <div class="gm-schermo cab-crt" id="gmSchermo">
           <img src="gioco/img/anteprima.webp" alt="Il gioco FUTURE AI: il personaggio spara ai computer impazziti in una città al neon" width="1280" height="720" loading="lazy" decoding="async">
           <button class="gm-play" id="gmPlay" type="button" aria-label="Gioca al gioco FUTURE AI">
-            <span class="cab-attesa"><b>PREMI START</b><small>1 giocatore · 3-4 minuti</small></span>
+            <span class="cab-attesa"><b id="cabInvito">CLICCA PER GIOCARE</b><small id="cabSotto">si gioca con la tastiera · 3-4 minuti</small></span>
           </button>
           <span class="gm-ia">Grafica generata con IA</span>
         </div>
       </div>
-      <div class="cab-plancia">
-        <div class="cab-joy" aria-hidden="true"><i></i></div>
-        <button type="button" class="cab-start" id="cabStart" aria-label="Start: gioca">START</button>
-        <div class="cab-tasti" aria-hidden="true"><i></i><i></i></div>
-        <p class="cab-comandi" id="gmTasti">← → muoviti · SPAZIO salta · X spara</p>
+      <div class="cab-legenda" id="gmTasti" aria-label="Comandi: frecce destra e sinistra per muoversi, spazio per saltare, X per sparare, P per la pausa">
+        <span><kbd>←</kbd><kbd>→</kbd> muoviti</span>
+        <span><kbd class="lungo">SPAZIO</kbd> salta</span>
+        <span><kbd>X</kbd> spara</span>
+        <span><kbd>P</kbd> pausa</span>
       </div>
       <div class="cab-base">
         <span class="cab-moneta" aria-hidden="true"><i></i>INSERT COIN</span>
@@ -275,14 +270,14 @@ html .pg-cta .btn-secondary,html .pg-cta a:not(.btn-primary){color:#fff;border-c
   var play=document.getElementById('gmPlay'),schermo=document.getElementById('gmSchermo'),pieno=document.getElementById('gmPieno');
   if(!play)return;
   var tocco=('ontouchstart' in window)||navigator.maxTouchPoints>0;
-  if(tocco)document.getElementById('gmTasti').textContent='Tasti sullo schermo';
+  if(tocco){document.getElementById('gmTasti').innerHTML='<span>Da telefono i comandi compaiono sullo schermo del gioco</span>';
+    document.getElementById('cabInvito').textContent='TOCCA PER GIOCARE';document.getElementById('cabSotto').textContent='comandi sullo schermo · 3-4 minuti';}
   function carica(){
     var f=document.createElement('iframe');f.src='gioco/';f.title='Gioco FUTURE AI';f.allow='autoplay; fullscreen';f.setAttribute('allowfullscreen','');
     schermo.appendChild(f);play.remove();schermo.classList.add('gioca');f.addEventListener('load',function(){try{f.focus();}catch(e){}});
     // la musica del sito si mette in pausa mentre si gioca
     var m=document.getElementById('bgMusic');if(m&&!m.paused)m.pause();
   }
-  var start=document.getElementById('cabStart');if(start)start.addEventListener('click',function(){if(document.getElementById('gmPlay'))play.click();else schermo.scrollIntoView({behavior:'smooth',block:'center'});});
   play.addEventListener('click',function(){
     // su telefono in verticale il gioco rende meglio a tutto schermo
     if(tocco&&innerHeight>innerWidth){(window.vaiPagina||function(u){location.href=u;})('/gioco/');return;}

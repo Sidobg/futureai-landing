@@ -416,7 +416,7 @@ function disegna(){
   if(boss&&boss.ingresso>0&&t%30<20)testo('⚠ BOSS ⚠',W/2,Math.round(H*.3),9,'#ff3b5c','center');
   if(stato==='vinta'){g.globalAlpha=Math.min(1,(t%100000)/1);if(logo.complete&&logo.naturalWidth){var s=ORIZ?36:52,ly=ORIZ?8:26;g.save();g.shadowColor='#4DD9E0';g.shadowBlur=14;g.drawImage(logo,W/2-s/2,ly,s,s);g.restore();}
     testo('FUTURE AI',W/2,ORIZ?58:96,ORIZ?10:12,'#fff','center');g.globalAlpha=1;}
-  if(stato==='pausa'){g.fillStyle='rgba(0,0,0,.55)';g.fillRect(0,0,W,H);testo('PAUSA',W/2,H/2,14,'#fff','center');}
+  if(stato==='pausa'){g.fillStyle='rgba(0,0,0,.55)';g.fillRect(0,0,W,H);testo('PAUSA',W/2,H/2-8,14,'#fff','center');testo('clicca per riprendere',W/2,H/2+12,8,'#4DD9E0','center');}
 }
 function disegnaInizio(){sfondo((Math.sin(t*.004)+1)/2);
   for(var c=0;c<W/T+1;c++)for(var r=GY;r<ROWS;r++)g.drawImage(r===GY?tileT:tileD,c*T,r*T);
@@ -443,7 +443,9 @@ document.getElementById('bGioca').onclick=function(){parti_(false);};
 document.getElementById('bRiprova').onclick=function(){parti_(true);};
 document.getElementById('bRigioca').onclick=function(){parti_(false);};
 // aperto da solo (non dentro la sezione del sito): serve la strada per tornare
-if(window.top===window.self)document.getElementById('torna').hidden=false;
+// ...o aperto nella cornice della musica del sito, che per chi guarda e' come una pagina a se'
+var daSolo=window.top===window.self;try{daSolo=daSolo||(window.parent===window.top&&!!window.parent.__musicaFutureAI);}catch(e){}
+if(daSolo)document.getElementById('torna').hidden=false;
 var ba=document.getElementById('audio');ba.onclick=function(){suono=!suono;ba.textContent=suono?'♪ ON':'♪ OFF';ba.setAttribute('aria-pressed',suono);};
 var MAPPA={ArrowLeft:'sx',KeyA:'sx',ArrowRight:'dx',KeyD:'dx',Space:'salta',ArrowUp:'salta',KeyW:'salta',KeyX:'spara',KeyJ:'spara',KeyK:'spara'};
 addEventListener('keydown',function(e){var k=MAPPA[e.code];
@@ -452,6 +454,8 @@ addEventListener('keydown',function(e){var k=MAPPA[e.code];
   if(!k)return;e.preventDefault();if(k==='salta'&&!tasti.salta)tasti.saltaPremuto=true;tasti[k]=true;});
 addEventListener('keyup',function(e){var k=MAPPA[e.code];if(k)tasti[k]=false;});
 addEventListener('blur',function(){tasti={};if(stato==='gioco')stato='pausa';});
+// in pausa (anche quella automatica di quando si clicca fuori) un clic o un tocco sul gioco lo fa ripartire
+addEventListener('pointerdown',function(){if(stato==='pausa'){stato='gioco';tasti={};}try{window.focus();}catch(e){}});
 document.addEventListener('visibilitychange',function(){if(document.hidden&&stato==='gioco')stato='pausa';});
 // touch: piu' dita insieme (corri + salta + spara)
 var tocco=('ontouchstart' in window)||navigator.maxTouchPoints>0;
