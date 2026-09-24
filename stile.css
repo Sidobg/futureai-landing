@@ -1920,3 +1920,11 @@ html .hero .video-nota{display:inline-block}
 html .rm-ia{color:#1A2A6C!important;background:rgba(255,255,255,.85)!important}
 /* dati legali e trasparenza IA nel piè di pagina: la misura piu' piccola leggibile */
 html .ft-legale p{font-size:9px;line-height:1.55;letter-spacing:.01em;color:#B7C0D6}
+
+/* ---------- telefono: niente scorrimento laterale, niente zoom sui campi ---------- */
+.pg-testa{overflow-x:clip}   /* l'alone ::before sporge a destra e allargava la pagina */
+@media (max-width:760px){
+  /* sotto i 16px l'iPhone ingrandisce la pagina appena si tocca un campo */
+  input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea,select{font-size:16px!important}
+  input[type=checkbox]{width:20px;height:20px}
+}

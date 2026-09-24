@@ -4,6 +4,10 @@
 <base href="/">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" href="/favicon-96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>I nostri lavori – FutureAI</title>
 <meta name="description" content="Progetti reali realizzati da FUTURE AI per aziende e professionisti: app, siti, automazioni e assistenti AI.">
 <link rel="canonical" href="https://www.futureai.it/lavori/">
@@ -70,7 +74,8 @@
      gli altri lavori sono descritti per mestiere e i loro reel sono ricostruzioni con dati inventati. -->
 <style>
 .lv{position:relative;isolation:isolate;min-height:100vh;min-height:100svh;background:#0A0E1A;color:#fff;overflow:hidden}
-.lv-fondo{position:absolute;inset:0;z-index:-2}
+html,body{overflow-x:hidden;overflow-x:clip}   /* con solo «hidden» il telefono allargava la pagina di 8px */
+.lv-fondo{position:absolute;inset:0;z-index:-2;overflow:hidden}
 .lv-fondo video,.lv-fondo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 /* orizzontale: ingrandito dall'angolo in alto a sinistra, cosi' l'angolo in basso a destra (dove c'era la stellina) resta fuori schermo */
 .lv-fondo video.orizz{transform:scale(1.12);transform-origin:0 0}
