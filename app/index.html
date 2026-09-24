@@ -195,13 +195,11 @@
   mostra();
 })();
 </script>
-<section class="sv-sez sv-sez--alt" id="come"><div class="sv-in">
-  <div class="sv-testa sv-rivela"><div class="pg-tag">— Come funziona</div><h2 class="sv-h2">Dall'idea al lavoro, <em>in quattro passi.</em></h2></div>
+<section class="sv-sez sv-sez--alt ap-come" id="come"><div class="sv-in">
+  <div class="sv-testa sv-rivela"><div class="pg-tag">— Come funziona e per chi è</div><h2 class="sv-h2">Dall'idea al lavoro, <em>in quattro passi.</em></h2></div>
   <ol class="sv-passi"><li class="sv-passo sv-rivela"><span class="sv-n">01</span><h3>Ci racconti come lavori</h3><p>Una chiacchierata gratuita: capiamo dove perdi tempo e cosa ti serve davvero.</p></li><li class="sv-passo sv-rivela"><span class="sv-n">02</span><h3>Ti mostriamo un'anteprima</h3><p>In pochi giorni vedi com'è fatta l'app, prima di scrivere il codice vero.</p></li><li class="sv-passo sv-rivela"><span class="sv-n">03</span><h3>La costruiamo con l'IA</h3><p>Sviluppo rapido e su misura: la provi e la aggiustiamo insieme.</p></li><li class="sv-passo sv-rivela"><span class="sv-n">04</span><h3>Online e assistita</h3><p>La mettiamo in funzione, formiamo chi la usa e restiamo al tuo fianco.</p></li></ol>
-</div></section>
-<section class="sv-sez sv-sez--chi"><div class="sv-in sv-rivela">
-  <div class="sv-testa"><div class="pg-tag">— Per chi è</div><h2 class="sv-h2">Pensato per chi <em>lavora davvero.</em></h2></div>
-  <ul class="sv-chip"><li>Artigiani e impiantisti</li><li>Negozi e laboratori</li><li>Studi professionali</li><li>Saloni e centri estetici</li><li>Associazioni sportive</li><li>Aziende di servizi</li><li>Affitti brevi</li><li>Manutenzioni e assistenza</li></ul>
+  <div class="ap-chi sv-rivela"><p class="ap-chi-tit">Pensato per chi <em>lavora davvero:</em></p>
+  <ul class="sv-chip"><li>Artigiani e impiantisti</li><li>Negozi e laboratori</li><li>Studi professionali</li><li>Saloni e centri estetici</li><li>Associazioni sportive</li><li>Aziende di servizi</li><li>Affitti brevi</li><li>Manutenzioni e assistenza</li></ul></div>
 </div></section>
 <section class="sv-sez"><div class="sv-in sv-stretto">
   <div class="sv-testa sv-rivela"><div class="pg-tag">— Domande frequenti</div><h2 class="sv-h2">Le domande <em>che ci fanno tutti.</em></h2></div>
@@ -625,6 +623,22 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   .ap-sfondo::after{background:linear-gradient(0deg,#F7F5F0 0%,rgba(247,245,240,.85) 16%,rgba(247,245,240,0) 42%)}
   .ap-hero .sv-hero-in{position:relative;z-index:1;margin-top:-3.2rem}
   .ap-ia{right:.8rem;top:.7rem}
+}
+
+/* come funziona + per chi e': una sezione sola, piu' raccolta */
+.ap-come{padding-top:clamp(2.8rem,6vw,4.5rem);padding-bottom:clamp(2.8rem,6vw,4.5rem)}
+.ap-come .sv-testa{margin-bottom:clamp(1.4rem,3vw,2.2rem)}
+.ap-chi{margin-top:clamp(1.8rem,4vw,2.6rem);padding-top:clamp(1.4rem,3vw,2rem);border-top:1px solid rgba(20,33,61,.1);text-align:center}
+.ap-chi-tit{margin:0 0 .9rem;font:800 clamp(1.1rem,2vw,1.35rem) 'Bricolage Grotesque',sans-serif;letter-spacing:-.02em;color:var(--ink)}
+.ap-chi-tit em{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-style:italic;color:#5B4BDB}
+.ap-chi .sv-chip{gap:.45rem}
+.ap-chi .sv-chip li{padding:.45rem .85rem;font-size:.88rem}
+@media(max-width:600px){
+  .ap-come .sv-passi{gap:.9rem}
+  .ap-come .sv-passo{display:grid;grid-template-columns:auto 1fr;column-gap:.9rem;text-align:left;padding:0}
+  .ap-come .sv-passo .sv-n{grid-row:span 2;width:42px;height:42px;font-size:.85rem}
+  .ap-come .sv-passo h3{margin:.1rem 0 0;font-size:1rem}
+  .ap-come .sv-passo p{margin:.2rem 0 0;font-size:.88rem}
 }
 </style>
 
