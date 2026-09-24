@@ -41,24 +41,40 @@
   var fade, attiva = false, chi = [];
   function avvisaTutti(){ segna(attiva); chi.forEach(function(f){ try{ f(); }catch(e){} }); }
 
+  // Su iPhone/iPad audio.volume e' di sola lettura (suonerebbe a tutto volume): li' il volume
+  // passa da un regolatore Web Audio, creato dentro il primo tocco come vuole Safari.
+  var IOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var actx = null, gain = null;
+  function preparaAudio(){
+    if(!IOS || actx) return;
+    var AC = window.AudioContext || window.webkitAudioContext; if(!AC) return;
+    try{
+      actx = new AC(); gain = actx.createGain(); gain.gain.value = 0;
+      actx.createMediaElementSource(audio).connect(gain); gain.connect(actx.destination);
+    }catch(e){ actx = null; gain = null; }
+  }
+  function vol(v){ if(v === undefined) return gain ? gain.gain.value : audio.volume; if(gain) gain.gain.value = v; else audio.volume = v; }
   function fadeTo(target, done){
     clearInterval(fade);
-    var step = (target - audio.volume) / 18;
+    var step = (target - vol()) / 18;
     fade = setInterval(function(){
-      var v = audio.volume + step;
+      var v = vol() + step;
       if((step > 0 && v >= target) || (step < 0 && v <= target)){
-        clearInterval(fade); audio.volume = Math.min(1, Math.max(0, target)); if(done) done();
-      } else audio.volume = Math.min(1, Math.max(0, v));
+        clearInterval(fade); vol(Math.min(1, Math.max(0, target))); if(done) done();
+      } else vol(Math.min(1, Math.max(0, v)));
     }, 40);
   }
   function stato(v){ try{ if(v === undefined) return sessionStorage.getItem(KEY); sessionStorage.setItem(KEY, v); }catch(e){ return null; } }
 
+  var tentativo = false;   // un avvio e' in corso: il browser non ha ancora detto si' o no
   function parti(ok, no){
-    attiva = true;
-    if(audio.paused) audio.volume = 0;
+    attiva = true; tentativo = true;
+    preparaAudio();
+    if(actx && actx.state === 'suspended'){ try{ actx.resume(); }catch(e){} }
+    if(audio.paused) vol(0);
     var p = audio.play();
-    var riuscito = function(){ stato('on'); avvisaTutti(); fadeTo(VOLUME); if(ok) ok(); };
-    if(p && p.then) p.then(riuscito, function(){ attiva = false; avvisaTutti(); if(no) no(); });
+    var riuscito = function(){ tentativo = false; stato('on'); avvisaTutti(); fadeTo(VOLUME); if(ok) ok(); };
+    if(p && p.then) p.then(riuscito, function(){ tentativo = false; attiva = false; avvisaTutti(); if(no) no(); });
     else riuscito();
   }
   function ferma(){
@@ -75,14 +91,17 @@
   var togli = function(){ EV.forEach(function(t){ document.removeEventListener(t, primoGesto, true); }); };
   var primoGesto = function(e){
     if(e && e.target && e.target.closest && e.target.closest('#musicToggle')){ togli(); return; }
-    if(attiva){ togli(); return; }
+    // si smette di ascoltare i tocchi SOLO quando la musica suona davvero: se il primo tentativo
+    // (fine del tocco) viene rifiutato, il clic che segue ci riprova
+    if(!audio.paused && attiva){ togli(); return; }
+    if(tentativo){ var q = audio.play(); if(q && q.catch) q.catch(function(){}); return; }
     parti(togli);
   };
   if(stato() !== 'off') EV.forEach(function(t){ document.addEventListener(t, primoGesto, true); });
 
   document.addEventListener('visibilitychange', function(){
     if(document.hidden){ if(!audio.paused) audio.pause(); }
-    else if(attiva && audio.paused){ audio.play().catch(function(){}); }
+    else if(attiva && audio.paused){ if(actx && actx.state === 'suspended'){ try{ actx.resume(); }catch(e){} } audio.play().catch(function(){}); }
   });
 
   /* ---------- la cornice: cambiare pagina senza fermare la musica ---------- */

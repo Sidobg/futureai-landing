@@ -200,6 +200,19 @@
 @media(min-width:901px) and (max-height:820px){.sw-desc{-webkit-line-clamp:2}.sw-provalo-lungo{display:none}.sw-chip{display:none}}
 @media(max-width:900px){.sw-desc{display:none}.sw-chip li:nth-child(n+3){display:none}.sw-chip{margin-top:.8rem}.sw-tit{margin-top:.5rem}}
 @media(max-width:900px) and (max-height:700px){.sw-chip{display:none}.sw-tag{display:none}}
+/* ===== da telefono tutto dentro lo schermo, su qualsiasi altezza (vedi swAdatta) ===== */
+@media(max-width:900px){
+  .sw-cta{display:flex!important;flex-direction:row!important;gap:.5rem!important;margin-top:.8rem!important}
+  .sw-cta>a{flex:1 1 0;justify-content:center;min-height:46px;padding:.7rem .6rem!important;font-size:.88rem!important;text-align:center;white-space:nowrap}
+  .sw--s1 .sw-chip{display:none}
+  .sw--s2 .sw-pagina{aspect-ratio:16/10}
+  .sw--s3 .sw-tag{display:none}.sw--s3 .sw-torna{margin-bottom:.4rem}
+  .sw--s4 .sw-pagina{aspect-ratio:16/9}.sw--s4 .sw-provalo-testo{font-size:.84rem}
+}
+/* in fondo niente stacco chiaro: la chiusura resta scura come la vetrina */
+html .pg-cta{background:#07090f;position:relative}
+html .pg-cta h2{color:#fff}html .pg-cta h2 em{color:#9B7FF8}html .pg-cta p{color:rgba(255,255,255,.75)}
+html .pg-cta a:not(.btn-primary){color:#fff;border-color:rgba(255,255,255,.3);background:transparent}
 </style>
 
 <section class="sw" id="siti-web" aria-label="Siti web moderni">
@@ -638,6 +651,23 @@
 })();
 </script>
 
+<script>
+/* da telefono la vetrina e' ferma a schermo intero: se il contenuto non ci sta, si tolgono
+   le cose secondarie un passo alla volta finche' non ci sta (chip, finestra piu' bassa, etichetta) */
+(function(){
+  var sw=document.querySelector('.sw'),f=document.querySelector('.sw-fisso');if(!sw||!f)return;
+  function adatta(){
+    for(var i=1;i<=4;i++)sw.classList.remove('sw--s'+i);
+    if(innerWidth>900)return;
+    // si misura il contenuto vero (lo sfondo sfocato e' piu' grande dello schermo apposta)
+    var g=f.querySelector('.sw-griglia');function sborda(){return g.getBoundingClientRect().bottom>f.getBoundingClientRect().bottom-72;}   // 72px liberi in fondo per il robot assistente
+    for(var k=1;k<=4&&sborda();k++)sw.classList.add('sw--s'+k);
+  }
+  var t=0;addEventListener('resize',function(){clearTimeout(t);t=setTimeout(adatta,120);});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(adatta);
+  addEventListener('load',adatta);adatta();
+})();
+</script>
 <section class="pg-cta">
   <h2>Ti piace? <em>Parliamone.</em></h2>
   <p>La prima consulenza è gratuita: raccontaci cosa ti serve, ti diciamo come lo costruiremmo.</p>

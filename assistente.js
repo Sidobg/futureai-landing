@@ -50,8 +50,8 @@
          {q:'E se il cliente vuole una persona?',r:'L\'assistente passa la chiamata o prende il messaggio e ti avvisa subito: nessuno resta senza risposta.'},
          COSTO]},
     '/lavori/':{
-      t:'Qui trovi i <b>nostri lavori</b>: progetti veri, per aziende vere. Tocca una scheda per vedere il problema e come l\'abbiamo risolto.',
-      d:[{q:'Fammi vedere i progetti',r:'Eccoli: per ognuno trovi il problema di partenza e la soluzione che abbiamo costruito.',vai:'#casi-studio',etich:'Vai ai progetti'},
+      t:'Qui trovi i <b>nostri lavori</b>, appesi alla parete che i robot stanno guardando. <b>Tocca un lavoro</b>: si apre il video dell\'app e ti racconto cosa ha risolto.',
+      d:[{q:'Quali sono veri?',r:'Tutti. Quelli con il pallino azzurro sono per clienti, il verde è un nostro prodotto, l\'arancio sono strumenti che usiamo noi. Dove i dati sono privati, il video è una ricostruzione con dati di esempio.'},
          {q:'Potete fare una cosa simile per me?',r:'Sì: ogni progetto parte da come lavori tu. Raccontaci il tuo caso.',link:'/contatti/',etich:'Scrivici'}]},
     '/contatti/':{
       t:'Qui ci scrivi: raccontaci la tua idea, o il problema che ti fa perdere tempo ogni giorno. <b>La prima consulenza è gratuita.</b>',

@@ -495,6 +495,23 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
     // gesto nuovo, oppure trackpad che continua a spingere: una voce per volta
     if(nuovo||wAcc>320){wAcc=0;wBlocco=ora+(nuovo?260:420);wDest=i;wQuando=ora;vaiA(i);}
   },{passive:false});
+  // dito (telefono): una strisciata = una voce, qualunque sia la forza della spinta.
+  // Dentro il menu lo scorrimento del browser si blocca e si va dritti alla voce dopo/prima;
+  // alla prima voce (in su) e all'ultima (in giu') si lascia scorrere, cosi' si esce dal menu.
+  var tInizio=null,tPasso=false;
+  function dentroMenu(){var r=sez.getBoundingClientRect();return r.top<=2&&r.bottom>=innerHeight-2;}
+  addEventListener('touchstart',function(e){if(uscendo||e.touches.length>1){tInizio=null;return;}
+    tInizio={y:e.touches[0].clientY,x:e.touches[0].clientX,dentro:dentroMenu(),base:(performance.now()-wQuando<900&&wDest>=0)?wDest:att};tPasso=false;},{passive:true});
+  addEventListener('touchmove',function(e){
+    if(!tInizio||!tInizio.dentro)return;
+    var dy=tInizio.y-e.touches[0].clientY,dx=tInizio.x-e.touches[0].clientX;
+    if(Math.abs(dx)>Math.abs(dy))return;
+    var i=tInizio.base+(dy>0?1:-1);
+    if(i<0||i>=VOCI.length)return;            // ai bordi del menu: scorrimento normale
+    if(e.cancelable)e.preventDefault();
+    if(!tPasso&&Math.abs(dy)>22){tPasso=true;wDest=i;wQuando=performance.now();vaiA(i);}
+  },{passive:false});
+  addEventListener('touchend',function(){tInizio=null;},{passive:true});
   // tornando indietro dalla pagina, la scena deve essere di nuovo a posto
   addEventListener('pageshow',function(){uscendo=false;sez.classList.remove('via');fum.classList.remove('on');});
 })();

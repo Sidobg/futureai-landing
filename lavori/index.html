@@ -63,130 +63,209 @@
 </div>
 
 <main>
-<header class="pg-testa">
-  <a class="pg-torna" href="/#menu"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Torna dal robot</a>
-  <div class="pg-tag">— I nostri lavori</div>
-  <h1 class="pg-tit">Progetti veri, <em>per aziende vere.</em></h1>
-  <p class="pg-sub">Alcuni dei lavori che abbiamo costruito con l'intelligenza artificiale per chi ci ha scelto.</p>
-</header>
-<div class="process-bg">
-  <!-- LIGHTBOX -->
-  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
-    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-    <img id="lightbox-img" src="" alt="">
-  </div>
+<!-- ===== I NOSTRI LAVORI: la galleria dei robot =====
+     Sfondo: video in loop (computer = orizzontale, telefono = verticale), senza testi per 3 secondi.
+     Poi entrano titolo e quadri sulla parete: ogni quadro apre lo «specchietto» con il reel
+     dell'app (lavori/reel/) e cosa fa. Nomi veri solo per WIDER, MADEMOISELLE e LINDA AFFITTI BREVI:
+     gli altri lavori sono descritti per mestiere e i loro reel sono ricostruzioni con dati inventati. -->
+<style>
+.lv{position:relative;isolation:isolate;min-height:100vh;min-height:100svh;background:#0A0E1A;color:#fff;overflow:hidden}
+.lv-fondo{position:absolute;inset:0;z-index:-2}
+.lv-fondo video,.lv-fondo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* orizzontale: ingrandito dall'angolo in alto a sinistra, cosi' l'angolo in basso a destra (dove c'era la stellina) resta fuori schermo */
+.lv-fondo video.orizz{transform:scale(1.12);transform-origin:0 0}
+.lv-velo{position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(90deg,rgba(6,9,20,.78) 0%,rgba(6,9,20,.45) 34%,rgba(6,9,20,.05) 55%),linear-gradient(0deg,rgba(6,9,20,.75) 0%,rgba(6,9,20,0) 26%),linear-gradient(180deg,rgba(6,9,20,.6) 0%,rgba(6,9,20,0) 18%);
+  opacity:0;transition:opacity 1.2s}
+.lv.pronto .lv-velo{opacity:1}
+.lv-in{position:relative;min-height:100vh;min-height:100svh;padding:calc(64px + clamp(1.5rem,5vh,3rem)) clamp(1.25rem,4vw,3rem) 2rem}
+.lv-testa{max-width:30rem;opacity:0;transform:translateY(16px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.lv.pronto .lv-testa{opacity:1;transform:none}
+.lv-torna{color:#fff!important;background:rgba(8,12,28,.5)!important;border-color:rgba(255,255,255,.28)!important}
+.lv-tag{margin-top:1.4rem;font:700 .74rem 'Space Mono',monospace;letter-spacing:.22em;text-transform:uppercase;color:#4DD9E0}
+.lv-tit{margin:.8rem 0 0;font:800 clamp(2.4rem,5vw,4.4rem)/.95 'Bricolage Grotesque',sans-serif;letter-spacing:-.04em;text-shadow:0 6px 30px rgba(0,0,0,.5)}
+.lv-tit em{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-style:italic;letter-spacing:-.01em;color:#FFD08A}
+.lv-sub{margin:1rem 0 0;font-size:clamp(.98rem,1.3vw,1.1rem);line-height:1.6;color:rgba(255,255,255,.88);text-shadow:0 2px 14px rgba(0,0,0,.7)}
+.lv-sub b{color:#fff}
+.lv-legenda{display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin-top:1.1rem;font:600 .74rem 'DM Sans',sans-serif;color:rgba(255,255,255,.75)}
+.lv-legenda span{display:inline-flex;align-items:center;gap:.4rem}
+.lv-legenda i{width:9px;height:9px;border-radius:50%}
+/* la parete: da computer i quadri sono appesi in prospettiva, dove guardano i robot */
+.lv-parete{list-style:none;margin:0;padding:0}
+.lv-quadro{opacity:0;transform:translateY(18px) scale(.96);transition:opacity .6s,transform .7s cubic-bezier(.22,1,.36,1)}
+.lv.pronto .lv-quadro{opacity:1;transform:none}
+.lv-quadro button{display:grid;grid-template-columns:auto 1fr;gap:.75rem;align-items:center;width:100%;padding:.55rem .75rem .55rem .55rem;border-radius:14px;cursor:pointer;text-align:left;color:#fff;
+  background:rgba(8,12,28,.62);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  box-shadow:0 18px 40px -18px rgba(0,0,0,.8);transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .25s,background .25s,box-shadow .35s}
+.lv-quadro button:hover,.lv-quadro button:focus-visible{transform:translateY(-4px);border-color:var(--c,#4DD9E0);background:rgba(8,12,28,.85);outline:none;box-shadow:0 22px 50px -18px rgba(0,0,0,.9),0 0 34px -8px var(--c,#4DD9E0)}
+.lv-quadro img{width:52px;height:auto;flex:none;aspect-ratio:9/19.8;object-fit:cover;border-radius:9px;box-shadow:0 0 0 2px rgba(255,255,255,.15)}
+.lv-q-num{font:700 .66rem 'Space Mono',monospace;letter-spacing:.14em;color:var(--c,#4DD9E0)}
+.lv-q-nome{display:block;margin-top:.15rem;font:800 1rem/1.15 'Bricolage Grotesque',sans-serif;letter-spacing:-.01em}
+.lv-q-cat{display:block;margin-top:.2rem;font-size:.76rem;line-height:1.35;color:rgba(255,255,255,.75)}
+.lv-q-vai{display:block;margin-top:.35rem;font:700 .72rem 'DM Sans',sans-serif;color:var(--c,#4DD9E0)}
+.lv-quadro[data-tipo="cliente"]{--c:#4DD9E0}.lv-quadro[data-tipo="prodotto"]{--c:#C6FF3D}.lv-quadro[data-tipo="interno"]{--c:#FFB768}
+@media(min-width:900px) and (orientation:landscape){
+  .lv-in{height:100vh;height:100svh}
+  .lv-parete{position:absolute;right:3vw;top:calc(64px + 7vh);width:min(56vw,860px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4vh 1.2vw;
+    transform:perspective(1400px) rotateY(-16deg);transform-origin:100% 50%}
+  .lv-testa{max-width:min(30rem,36vw)}
+}
+@media(min-width:900px) and (orientation:landscape) and (max-height:760px){.lv-quadro img{width:34px}.lv-q-cat{display:none}.lv-parete{top:calc(64px + 3vh)}}
+@media(max-width:899px),(orientation:portrait){
+  .lv-fondo{position:fixed;inset:0}
+  .lv-velo{position:fixed;background:linear-gradient(180deg,rgba(6,9,20,.7) 0%,rgba(6,9,20,.35) 40%,rgba(6,9,20,.75) 100%)}
+  .lv-parete{margin-top:1.6rem;display:grid;grid-template-columns:1fr;gap:.6rem;max-width:34rem}
+  .lv-in{padding-bottom:3rem}
+}
+/* ordine di entrata dei quadri */
+.lv.pronto .lv-quadro:nth-child(1){transition-delay:.25s}.lv.pronto .lv-quadro:nth-child(2){transition-delay:.33s}.lv.pronto .lv-quadro:nth-child(3){transition-delay:.41s}
+.lv.pronto .lv-quadro:nth-child(4){transition-delay:.49s}.lv.pronto .lv-quadro:nth-child(5){transition-delay:.57s}.lv.pronto .lv-quadro:nth-child(6){transition-delay:.65s}
+.lv.pronto .lv-quadro:nth-child(7){transition-delay:.73s}.lv.pronto .lv-quadro:nth-child(8){transition-delay:.81s}.lv.pronto .lv-quadro:nth-child(9){transition-delay:.89s}
+.lv-ia{position:absolute;right:1rem;bottom:.8rem;font-size:9px;color:rgba(255,255,255,.6)}
 
-  <div class="section-wrap" id="casi-studio">
-    <div class="section-inner">
-      <div class="section-tag">— Cosa abbiamo già costruito</div>
-      <h2 class="section-title">Progetti reali, problemi reali.</h2>
-      <p class="section-sub">Ogni soluzione è stata costruita su misura per il cliente. Ecco alcuni progetti completati — con i risultati concreti ottenuti.</p>
-      <div class="car-pista">
-  <div class="casi-grid" data-carosello>
+/* ===== lo specchietto ===== */
+.sp-fondo{position:fixed;inset:0;z-index:8000;background:rgba(4,6,14,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity .35s}
+.sp-fondo.su{opacity:1}
+.sp{position:fixed;z-index:8001;left:50%;top:50%;width:min(1000px,calc(100vw - 2.5rem));max-height:calc(100vh - 2.5rem);max-height:calc(100dvh - 2.5rem);overflow:auto;overscroll-behavior:contain;
+  display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(1.2rem,3vw,2.6rem);align-items:center;padding:clamp(1.2rem,3vw,2.2rem);border-radius:28px;
+  background:#0F1426;color:#E8EDF8;border:1px solid rgba(255,255,255,.12);box-shadow:0 50px 120px -30px rgba(0,0,0,.9);
+  transform:translate(-50%,-46%) scale(.97);opacity:0;transition:opacity .35s,transform .5s cubic-bezier(.22,1,.36,1)}
+.sp.su{opacity:1;transform:translate(-50%,-50%)}
+.sp[hidden],.sp-fondo[hidden]{display:none}
+.sp-video{position:relative;width:min(300px,34vh);aspect-ratio:9/16;border-radius:22px;overflow:hidden;background:#000;box-shadow:0 30px 60px -20px rgba(0,0,0,.8),0 0 50px -12px var(--c,#4DD9E0)}
+.sp-video video{width:100%;height:100%;object-fit:cover;display:block}
+.sp-kick{display:flex;align-items:center;gap:.5rem;font:700 .72rem 'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--c,#4DD9E0)}
+.sp-tit{margin:.6rem 0 0;font:800 clamp(1.7rem,3vw,2.5rem)/1.02 'Bricolage Grotesque',sans-serif;letter-spacing:-.035em;color:#fff}
+.sp-cat{margin:.35rem 0 0;font-size:.95rem;color:rgba(232,237,248,.72)}
+.sp-blocco{margin-top:1.1rem}
+.sp-blocco h4{font:700 .7rem 'Space Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:rgba(232,237,248,.55)}
+.sp-blocco p{margin:.35rem 0 0;line-height:1.62;font-size:.97rem}
+.sp-blocco--ok p{color:#fff;font-weight:600}
+.sp-az{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center;margin-top:1.4rem}
+.sp-btn{display:inline-flex;align-items:center;min-height:46px;padding:.75rem 1.2rem;border-radius:100px;background:#fff;color:#0F1426;text-decoration:none;font:700 .92rem 'DM Sans',sans-serif}
+.sp-link{color:#fff;font-size:.9rem;text-underline-offset:3px}
+.sp-nav{display:flex;gap:.5rem;margin-top:1.4rem}
+.sp-nav button{min-height:40px;padding:.45rem .9rem;border-radius:100px;border:1px solid rgba(255,255,255,.22);background:transparent;color:#fff;font:600 .82rem 'DM Sans',sans-serif;cursor:pointer}
+.sp-nav button:hover{border-color:var(--c,#4DD9E0)}
+.sp-chiudi{position:absolute;right:.9rem;top:.9rem;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff;font-size:1.5rem;cursor:pointer;z-index:2}
+.sp-nota{margin-top:.8rem;font-size:.74rem;color:rgba(232,237,248,.5)}
+@media(max-width:760px){
+  .sp{grid-template-columns:1fr;top:auto;bottom:0;left:0;width:100%;max-height:94dvh;border-radius:24px 24px 0 0;transform:translateY(40px);justify-items:center;padding:1.2rem 1.1rem 1.6rem}
+  .sp.su{transform:none}
+  .sp-video{width:min(62vw,250px)}
+  .sp-testo{justify-self:stretch}
+}
+@media(prefers-reduced-motion:reduce){.lv-testa,.lv-quadro,.lv-velo{transition:none}}
+</style>
 
-        <div class="caso-card">
-      <span class="beam-glow" aria-hidden="true"></span>
-      <span class="beam-ring" aria-hidden="true"></span>
-          <div class="caso-img-wrap" onclick="openLightbox(this)">
-            <img src="app/esempi/preventivi.webp" alt="Generatore preventivi vocale Linda Affitti Brevi" class="caso-img" loading="lazy" decoding="async">
-          </div>
-          <div class="caso-body">
-            <span class="caso-tag">Affitti Brevi · Bergamo</span>
-            <h3 class="caso-problema">"Ogni preventivo richiedeva 15–20 minuti tra calcoli, scrittura e invio manuale al cliente"</h3>
-            <p class="caso-soluzione">→ App personalizzata con assistente AI vocale integrato: l'utente parla e descrive il soggiorno, il sistema genera automaticamente il preventivo formattato, pronto da stampare o inviare.</p>
-            <p class="caso-dettaglio">Eliminata la scrittura manuale, gli errori di calcolo e i tempi di formattazione. La gestione preventivi è passata da un'attività che occupava ore ogni giorno a un processo quasi istantaneo.</p>
-            <div class="caso-risultato">⏱ Da 15–20 minuti a 30 secondi per preventivo · Ore liberate ogni settimana</div>
-          </div>
-        </div>
-
-        <div class="caso-card">
-      <span class="beam-glow" aria-hidden="true"></span>
-      <span class="beam-ring" aria-hidden="true"></span>
-          <div class="caso-img-wrap" onclick="openLightbox(this)">
-            <img src="app/esempi/prenotazioni.webp" alt="Sistema prenotazioni salone parrucchiera" class="caso-img" loading="lazy" decoding="async">
-          </div>
-          <div class="caso-body">
-            <span class="caso-tag">Salone · Beauty</span>
-            <h3 class="caso-problema">"Telefonate continue per prenotare, doppie prenotazioni e agenda sempre in disordine"</h3>
-            <p class="caso-soluzione">→ Sistema di prenotazione online su misura: il cliente sceglie servizio, giorno e ora direttamente dal sito. Conferma email automatica, promemoria, e calendario sincronizzato in tempo reale sull'iPad del salone.</p>
-            <p class="caso-dettaglio">Azzerato il tempo dedicato a rispondere al telefono per fissare appuntamenti. La titolare gestisce l'agenda da qualsiasi dispositivo, senza rischio di sovrapposizioni.</p>
-            <div class="caso-risultato">⏱ Zero telefonate per gestire appuntamenti · Agenda sempre aggiornata automaticamente</div>
-          </div>
-        </div>
-
-        <div class="caso-card">
-      <span class="beam-glow" aria-hidden="true"></span>
-      <span class="beam-ring" aria-hidden="true"></span>
-          <div class="caso-img-wrap" onclick="openLightbox(this)">
-            <img src="app/esempi/anteprima-capelli.webp" alt="AI visuale trasformazione capelli" class="caso-img" loading="lazy" decoding="async">
-          </div>
-          <div class="caso-body">
-            <span class="caso-tag">Salone · AI Visuale</span>
-            <h3 class="caso-problema">"Il cliente non riusciva a immaginare il risultato finale — troppi ripensamenti e lavori da rifare"</h3>
-            <p class="caso-soluzione">→ App AI di anteprima del look: si carica la foto del cliente, si seleziona il taglio e il colore desiderato, e l'intelligenza artificiale genera un'anteprima realistica del risultato prima ancora di iniziare.</p>
-            <p class="caso-dettaglio">Strumento differenziante che aumenta la fiducia del cliente, riduce i ripensamenti a lavoro finito e posiziona il salone come realtà innovativa nel settore.</p>
-            <div class="caso-risultato">⏱ Meno ripensamenti e rifacimenti · Cliente più sicuro e soddisfatto</div>
-          </div>
-        </div>
-
-        <div class="caso-card">
-      <span class="beam-glow" aria-hidden="true"></span>
-      <span class="beam-ring" aria-hidden="true"></span>
-          <div class="caso-img-wrap" onclick="openLightbox(this)">
-            <img src="app/esempi/crm.webp" alt="CRM personalizzato mobile" class="caso-img" loading="lazy" decoding="async">
-          </div>
-          <div class="caso-body">
-            <span class="caso-tag">Libero Professionista · CRM</span>
-            <h3 class="caso-problema">"Clienti su foglio Excel, lavori su carta, preventivi fatti a mano — nessun sistema centrale"</h3>
-            <p class="caso-soluzione">→ CRM mobile personalizzato con gestione completa: clienti, lavori attivi e terminati, finanze, note e generazione automatica preventivi. Accessibile da smartphone in qualsiasi momento.</p>
-            <p class="caso-dettaglio">Tutto in un'unica app costruita sulle esigenze reali del professionista: categorie personalizzate (Sito Web, Landing Page, Agente AI, Automazione), stato avanzamento lavori e reportistica finanziaria integrata.</p>
-            <div class="caso-risultato">⏱ Un ufficio completo sempre in tasca · Zero fogli Excel e appunti sparsi</div>
-          </div>
-        </div>
-
-        <div class="caso-card caso-full">
-      <span class="beam-glow" aria-hidden="true"></span>
-      <span class="beam-ring" aria-hidden="true"></span>
-          <div class="caso-img-wrap" onclick="openLightbox(this)">
-            <img src="app/esempi/riassunto-email.webp" alt="Agente AI gestione Gmail" class="caso-img" loading="lazy" decoding="async">
-          </div>
-          <div class="caso-body">
-            <span class="caso-tag">Imprenditore · Automazione Email</span>
-            <h3 class="caso-problema">"Ogni mattina 30–40 minuti solo per leggere, capire e smistare le email — un'attività che divorava il tempo migliore della giornata"</h3>
-            <p class="caso-soluzione">→ Agente AI automatico collegato a Gmail: ogni mattina a orario prestabilito entra nella casella, legge tutte le email, le classifica per categoria (Scadenze, Urgenti, Clienti, Fornitori), scarta le promozionali e genera un report HTML chiaro con le azioni da intraprendere.</p>
-            <p class="caso-dettaglio">Il professionista apre il computer e trova già tutto analizzato e organizzato. Nessuna email importante viene persa, nessun tempo sprecato su newsletter e messaggi automatici. Il sistema può essere attivato anche manualmente con un semplice comando.</p>
-            <div class="caso-risultato">⏱ 30–40 minuti risparmiati ogni mattina · Oltre 150 minuti a settimana restituiti al lavoro che conta</div>
-          </div>
-        </div>
-
-      </div>
-  <div class="car-frecce">
-    <button type="button" class="car-btn" data-verso="-1" aria-label="Lavori precedenti"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    <button type="button" class="car-btn" data-verso="1" aria-label="Lavori successivi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-  </div>
-</div>
-  <div class="car-comandi"><div class="car-barra" aria-hidden="true"><span></span></div></div>
-
+<section class="lv" id="parete" aria-labelledby="lvTit">
+  <div class="lv-fondo" aria-hidden="true"><video id="lvVideo" muted loop playsinline autoplay preload="auto"></video></div>
+  <div class="lv-velo" aria-hidden="true"></div>
+  <div class="lv-in">
+    <div class="lv-testa">
+      <a class="pg-torna lv-torna" href="/#menu"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Torna dal robot</a>
+      <div class="lv-tag">— I nostri lavori</div>
+      <h1 class="lv-tit" id="lvTit">Progetti veri, <em>per aziende vere.</em></h1>
+      <p class="lv-sub">Siti, gestionali e app costruiti con l'intelligenza artificiale. Sono appesi alla parete che i robot stanno guardando: <b>tocca un lavoro per vedere il video e cosa ha risolto.</b></p>
+      <div class="lv-legenda"><span><i style="background:#4DD9E0"></i>Per un cliente</span><span><i style="background:#C6FF3D"></i>Prodotto FUTURE AI</span><span><i style="background:#FFB768"></i>Strumento interno</span></div>
     </div>
+    <ul class="lv-parete" id="lvParete" aria-label="I lavori"></ul>
   </div>
+  <span class="lv-ia">Video di sfondo generato con IA</span>
+</section>
 
-  <script>
-    function openLightbox(wrap) {
-      var img = wrap.querySelector('img');
-      document.getElementById('lightbox-img').src = img.src;
-      document.getElementById('lightbox').classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('active');
-      document.body.style.overflow = '';
-    }
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeLightbox();
-    });
-  </script>
+<div class="sp-fondo" id="spFondo" hidden></div>
+<section class="sp" id="sp" role="dialog" aria-modal="true" aria-labelledby="spTit" hidden>
+  <button type="button" class="sp-chiudi" id="spChiudi" aria-label="Chiudi">×</button>
+  <div class="sp-video"><video id="spVideo" muted loop playsinline preload="none"></video></div>
+  <div class="sp-testo">
+    <p class="sp-kick" id="spKick"></p>
+    <h2 class="sp-tit" id="spTit"></h2>
+    <p class="sp-cat" id="spCat"></p>
+    <div class="sp-blocco"><h4>Il problema</h4><p id="spProb"></p></div>
+    <div class="sp-blocco"><h4>Cosa fa</h4><p id="spFa"></p></div>
+    <div class="sp-blocco sp-blocco--ok"><h4>Cosa ha risolto</h4><p id="spOk"></p></div>
+    <div class="sp-az"><a href="/contatti/" class="sp-btn">Voglio qualcosa di simile →</a><a class="sp-link" id="spSito" target="_blank" rel="noopener" hidden>Guarda il sito</a></div>
+    <p class="sp-nota" id="spNota"></p>
+    <div class="sp-nav"><button type="button" id="spPrima">‹ Lavoro precedente</button><button type="button" id="spDopo">Lavoro successivo ›</button></div>
+  </div>
+</section>
 
-</div>
+<script>
+(function(){
+  var L=[
+    {id:'wider',nome:'WIDER',tipo:'cliente',kick:'Per un cliente · brand di abbigliamento',cat:'Sito web e gioco per la community',sito:'https://wearewider.it',
+     prob:'Un brand nato da una community aveva bisogno di un posto online che raccontasse i suoi valori e trasformasse le visite in richieste di prodotto.',
+     fa:'Un sito in italiano e inglese con video, manifesto, collezione e galleria: ogni capo si richiede con un modulo che manda un\'email con il marchio sia a WIDER sia al cliente. In più «The Gathering», un gioco arcade con le foto vere della community: raduni le persone e schivi i telefoni.',
+     ok:'Un\'identità online coerente con il brand, richieste che arrivano già in ordine e un gioco che la community condivide.'},
+    {id:'linda',nome:'LINDA AFFITTI BREVI',tipo:'cliente',kick:'Per un cliente · case vacanza',cat:'Sito web con disponibilità in tempo reale',sito:'https://linda-affitti-brevi.vercel.app',
+     prob:'Il vecchio sito era una vetrina ferma: per sapere se una casa era libera bisognava scrivere e aspettare, e le prenotazioni passavano dai portali, con le loro commissioni.',
+     fa:'Tutte le case in Val Seriana e a Bergamo, ognuna con foto, descrizione e dotazioni. La disponibilità è collegata ai calendari dei portali e si aggiorna da sola ogni ora; chi vuole prenotare manda la richiesta direttamente.',
+     ok:'Disponibilità sempre giusta senza lavoro manuale e richieste dirette, senza commissioni ai portali.'},
+    {id:'mademoiselle',nome:'MADEMOISELLE',tipo:'cliente',kick:'Per un cliente · salone di parrucchiere',cat:'Prenotazioni online',sito:'https://madmoiselle.vercel.app',
+     prob:'Telefonate continue per fissare e spostare gli appuntamenti, e il rischio di sovrapposizioni in agenda.',
+     fa:'Una pagina di prenotazione con il marchio del salone: il cliente sceglie servizio, giorno e orario (quelli già presi sono barrati), poi riceve conferma e promemoria.',
+     ok:'Meno tempo al telefono e un\'agenda sempre in ordine, senza commissioni a piattaforme esterne.'},
+    {id:'linda-gestionale',nome:'LINDA AFFITTI BREVI · gestionale',tipo:'cliente',kick:'Per un cliente · gestione di case in affitto',cat:'Gestionale dei conti e preventivi a voce',ricostr:true,
+     prob:'I conti di ogni casa stavano in un file Excel diverso: compensi, pulizie e resoconti per i proprietari si calcolavano a mano, casa per casa.',
+     fa:'Un gestionale unico per tutte le case: si segnano i soggiorni, compensi e pulizie si calcolano da soli con la stessa regola dei vecchi fogli, e il resoconto mensile per il proprietario esce in PDF. Collegata c\'è l\'app dei preventivi: si detta il soggiorno a voce e il preventivo è pronto.',
+     ok:'Niente più fogli sparsi e calcoli a mano. Un preventivo passa da 15-20 minuti a circa 30 secondi.'},
+    {id:'spazzacamino',nome:'Gestionale per uno spazzacamino',tipo:'cliente',kick:'Per un cliente · manutenzione di camini e stufe',cat:'Clienti, scadenze e giri per zona',ricostr:true,
+     prob:'Centinaia di clienti in un foglio di calcolo: capire chi era scaduto e organizzare i giri voleva dire scorrere righe su righe.',
+     fa:'Ogni cliente con indirizzo, zona, storico degli interventi e la scadenza della prossima pulizia, a colori. La mappa mostra chi chiamare zona per zona; segnato un intervento, la scadenza successiva si calcola da sola. Accessi protetti e dati trattati secondo il GDPR.',
+     ok:'Si sa subito chi chiamare e dove andare, senza scorrere fogli.'},
+    {id:'calcio',nome:'Gestionale per una società di calcio',tipo:'cliente',kick:'Per un cliente · società sportiva',cat:'Atleti, presenze, certificati e sponsor',ricostr:true,
+     prob:'Atleti, presenze, certificati medici, sponsor e documenti erano sparsi tra quaderni, fogli e messaggi.',
+     fa:'La rosa di ogni stagione divisa per squadra, presenze e convocazioni con le percentuali calcolate da sole, scadenze dei certificati con avviso email a 30, 15 e 7 giorni, calendario, sponsor, documenti e una ricerca automatica dei bandi per le società sportive.',
+     ok:'Nessun certificato scaduto per distrazione e tutta la società gestita da un posto solo.'},
+    {id:'gym',nome:'FUTURE GYM',tipo:'prodotto',kick:'Prodotto FUTURE AI · per palestre',cat:'La scheda di allenamento sul telefono',ricostr:true,
+     prob:'La scheda di carta si perde, non si aggiorna e non dice all\'atleta quanto sta migliorando.',
+     fa:'Il trainer crea gli accessi e le schede scegliendo tra 173 esercizi; l\'atleta ha la scheda sul telefono, segna serie e pesi, ha il timer del recupero, vede i progressi e può condividerli come storia. Con notifiche e presenze.',
+     ok:'Una scheda sempre aggiornata in tasca, e una palestra che si fa ricordare.'},
+    {id:'viaggi',nome:'FUTURE AI Viaggi',tipo:'interno',kick:'Strumento interno FUTURE AI',cat:'Voli e hotel al prezzo più basso, a voce',ricostr:true,
+     prob:'Trovare il volo più economico voleva dire provare date e orari a mano, un sito alla volta.',
+     fa:'Si detta il viaggio a voce, in italiano: l\'app trova il volo più economico del giorno con gli altri orari, fa il totale per tutti i passeggeri e sa rispondere a «dove vado spendendo meno?». In più gli hotel per la meta scelta.',
+     ok:'Un viaggio pianificato in un minuto invece che in una serata.'},
+    {id:'crm',nome:'CRM FUTURE AI',tipo:'interno',kick:'Strumento interno FUTURE AI',cat:'Clienti, lavori, conti e agenda',ricostr:true,
+     prob:'Clienti, lavori, canoni, spese e appuntamenti erano sparsi tra Excel, note e calendario.',
+     fa:'Un\'app sola per clienti e lavori, entrate e spese con le tasse calcolate, canoni mensili, agenda con i turni e il calendario dei contenuti social pronti da pubblicare.',
+     ok:'Tutto l\'ufficio in tasca: si sa sempre come va l\'attività, mese per mese.'}
+  ];
+  var sez=document.getElementById('parete'),parete=document.getElementById('lvParete'),bg=document.getElementById('lvVideo');
+  var calmo=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // sfondo: verticale su schermi verticali, orizzontale sugli altri
+  var vert=innerHeight>innerWidth;if(!vert)bg.classList.add('orizz');bg.poster='/lavori/sfondo-'+(vert?'telefono':'computer')+'.webp';bg.src='/lavori/sfondo-'+(vert?'telefono':'computer')+'.mp4';
+  var p=bg.play();if(p&&p.catch)p.catch(function(){});
+  // prima solo lo sfondo, dopo 3 secondi escono le scritte e i quadri
+  setTimeout(function(){sez.classList.add('pronto');},calmo?0:3000);
+  L.forEach(function(x,i){var li=document.createElement('li');li.className='lv-quadro';li.dataset.tipo=x.tipo;
+    li.innerHTML='<button type="button" data-i="'+i+'"><img src="/lavori/reel/quadro-'+x.id+'.webp" alt="" width="260" height="572" loading="lazy">'+
+      '<span><span class="lv-q-num">'+String(i+1).padStart(2,'0')+'</span><span class="lv-q-nome">'+x.nome+'</span><span class="lv-q-cat">'+x.cat+'</span><span class="lv-q-vai">Guarda il video →</span></span></button>';
+    parete.appendChild(li);});
+  // lo specchietto
+  var sp=document.getElementById('sp'),fondo=document.getElementById('spFondo'),vid=document.getElementById('spVideo'),att=-1,daDove=null;
+  document.body.appendChild(fondo);document.body.appendChild(sp);
+  var COL={cliente:'#4DD9E0',prodotto:'#C6FF3D',interno:'#FFB768'};
+  function mostra(i){att=(i+L.length)%L.length;var x=L[att];sp.style.setProperty('--c',COL[x.tipo]);
+    document.getElementById('spKick').textContent=x.kick;document.getElementById('spTit').textContent=x.nome;document.getElementById('spCat').textContent=x.cat;
+    document.getElementById('spProb').textContent=x.prob;document.getElementById('spFa').textContent=x.fa;document.getElementById('spOk').textContent=x.ok;
+    var s=document.getElementById('spSito');if(x.sito){s.hidden=false;s.href=x.sito;}else s.hidden=true;
+    document.getElementById('spNota').textContent=x.ricostr?'Il video è una ricostruzione con dati di esempio: i dati veri dei clienti restano privati.':'';
+    vid.poster='/lavori/reel/cop-'+x.id+'.webp';vid.src='/lavori/reel/reel-'+x.id+'.mp4';var q=vid.play();if(q&&q.catch)q.catch(function(){});
+    sp.scrollTop=0;}
+  function apri(i,da){daDove=da||null;mostra(i);fondo.hidden=false;sp.hidden=false;document.documentElement.style.overflow='hidden';
+    requestAnimationFrame(function(){requestAnimationFrame(function(){fondo.classList.add('su');sp.classList.add('su');});});
+    document.getElementById('spChiudi').focus({preventScroll:true});}
+  function chiudi(){if(sp.hidden)return;sp.classList.remove('su');fondo.classList.remove('su');document.documentElement.style.overflow='';try{vid.pause();}catch(e){}
+    setTimeout(function(){sp.hidden=true;fondo.hidden=true;},380);if(daDove)try{daDove.focus({preventScroll:true});}catch(e){}}
+  parete.addEventListener('click',function(e){var b=e.target.closest('button[data-i]');if(b)apri(+b.dataset.i,b);});
+  document.getElementById('spChiudi').addEventListener('click',chiudi);fondo.addEventListener('click',chiudi);
+  document.getElementById('spPrima').addEventListener('click',function(){mostra(att-1);});
+  document.getElementById('spDopo').addEventListener('click',function(){mostra(att+1);});
+  addEventListener('keydown',function(e){if(sp.hidden)return;if(e.key==='Escape')chiudi();if(e.key==='ArrowRight')mostra(att+1);if(e.key==='ArrowLeft')mostra(att-1);});
+})();
+</script>
+
 <section class="pg-cta">
   <h2>Ti piace? <em>Parliamone.</em></h2>
   <p>La prima consulenza è gratuita: raccontaci cosa ti serve, ti diciamo come lo costruiremmo.</p>
@@ -719,3 +798,6 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
 <script src="/assistente.js" defer></script>
 </body>
 </html>
+/* la chiusura resta scura, come la galleria */
+html .pg-cta{background:#0A0E1A}html .pg-cta h2{color:#fff}html .pg-cta h2 em{color:#FFD08A}html .pg-cta p{color:rgba(255,255,255,.75)}html .pg-cta a:not(.btn-primary){color:#fff;border-color:rgba(255,255,255,.3);background:transparent}
+
