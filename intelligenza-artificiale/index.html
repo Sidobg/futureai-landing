@@ -958,30 +958,12 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 </script>
 
 <!-- ============================================================
-     RIQUADRO COOKIE — dal kit GDPR di FUTURE AI.
-     Non blocca la pagina (niente cookie wall). Le statistiche di Vercel
-     partono SOLO dopo "Accetto". La scelta resta in localStorage e si
-     riapre dal link "Cookie" nel piè di pagina.
+     COOKIE E PRIVACY — gestiti da AICOOKIE (aicookie.vercel.app).
+     Il riquadro, il blocco delle statistiche fino ad "Accetto" e i link
+     arrivano dallo script in fondo. Le statistiche di Vercel partono
+     solo quando AICOOKIE chiama window.avviaStatistiche().
      ============================================================ -->
 <style>
-.cookie{position:fixed;z-index:9000;left:1rem;right:1rem;bottom:1rem;max-width:25rem;margin-inline:auto;
-  background:#111827;color:#EDF1FA;border-radius:16px;padding:1.15rem 1.3rem 1.3rem;
-  box-shadow:0 24px 60px -18px rgba(0,0,0,.7),0 0 0 1px rgba(155,127,248,.22);
-  font-family:'DM Sans',sans-serif;
-  transform:translateY(calc(100% + 2rem));opacity:0;transition:transform .55s cubic-bezier(.22,1,.36,1),opacity .4s}
-.cookie.su{transform:none;opacity:1}
-.cookie[hidden]{display:none}
-@media (min-width:760px){.cookie{left:1.5rem;right:auto;bottom:1.5rem;margin:0}}
-.cookie::before{content:"";display:block;width:2.2rem;height:3px;border-radius:3px;background:linear-gradient(90deg,#6C63FF,#4DD9E0);margin-bottom:.9rem}
-.cookie__tit{font-family:'Manrope',sans-serif;font-weight:800;font-size:1.15rem;letter-spacing:-.02em;line-height:1.15;margin:0 0 .45rem}
-.cookie__testo{font-size:.88rem;line-height:1.55;color:#AEB7CA;margin:0}
-.cookie__testo a{color:#C4B5FD}
-.cookie__az{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
-.cookie__btn{flex:1 1 auto;min-height:44px;padding:.6rem 1.15rem;border-radius:999px;border:1px solid transparent;
-  background:linear-gradient(90deg,#6C63FF,#4DD9E0);color:#fff;font:600 .9rem/1 'DM Sans',sans-serif;cursor:pointer}
-.cookie__btn--no{background:transparent;border-color:rgba(255,255,255,.22);color:#EDF1FA}
-.cookie__btn:focus-visible{outline:2px solid #4DD9E0;outline-offset:3px}
-@media (prefers-reduced-motion:reduce){.cookie{transition:none}}
 /* piè di pagina legale e casella del modulo */
 .footer-legale{font-size:.78rem}
 .footer-legale a{color:inherit;text-decoration:underline;text-underline-offset:2px}
@@ -990,14 +972,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 .form-presa a{color:#C4B5FD}
 </style>
 
-<div class="cookie" id="cookie" role="dialog" aria-labelledby="cookieTit" aria-describedby="cookieTesto" hidden>
-  <p class="cookie__tit" id="cookieTit">Due parole sui cookie.</p>
-  <p class="cookie__testo" id="cookieTesto">Il sito usa solo memoria tecnica per funzionare. Se accetti, contiamo anche le visite in forma anonima e aggregata: nessun profilo, nessuna pubblicità. Puoi cambiare idea quando vuoi dal link «Cookie» in fondo alla pagina. <a href="/privacy/#cookie">Come trattiamo i dati</a></p>
-  <div class="cookie__az">
-    <button class="cookie__btn" id="cookieSi" type="button">Accetto</button>
-    <button class="cookie__btn cookie__btn--no" id="cookieNo" type="button">Solo necessari</button>
-  </div>
-</div>
 
 <script>
 /* Vercel Web Analytics (versione per siti statici): lo script arriva
@@ -1007,24 +981,6 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
   window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};
   var s=document.createElement('script'); s.defer=true; s.src='/_vercel/insights/script.js'; document.body.appendChild(s);
 };
-(function(){
-  var K='futureai-cookie', b=document.getElementById('cookie'); if(!b)return;
-  function letto(){try{return localStorage.getItem(K)}catch(e){return null}}
-  function salva(v){try{localStorage.setItem(K,v)}catch(e){}}
-  function mostra(){b.hidden=false;requestAnimationFrame(function(){requestAnimationFrame(function(){b.classList.add('su')})});}
-  function chiudi(){b.classList.remove('su');setTimeout(function(){b.hidden=true},450)}
-  document.getElementById('cookieSi').addEventListener('click',function(){salva('tutti');chiudi();window.avviaStatistiche();});
-  document.getElementById('cookieNo').addEventListener('click',function(){
-    var prima=letto(); salva('necessari'); chiudi();
-    /* chi ritira il consenso: si ricarica per spegnere lo script gia' avviato */
-    if(prima==='tutti'&&window.__statsAvviate)setTimeout(function(){location.reload()},500);
-  });
-  var s=letto();
-  if(s==='tutti'){window.avviaStatistiche();}
-  else if(s!=='necessari'){setTimeout(mostra,1100);}
-  var ap=document.getElementById('apriCookie');
-  if(ap)ap.addEventListener('click',function(e){e.preventDefault();mostra();});
-})();
 </script>
 
 <script>
@@ -2070,5 +2026,6 @@ html .al .btn-secondary{color:#14213D;background:#fff;border-color:rgba(20,33,61
 })();
 </script>
 <script src="/assistente.js" defer></script>
+<script src="https://aicookie.vercel.app/e/futureai.js" defer></script>
 </body>
 </html>

@@ -167,7 +167,7 @@
   // se si era aperto da solo e inizi a scorrere, si fa da parte
   var chiave='as-visto:'+location.pathname,gia=false;try{gia=sessionStorage.getItem(chiave)==='1';}catch(e){}
   // alla prima visita parla solo dopo che si e' chiuso l'avviso dei cookie
-  function cookieAperto(){var c=document.getElementById('cookie');return c&&!c.hidden;}
+  function cookieAperto(){var c=document.getElementById('cookie')||document.getElementById('faiCookie');return c&&!c.hidden;}
   function saluto(){if(cookieAperto()){setTimeout(saluto,600);return;}apri(true);try{sessionStorage.setItem(chiave,'1');}catch(e){}}
   setTimeout(function(){as.classList.add('su');
     if(!gia)setTimeout(saluto,500);
