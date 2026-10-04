@@ -377,6 +377,11 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
   .rm-punti{right:-.4rem}
 }
 @media (prefers-reduced-motion:reduce){.rm-lista,.rm-voce,.rm-riga,.rm-scena{transition:none}}
+/* PC che non ce la fanno (schermo grande + grafica debole): la citta' resta ferma
+   su un fotogramma e la scritta non scorre piu'. Il robot continua a muoversi. */
+.rm.leggero .rm-titolo em{animation:none}
+.rm.leggero .rm-voce{filter:none;opacity:.22}
+.rm.leggero .rm-capsula{box-shadow:0 0 0 1px rgba(255,255,255,.9),0 0 0 8px rgba(255,255,255,.35),0 30px 60px -30px rgba(26,42,108,.5)}
 </style>
 
 <section class="rm" id="menu" aria-label="Scegli dove andare">
@@ -518,6 +523,34 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
   addEventListener('touchend',function(){tInizio=null;},{passive:true});
   // tornando indietro dalla pagina, la scena deve essere di nuovo a posto
   addEventListener('pageshow',function(){uscendo=false;sez.classList.remove('via');fum.classList.remove('on');});
+
+  // CITTA' DI SFONDO: gira solo mentre il menu e' sullo schermo.
+  // Su PC che non ce la fanno (tipico: schermo grande + Windows con grafica integrata
+  // scendeva a ~4 fotogrammi al secondo) si misura la fluidita' appena si entra nel menu:
+  // se e' sotto i ~30 fps la citta' si ferma su un fotogramma e la sezione passa "leggera".
+  var citta=sez.querySelector('.rm-citta'),inVista=false,leggero=false;
+  try{leggero=sessionStorage.getItem('fai-leggero')==='1';}catch(e){}
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)leggero=true;
+  function vaiLeggero(){leggero=true;sez.classList.add('leggero');try{citta.pause();}catch(e){}
+    try{sessionStorage.setItem('fai-leggero','1');}catch(e){}}
+  if(leggero){sez.classList.add('leggero');citta.removeAttribute('autoplay');citta.preload='auto';try{citta.pause();}catch(e){}}
+  var misurato=leggero;
+  function misuraFluidita(){
+    misurato=true;var n=0,t0=0,lenti=0,prima=0;
+    function passo(t){
+      if(!inVista||document.hidden){misurato=false;return;}   // uscito dal menu o scheda nascosta: si rimisura dopo
+      if(!t0||t-prima>1000){t0=prima=t;n=lenti=0;}else{if(t-prima>40)lenti++;prima=t;n++;}
+      if(n<90&&t-t0<2500){requestAnimationFrame(passo);return;}
+      // piu' di un fotogramma su tre oltre i 40 ms = scatta a vista
+      if(n<45||lenti/n>0.33)vaiLeggero();
+    }
+    // si aspetta che il video sia partito, cosi' si misura il carico vero
+    setTimeout(function(){requestAnimationFrame(passo);},700);
+  }
+  new IntersectionObserver(function(es){inVista=es[0].isIntersecting;
+    if(inVista){if(!leggero){var q=citta.play();if(q&&q.catch)q.catch(function(){});if(!misurato)misuraFluidita();}}
+    else{try{citta.pause();}catch(e){}}},{threshold:0}).observe(sez);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden&&inVista&&!leggero&&!misurato)misuraFluidita();});
 })();
 </script>
 
@@ -713,15 +746,19 @@ if (window.matchMedia('(hover: hover)').matches) {
   const cur = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
   let mx=0,my=0,rx=0,ry=0;
+  // l'anello insegue il puntatore solo finche' serve: a mouse fermo il giro si spegne
+  let giroCur=0;
+  function anim(){
+    rx+=(mx-rx-16)*0.12; ry+=(my-ry-16)*0.12;
+    if(Math.abs(mx-16-rx)<0.3&&Math.abs(my-16-ry)<0.3){rx=mx-16;ry=my-16;giroCur=0;}
+    ring.style.left=rx+'px';ring.style.top=ry+'px';
+    if(giroCur)giroCur=requestAnimationFrame(anim);
+  }
   document.addEventListener('mousemove', e => {
     mx=e.clientX; my=e.clientY;
-    cur.style.cssText += `;left:${mx-5}px;top:${my-5}px`;
+    cur.style.left=(mx-5)+'px';cur.style.top=(my-5)+'px';
+    if(!giroCur)giroCur=requestAnimationFrame(anim);
   });
-  (function anim(){
-    rx+=(mx-rx-16)*0.12; ry+=(my-ry-16)*0.12;
-    ring.style.cssText += `;left:${rx}px;top:${ry}px`;
-    requestAnimationFrame(anim);
-  })();
   document.querySelectorAll('a,button,.service-card').forEach(el => {
     el.addEventListener('mouseenter',()=>{cur.style.transform='scale(2.2)';ring.style.transform='scale(1.5)';});
     el.addEventListener('mouseleave',()=>{cur.style.transform='scale(1)';ring.style.transform='scale(1)';});
