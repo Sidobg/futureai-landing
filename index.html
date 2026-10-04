@@ -146,7 +146,9 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
   // si ridisegna solo se il riquadro cambia davvero: su telefono la barra
   // del browser che compare e sparisce manda resize a ogni scroll
   function misura(){var dpr=Math.min(window.devicePixelRatio||1,2),w=tela.clientWidth,h=tela.clientHeight;
-    if(w===W&&h===H&&tela.width)return; W=w;H=h;
+    // PC che scattano: la tela non supera i 1280 px dei fotogrammi (oltre si ingrandisce e basta)
+    if(document.documentElement.classList.contains('fai-leggero')&&w)dpr=Math.min(dpr,1280/w);
+    if(w===W&&h===H&&tela.width===Math.round(w*dpr))return; W=w;H=h;
     tela.width=Math.round(W*dpr);tela.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);
     ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';disegna(true);}
   var fatto=-1;
@@ -199,6 +201,7 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
   function sveglia(){if(!raf&&visibile)raf=requestAnimationFrame(giro);}
   addEventListener('scroll',sveglia,{passive:true});
   addEventListener('resize',function(){misura();sveglia();});
+  document.addEventListener('fai-leggero',function(){misura();disegna(true);});
 
   // fuori schermo non si calcola niente; menu e musica tornano quando si esce
   new IntersectionObserver(function(es){
@@ -532,7 +535,9 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
   try{leggero=sessionStorage.getItem('fai-leggero')==='1';}catch(e){}
   if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)leggero=true;
   function vaiLeggero(){leggero=true;sez.classList.add('leggero');try{citta.pause();}catch(e){}
-    try{sessionStorage.setItem('fai-leggero','1');}catch(e){}}
+    try{sessionStorage.setItem('fai-leggero','1');}catch(e){}
+    if(window.faiLeggero)window.faiLeggero();}
+  document.addEventListener('fai-leggero',function(){if(!leggero)vaiLeggero();});
   if(leggero){sez.classList.add('leggero');citta.removeAttribute('autoplay');citta.preload='auto';try{citta.pause();}catch(e){}}
   var misurato=leggero;
   function misuraFluidita(){
@@ -541,8 +546,8 @@ body.in-ingresso nav,body.in-ingresso .music-toggle{opacity:0;pointer-events:non
       if(!inVista||document.hidden){misurato=false;return;}   // uscito dal menu o scheda nascosta: si rimisura dopo
       if(!t0||t-prima>1000){t0=prima=t;n=lenti=0;}else{if(t-prima>40)lenti++;prima=t;n++;}
       if(n<90&&t-t0<2500){requestAnimationFrame(passo);return;}
-      // piu' di un fotogramma su tre oltre i 40 ms = scatta a vista
-      if(n<45||lenti/n>0.33)vaiLeggero();
+      // sotto i ~14 fps o meta' dei fotogrammi oltre i 40 ms = scatta a vista (il PC del cliente: 8 fps, 79%)
+      if(n<35||lenti/n>0.5)vaiLeggero();
     }
     // si aspetta che il video sia partito, cosi' si misura il carico vero
     setTimeout(function(){requestAnimationFrame(passo);},700);
@@ -829,7 +834,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 
 // === HERO NEURO CANVAS ===
-(function(){const c=document.getElementById('heroNeuro');if(!c)return;const gl=c.getContext('webgl')||c.getContext('experimental-webgl');if(!gl)return;const vs='precision mediump float;attribute vec2 a_position;varying vec2 vUv;void main(){vUv=.5*(a_position+1.);gl_Position=vec4(a_position,0.0,1.0);}';const fs='precision mediump float;varying vec2 vUv;uniform float u_time;uniform float u_ratio;uniform vec2 u_pointer_position;uniform float u_scroll_progress;vec2 rotate(vec2 uv,float th){return mat2(cos(th),sin(th),-sin(th),cos(th))*uv;}float neuro_shape(vec2 uv,float t,float p){vec2 sine_acc=vec2(0.);vec2 res=vec2(0.);float scale=8.;for(int j=0;j<15;j++){uv=rotate(uv,1.);sine_acc=rotate(sine_acc,1.);vec2 layer=uv*scale+float(j)+sine_acc-t;sine_acc+=sin(layer)+2.4*p;res+=(.5+.5*cos(layer))/scale;scale*=(1.2);}return res.x+res.y;}void main(){vec2 uv=.5*vUv;uv.x*=u_ratio;vec2 pointer=vUv-u_pointer_position;pointer.x*=u_ratio;float p=clamp(length(pointer),0.,1.);p=.5*pow(1.-p,2.);float t=.001*u_time;float noise=neuro_shape(uv,t,p);noise=1.2*pow(noise,3.);noise+=pow(noise,10.);noise=max(.0,noise-.5);noise*=(1.-length(vUv-.5));vec3 color=vec3(0.5,0.15,0.65);color=mix(color,vec3(0.02,0.7,0.9),0.32+0.16*sin(2.0*u_scroll_progress+1.2));color+=vec3(0.15,0.0,0.6)*sin(2.0*u_scroll_progress+1.5);color=color*noise;gl_FragColor=vec4(color,noise);}';function mk(src,type){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;}const prog=gl.createProgram();gl.attachShader(prog,mk(vs,gl.VERTEX_SHADER));gl.attachShader(prog,mk(fs,gl.FRAGMENT_SHADER));gl.linkProgram(prog);gl.useProgram(prog);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE);const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);const loc=gl.getAttribLocation(prog,'a_position');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);const uT=gl.getUniformLocation(prog,'u_time'),uR=gl.getUniformLocation(prog,'u_ratio'),uP=gl.getUniformLocation(prog,'u_pointer_position'),uS=gl.getUniformLocation(prog,'u_scroll_progress');const ptr={x:.5,y:.5,tX:.5,tY:.5};function resize(){const dpr=Math.min(window.devicePixelRatio,2),rect=c.parentElement.getBoundingClientRect();c.width=rect.width*dpr;c.height=rect.height*dpr;gl.viewport(0,0,c.width,c.height);gl.uniform1f(uR,c.width/c.height);}resize();window.addEventListener('resize',resize);function render(){ptr.x+=(ptr.tX-ptr.x)*0.2;ptr.y+=(ptr.tY-ptr.y)*0.2;gl.uniform1f(uT,performance.now());gl.uniform2f(uP,ptr.x,1-ptr.y);gl.uniform1f(uS,window.pageYOffset/(2*window.innerHeight));gl.drawArrays(gl.TRIANGLE_STRIP,0,4);raf=requestAnimationFrame(render);}let raf=0;new IntersectionObserver(es=>{const on=es[0].isIntersecting;if(on&&!raf){raf=requestAnimationFrame(render);}else if(!on&&raf){cancelAnimationFrame(raf);raf=0;}}).observe(c);window.addEventListener('pointermove',function(e){const r=c.parentElement.getBoundingClientRect();ptr.tX=(e.clientX-r.left)/r.width;ptr.tY=(e.clientY-r.top)/r.height;});})();
+(function(){const c=document.getElementById('heroNeuro');if(!c)return;const gl=c.getContext('webgl')||c.getContext('experimental-webgl');if(!gl)return;const vs='precision mediump float;attribute vec2 a_position;varying vec2 vUv;void main(){vUv=.5*(a_position+1.);gl_Position=vec4(a_position,0.0,1.0);}';const fs='precision mediump float;varying vec2 vUv;uniform float u_time;uniform float u_ratio;uniform vec2 u_pointer_position;uniform float u_scroll_progress;vec2 rotate(vec2 uv,float th){return mat2(cos(th),sin(th),-sin(th),cos(th))*uv;}float neuro_shape(vec2 uv,float t,float p){vec2 sine_acc=vec2(0.);vec2 res=vec2(0.);float scale=8.;for(int j=0;j<15;j++){uv=rotate(uv,1.);sine_acc=rotate(sine_acc,1.);vec2 layer=uv*scale+float(j)+sine_acc-t;sine_acc+=sin(layer)+2.4*p;res+=(.5+.5*cos(layer))/scale;scale*=(1.2);}return res.x+res.y;}void main(){vec2 uv=.5*vUv;uv.x*=u_ratio;vec2 pointer=vUv-u_pointer_position;pointer.x*=u_ratio;float p=clamp(length(pointer),0.,1.);p=.5*pow(1.-p,2.);float t=.001*u_time;float noise=neuro_shape(uv,t,p);noise=1.2*pow(noise,3.);noise+=pow(noise,10.);noise=max(.0,noise-.5);noise*=(1.-length(vUv-.5));vec3 color=vec3(0.5,0.15,0.65);color=mix(color,vec3(0.02,0.7,0.9),0.32+0.16*sin(2.0*u_scroll_progress+1.2));color+=vec3(0.15,0.0,0.6)*sin(2.0*u_scroll_progress+1.5);color=color*noise;gl_FragColor=vec4(color,noise);}';function mk(src,type){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;}const prog=gl.createProgram();gl.attachShader(prog,mk(vs,gl.VERTEX_SHADER));gl.attachShader(prog,mk(fs,gl.FRAGMENT_SHADER));gl.linkProgram(prog);gl.useProgram(prog);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE);const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);const loc=gl.getAttribLocation(prog,'a_position');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);const uT=gl.getUniformLocation(prog,'u_time'),uR=gl.getUniformLocation(prog,'u_ratio'),uP=gl.getUniformLocation(prog,'u_pointer_position'),uS=gl.getUniformLocation(prog,'u_scroll_progress');const ptr={x:.5,y:.5,tX:.5,tY:.5};function resize(){const dpr=Math.min(window.devicePixelRatio,2),rect=c.parentElement.getBoundingClientRect();c.width=rect.width*dpr;c.height=rect.height*dpr;gl.viewport(0,0,c.width,c.height);gl.uniform1f(uR,c.width/c.height);}resize();window.addEventListener('resize',resize);function render(){if(document.documentElement.classList.contains('fai-leggero')){raf=0;return;}ptr.x+=(ptr.tX-ptr.x)*0.2;ptr.y+=(ptr.tY-ptr.y)*0.2;gl.uniform1f(uT,performance.now());gl.uniform2f(uP,ptr.x,1-ptr.y);gl.uniform1f(uS,window.pageYOffset/(2*window.innerHeight));gl.drawArrays(gl.TRIANGLE_STRIP,0,4);raf=requestAnimationFrame(render);}let raf=0;new IntersectionObserver(es=>{const on=es[0].isIntersecting;if(on&&!raf){raf=requestAnimationFrame(render);}else if(!on&&raf){cancelAnimationFrame(raf);raf=0;}}).observe(c);window.addEventListener('pointermove',function(e){const r=c.parentElement.getBoundingClientRect();ptr.tX=(e.clientX-r.left)/r.width;ptr.tY=(e.clientY-r.top)/r.height;});})();
 </script>
 
 <!-- MUSICA DI SOTTOFONDO -->

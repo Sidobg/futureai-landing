@@ -1,4 +1,47 @@
 /* ============================================================
+   SENTINELLA DI FLUIDITA' — vale per tutte le pagine.
+   Sui PC che non ce la fanno (schermo grande + Windows con grafica debole o
+   accelerazione spenta) il sito andava a scatti. Mentre si scorre si misura
+   per 1,5 s quanti fotogrammi arrivano in ritardo: se sono troppi per due volte, <html>
+   prende la classe "fai-leggero" (vetri sfocati spenti, sfondo animato della
+   hero spento, animazioni infinite ferme, citta' del menu ferma). Sui PC
+   buoni non scatta mai e il sito resta identico.
+   ============================================================ */
+(function(){
+  var H=document.documentElement,K='fai-leggero';
+  function attiva(){
+    if(H.classList.contains(K))return;
+    H.classList.add(K);
+    try{sessionStorage.setItem(K,'1');}catch(e){}
+    try{document.getAnimations().forEach(function(a){var t=a.effect&&a.effect.getTiming&&a.effect.getTiming();if(t&&t.iterations===Infinity)a.pause();});}catch(e){}
+    try{document.dispatchEvent(new Event(K));}catch(e){}
+  }
+  window.faiLeggero=attiva;
+  try{if(sessionStorage.getItem(K)==='1')attiva();}catch(e){}
+  var occupato=false,ultimo=-1e9,campioni=0,brutti=0;
+  function campiona(){
+    if(H.classList.contains(K)||occupato||document.hidden||campioni>=12)return;
+    if(performance.now()-ultimo<1200)return;
+    occupato=true;campioni++;
+    var n=0,lenti=0,t0=0,pr=0;
+    requestAnimationFrame(function f(t){
+      if(document.hidden){occupato=false;return;}
+      if(!t0){t0=pr=t;}
+      else{if(t-pr>1000){occupato=false;return;}   // scheda rimasta ferma: campione buttato
+        if(t-pr>40)lenti++;pr=t;n++;}
+      if(t-t0<1500){requestAnimationFrame(f);return;}
+      occupato=false;ultimo=performance.now();
+      // sotto i 20 fps, o piu' di un fotogramma su quattro oltre i 40 ms
+      // brutto = sotto i ~13 fps, o piu' di 4 fotogrammi su 10 oltre i 40 ms.
+      // Ne servono due: un singolo intoppo (fotogrammi ancora in caricamento) non basta.
+      if(n<20||lenti/n>0.4){if(++brutti>=2)attiva();}
+    });
+  }
+  addEventListener('scroll',campiona,{passive:true});
+  addEventListener('load',function(){setTimeout(campiona,1500);});
+})();
+
+/* ============================================================
    MUSICA DI SOTTOFONDO — un solo file per tutte le pagine.
 
    Parte al primo clic (Safari e iPhone accettano solo un clic completato).

@@ -1928,3 +1928,11 @@ html .ft-legale p{font-size:9px;line-height:1.55;letter-spacing:.01em;color:#B7C
   input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea,select{font-size:16px!important}
   input[type=checkbox]{width:20px;height:20px}
 }
+
+/* ===== MODALITA' LEGGERA (vedi sentinella in musica.js) =====
+   Solo sui PC che scattano: vetri sfocati spenti e fondi piu' pieni al loro posto. */
+html.fai-leggero *,html.fai-leggero *::before,html.fai-leggero *::after{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html.fai-leggero nav{background:rgba(8,11,20,.97)}
+html.fai-leggero .music-toggle{background:rgba(12,12,24,.95)}
+html.fai-leggero #heroNeuro{display:none}
+html.fai-leggero .cursor,html.fai-leggero .cursor-ring{display:none!important}
