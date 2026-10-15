@@ -8,8 +8,20 @@
 <link rel="icon" type="image/png" href="/favicon-96.png" sizes="96x96">
 <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<title>I nostri lavori – FutureAI</title>
+<title>I nostri lavori – FUTURE AI</title>
 <meta name="description" content="Progetti reali realizzati da FUTURE AI per aziende e professionisti: app, siti, automazioni e assistenti AI.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FUTURE AI">
+<meta property="og:locale" content="it_IT">
+<meta property="og:title" content="I nostri lavori – FUTURE AI">
+<meta property="og:description" content="Progetti reali realizzati da FUTURE AI per aziende e professionisti: app, siti, automazioni e assistenti AI.">
+<meta property="og:url" content="https://www.futureai.it/lavori/">
+<meta property="og:image" content="https://www.futureai.it/img/anteprima-social.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FUTURE AI – Non temere l'IA. Mettila al lavoro.">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.futureai.it/"}, {"@type": "ListItem", "position": 2, "name": "I nostri lavori", "item": "https://www.futureai.it/lavori/"}]}]}</script>
 <link rel="canonical" href="https://www.futureai.it/lavori/">
 <link href="/fonts/fonts.css" rel="stylesheet">
 <link href="/stile.css" rel="stylesheet">
@@ -59,7 +71,7 @@
       <li class="menu-voce" data-forma="4"><a href="/contatti/" class="menu-link"><span class="menu-link-testo">Contatti</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       </ul>
       <div class="menu-piede" data-menu-fade>
-        <a href="mailto:futureai@libero.it">futureai@libero.it</a>
+        <a href="mailto:info@futureai.it">info@futureai.it</a>
         <span>Siti, app e giochi creati con l'IA</span>
       </div>
     </div>
@@ -300,7 +312,7 @@ html,body{overflow-x:hidden;overflow-x:clip}   /* con solo «hidden» il telefon
       <h3>Seguici</h3>
       <ul>
         <li><a href="https://www.instagram.com/future_ai_automazioni/" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg><span>Instagram</span></a></li>
-        <li><a href="mailto:futureai@libero.it"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg><span>futureai@libero.it</span></a></li>
+        <li><a href="mailto:info@futureai.it"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg><span>info@futureai.it</span></a></li>
       </ul>
     </div>
     <div class="ft-col ft-richiamo">
@@ -323,7 +335,7 @@ html,body{overflow-x:hidden;overflow-x:clip}   /* con solo «hidden» il telefon
     </a>
   </div>
   <div class="ft-legale">
-    <p>© 2026 FUTURE AI di Sidoni Manuel · P.IVA 04923480166 · <a href="/privacy/">Privacy</a> · <a href="#" id="apriCookie">Cookie</a></p>
+    <p>© 2026 FUTURE AI di Sidoni Manuel · P.IVA 04923480166 · Via Piave 5E, Rovetta (BG) · <a href="/privacy/">Privacy</a> · <a href="#" id="apriCookie">Cookie</a></p>
     <p class="footer-trasparenza">
     <strong>Trasparenza IA</strong> — Sono generati con intelligenza artificiale:
     il video d'ingresso, il video nella sezione iniziale, il video della pagina App su misura, la clip di «Prenotazioni online»,
@@ -344,11 +356,11 @@ html,body{overflow-x:hidden;overflow-x:clip}   /* con solo «hidden» il telefon
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){dici("Controlla l'email.",false);return;}
     if(!document.getElementById('ftOk').checked){dici("Spunta la casella dell'informativa.",false);return;}
     if(Date.now()-t0<3000){dici('Fatto! Ti scriviamo presto.',true);f.reset();return;}
-    if(typeof emailjs==='undefined'){dici('Scrivici a futureai@libero.it',false);return;}
+    if(typeof emailjs==='undefined'){dici('Scrivici a info@futureai.it',false);return;}
     bt.disabled=true;bt.textContent='Invio…';
     emailjs.send('service_gemvayq','template_t3abbma',{name:'Richiesta dal piè di pagina',azienda:'',email:em,servizio:'Ti richiamiamo noi',message:'Richiesta di essere ricontattati dal piè di pagina del sito.'},{publicKey:'OwJnmLJDM9NW0S1rk'})
       .then(function(){dici('Fatto! Ti scriviamo entro 24 ore lavorative.',true);f.reset();})
-      .catch(function(err){console.error('Invio non riuscito:',err&&err.status);dici('Non è partita: scrivici a futureai@libero.it',false);})
+      .catch(function(err){console.error('Invio non riuscito:',err&&err.status);dici('Non è partita: scrivici a info@futureai.it',false);})
       .then(function(){bt.disabled=false;bt.textContent='Invia';});
   });
 })();

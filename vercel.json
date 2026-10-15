@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "futureai-beige.vercel.app" }],
+      "destination": "https://www.futureai.it/:path*",
+      "permanent": true
+    }
+  ]
+}
