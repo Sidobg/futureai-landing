@@ -150,7 +150,10 @@ html,body{overflow-x:hidden;overflow-x:clip}   /* con solo «hidden» il telefon
 .sp.su{opacity:1;transform:translate(-50%,-50%)}
 .sp[hidden],.sp-fondo[hidden]{display:none}
 .sp-video{position:relative;width:min(300px,34vh);aspect-ratio:9/16;border-radius:22px;overflow:hidden;background:#000;box-shadow:0 30px 60px -20px rgba(0,0,0,.8),0 0 50px -12px var(--c,#4DD9E0)}
-.sp-video video{width:100%;height:100%;object-fit:cover;display:block}
+.sp-video video,.sp-video img{width:100%;height:100%;object-fit:cover;display:block}
+.sp-video img{object-position:top}
+.sp-video [hidden]{display:none}
+.lv-quadro img{object-position:top}
 .sp-kick{display:flex;align-items:center;gap:.5rem;font:700 .72rem 'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--c,#4DD9E0)}
 .sp-tit{margin:.6rem 0 0;font:800 clamp(1.7rem,3vw,2.5rem)/1.02 'Bricolage Grotesque',sans-serif;letter-spacing:-.035em;color:#fff}
 .sp-cat{margin:.35rem 0 0;font-size:.95rem;color:rgba(232,237,248,.72)}
@@ -194,7 +197,7 @@ html,body{overflow-x:hidden;overflow-x:clip}   /* con solo «hidden» il telefon
 <div class="sp-fondo" id="spFondo" hidden></div>
 <section class="sp" id="sp" role="dialog" aria-modal="true" aria-labelledby="spTit" hidden>
   <button type="button" class="sp-chiudi" id="spChiudi" aria-label="Chiudi">×</button>
-  <div class="sp-video"><video id="spVideo" muted loop playsinline preload="none"></video></div>
+  <div class="sp-video"><video id="spVideo" muted loop playsinline preload="none"></video><img id="spFoto" alt="" hidden></div>
   <div class="sp-testo">
     <p class="sp-kick" id="spKick"></p>
     <h2 class="sp-tit" id="spTit"></h2>
@@ -255,10 +258,19 @@ html,body{overflow-x:hidden;overflow-x:clip}   /* con solo «hidden» il telefon
   var p=bg.play();if(p&&p.catch)p.catch(function(){});
   // prima solo lo sfondo, dopo 3 secondi escono le scritte e i quadri
   setTimeout(function(){sez.classList.add('pronto');},calmo?0:3000);
-  L.forEach(function(x,i){var li=document.createElement('li');li.className='lv-quadro';li.dataset.tipo=x.tipo;
-    li.innerHTML='<button type="button" data-i="'+i+'"><img src="/lavori/reel/quadro-'+x.id+'.webp" alt="" width="260" height="572" loading="lazy">'+
-      '<span><span class="lv-q-num">'+String(i+1).padStart(2,'0')+'</span><span class="lv-q-nome">'+x.nome+'</span><span class="lv-q-cat">'+x.cat+'</span><span class="lv-q-vai">Guarda il video →</span></span></button>';
-    parete.appendChild(li);});
+  // il muro: i lavori pubblicati da stAIsereno (con la foto) in cima, poi i 9 fissi con il reel
+  var esc=function(t){return String(t==null?'':t).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
+  function disegna(){parete.innerHTML='';
+    L.forEach(function(x,i){var li=document.createElement('li');li.className='lv-quadro';li.dataset.tipo=x.tipo;
+      li.innerHTML='<button type="button" data-i="'+i+'"><img src="'+esc(x.foto||'/lavori/reel/quadro-'+x.id+'.webp')+'" alt="" width="260" height="572" loading="lazy">'+
+        '<span><span class="lv-q-num">'+String(i+1).padStart(2,'0')+'</span><span class="lv-q-nome">'+esc(x.nome)+'</span><span class="lv-q-cat">'+esc(x.cat)+'</span><span class="lv-q-vai">'+(x.foto?'Guarda il lavoro →':'Guarda il video →')+'</span></span></button>';
+      parete.appendChild(li);});}
+  disegna();
+  // se stAIsereno non risponde il muro resta con i lavori fissi
+  try{fetch('https://staisereno-ten.vercel.app/api/sito-lavori',{mode:'cors'}).then(function(r){return r.ok?r.json():null;}).then(function(j){
+    var nuovi=(j&&Array.isArray(j.lavori)?j.lavori:[]).filter(function(x){return x&&x.nome&&x.copertina&&/^https:\/\//.test(x.copertina);}).map(function(x){
+      return {nome:x.nome,tipo:x.tipo==='prodotto'?'prodotto':'cliente',kick:x.kick||'',cat:x.cat||'',prob:x.prob||'',fa:x.fa||'',ok:x.ok||'',sito:/^https:\/\//.test(x.sito||'')?x.sito:'',foto:x.copertina};});
+    if(!nuovi.length)return;L=nuovi.concat(L);disegna();}).catch(function(){});}catch(e){}
   // lo specchietto
   var sp=document.getElementById('sp'),fondo=document.getElementById('spFondo'),vid=document.getElementById('spVideo'),att=-1,daDove=null;
   document.body.appendChild(fondo);document.body.appendChild(sp);
@@ -268,7 +280,9 @@ html,body{overflow-x:hidden;overflow-x:clip}   /* con solo «hidden» il telefon
     document.getElementById('spProb').textContent=x.prob;document.getElementById('spFa').textContent=x.fa;document.getElementById('spOk').textContent=x.ok;
     var s=document.getElementById('spSito');if(x.sito){s.hidden=false;s.href=x.sito;}else s.hidden=true;
     document.getElementById('spNota').textContent=x.ricostr?'Il video è una ricostruzione con dati di esempio: i dati veri dei clienti restano privati.':'';
-    vid.poster='/lavori/reel/cop-'+x.id+'.webp';vid.src='/lavori/reel/reel-'+x.id+'.mp4';var q=vid.play();if(q&&q.catch)q.catch(function(){});
+    var foto=document.getElementById('spFoto');
+    if(x.foto){try{vid.pause();}catch(e){}vid.removeAttribute('src');vid.removeAttribute('poster');vid.hidden=true;foto.src=x.foto;foto.hidden=false;}
+    else{foto.hidden=true;foto.removeAttribute('src');vid.hidden=false;vid.poster='/lavori/reel/cop-'+x.id+'.webp';vid.src='/lavori/reel/reel-'+x.id+'.mp4';var q=vid.play();if(q&&q.catch)q.catch(function(){});}
     sp.scrollTop=0;}
   function apri(i,da){daDove=da||null;mostra(i);fondo.hidden=false;sp.hidden=false;document.documentElement.style.overflow='hidden';
     requestAnimationFrame(function(){requestAnimationFrame(function(){fondo.classList.add('su');sp.classList.add('su');});});
