@@ -1936,3 +1936,40 @@ html.fai-leggero nav{background:rgba(8,11,20,.97)}
 html.fai-leggero .music-toggle{background:rgba(12,12,24,.95)}
 html.fai-leggero #heroNeuro{display:none}
 html.fai-leggero .cursor,html.fai-leggero .cursor-ring{display:none!important}
+
+/* ===== Report gratuito (pagina Contatti, #report) ===== */
+.rg{position:relative;z-index:1;max-width:1180px;margin:clamp(1.5rem,4vw,3rem) auto;padding:0 clamp(1.25rem,4vw,2.5rem);scroll-margin-top:90px}
+.rg-card{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(1.5rem,4vw,3.5rem);padding:clamp(1.6rem,4vw,3.2rem);border-radius:28px;color:#E8ECFF;
+  background:radial-gradient(ellipse 60% 70% at 85% 0%,rgba(108,99,255,.45),transparent 70%),radial-gradient(ellipse 50% 60% at 0% 100%,rgba(77,217,224,.22),transparent 70%),linear-gradient(160deg,#1A2A6C 0%,#0A1232 100%);
+  box-shadow:0 30px 60px -30px rgba(10,18,50,.7),inset 0 0 0 1px rgba(124,140,255,.35)}
+.rg-card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,#6C63FF,#4DD9E0)}
+.rg-benv{display:inline-block;margin:0 0 1rem;padding:.45rem .9rem;border-radius:99px;background:rgba(77,217,224,.14);border:1px solid rgba(77,217,224,.4);color:#9BF1F5;font-size:.9rem}
+.rg-tag{font-family:'Space Mono',monospace;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#4DD9E0}
+.rg h2{margin:.7rem 0 .9rem;font:800 clamp(1.8rem,3.6vw,2.7rem)/1.08 'Bricolage Grotesque',sans-serif;letter-spacing:-.02em;color:#fff}
+.rg h2 em{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;font-size:1.08em;background:linear-gradient(100deg,#9B8CFF,#4DD9E0);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.05em}
+.rg-sub{margin:0 0 1.6rem;color:#B8C1EA;font-size:1.02rem;line-height:1.6}
+.rg-cosa{list-style:none;margin:0;padding:0;display:grid;gap:.75rem;counter-reset:rg}
+.rg-cosa li{counter-increment:rg;display:grid;grid-template-columns:2.2rem 1fr;column-gap:.9rem;padding:.9rem 1rem;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09)}
+.rg-cosa li::before{content:counter(rg,decimal-leading-zero);grid-row:span 2;align-self:start;font:700 .85rem 'Space Mono',monospace;color:#071030;width:2.2rem;height:2.2rem;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#8F87FF,#4DD9E0)}
+.rg-cosa b{font:700 1rem 'Bricolage Grotesque',sans-serif;color:#fff}
+.rg-cosa span{font-size:.9rem;line-height:1.5;color:#A6B0DA}
+.rg-form{align-self:start;padding:clamp(1.3rem,3vw,2rem);border-radius:22px;background:#fff;color:#14213D;box-shadow:0 24px 50px -24px rgba(0,0,0,.6)}
+.rg-form h3{margin:0 0 1.1rem;font:800 1.3rem 'Bricolage Grotesque',sans-serif;color:#14213D}
+.rg-form .fg{margin-bottom:.95rem}
+.rg-form .fg label{display:block;margin-bottom:.35rem;font-size:.82rem;font-weight:600;color:#45506A}
+.rg-form .fg label small{font-weight:400;color:#7A849A}
+.rg-form .fg input,.rg-form .fg textarea{width:100%;padding:.78rem .9rem;border-radius:12px;border:1px solid #D9DEEA;background:#F6F7FB;color:#14213D;font:16px 'DM Sans',sans-serif}
+.rg-form .fg textarea{height:auto;min-height:84px;resize:vertical}
+.rg-form .fg input:focus,.rg-form .fg textarea:focus{outline:none;border-color:#6C63FF;box-shadow:0 0 0 3px rgba(108,99,255,.18);background:#fff}
+.rg-form .fg input:disabled{opacity:.45}
+.rg-form .form-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.rg-spunta{display:flex;align-items:center;gap:.55rem;margin:-.35rem 0 1rem;font-size:.9rem;color:#45506A;cursor:pointer}
+.rg-spunta input,.rg-form .form-presa input{width:18px;height:18px;accent-color:#6C63FF;flex:none}
+.rg-form .form-presa{display:flex;gap:.6rem;align-items:flex-start;margin:.2rem 0 1.1rem;font-size:.85rem;line-height:1.45;color:#45506A}
+.rg-form .form-presa a{color:#5B4BDB}
+.rg-form .btn-submit{width:100%}
+.rg-esito{margin:.8rem 0 0;font-size:.92rem;text-align:center;min-height:1.2em}
+.rg-esito.ok{color:#0E7A4E;font-weight:600}.rg-esito.no{color:#C0392B}
+.rg-form.fatto .fg,.rg-form.fatto .rg-spunta,.rg-form.fatto .form-presa,.rg-form.fatto .form-row{display:none}
+@media(max-width:900px){.rg-card{grid-template-columns:1fr}}
+@media(max-width:520px){.rg-form .form-row{grid-template-columns:1fr;gap:0}.rg-card{border-radius:22px}}

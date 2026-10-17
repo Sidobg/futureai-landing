@@ -2,9 +2,29 @@
   "redirects": [
     {
       "source": "/(.*)",
-      "has": [{ "type": "host", "value": "futureai-beige.vercel.app" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "futureai-beige.vercel.app"
+        }
+      ],
       "destination": "https://www.futureai.it/$1",
       "permanent": true
+    },
+    {
+      "source": "/report",
+      "destination": "/contatti/?da=volantino#report",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/report",
+      "destination": "https://staisereno-ten.vercel.app/api/report-richiesta"
+    },
+    {
+      "source": "/r/:slug",
+      "destination": "https://staisereno-ten.vercel.app/api/report-pagina?s=:slug"
     }
   ]
 }
