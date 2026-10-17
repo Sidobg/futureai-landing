@@ -1973,3 +1973,23 @@ html.fai-leggero .cursor,html.fai-leggero .cursor-ring{display:none!important}
 .rg-form.fatto .fg,.rg-form.fatto .rg-spunta,.rg-form.fatto .form-presa,.rg-form.fatto .form-row{display:none}
 @media(max-width:900px){.rg-card{grid-template-columns:1fr}}
 @media(max-width:520px){.rg-form .form-row{grid-template-columns:1fr;gap:0}.rg-card{border-radius:22px}}
+
+/* Contatti: richiamo alla pagina del report gratuito */
+.rg-richiamo .rg-card{grid-template-columns:minmax(0,1fr) auto;align-items:center;text-decoration:none;transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s}
+.rg-richiamo .rg-card:hover{transform:translateY(-3px)}
+.rg-richiamo .rg-sub{margin:0}
+.rg-vai{display:inline-flex;align-items:center;gap:.8rem;padding:1rem 1.2rem 1rem 1.6rem;border-radius:99px;background:#F3EFE6;color:#0E1636;font:700 1.02rem 'Bricolage Grotesque',sans-serif;white-space:nowrap}
+.rg-vai b{display:grid;place-items:center;width:1.9rem;height:1.9rem;border-radius:50%;background:linear-gradient(135deg,#6C63FF,#4DD9E0);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.rg-richiamo .rg-card:hover .rg-vai b{transform:translateX(4px)}
+@media(max-width:900px){.rg-richiamo .rg-card{grid-template-columns:1fr}.rg-vai{justify-self:start}}
+
+/* Barra in alto: il bottone del report gratuito, in ambra per staccare dal gradiente di «Richiedi preventivo» */
+.nav-report{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem 1.15rem;border-radius:100px;background:#FFB547;color:#1B1004!important;
+  font-weight:700;font-size:.92rem;text-decoration:none;white-space:nowrap;box-shadow:0 8px 22px -8px rgba(255,181,71,.75);transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s,background .25s}
+.nav-report:hover{transform:translateY(-1px);background:#FFC56B;box-shadow:0 12px 26px -8px rgba(255,181,71,.9)}
+.nav-report i{width:8px;height:8px;border-radius:50%;background:#1B1004;position:relative}
+.nav-report i::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(27,16,4,.45);animation:navReport 2s ease-out infinite}
+@keyframes navReport{0%{transform:scale(.5);opacity:1}100%{transform:scale(1.6);opacity:0}}
+@media(max-width:768px){.nav-report{padding:.5rem .9rem;font-size:.85rem}}
+@media(max-width:360px){.nav-report{padding:.45rem .75rem;font-size:.8rem}}
+@media(prefers-reduced-motion:reduce){.nav-report i::after{animation:none}}

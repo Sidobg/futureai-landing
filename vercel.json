@@ -13,7 +13,7 @@
     },
     {
       "source": "/report",
-      "destination": "/contatti/?da=volantino#report",
+      "destination": "/report-gratuito/?da=volantino",
       "permanent": false
     }
   ],
@@ -25,6 +25,10 @@
     {
       "source": "/r/:slug",
       "destination": "https://staisereno-ten.vercel.app/api/report-pagina?s=:slug"
+    },
+    {
+      "source": "/api/visita",
+      "destination": "https://staisereno-ten.vercel.app/api/sito-visita"
     }
   ]
 }

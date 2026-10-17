@@ -41,6 +41,7 @@
 <nav>
   <a href="#" class="nav-logo"></a>
   <div class="nav-destra">
+    <a href="/report-gratuito/" class="nav-report"><i aria-hidden="true"></i>Report gratuito</a>
     <a href="/contatti/" class="nav-cta">Richiedi Preventivo</a>
     <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuSchermo">
       <span class="menu-btn-testo"><span>Menu</span><span>Chiudi</span></span>
@@ -68,6 +69,7 @@
       <li class="menu-voce" data-forma="4"><a href="/intelligenza-artificiale/" class="menu-link"><span class="menu-link-testo">Mondo AI</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       <li class="menu-voce" data-forma="3"><a href="/giochi/" class="menu-link"><span class="menu-link-testo">Giochi aziendali</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       <li class="menu-voce" data-forma="3"><a href="/lavori/" class="menu-link"><span class="menu-link-testo">I nostri lavori</span></a><span class="menu-riga" aria-hidden="true"></span></li>
+      <li class="menu-voce" data-forma="4"><a href="/report-gratuito/" class="menu-link"><span class="menu-link-testo">Report gratuito</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       <li class="menu-voce" data-forma="4"><a href="/contatti/" class="menu-link"><span class="menu-link-testo">Contatti</span></a><span class="menu-riga" aria-hidden="true"></span></li>
       </ul>
       <div class="menu-piede" data-menu-fade>
@@ -92,42 +94,15 @@
   <div><b>2</b><span><h3>Ti richiamiamo</h3><p>Entro 24 ore lavorative, per una chiacchierata gratuita e senza impegno.</p></span></div>
   <div><b>3</b><span><h3>Ti mostriamo l'idea</h3><p>Un'anteprima e un preventivo chiaro, prima di iniziare qualsiasi lavoro.</p></span></div>
 </div>
-<section class="rg" id="report" aria-labelledby="rgTit">
-  <div class="rg-card">
+<section class="rg rg-richiamo" id="report" aria-labelledby="rgTit">
+  <a class="rg-card" href="/report-gratuito/">
     <div class="rg-testo">
-      <p class="rg-benv" id="rgBenv" hidden>👋 Benvenuto dal volantino: sei nel posto giusto.</p>
       <div class="rg-tag">— Report gratuito</div>
-      <h2 id="rgTit">Quanto tempo potrebbe <em>risparmiare</em> la tua azienda?</h2>
-      <p class="rg-sub">Ti mandiamo un report sulla tua attività, preparato su di te in pochi giorni. Gratis e senza impegno.</p>
-      <ol class="rg-cosa">
-        <li><b>Come ti trovano oggi</b><span>su Google e su Maps, rispetto ai concorrenti della tua zona.</span></li>
-        <li><b>Se le IA ti consigliano</b><span>cosa rispondono ChatGPT, Gemini e Claude quando qualcuno cerca quello che fai.</span></li>
-        <li><b>Il tuo sito, dal telefono</b><span>cosa funziona, cosa manca e cosa fa scappare i clienti.</span></li>
-        <li><b>3 cose da automatizzare</b><span>con una stima delle ore che ti restituiscono ogni settimana.</span></li>
-      </ol>
+      <h2 id="rgTit">Vuoi sapere come ti vedono <em>i tuoi clienti?</em></h2>
+      <p class="rg-sub">Ti mandiamo un report sulla tua attività: Google, intelligenze artificiali, sito dal telefono e tre lavori da automatizzare. Gratis, in 3 giorni lavorativi.</p>
     </div>
-    <form class="rg-form" id="rgForm" novalidate>
-      <h3>Richiedi il tuo report</h3>
-      <div class="fg rg-sito-campo">
-        <label for="rgSito">Il sito della tua attività *</label>
-        <input id="rgSito" name="sito" type="text" inputmode="url" placeholder="www.latuaattivita.it" autocomplete="url">
-      </div>
-      <label class="rg-spunta"><input type="checkbox" id="rgSenza" name="senza_sito"><span>Non ho un sito</span></label>
-      <div class="form-row">
-        <div class="fg"><label for="rgAtt" id="rgAttEt">Nome dell'attività</label><input id="rgAtt" name="attivita" type="text" placeholder="Forno Rossi" autocomplete="organization"></div>
-        <div class="fg"><label for="rgCitta" id="rgCittaEt">Città</label><input id="rgCitta" name="citta" type="text" placeholder="Clusone" autocomplete="address-level2"></div>
-      </div>
-      <div class="fg"><label for="rgObi">Cosa ti fa perdere più tempo?</label><textarea id="rgObi" name="obiettivo" rows="3" placeholder="Es. rispondo tutto il giorno al telefono, ricopio gli ordini a mano…"></textarea></div>
-      <div class="form-row">
-        <div class="fg"><label for="rgNome">Il tuo nome *</label><input id="rgNome" name="nome" type="text" placeholder="Mario" autocomplete="given-name"></div>
-        <div class="fg"><label for="rgWa">WhatsApp</label><input id="rgWa" name="whatsapp" type="tel" placeholder="facoltativo" autocomplete="tel"></div>
-      </div>
-      <div class="fg"><label for="rgEmail">Email * <small>(ti mandiamo qui il report)</small></label><input id="rgEmail" name="email" type="email" placeholder="mario@latuaattivita.it" autocomplete="email"></div>
-      <label class="form-presa"><input type="checkbox" id="rgOk"><span>Ho letto l'<a href="/privacy/" target="_blank" rel="noopener">informativa privacy</a>: i miei dati servono solo a preparare e mandarmi il report.</span></label>
-      <button type="submit" class="btn-submit" id="rgBtn">Voglio il report gratuito →</button>
-      <p class="rg-esito" id="rgEsito" role="status" aria-live="polite"></p>
-    </form>
-  </div>
+    <span class="rg-vai">Richiedi il report<b aria-hidden="true">→</b></span>
+  </a>
 </section>
 
 <div class="contact-section" id="contatti">
@@ -218,6 +193,7 @@
         <li><a href="/siti-web/">Siti Web</a></li>
         <li><a href="/giochi/">Giochi aziendali</a></li>
         <li><a href="/lavori/">I nostri lavori</a></li>
+        <li><a href="/report-gratuito/">Report gratuito</a></li>
         <li><a href="/contatti/">Contatti</a></li>
         <li><a href="/privacy/">Privacy</a></li>
       </ul>
@@ -260,35 +236,6 @@
     </p>
   </div>
 </footer>
-<script>
-/* Report gratuito: la richiesta va a /api/report (rewrite di Vercel verso il gestionale di FUTURE AI) e arriva come notifica a Manuel.
-   ?da=volantino (QR del volantino) porta qui e lo segna sulla richiesta. Anti-spam a tempo: niente campi nascosti (l'autocompilazione li riempie). */
-(function(){
-  var f=document.getElementById('rgForm');if(!f)return;
-  var t0=Date.now(),q=new URLSearchParams(location.search),da=(q.get('da')||'').toLowerCase().replace(/[^a-z0-9-]/g,'').slice(0,30)||'sito';
-  if(da==='volantino'){document.getElementById('rgBenv').hidden=false;}
-  if(da!=='sito'||location.hash==='#report'){setTimeout(function(){var r=document.getElementById('report');if(r)r.scrollIntoView({behavior:'smooth',block:'start'});},400);}
-  var senza=document.getElementById('rgSenza'),sito=document.getElementById('rgSito'),es=document.getElementById('rgEsito'),bt=document.getElementById('rgBtn');
-  function aggiornaSenza(){var s=senza.checked;f.classList.toggle('senza',s);sito.disabled=s;
-    document.getElementById('rgAttEt').textContent="Nome dell'attività"+(s?' *':'');document.getElementById('rgCittaEt').textContent='Città'+(s?' *':'');}
-  senza.addEventListener('change',aggiornaSenza);aggiornaSenza();
-  function dici(t,ok){es.textContent=t;es.className='rg-esito '+(ok?'ok':'no');}
-  f.addEventListener('submit',function(e){e.preventDefault();
-    var v=function(id){return document.getElementById(id).value.trim();};
-    var d={sito:v('rgSito'),senza_sito:senza.checked,attivita:v('rgAtt'),citta:v('rgCitta'),obiettivo:v('rgObi'),nome:v('rgNome'),whatsapp:v('rgWa'),email:v('rgEmail'),privacy:document.getElementById('rgOk').checked,da:da,ms:Date.now()-t0};
-    if(!d.senza_sito&&!/\./.test(d.sito)){dici("Scrivi l'indirizzo del sito, oppure spunta «Non ho un sito».",false);return;}
-    if(d.senza_sito&&(!d.attivita||!d.citta)){dici("Senza sito ci servono il nome dell'attività e la città.",false);return;}
-    if(!d.nome){dici('Scrivi il tuo nome.',false);return;}
-    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)){dici("Controlla l'email: è lì che ti mandiamo il report.",false);return;}
-    if(!d.privacy){dici("Spunta la casella dell'informativa privacy.",false);return;}
-    bt.disabled=true;bt.textContent='Invio…';
-    fetch('/api/report',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
-      .then(function(r){return r.json().catch(function(){return {};}).then(function(j){if(!r.ok)throw new Error(j.errore||'');return j;});})
-      .then(function(){f.reset();aggiornaSenza();f.classList.add('fatto');dici('Fatto! Ti scriviamo entro 3 giorni lavorativi con il tuo report.',true);bt.textContent='Richiesta inviata ✓';})
-      .catch(function(err){dici(err.message||'Non è partita: riprova o scrivici a info@futureai.it',false);bt.disabled=false;bt.textContent='Voglio il report gratuito →';});
-  });
-})();
-</script>
 <script>
 /* «Ti richiamiamo noi»: la richiesta arriva via email come il modulo contatti (EmailJS).
    Anti-spam a tempo, casella dell'informativa obbligatoria, nei log niente email. */
@@ -624,5 +571,6 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
 <script src="/assistente.js" defer></script>
 <script src="https://aicookie.vercel.app/e/futureai.js" defer></script>
 <script src="/whatsapp.js" defer></script>
+<script src="/visita.js" defer></script>
 </body>
 </html>

@@ -110,6 +110,7 @@ html .ft-legale a{color:#C9D1E3}
     <tbody>
       <tr><td><strong>Navighi il sito</strong></td><td>indirizzo IP e dati tecnici della connessione (browser, pagina richiesta)</td><td>mostrarti le pagine e proteggere il sito da abusi</td><td>legittimo interesse (art. 6.1.f GDPR)</td></tr>
       <tr><td><strong>Compili il modulo «Richiedi preventivo» o «Ti richiamiamo noi» in fondo alle pagine</strong></td><td>nome, azienda (se la indichi), email, servizio di interesse, messaggio</td><td>rispondere alla tua richiesta e prepararti un preventivo</td><td>misure precontrattuali su tua richiesta (art. 6.1.b GDPR)</td></tr>
+      <tr><td><strong>Resti qualche secondo su una pagina</strong></td><td>la pagina, il sito da cui arrivi (per esempio Google), il tipo di dispositivo e l'ora; nessun cookie, nessun identificativo, l'indirizzo IP non viene salvato</td><td>contare le visite del giorno e sapere quando qualcuno sta guardando il sito, per poter rispondere in fretta</td><td>legittimo interesse (art. 6.1.f GDPR)</td></tr>
       <tr><td><strong>Chiedi il «Report gratuito» dalla pagina Contatti</strong></td><td>sito e nome dell'attività, città, cosa vorresti migliorare (se lo scrivi), il tuo nome, email, numero WhatsApp (se lo indichi)</td><td>preparare il report sulla tua attività, mandartelo e risponderti se vuoi parlarne</td><td>misure precontrattuali su tua richiesta (art. 6.1.b GDPR)</td></tr>
       <tr><td><strong>Apri il link del tuo report</strong> (futureai.it/r/…)</td><td>data e ora di apertura e tipo di dispositivo (telefono, tablet o computer); l'indirizzo IP non viene salvato</td><td>sapere se il report ti è arrivato e quando ricontattarti</td><td>legittimo interesse (art. 6.1.f GDPR)</td></tr>
       <tr><td><strong>Accetti le statistiche</strong></td><td>pagina vista, sito di provenienza, tipo di dispositivo e paese, in forma aggregata</td><td>capire quali pagine sono utili, contando le visite</td><td>consenso (art. 6.1.a GDPR), revocabile in ogni momento</td></tr>
@@ -134,6 +135,7 @@ html .ft-legale a{color:#C9D1E3}
   <ul>
     <li><strong>Dati tecnici di navigazione:</strong> il tempo della visita, più i log di sicurezza dell'hosting per il periodo previsto da Vercel (di norma pochi giorni).</li>
     <li><strong>Richieste dal modulo:</strong> 12 mesi dalla nostra ultima risposta, poi le cancelliamo. Se diventi cliente, i dati passano al contratto e seguono i suoi tempi.</li>
+    <li><strong>Conteggio delle visite:</strong> teniamo solo il numero del giorno e le ultime 40 visite (pagina, provenienza, dispositivo, ora), che si sovrascrivono da sole.</li>
     <li><strong>Richieste di report e aperture del link:</strong> 12 mesi dall'invio del report, poi le cancelliamo; puoi chiederci di cancellarle prima in ogni momento.</li>
     <li><strong>Statistiche:</strong> solo in forma aggregata e anonima, senza collegamento alla tua persona.</li>
     <li><strong>Documenti fiscali</strong> (preventivi accettati, fatture): 10 anni, come chiede la legge.</li>
@@ -145,7 +147,7 @@ html .ft-legale a{color:#C9D1E3}
     <li>la scelta che fai nel riquadro dei cookie (<em>futureai-cookie</em>);</li>
     <li>se hai spento la musica di sottofondo, così non riparte alla visita successiva.</li>
   </ul>
-  <p>Se <strong>accetti le statistiche</strong> attiviamo Vercel Web Analytics: conta le visite alle pagine senza salvare cookie sul tuo dispositivo e senza seguirti su altri siti. I dati arrivano a noi solo come totali (quante visite, da quali pagine, da che tipo di dispositivo). Se scegli «Solo necessari», le statistiche non partono proprio.</p>
+  <p>Se <strong>accetti le statistiche</strong> attiviamo Vercel Web Analytics: conta le visite alle pagine senza salvare cookie sul tuo dispositivo e senza seguirti su altri siti. I dati arrivano a noi solo come totali (quante visite, da quali pagine, da che tipo di dispositivo). Se scegli «Solo necessari», le statistiche di Vercel non partono proprio: resta solo il conteggio anonimo delle visite descritto sopra, che non salva niente sul tuo dispositivo e non ti identifica.</p>
   <div class="box">
     <p style="margin:0">Puoi cambiare idea in ogni momento, qui o dal link «Cookie» in fondo a ogni pagina.</p>
     <button class="btn" type="button" data-scelta="tutti">Accetto le statistiche</button>
@@ -194,6 +196,7 @@ html .ft-legale a{color:#C9D1E3}
         <li><a href="/siti-web/">Siti Web</a></li>
         <li><a href="/giochi/">Giochi aziendali</a></li>
         <li><a href="/lavori/">I nostri lavori</a></li>
+        <li><a href="/report-gratuito/">Report gratuito</a></li>
         <li><a href="/contatti/">Contatti</a></li>
         <li><a href="/privacy/">Privacy</a></li>
       </ul>
@@ -274,5 +277,6 @@ html .ft-legale a{color:#C9D1E3}
 </script>
 <script src="https://aicookie.vercel.app/e/futureai.js" defer></script>
 <script src="/whatsapp.js" defer></script>
+<script src="/visita.js" defer></script>
 </body>
 </html>
