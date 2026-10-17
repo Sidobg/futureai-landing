@@ -94,16 +94,6 @@
   <div><b>2</b><span><h3>Ti richiamiamo</h3><p>Entro 24 ore lavorative, per una chiacchierata gratuita e senza impegno.</p></span></div>
   <div><b>3</b><span><h3>Ti mostriamo l'idea</h3><p>Un'anteprima e un preventivo chiaro, prima di iniziare qualsiasi lavoro.</p></span></div>
 </div>
-<section class="rg rg-richiamo" id="report" aria-labelledby="rgTit">
-  <a class="rg-card" href="/report-gratuito/">
-    <div class="rg-testo">
-      <div class="rg-tag">— Report gratuito</div>
-      <h2 id="rgTit">Vuoi sapere come ti vedono <em>i tuoi clienti?</em></h2>
-      <p class="rg-sub">Ti mandiamo un report sulla tua attività: Google, intelligenze artificiali, sito dal telefono e tre lavori da automatizzare. Gratis, in 3 giorni lavorativi.</p>
-    </div>
-    <span class="rg-vai">Richiedi il report<b aria-hidden="true">→</b></span>
-  </a>
-</section>
 
 <div class="contact-section" id="contatti">
   <div class="contact-inner">
@@ -177,6 +167,78 @@
   </div>
 </div>
 
+<!-- ===== Modulo del report gratuito (uguale nella pagina Report gratuito e in Contatti) ===== -->
+<section class="rgp-modulo" id="report" aria-labelledby="rgpModTit">
+  <div class="rgp-modulo-testa">
+    <div>
+      <p class="rgp-occhiello">— Report gratuito</p>
+      <h2 id="rgpModTit">Tre domande, <em>due minuti.</em></h2>
+      <p class="rgp-modulo-sub">Così facendo, nel report vedi i tuoi punti di forza, i punti deboli, dove possiamo aiutarti e come ti vedono gli altri.</p>
+    </div>
+    <ul class="rgp-promesse" aria-label="Come funziona">
+      <li><b>0 €</b><span>gratis davvero</span></li>
+      <li><b>0</b><span>registrazioni</span></li>
+      <li><b>poche ore</b><span>per il riscontro</span></li>
+    </ul>
+  </div>
+  <div class="rgp-modulo-griglia">
+    <div class="rgp-cop-colonna">
+      <div class="rgp-copertina" id="rgpCop" aria-hidden="true">
+        <span class="rgp-cop-anelli"></span>
+        <p class="rgp-cop-data">Check-up digitale · <span id="copData">oggi</span></p>
+        <p class="rgp-cop-tit"><span id="copNome">La tua attività</span>,<br><em>ecco cosa abbiamo visto.</em></p>
+        <div class="rgp-cop-indice"><b>?</b><small>/100</small><span>Indice FUTURE AI</span></div>
+        <ul class="rgp-cop-righe"><li>Reputazione su Google</li><li>Sito dal telefono</li><li>Leggibile dalle IA</li><li>Facilità di contatto</li><li>Tempo da recuperare</li></ul>
+        <p class="rgp-cop-piede"><span id="copCitta">Preparato da FUTURE AI</span></p>
+        <span class="rgp-cop-timbro" id="copTimbro">In preparazione</span>
+      </div>
+      <p class="rgp-cop-nota">È la copertina del tuo report: si scrive mentre compili.</p>
+    </div>
+
+    <form class="rgp-form" id="rgForm" novalidate>
+      <fieldset>
+        <legend><b>1</b>La tua attività</legend>
+        <div class="rgp-campo"><label for="rgSito">Il sito internet</label><input id="rgSito" name="sito" type="text" inputmode="url" placeholder="www.latuaattivita.it" autocomplete="url"></div>
+        <label class="rgp-spunta"><input type="checkbox" id="rgSenza"><span>Non ho un sito</span></label>
+        <div class="rgp-due">
+          <div class="rgp-campo"><label for="rgAtt" id="rgAttEt">Nome dell'attività</label><input id="rgAtt" name="attivita" type="text" placeholder="Forno Rossi" autocomplete="organization"></div>
+          <div class="rgp-campo"><label for="rgCitta" id="rgCittaEt">Città</label><input id="rgCitta" name="citta" type="text" placeholder="Clusone" autocomplete="address-level2"></div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><b>2</b>Cosa ti ruba più tempo?</legend>
+        <div class="rgp-scelte" id="rgScelte" role="group" aria-label="Scegli una o più voci">
+          <button type="button" aria-pressed="false">Il telefono che squilla</button>
+          <button type="button" aria-pressed="false">Appuntamenti e prenotazioni</button>
+          <button type="button" aria-pressed="false">Preventivi</button>
+          <button type="button" aria-pressed="false">Fatture e documenti</button>
+          <button type="button" aria-pressed="false">Farmi trovare online</button>
+          <button type="button" aria-pressed="false">Rispondere ai clienti</button>
+        </div>
+        <div class="rgp-campo"><label for="rgObi">Vuoi aggiungere qualcosa? <small>facoltativo</small></label><textarea id="rgObi" name="obiettivo" rows="3" placeholder="Es. ricopio a mano gli ordini che arrivano su WhatsApp…"></textarea></div>
+      </fieldset>
+      <fieldset>
+        <legend><b>3</b>Dove te lo mandiamo</legend>
+        <div class="rgp-due">
+          <div class="rgp-campo"><label for="rgNome">Il tuo nome</label><input id="rgNome" name="nome" type="text" placeholder="Mario" autocomplete="given-name"></div>
+          <div class="rgp-campo"><label for="rgWa">WhatsApp <small>facoltativo</small></label><input id="rgWa" name="whatsapp" type="tel" placeholder="333 123 4567" autocomplete="tel"></div>
+        </div>
+        <div class="rgp-campo"><label for="rgEmail">Email</label><input id="rgEmail" name="email" type="email" placeholder="mario@latuaattivita.it" autocomplete="email"></div>
+      </fieldset>
+      <label class="rgp-privacy"><input type="checkbox" id="rgOk"><span>Ho letto l'<a href="/privacy/" target="_blank" rel="noopener">informativa privacy</a>: i miei dati servono solo a preparare e mandarmi il report.</span></label>
+      <button type="submit" class="rgp-invia" id="rgBtn"><span>Voglio il mio report</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <p class="rgp-sotto-invio">Nessuna registrazione, nessuna password, nessuna chiamata commerciale.</p>
+      <p class="rgp-esito" id="rgEsito" role="status" aria-live="polite"></p>
+    </form>
+
+    <div class="rgp-fatto" id="rgFatto" hidden>
+      <p class="rgp-occhiello">— Ricevuto</p>
+      <h3>Il report di <em id="fattoNome">la tua attività</em> è in preparazione.</h3>
+      <p>Lo scriviamo guardando la tua attività come farebbe un cliente nuovo. In poche ore ti arriva il link all'email che ci hai lasciato.</p>
+      <p class="rgp-fatto-piccolo">Nel frattempo, se vuoi raccontarci qualcosa in più: <a href="https://wa.me/393272727775?text=Ciao%20Manuel%2C%20ho%20appena%20chiesto%20il%20report%20gratuito." target="_blank" rel="noopener">scrivici su WhatsApp</a>.</p>
+    </div>
+  </div>
+</section>
 </main>
 
 <!-- FOOTER -->
@@ -571,6 +633,7 @@ window.avviaStatistiche=function(){ if(window.__statsAvviate)return; window.__st
 <script src="/assistente.js" defer></script>
 <script src="https://aicookie.vercel.app/e/futureai.js" defer></script>
 <script src="/whatsapp.js" defer></script>
+<script src="/report-modulo.js" defer></script>
 <script src="/visita.js" defer></script>
 </body>
 </html>
