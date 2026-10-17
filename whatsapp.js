@@ -7,6 +7,8 @@
    ============================================================ */
 (function () {
   if (document.getElementById('waTasto')) return;
+  /* il pulsante fisso solo nella pagina Contatti (scelta di Manuel); altrove resta la voce nel piè di pagina e nel menu */
+  if (!/^\/contatti\/?$/.test(location.pathname)) return;
   var NUMERO = '393272727775';
   var TESTO = 'Ciao Manuel, ho visto il sito di FUTURE AI e vorrei qualche informazione.';
   var LINK = 'https://wa.me/' + NUMERO + '?text=' + encodeURIComponent(TESTO);
