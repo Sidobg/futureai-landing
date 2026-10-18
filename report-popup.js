@@ -1,6 +1,6 @@
 /* ============================================================
    RIQUADRO DEL REPORT GRATUITO — un solo file per tutte le pagine.
-   Dopo 20 secondi passati davvero sulla pagina (scheda in primo piano) propone il report gratuito
+   Dopo 10 secondi passati davvero sulla pagina (scheda in primo piano) propone il report gratuito
    con un modulo corto, che manda la richiesta a /api/report come la pagina /report-gratuito/ (provenienza «popup»).
    Non compare: nelle pagine che hanno già il modulo (Report gratuito, Contatti), sulla privacy e sul gioco;
    per 7 giorni dopo averlo chiuso; mai più dopo aver chiesto il report; sui dispositivi di Manuel (?sono-io=1).
@@ -16,8 +16,8 @@
   if (stato === 'inviato' || (stato && Date.now() - Number(stato) < SETTE_GIORNI)) return;
   if (navigator.webdriver) return;
 
-  /* 20 secondi di presenza vera: il tempo con la scheda nascosta non conta */
-  var resta = 20000, ultimo = Date.now(), timer = null;
+  /* 10 secondi di presenza vera: il tempo con la scheda nascosta non conta */
+  var resta = 10000, ultimo = Date.now(), timer = null, attese = 0;
   function parti() { clearTimeout(timer); ultimo = Date.now(); timer = setTimeout(mostra, resta); }
   function ferma() { clearTimeout(timer); resta -= Date.now() - ultimo; if (resta < 0) resta = 0; }
   document.addEventListener('visibilitychange', function () { document.hidden ? ferma() : parti(); });
@@ -27,6 +27,12 @@
     /* se il menu a tutto schermo è aperto, aspetta che si chiuda */
     var menu = document.getElementById('menuSchermo');
     if (menu && menu.getAttribute('data-nav') === 'open') { resta = 4000; return parti(); }
+    /* e se c'è ancora il riquadro dei cookie, aspetta che la persona risponda (al massimo 3 minuti) */
+    var cookie = [].slice.call(document.querySelectorAll('[id*="cookie" i],[class*="cookie" i]')).filter(function (el) {
+      if (el.closest('.rpp')) return false; var r = el.getBoundingClientRect(), cs = getComputedStyle(el);
+      return r.height > 60 && r.width > 120 && cs.visibility !== 'hidden' && cs.display !== 'none' && +cs.opacity > 0.1 && (cs.position === 'fixed' || cs.position === 'sticky');
+    })[0];
+    if (cookie && (attese = (attese || 0) + 1) < 45) { resta = 4000; return parti(); }
     var st = document.createElement('style');
     st.textContent =
       '.rpp-velo{position:fixed;inset:0;z-index:9990;background:rgba(5,9,26,.55);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;transition:opacity .35s}' +
@@ -70,8 +76,8 @@
       '<ul class="rpp-dentro-lista"><li>Punti di forza</li><li>Punti deboli</li><li>Come ti trovano su Google e sulle IA</li><li>Dove possiamo aiutarti</li></ul>' +
       '<form novalidate>' +
       '<div class="rpp-sito"><label class="rpp-et" for="rppSito">Il sito della tua attività</label><input id="rppSito" type="text" inputmode="url" placeholder="www.latuaattivita.it" autocomplete="url"></div>' +
-      '<div class="rpp-due rpp-nascosto"><div><label class="rpp-et" for="rppAtt">Nome dell\'attività</label><input id="rppAtt" type="text" placeholder="Forno Rossi" autocomplete="organization"></div><div><label class="rpp-et" for="rppCitta">Città</label><input id="rppCitta" type="text" placeholder="Clusone" autocomplete="address-level2"></div></div>' +
       '<label class="rpp-spunta"><input type="checkbox" id="rppSenza"><span>Non ho un sito</span></label>' +
+      '<div class="rpp-due rpp-nascosto"><div><label class="rpp-et" for="rppAtt">Nome dell\'azienda *</label><input id="rppAtt" type="text" placeholder="Forno Rossi" autocomplete="organization"></div><div><label class="rpp-et" for="rppCitta">Paese o città *</label><input id="rppCitta" type="text" placeholder="Clusone" autocomplete="address-level2"></div></div>' +
       '<div class="rpp-due"><div><label class="rpp-et" for="rppNome">Il tuo nome</label><input id="rppNome" type="text" placeholder="Mario" autocomplete="given-name"></div><div><label class="rpp-et" for="rppEmail">Email</label><input id="rppEmail" type="email" placeholder="mario@email.it" autocomplete="email"></div></div>' +
       '<label class="rpp-spunta"><input type="checkbox" id="rppOk"><span>Ho letto l\'<a href="/privacy/" target="_blank" rel="noopener">informativa privacy</a>: i dati servono solo per il report.</span></label>' +
       '<button class="rpp-invia" type="submit">Ricevi il mio report gratuito →</button>' +
@@ -100,15 +106,16 @@
     box.querySelector('.rpp-chiudi').addEventListener('click', function () { chiudi(false); });
     box.querySelector('.rpp-no').addEventListener('click', function () { chiudi(false); });
     var senza = box.querySelector('#rppSenza');
-    senza.addEventListener('change', function () { box.classList.toggle('senza', senza.checked); });
+    senza.addEventListener('change', function () { box.classList.toggle('senza', senza.checked); if (senza.checked) box.querySelector('#rppAtt').focus(); });
     var form = box.querySelector('form'), es = box.querySelector('.rpp-esito'), bt = box.querySelector('.rpp-invia');
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var v = function (id) { return box.querySelector('#' + id).value.trim(); };
       var d = { sito: senza.checked ? '' : v('rppSito'), senza_sito: senza.checked, attivita: v('rppAtt'), citta: v('rppCitta'), obiettivo: '', nome: v('rppNome'), whatsapp: '', email: v('rppEmail'),
-        privacy: box.querySelector('#rppOk').checked, da: 'popup', ms: Date.now() - t0 + 20000 };
+        privacy: box.querySelector('#rppOk').checked, da: 'popup', ms: Date.now() - t0 + 10000 };
       if (!d.senza_sito && !/\./.test(d.sito)) { es.textContent = "Scrivi l'indirizzo del sito, oppure spunta «Non ho un sito»."; return; }
-      if (d.senza_sito && (!d.attivita || !d.citta)) { es.textContent = "Senza sito ci servono il nome dell'attività e la città."; return; }
+      if (d.senza_sito && !d.attivita) { es.textContent = "Senza sito scrivi il nome della tua azienda: il report lo facciamo su quello."; box.querySelector('#rppAtt').focus(); return; }
+      if (d.senza_sito && !d.citta) { es.textContent = "Scrivi anche il paese o la città, per trovarti su Google."; box.querySelector('#rppCitta').focus(); return; }
       if (!d.nome) { es.textContent = 'Scrivi il tuo nome.'; return; }
       if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)) { es.textContent = "Controlla l'email: è lì che ti mandiamo il report."; return; }
       if (!d.privacy) { es.textContent = "Spunta la casella dell'informativa privacy."; return; }

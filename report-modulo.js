@@ -16,7 +16,7 @@
   /* senza sito: servono nome e città */
   var senza=$('rgSenza'),sito=$('rgSito');
   function aggiornaSenza(){var s=senza.checked;sito.disabled=s;if(s)sito.value='';
-    $('rgAttEt').textContent="Nome dell'attività"+(s?' *':'');$('rgCittaEt').textContent='Città'+(s?' *':'');copertina();}
+    $('rgAttEt').textContent="Nome dell'azienda"+(s?' *':'');$('rgCittaEt').textContent='Paese o città'+(s?' *':'');copertina();if(s)$('rgAtt').focus();}
   senza.addEventListener('change',aggiornaSenza);aggiornaSenza();
   /* le scelte rapide */
   var scelte=[].slice.call(document.querySelectorAll('#rgScelte button'));
@@ -29,7 +29,8 @@
     var obi=(spunte.length?'Mi ruba tempo: '+spunte.join(', ').toLowerCase()+'. ':'')+v('rgObi');
     var d={sito:v('rgSito'),senza_sito:senza.checked,attivita:v('rgAtt'),citta:v('rgCitta'),obiettivo:obi.trim(),nome:v('rgNome'),whatsapp:v('rgWa'),email:v('rgEmail'),privacy:$('rgOk').checked,da:da,ms:Date.now()-t0};
     if(!d.senza_sito&&!/\./.test(d.sito)){dici("Scrivi l'indirizzo del sito, oppure spunta «Non ho un sito».");$('rgSito').focus();return;}
-    if(d.senza_sito&&(!d.attivita||!d.citta)){dici("Senza sito ci servono il nome dell'attività e la città.");$(d.attivita?'rgCitta':'rgAtt').focus();return;}
+    if(d.senza_sito&&!d.attivita){dici("Senza sito scrivi il nome della tua azienda: il report lo facciamo su quello.");$('rgAtt').focus();return;}
+    if(d.senza_sito&&!d.citta){dici("Scrivi anche il paese o la città, per trovarti su Google.");$('rgCitta').focus();return;}
     if(!d.nome){dici('Scrivi il tuo nome.');$('rgNome').focus();return;}
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)){dici("Controlla l'email: è lì che ti mandiamo il report.");$('rgEmail').focus();return;}
     if(!d.privacy){dici("Spunta la casella dell'informativa privacy.");return;}
